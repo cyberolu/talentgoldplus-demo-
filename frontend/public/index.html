@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
   <!-- HEADER -->
@@ -19,12 +20,14 @@
         </span>
       </div>
 
+      <div class="menu-toggle">☰</div>
+
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="pages/athletes.html">Athletes</a></li>
         <li><a href="pages/coaches.html">Coaches</a></li>
         <li><a href="pages/investors.html">Investors</a></li>
-        <li><a href="pages/services.html">Services</a></li>
+        <li><a href="pages/services.html">Professionals</a></li>
         <li><a href="pages/scouts.html">Scouts</a></li>
         <li><a href="pages/community.html">Community</a></li>
         <li><a href="auth/login.html">Login</a></li>
@@ -34,6 +37,22 @@
     </nav>
   </header>
 
+  <!-- YOUR MAIN CONTENT GOES HERE -->
+
+
+  <!-- SCRIPT MUST BE AT THE BOTTOM -->
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav-links");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  </script>
+
+</body>
+</html>
+
   <main>
 
     <!-- HERO -->
@@ -41,58 +60,75 @@
       <div class="container">
     
         <h1>
-          Discover, Develop and Fund
+          Discover, Develop, Support and Invest
           <span>The Next Generation of Talent</span>
         </h1>
-    
+        
         <div class="hero-text">
           <p class="hero-main">
-            Connecting athletes, coaches, investors and professionals in one global sports ecosystem.
-          </p>
-        
-          <p class="hero-sub">
-            Empowering athletes. Supporting mental wellbeing. Creating pathways away from crime and towards opportunity.
-          </p>
+            TalentGoldPlus is a sports marketplace connecting athletes and grassroots footballers 
+            with coaches, mentors and verified mental health and wellbeing professionals.
+            </p>
+            
+            <p class="hero-sub">
+            Prioritising mental health, performance and long term wellbeing while creating real opportunities 
+            for athletes and professionals.
+            </p>
         </div>
         <div class="hero-buttons">
           <a href="pages/athletes.html" class="btn-primary">I’m an Athlete</a>
           <a href="pages/coaches.html" class="btn-secondary">I’m a Coach</a>
           <a href="pages/investors.html" class="btn-secondary">I’m an Investor</a>
-          <a href="pages/services.html" class="btn-secondary">I Provide Services</a>
+          <a href="pages/services.html" class="btn-secondary">I’m a Professional</a>
         </div>
     
       </div>
     </section>
 
-    <!-- MISSION -->
-    <section id="mission">
-      <div class="container">
-        <h2>More Than Sport. A Movement for Change.</h2>
+   <!-- MISSION -->
+<section id="mission">
+  <div class="container">
+    <h2>More Than Sport. A Movement for Change.</h2>
 
-        <p>
-          TalentGoldPlus is not just about performance — it is about purpose.
-        </p>
+    <p>
+      TalentGoldPlus is not just about performance. It is about purpose.
+    </p>
 
-        <p>
-          We are building a platform that empowers athletes, with a strong focus on
-          female football, mental health and wellbeing, and creating real opportunities
-          that help young people move away from drug abuse, knife crime, gun violence
-          and depression.
-        </p>
+    <p>
+      We are building a platform that empowers athletes and footballers, with a strong focus on
+      grassroots and female football, mental health and wellbeing, and creating real opportunities
+      that help young people move away from drug abuse, knife crime, gun violence and depression.
+    </p>
 
-        <p>
-          Through sport, mentorship and access, we are changing lives, reshaping futures
-          and building stronger communities across the world.
-        </p>
+    <p>
+      Through sport, mentorship and access, we are changing lives, reshaping futures
+      and building stronger communities across the world.
+    </p>
 
-        <div class="mission-highlights">
-          <p>⚽ Empowering Female Football</p>
-          <p>🧠 Mental Health & Wellbeing</p>
-          <p>🚫 Breaking Cycles of Crime</p>
-          <p>🌍 Building Global Communities</p>
-        </div>
+    <div class="mission-cards">
+      <div class="card">
+        <h3>⚽ Grassroots & Female Football</h3>
+        <p>Supporting athletes from foundation level to elite performance.</p>
       </div>
-    </section>
+
+      <div class="card">
+        <h3>🧠 Mental Health & Wellbeing</h3>
+        <p>Connecting athletes with verified therapists, counsellors and nutritionists.</p>
+      </div>
+
+      <div class="card">
+        <h3>🚫 Pathways Away From Crime</h3>
+        <p>Creating real opportunities that redirect young people toward purpose.</p>
+      </div>
+
+      <div class="card">
+        <h3>💼 Professional Opportunities</h3>
+        <p>Helping coaches and specialists access high quality athletes and clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
     <section id="problem">
       <div class="container">
         <h2>The Reality Young Athletes Face</h2>
@@ -133,6 +169,38 @@
       </div>
     </section>
 
+    <section id="for-professionals">
+      <div class="container">
+    
+        <h2>For Professionals</h2>
+    
+        <p>
+          TalentGoldPlus is also a platform for coaches, therapists, nutritionists 
+          and performance experts to connect with serious athletes.
+        </p>
+    
+        <div class="solution-cards">
+    
+          <div class="card">
+            <h3>Verified Athletes</h3>
+            <p>Work with committed athletes focused on growth.</p>
+          </div>
+    
+          <div class="card">
+            <h3>Quality Clients</h3>
+            <p>Access a growing network of athletes needing your expertise.</p>
+          </div>
+    
+          <div class="card">
+            <h3>Grow Your Business</h3>
+            <p>Turn your services into real opportunities and income.</p>
+          </div>
+    
+        </div>
+    
+      </div>
+    </section>
+
     <!-- TRUST -->
     <section id="trust">
       <div class="container">
@@ -140,9 +208,10 @@
         <p>Join a global community of athletes, coaches, investors, scouts and sports professionals.</p>
 
         <div class="trust-stats">
-          <p>Growing Athlete Network</p>
+          <p>Growing Global Athlete Network</p>
+          <p>Access to Verified Professionals</p>
+          <p>Multi Role Sports Ecosystem</p>
           <p>Global Reach</p>
-          <p>Multi Role Platform</p>
         </div>
       </div>
     </section>
@@ -196,7 +265,7 @@
           </article>
 
           <article>
-            <h3>Service Providers</h3>
+            <h3>Professionals</h3>
             <p>Connect with athletes who need your expertise.</p>
             <a href="pages/services.html" class="btn-primary">Get Listed</a>
           </article>
@@ -315,7 +384,7 @@
           <a href="pages/athletes.html">Athletes</a>
           <a href="pages/coaches.html">Coaches</a>
           <a href="pages/investors.html">Investors</a>
-          <a href="pages/services.html">Services</a>
+          <a href="pages/services.html">Professionals</a>
           <a href="pages/scouts.html">Scouts</a>
           <a href="pages/community.html">Community</a>
         </div>
