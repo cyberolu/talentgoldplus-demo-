@@ -522,7 +522,52 @@ footer {
     cursor: pointer;
   }
   
-  
+  /* PROFILE HEADER */
+.profile-header {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile-image img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-info h1 {
+  font-size: 32px;
+}
+
+.profile-tags {
+  margin: 10px 0;
+}
+
+.profile-tags span {
+  background: var(--gold);
+  color: white;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* STATS */
+.stats-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* MEDIA */
+.media-grid {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
 /* =========================
    MOBILE RESPONSIVE
 ========================= */

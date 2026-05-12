@@ -1,0 +1,234 @@
+/* ATHLETE GRID */
+.athlete-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+  
+  /* CARD */
+  .athlete-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+  }
+  
+  .athlete-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+  
+  /* IMAGE */
+  .athlete-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  
+  /* INFO */
+  .athlete-info {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .athlete-info h3 {
+    margin-bottom: 5px;
+  }
+  
+  .athlete-info .sport {
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .athlete-info .pb {
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  .profile-page {
+    margin-top: 60px;
+  }
+  
+  .profile-card {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .profile-card img {
+    width: 300px;
+    border-radius: 10px;
+  }
+  
+  .profile-info {
+    max-width: 500px;
+  }
+  
+  .profile-info h1 {
+    font-size: 32px;
+  }
+  
+  .profile-info .sport {
+    color: var(--gold);
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  /* =========================
+   PROFESSIONAL PROFILE
+========================= */
+
+.profile-section {
+  padding: 80px 20px;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* LEFT IMAGE */
+
+.profile-image img {
+  width: 420px;
+  max-width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* RIGHT CONTENT */
+
+.profile-content {
+  flex: 1;
+  min-width: 320px;
+}
+
+.profile-content h1 {
+  font-size: 52px;
+  margin-bottom: 15px;
+}
+
+.profile-role {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.profile-location {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+/* STATS */
+
+.profile-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.stat-box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  min-width: 180px;
+
+  border: 1px solid #eee;
+
+  text-align: center;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.stat-box h3 {
+  font-size: 36px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.stat-box p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* BIO */
+
+.profile-bio {
+  margin-bottom: 40px;
+}
+
+.profile-bio h2,
+.profile-specialties h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.profile-bio p {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.8;
+}
+
+/* SPECIALTIES */
+
+.profile-specialties ul {
+  padding-left: 20px;
+}
+
+.profile-specialties li {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #444;
+}
+
+/* BUTTONS */
+
+.profile-contact {
+  margin-top: 40px;
+
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+  .profile-container {
+    flex-direction: column;
+  }
+
+  .profile-image img {
+    width: 100%;
+  }
+
+  .profile-content h1 {
+    font-size: 38px;
+  }
+
+  .profile-role {
+    font-size: 24px;
+  }
+
+  .profile-stats {
+    flex-direction: column;
+  }
+
+  .stat-box {
+    width: 100%;
+  }
+
+}

@@ -3,31 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>coaches | TalentGoldPlus</title>
+  <title>Coaches | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
 </head>
+
 <body>
 
-  <section class="coming-page">
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+        <span class="logo-text">
+          Talent<span class="gold">Gold</span>Plus
+        </span>
+      </div>
 
-    <div class="container">
+      <div class="menu-toggle">☰</div>
 
-      <h1>Coaches Section</h1>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="services.html">Professionals</a></li>
+        <li><a href="scouts.html">Scouts</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="../auth/login.html">Login</a></li>
+      </ul>
 
-      <p>
-        This section is currently under development.
-        We are building a powerful space for athletes to showcase talent,
-        connect with opportunities and grow.
-      </p>
+      <a href="../auth/register.html" class="btn-primary nav-btn">Join Now</a>
+    </nav>
+  </header>
 
-      <a href="../index.html" class="btn-primary">
-        ← Back to Home
-      </a>
+<main>
+
+<section class="container">
+
+  <h2>Discover Coaches</h2>
+
+  <p>
+    Connect with experienced coaches helping athletes reach the next level.
+  </p>
+
+  <div class="athlete-grid">
+
+    <!-- Coach 1 -->
+    <div class="athlete-card">
+
+      <img src="../assets/images/coach1.jpg" alt="Coach">
+
+      <div class="athlete-info">
+        <h3>James Carter</h3>
+
+        <p class="sport">Sprint Coach</p>
+
+        <p>London | United Kingdom</p>
+
+        <p class="pb">10+ Years Experience</p>
+
+        <a href="coach-profile.html?id=1" class="btn-primary">
+          View Profile
+        </a>
+      </div>
 
     </div>
 
-  </section>
+    <!-- Coach 2 -->
+    <div class="athlete-card">
+
+      <img src="../assets/images/coach2.jpg" alt="Coach">
+
+      <div class="athlete-info">
+        <h3>Maria Lopez</h3>
+
+        <p class="sport">Football Coach</p>
+
+        <p>Manchester | UK</p>
+
+        <p class="pb">UEFA Licensed</p>
+
+        <a href="coach-profile.html?id=2" class="btn-primary">
+          View Profile
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Coach 3 -->
+    <div class="athlete-card">
+
+      <img src="../assets/images/coach3.jpg" alt="Coach">
+
+      <div class="athlete-info">
+        <h3>David Brown</h3>
+
+        <p class="sport">Basketball Development Coach</p>
+
+        <p>Birmingham | UK</p>
+
+        <p class="pb">Elite Youth Development</p>
+
+        <a href="coach-profile.html?id=3" class="btn-primary">
+          View Profile
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- JS -->
+<script src="../js/navigation.js"></script>
 
 </body>
 </html>

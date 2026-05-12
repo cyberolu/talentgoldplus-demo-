@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Professional Profile | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+
+      <div class="logo">
+        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+
+        <span class="logo-text">
+          Talent<span class="gold">Gold</span>Plus
+        </span>
+      </div>
+
+      <div class="menu-toggle">☰</div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="services.html">Professionals</a></li>
+        <li><a href="scouts.html">Scouts</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="../auth/login.html">Login</a></li>
+      </ul>
+
+      <a href="../auth/register.html" class="btn-primary nav-btn">
+        Join Now
+      </a>
+
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <section class="profile-section">
+
+      <div class="profile-container">
+
+        <!-- LEFT -->
+        <div class="profile-image">
+          <img id="profileImage" src="../assets/images/pro1.jpg" alt="Professional">
+        </div>
+
+        <!-- RIGHT -->
+        <div class="profile-content">
+
+          <h1 id="profileName"></h1>
+
+          <p class="profile-role" id="profileRole"></p>
+
+          <p class="profile-location" id="profileLocation"></p>
+
+          <!-- STATS -->
+          <div class="profile-stats">
+
+            <div class="stat-box">
+              <h3 id="experience"></h3>
+              <p>Years Experience</p>
+            </div>
+
+            <div class="stat-box">
+              <h3 id="athletesSupported"></h3>
+              <p>Athletes Supported</p>
+            </div>
+
+            <div class="stat-box">
+              <h3 id="successRate"></h3>
+              <p>Success Rate</p>
+            </div>
+
+          </div>
+
+          <!-- BIO -->
+          <div class="profile-bio">
+
+            <h2>About</h2>
+
+            <p id="bio"></p>
+
+          </div>
+
+          <!-- SPECIALTIES -->
+          <div class="profile-specialties">
+
+            <h2>Specialties</h2>
+
+            <ul id="specialties"></ul>
+
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="profile-contact">
+
+            <a href="#" class="btn-primary">
+              Contact Professional
+            </a>
+
+            <a href="services.html" class="btn-secondary">
+              Back to Professionals
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
+    Chat on WhatsApp
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <h2>TalentGoldPlus</h2>
+
+      <p>
+        Discover, develop and fund the next generation
+        of sports talent while creating positive change
+        in communities across the world.
+      </p>
+
+      <div class="footer-grid">
+
+        <div class="footer-column">
+          <h4>Platform</h4>
+
+          <a href="../index.html">Home</a>
+          <a href="athletes.html">Athletes</a>
+          <a href="coaches.html">Coaches</a>
+          <a href="investors.html">Investors</a>
+          <a href="services.html">Professionals</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Community</h4>
+
+          <a href="community.html">Community</a>
+          <a href="partners.html">Partners</a>
+          <a href="donate.html">Donate</a>
+        </div>
+
+      </div>
+
+      <p class="footer-copy">
+        © 2026 TalentGoldPlus. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+  <!-- JS -->
+  <script src="../js/navigation.js"></script>
+
+  <script>
+
+    const professionals = {
+
+      1: {
+        name: "Dr Emily Carter",
+        role: "Sports Therapist",
+        location: "London, United Kingdom",
+        image: "../assets/images/pro1.jpg",
+        experience: "8+",
+        athletesSupported: "250+",
+        successRate: "95%",
+        bio: "Dr Emily Carter specialises in athlete recovery, injury prevention and performance rehabilitation.",
+        specialties: [
+          "Sports Injury Recovery",
+          "Performance Recovery",
+          "Mobility Training"
+        ]
+      },
+
+      2: {
+        name: "Michael Brown",
+        role: "Performance Nutritionist",
+        location: "Manchester, United Kingdom",
+        image: "../assets/images/pro2.jpg",
+        experience: "10+",
+        athletesSupported: "300+",
+        successRate: "92%",
+        bio: "Michael Brown helps athletes optimise nutrition, energy and recovery for elite performance.",
+        specialties: [
+          "Elite Nutrition",
+          "Meal Planning",
+          "Performance Diets"
+        ]
+      },
+
+      3: {
+        name: "Sarah Williams",
+        role: "Mental Health Specialist",
+        location: "Birmingham, United Kingdom",
+        image: "../assets/images/pro3.jpg",
+        experience: "7+",
+        athletesSupported: "180+",
+        successRate: "97%",
+        bio: "Sarah Williams focuses on athlete wellbeing, confidence and mental resilience.",
+        specialties: [
+          "Mental Resilience",
+          "Athlete Wellbeing",
+          "Performance Psychology"
+        ]
+      }
+
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id") || 1;
+
+    const professional = professionals[id];
+
+    document.getElementById("profileName").textContent = professional.name;
+    document.getElementById("profileRole").textContent = professional.role;
+    document.getElementById("profileLocation").textContent = professional.location;
+
+    document.getElementById("profileImage").src = professional.image;
+
+    document.getElementById("experience").textContent = professional.experience;
+    document.getElementById("athletesSupported").textContent = professional.athletesSupported;
+    document.getElementById("successRate").textContent = professional.successRate;
+
+    document.getElementById("bio").textContent = professional.bio;
+
+    const specialtiesList = document.getElementById("specialties");
+
+    professional.specialties.forEach(item => {
+
+      const li = document.createElement("li");
+      li.textContent = item;
+
+      specialtiesList.appendChild(li);
+
+    });
+
+  </script>
+
+</body>
+</html>

@@ -6,28 +6,141 @@
   <title>Athletes | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
 </head>
+
 <body>
 
-  <section class="coming-page">
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+        <span class="logo-text">
+          Talent<span class="gold">Gold</span>Plus
+        </span>
+      </div>
 
+      <div class="menu-toggle">☰</div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="services.html">Professionals</a></li>
+        <li><a href="scouts.html">Scouts</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="../auth/login.html">Login</a></li>
+      </ul>
+
+      <a href="../auth/register.html" class="btn-primary nav-btn">Join Now</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <section class="container">
+      <h2>Discover Athletes</h2>
+      <p>Explore talented athletes across different sports and pathways.</p>
+
+      <div class="athlete-grid">
+
+        <!-- Athlete 1 -->
+        <div class="athlete-card">
+          <img src="../assets/images/athlete1.jpg" alt="Athlete">
+
+          <div class="athlete-info">
+            <h3>Rose Collings</h3>
+            <p class="sport">Sprint Athlete</p>
+            <p>U15 | United Kingdom</p>
+            <p class="pb">100m: 11.51s</p>
+
+            <a href="athlete-profile.html?id=1" class="btn-primary">View Profile</a>
+          </div>
+        </div>
+
+        <!-- Athlete 2 -->
+        <div class="athlete-card">
+          <img src="../assets/images/athlete2.jpg" alt="Athlete">
+
+          <div class="athlete-info">
+            <h3>Lana Smith</h3>
+            <p class="sport">Football</p>
+            <p>U18 | London</p>
+            <p class="pb">Forward</p>
+
+            <a href="athlete-profile.html" class="btn-primary">View Profile</a>
+          </div>
+        </div>
+
+        <!-- Athlete 3 -->
+        <div class="athlete-card">
+          <img src="../assets/images/athlete 3.jpg" alt="Athlete">
+
+          <div class="athlete-info">
+            <h3>Sarah Johnson</h3>
+            <p class="sport">Basketball</p>
+            <p>U17 | Manchester</p>
+            <p class="pb">Guard</p>
+
+            <a href="athlete-profile.html" class="btn-primary">View Profile</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
+    Chat on WhatsApp
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
     <div class="container">
 
-      <h1>Athletes Section</h1>
-
+      <h2>TalentGoldPlus</h2>
       <p>
-        This section is currently under development.
-        We are building a powerful space for athletes to showcase talent,
-        connect with opportunities and grow.
+        Discover, develop and fund the next generation of sports talent while
+        creating positive change in communities across the world.
       </p>
 
-      <a href="../index.html" class="btn-primary">
-        ← Back to Home
-      </a>
+      <div class="footer-grid">
+
+        <div class="footer-column">
+          <h4>Platform</h4>
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="athletes.html">Athletes</a>
+          <a href="coaches.html">Coaches</a>
+          <a href="investors.html">Investors</a>
+          <a href="services.html">Professionals</a>
+          <a href="scouts.html">Scouts</a>
+          <a href="community.html">Community</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Get Involved</h4>
+          <a href="volunteer.html">Volunteer</a>
+          <a href="ambassadors.html">Ambassadors</a>
+          <a href="partners.html">Partners</a>
+          <a href="donate.html">Donate</a>
+        </div>
+
+      </div>
+
+      <p class="footer-copy">© 2026 TalentGoldPlus. All rights reserved.</p>
 
     </div>
+  </footer>
 
-  </section>
+  <!-- JS -->
+  <script src="../js/navigation.js"></script>
+  <script src="../js/app.js"></script>
 
 </body>
 </html>
