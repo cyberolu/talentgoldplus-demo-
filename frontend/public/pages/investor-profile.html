@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Investor Profile | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+
+      <div class="logo">
+        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+
+        <span class="logo-text">
+          Talent<span class="gold">Gold</span>Plus
+        </span>
+      </div>
+
+      <div class="menu-toggle">☰</div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="services.html">Professionals</a></li>
+        <li><a href="scouts.html">Scouts</a></li>
+        <li><a href="community.html">Community</a></li>
+      </ul>
+
+      <a href="../auth/register.html" class="btn-primary nav-btn">
+        Join Now
+      </a>
+
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <section class="profile-section">
+
+      <div class="profile-container">
+
+        <!-- LEFT -->
+        <div class="profile-image">
+          <img id="profileImage" src="../assets/images/investor1.jpg" alt="Investor">
+        </div>
+
+        <!-- RIGHT -->
+        <div class="profile-content">
+
+          <h1 id="profileName"></h1>
+
+          <p class="profile-role" id="profileRole"></p>
+
+          <p class="profile-location" id="profileLocation"></p>
+
+          <!-- STATS -->
+          <div class="profile-stats">
+
+            <div class="stat-box">
+              <h3 id="investments"></h3>
+              <p>Investments</p>
+            </div>
+
+            <div class="stat-box">
+              <h3 id="athletesSupported"></h3>
+              <p>Athletes Supported</p>
+            </div>
+
+            <div class="stat-box">
+              <h3 id="regions"></h3>
+              <p>Regions Covered</p>
+            </div>
+
+          </div>
+
+          <!-- BIO -->
+          <div class="profile-bio">
+
+            <h2>About</h2>
+
+            <p id="bio"></p>
+
+          </div>
+
+          <!-- SPECIALTIES -->
+          <div class="profile-specialties">
+
+            <h2>Investment Focus</h2>
+
+            <ul id="specialties"></ul>
+
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="profile-contact">
+
+            <a href="#" class="btn-primary">
+              Contact Investor
+            </a>
+
+            <a href="investors.html" class="btn-secondary">
+              Back to Investors
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
+    Chat on WhatsApp
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <h2>TalentGoldPlus</h2>
+
+      <p>
+        Discover, develop and fund the next generation
+        of sports talent while creating positive change
+        in communities across the world.
+      </p>
+
+      <div class="footer-grid">
+
+        <div class="footer-column">
+          <h4>Platform</h4>
+
+          <a href="../index.html">Home</a>
+          <a href="athletes.html">Athletes</a>
+          <a href="coaches.html">Coaches</a>
+          <a href="investors.html">Investors</a>
+          <a href="services.html">Professionals</a>
+          <a href="scouts.html">Scouts</a>
+        </div>
+
+      </div>
+
+      <p class="footer-copy">
+        © 2026 TalentGoldPlus. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+  <!-- JS -->
+  <script src="../js/navigation.js"></script>
+
+  <script>
+
+    const investors = {
+
+      1: {
+        name: "Future Sports Capital",
+        role: "Athlete Development Fund",
+        location: "United Kingdom",
+        image: "../assets/images/investor1.jpg",
+        investments: "£5M+",
+        athletesSupported: "300+",
+        regions: "12+",
+        bio: "Future Sports Capital supports emerging athletes and grassroots programmes through strategic investment and long term development funding.",
+        specialties: [
+          "Youth Athlete Funding",
+          "Grassroots Development",
+          "Elite Performance Investment"
+        ]
+      },
+
+      2: {
+        name: "Elite Pathways Group",
+        role: "Scholarship & Sponsorship",
+        location: "Europe & USA",
+        image: "../assets/images/investor2.jpg",
+        investments: "£8M+",
+        athletesSupported: "500+",
+        regions: "20+",
+        bio: "Elite Pathways Group provides sponsorship opportunities, scholarship support and athlete career progression programmes.",
+        specialties: [
+          "Scholarships",
+          "International Sponsorship",
+          "Athlete Career Development"
+        ]
+      },
+
+      3: {
+        name: "Global Sports Ventures",
+        role: "Performance Investment",
+        location: "International",
+        image: "../assets/images/investor3.jpg",
+        investments: "£12M+",
+        athletesSupported: "750+",
+        regions: "30+",
+        bio: "Global Sports Ventures partners with athletes, academies and sports organisations to create sustainable high performance pathways.",
+        specialties: [
+          "High Performance Funding",
+          "Academy Partnerships",
+          "Global Athlete Investment"
+        ]
+      }
+
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id") || 1;
+
+    const investor = investors[id];
+
+    document.getElementById("profileName").textContent = investor.name;
+    document.getElementById("profileRole").textContent = investor.role;
+    document.getElementById("profileLocation").textContent = investor.location;
+
+    document.getElementById("profileImage").src = investor.image;
+
+    document.getElementById("investments").textContent = investor.investments;
+    document.getElementById("athletesSupported").textContent = investor.athletesSupported;
+    document.getElementById("regions").textContent = investor.regions;
+
+    document.getElementById("bio").textContent = investor.bio;
+
+    const specialtiesList = document.getElementById("specialties");
+
+    investor.specialties.forEach(item => {
+
+      const li = document.createElement("li");
+
+      li.textContent = item;
+
+      specialtiesList.appendChild(li);
+
+    });
+
+  </script>
+
+</body>
+</html>
