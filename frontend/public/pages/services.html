@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Professionals | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
@@ -11,150 +12,212 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <nav>
-      <div class="logo">
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
-      </div>
+<header>
+  <nav>
 
-      <div class="menu-toggle">☰</div>
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="athletes.html">Athletes</a></li>
-        <li><a href="coaches.html">Coaches</a></li>
-        <li><a href="investors.html">Investors</a></li>
-        <li><a href="services.html">Professionals</a></li>
-        <li><a href="scouts.html">Scouts</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="../auth/login.html">Login</a></li>
-      </ul>
+    <div class="menu-toggle">☰</div>
 
-      <a href="../auth/register.html" class="btn-primary nav-btn">Join Now</a>
-    </nav>
-  </header>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="services.html">Professionals</a></li>
 
-  <!-- MAIN -->
-  <main>
+      <li id="authNavItem">
+        <a href="../auth/login.html">Login</a>
+      </li>
+    </ul>
 
-    <!-- HERO -->
-    <section class="container">
-      <h2>Professional Services Marketplace</h2>
+    <a id="joinBtn" href="../auth/register.html" class="btn-primary nav-btn">
+      Join Now
+    </a>
 
-      <p>
-        Connect with trusted professionals helping athletes improve performance,
-        recovery, wellbeing and long term development.
-      </p>
+  </nav>
+</header>
 
-      <div class="athlete-grid">
+<main>
 
-        <!-- Professional 1 -->
-        <div class="athlete-card">
-          <img src="../assets/images/pro1.jpg" alt="Sports Therapist">
-
-          <div class="athlete-info">
-            <h3>Dr Emily Carter</h3>
-            <p class="sport">Sports Therapist</p>
-            <p>London | United Kingdom</p>
-            <p class="pb">Recovery & Injury Prevention</p>
-
-            <a href="professional-profile.html?id=1" class="btn-primary">
-              View Profile
-            </a>
-          </div>
-        </div>
-
-        <!-- Professional 2 -->
-        <div class="athlete-card">
-          <img src="../assets/images/pro2.jpg" alt="Nutritionist">
-
-          <div class="athlete-info">
-            <h3>Michael Brown</h3>
-            <p class="sport">Performance Nutritionist</p>
-            <p>Manchester | United Kingdom</p>
-            <p class="pb">Elite Athlete Nutrition</p>
-
-            <a href="professional-profile.html?id=2" class="btn-primary">
-              View Profile
-            </a>
-          </div>
-        </div>
-
-        <!-- Professional 3 -->
-        <div class="athlete-card">
-          <img src="../assets/images/pro3.jpg" alt="Mental Health Specialist">
-
-          <div class="athlete-info">
-            <h3>Sarah Williams</h3>
-            <p class="sport">Mental Health Specialist</p>
-            <p>Birmingham | United Kingdom</p>
-            <p class="pb">Athlete Wellbeing</p>
-
-            <a href="professional-profile.html?id=3" class="btn-primary">
-              View Profile
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- WHATSAPP -->
-  <a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
-    Chat on WhatsApp
-  </a>
-
-  <!-- FOOTER -->
-  <footer>
+  <section class="services-hero">
     <div class="container">
 
-      <h2>TalentGoldPlus</h2>
+    <h1>Professional Services</h1>
 
-      <p>
-        Discover, develop and fund the next generation of sports talent while
-        creating positive change in communities across the world.
-      </p>
+    <p>
+      Connect with trusted professionals supporting athletes with performance,
+      recovery, wellbeing and long term development.
+    </p>
 
-      <div class="footer-grid">
+    <div class="user-cards">
 
-        <div class="footer-column">
-          <h4>Platform</h4>
+      <article class="service-category-card">
+        <h3>Physiotherapists</h3>
+        <p>Support injury prevention, rehabilitation and movement health.</p>
+        <a href="services.html?category=physiotherapists" class="btn-primary">View Category</a>
+      </article>
 
-          <a href="../index.html">Home</a>
-          <a href="athletes.html">Athletes</a>
-          <a href="coaches.html">Coaches</a>
-          <a href="investors.html">Investors</a>
-          <a href="services.html">Professionals</a>
-          <a href="scouts.html">Scouts</a>
-          <a href="community.html">Community</a>
-        </div>
+      <article class="service-category-card">
+        <h3>Sports Therapists</h3>
+        <p>Help athletes recover, prepare and manage physical performance demands.</p>
+        <a href="services.html?category=sports-therapists" class="btn-primary">View Category</a>
+      </article>
 
-        <div class="footer-column">
-          <h4>Get Involved</h4>
+      <article class="service-category-card">
+        <h3>Nutritionists</h3>
+        <p>Support performance nutrition, recovery and healthy athlete development.</p>
+        <a href="services.html?category=nutritionists" class="btn-primary">View Category</a>
+      </article>
 
-          <a href="volunteer.html">Volunteer</a>
-          <a href="partners.html">Partners</a>
-          <a href="donate.html">Donate</a>
-        </div>
+      <article class="service-category-card">
+        <h3>Psychologists</h3>
+        <p>Support confidence, focus, pressure management and athlete wellbeing.</p>
+        <a href="services.html?category=psychologists" class="btn-primary">View Category</a>
+      </article>
 
-      </div>
+      <article class="service-category-card">
+        <h3>Wellbeing Specialists</h3>
+        <p>Help athletes balance sport, education, lifestyle and mental wellbeing.</p>
+        <a href="services.html?category=wellbeing-specialists" class="btn-primary">View Category</a>
+      </article>
 
-      <p class="footer-copy">
-        © 2026 TalentGoldPlus. All rights reserved.
-      </p>
+      <article class="service-category-card">
+        <h3>Recovery Experts</h3>
+        <p>Support rest, recovery, regeneration and sustainable performance.</p>
+        <a href="services.html?category=recovery-experts" class="btn-primary">View Category</a>
+      </article>
+
+      <article class="service-category-card">
+        <h3>Mentors</h3>
+        <p>Guide young athletes through sport, life choices and personal growth.</p>
+        <a href="services.html?category=mentors" class="btn-primary">View Category</a>
+      </article>
+
+      <article class="service-category-card">
+        <h3>Performance Specialists</h3>
+        <p>Support technical, physical and performance development.</p>
+        <a href="services.html?category=performance-specialists" class="btn-primary">View Category</a>
+      </article>
 
     </div>
-  </footer>
+    </div>
+  </section>
 
-  <!-- JS -->
-  <script src="../js/navigation.js"></script>
-  <script src="../js/app.js"></script>
+  <section class="container">
+
+    <h2>Featured Professionals</h2>
+
+    <div class="athlete-grid">
+
+      <div class="athlete-card">
+        <img src="../assets/images/pro1.jpg" alt="Sports Therapist">
+
+        <div class="athlete-info">
+          <h3>Dr Emily Carter</h3>
+          <p class="sport">Sports Therapist</p>
+          <p>London | United Kingdom</p>
+          <p class="pb">Recovery & Injury Prevention</p>
+
+          <a href="professional-profile.html?id=1" class="btn-primary">
+            View Profile
+          </a>
+        </div>
+      </div>
+
+      <div class="athlete-card">
+        <img src="../assets/images/pro2.jpg" alt="Nutritionist">
+
+        <div class="athlete-info">
+          <h3>Michael Brown</h3>
+          <p class="sport">Performance Nutritionist</p>
+          <p>Manchester | United Kingdom</p>
+          <p class="pb">Elite Athlete Nutrition</p>
+
+          <a href="professional-profile.html?id=2" class="btn-primary">
+            View Profile
+          </a>
+        </div>
+      </div>
+
+      <div class="athlete-card">
+        <img src="../assets/images/pro3.jpg" alt="Mental Health Specialist">
+
+        <div class="athlete-info">
+          <h3>Sarah Williams</h3>
+          <p class="sport">Mental Health Specialist</p>
+          <p>Birmingham | United Kingdom</p>
+          <p class="pb">Athlete Wellbeing</p>
+
+          <a href="professional-profile.html?id=3" class="btn-primary">
+            View Profile
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
+  Chat on WhatsApp
+</a>
+
+<footer>
+  <div class="container">
+
+    <h2>TalentGoldPlus</h2>
+
+    <p>
+      Discover, develop and fund the next generation of sports talent while
+      creating positive change in communities across the world.
+    </p>
+
+    <div class="footer-grid">
+
+      <div class="footer-column">
+        <h4>Platform</h4>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="community.html">Community</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="services.html">Professionals</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Community</h4>
+        <a href="athletes.html">Athletes</a>
+        <a href="coaches.html">Coaches</a>
+        <a href="scouts.html">Scouts</a>
+        <a href="investors.html">Investors</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Get Involved</h4>
+        <a href="volunteer.html">Volunteer</a>
+        <a href="ambassadors.html">Ambassadors</a>
+        <a href="partners.html">Partners</a>
+        <a href="donate.html">Donate</a>
+      </div>
+
+    </div>
+
+    <p class="footer-copy">
+      © 2026 TalentGoldPlus. All rights reserved.
+    </p>
+
+  </div>
+</footer>
+
+<script src="../js/navigation.js"></script>
+<script src="../js/app.js"></script>
+<script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

@@ -324,3 +324,34 @@
   display: flex;
   gap: 10px;
 }
+/* AUTH SWITCH */
+
+.auth-switch {
+
+  margin-top: 20px;
+
+  font-size: 16px;
+
+  text-align: center;
+
+}
+
+
+.auth-switch a {
+
+  color: #d4af37;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  margin-left: 5px;
+
+}
+
+
+.auth-switch a:hover {
+
+  text-decoration: underline;
+
+}

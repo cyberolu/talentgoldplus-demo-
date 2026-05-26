@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Register | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+
+      <div class="logo">
+        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+
+        <span class="logo-text">
+          Talent<span class="gold">Gold</span>Plus
+        </span>
+      </div>
+
+      <div class="menu-toggle">☰</div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <section class="container auth-container">
+
+      <div class="auth-card">
+
+        <h1>Create Account</h1>
+
+        <p>
+          Join TalentGoldPlus and become part of the global sports ecosystem.
+        </p>
+
+        <form id="registerForm">
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Full Name"
+            required
+          >
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Email Address"
+            required
+          >
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          >
+
+          <select id="role" required>
+
+            <option value="">
+              Select Role
+            </option>
+
+            <option value="athlete">
+              Athlete
+            </option>
+
+            <option value="coach">
+              Coach
+            </option>
+
+            <option value="professional">
+              Professional
+            </option>
+
+            <option value="scout">
+              Scout
+            </option>
+
+            <option value="investor">
+              Investor
+            </option>
+
+          </select>
+
+          <button type="submit" class="btn-primary auth-btn">
+            Create Account
+          </button>
+
+        </form>
+
+        <p class="auth-link">
+          Already have an account?
+
+          <a href="login.html">
+            Login
+          </a>
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script src="../js/navigation.js"></script>
+
+  <script type="module" src="../js/auth.js"></script>
+
+</body>
+</html>

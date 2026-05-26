@@ -3,36 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>About | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <nav>
-      <div class="logo">
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
-      </div>
+<header>
+  <nav>
 
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="athletes.html">Athletes</a></li>
-        <li><a href="coaches.html">Coaches</a></li>
-        <li><a href="investors.html">Investors</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="scouts.html">Scouts</a></li>
-        <li><a href="community.html">Community</a></li>
-      </ul>
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-      <a href="../auth/register.html" class="btn-primary nav-btn">Join Now</a>
-    </nav>
-  </header>
+    <div class="menu-toggle">☰</div>
+
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+
+      <li class="dropdown">
+        <a href="services.html">Professionals ▾</a>
+
+        <ul class="dropdown-menu">
+          <li><a href="services.html?category=physiotherapists">Physiotherapists</a></li>
+          <li><a href="services.html?category=sports-therapists">Sports Therapists</a></li>
+          <li><a href="services.html?category=nutritionists">Nutritionists</a></li>
+          <li><a href="services.html?category=psychologists">Psychologists</a></li>
+          <li><a href="services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
+          <li><a href="services.html?category=recovery-experts">Recovery Experts</a></li>
+          <li><a href="services.html?category=mentors">Mentors</a></li>
+          <li><a href="services.html?category=performance-specialists">Performance Specialists</a></li>
+        </ul>
+      </li>
+
+      <li id="authNavItem">
+        <a href="../auth/login.html">Login</a>
+      </li>
+    </ul>
+
+    <a id="joinBtn" href="../auth/register.html" class="btn-primary nav-btn">
+      Join Now
+    </a>
+
+  </nav>
+</header>
 
   <main>
 
@@ -131,36 +152,48 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-
+  
       <h2>TalentGoldPlus</h2>
+  
       <p>
-        Discover, develop and fund the next generation of sports talent.
+        Discover, develop and fund the next generation of sports talent while
+        creating positive change in communities across the world.
       </p>
-
+  
       <div class="footer-grid">
-
+  
         <div class="footer-column">
           <h4>Platform</h4>
-          <a href="../index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="athletes.html">Athletes</a>
-          <a href="coaches.html">Coaches</a>
+          <a href="index.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/community.html">Community</a>
+          <a href="pages/marketplace.html">Marketplace</a>
+          <a href="pages/services.html">Professionals</a>
         </div>
-
+  
+        <div class="footer-column">
+          <h4>Community</h4>
+          <a href="pages/athletes.html">Athletes</a>
+          <a href="pages/coaches.html">Coaches</a>
+          <a href="pages/scouts.html">Scouts</a>
+          <a href="pages/investors.html">Investors</a>
+        </div>
+  
         <div class="footer-column">
           <h4>Get Involved</h4>
-          <a href="volunteer.html">Volunteer</a>
-          <a href="ambassadors.html">Ambassadors</a>
-          <a href="partners.html">Partners</a>
-          <a href="donate.html">Donate</a>
+          <a href="pages/volunteer.html">Volunteer</a>
+          <a href="pages/ambassadors.html">Ambassadors</a>
+          <a href="pages/partners.html">Partners</a>
+          <a href="pages/donate.html">Donate</a>
         </div>
-
+  
       </div>
-
-      <p class="footer-copy">© 2026 TalentGoldPlus. All rights reserved.</p>
-
+  
+      <p class="footer-copy">
+        © 2026 TalentGoldPlus. All rights reserved.
+      </p>
+  
     </div>
   </footer>
-
-</body>
-</html>
+  
+ 
