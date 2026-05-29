@@ -1,3 +1,30 @@
+// =========================
+// PATHS
+// =========================
+
+const isPageFolder =
+  window.location.pathname.includes("/pages/");
+
+const loginPath =
+  isPageFolder
+    ? "../auth/login.html"
+    : "auth/login.html";
+
+const registerPath =
+  isPageFolder
+    ? "../auth/register.html"
+    : "auth/register.html";
+
+const dashboardPath =
+  isPageFolder
+    ? "dashboard.html"
+    : "pages/dashboard.html";
+
+const homePath =
+  isPageFolder
+    ? "../index.html"
+    : "index.html";
+
 import { auth, db } from "./firebase.js";
 
 import {
@@ -204,7 +231,7 @@ if (!userSnap.exists()) {
   
         alert("Logged out successfully!");
   
-        window.location.href = "../index.html";
+        window.location.href = homePath;
   
       } catch (error) {
   
@@ -250,7 +277,7 @@ onAuthStateChanged(auth, async (user) => {
 
   if (!user && (isDashboardPage || isProfilePage)) {
 
-    window.location.href = "../auth/login.html";
+    window.location.href = loginPath;
   
     return;
   }
@@ -549,7 +576,7 @@ onAuthStateChanged(auth, async (user) => {
 
       <div class="auth-links">
 
-        <a href="dashboard.html">
+        <a href="${dashboardPath}">
           Dashboard
         </a>
 
@@ -587,7 +614,7 @@ onAuthStateChanged(auth, async (user) => {
         await signOut(auth);
 
         authNavItem.innerHTML = `
-          <a href="../auth/login.html">
+          <a href="${loginPath}">
             Login
           </a>
         `;
@@ -598,7 +625,7 @@ onAuthStateChanged(auth, async (user) => {
 
         });
 
-        window.location.href = "../index.html";
+        window.location.href = homePath;
 
       });
 
@@ -611,7 +638,7 @@ onAuthStateChanged(auth, async (user) => {
 
       alert("Please login or create an account to access the community.");
     
-      window.location.href = "../auth/login.html";
+      window.location.href = loginPath;
     
       return;
     
@@ -621,7 +648,7 @@ onAuthStateChanged(auth, async (user) => {
     if (authNavItem) {
   
       authNavItem.innerHTML = `
-        <a href="../auth/login.html">
+        <a href="${loginPath}">
           Login
         </a>
       `;
