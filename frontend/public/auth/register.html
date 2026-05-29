@@ -12,115 +12,262 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <nav>
+<header>
+  <nav>
 
-      <div class="logo">
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
-      </div>
+    <div class="menu-toggle">☰</div>
 
-      <div class="menu-toggle">☰</div>
+    <ul class="nav-links">
 
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-      </ul>
+      <li>
+        <a href="../index.html">Home</a>
+      </li>
 
-    </nav>
-  </header>
+      <li>
+        <a href="../pages/about.html">About</a>
+      </li>
 
-  <!-- MAIN -->
-  <main>
+      <li class="dropdown">
 
-    <section class="container auth-container">
+        <a href="../pages/sports.html">Sports ▾</a>
 
-      <div class="auth-card">
+        <ul class="dropdown-menu">
+          <li><a href="../pages/athletes.html?sport=football">Football</a></li>
+          <li><a href="../pages/athletes.html?sport=athletics">Athletics</a></li>
+          <li><a href="../pages/athletes.html?sport=basketball">Basketball</a></li>
+          <li><a href="../pages/athletes.html?sport=rugby">Rugby</a></li>
+          <li><a href="../pages/athletes.html?sport=tennis">Tennis</a></li>
+          <li><a href="../pages/athletes.html?sport=combat-sports">Combat Sports</a></li>
+          <li><a href="../pages/athletes.html">More Sports</a></li>
+        </ul>
 
-        <h1>Create Account</h1>
+      </li>
 
-        <p>
-          Join TalentGoldPlus and become part of the global sports ecosystem.
-        </p>
+      <li>
+        <a href="../pages/community.html">Community</a>
+      </li>
 
-        <form id="registerForm">
+      <li>
+        <a href="../pages/marketplace.html">Marketplace</a>
+      </li>
 
-          <input
-            type="text"
-            id="name"
-            placeholder="Full Name"
-            required
-          >
+      <li class="dropdown">
 
-          <input
-            type="email"
-            id="email"
-            placeholder="Email Address"
-            required
-          >
+        <a href="../pages/services.html">Professionals ▾</a>
 
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-          >
+        <ul class="dropdown-menu">
+          <li><a href="../pages/services.html?category=physiotherapists">Physiotherapists</a></li>
+          <li><a href="../pages/services.html?category=sports-therapists">Sports Therapists</a></li>
+          <li><a href="../pages/services.html?category=nutritionists">Nutritionists</a></li>
+          <li><a href="../pages/services.html?category=psychologists">Psychologists</a></li>
+          <li><a href="../pages/services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
+          <li><a href="../pages/services.html?category=recovery-experts">Recovery Experts</a></li>
+          <li><a href="../pages/services.html?category=mentors">Mentors</a></li>
+          <li><a href="../pages/services.html?category=performance-specialists">Performance Specialists</a></li>
+        </ul>
 
-          <select id="role" required>
+      </li>
 
-            <option value="">
-              Select Role
-            </option>
+    </ul>
 
-            <option value="athlete">
-              Athlete
-            </option>
+  </nav>
+</header>
 
-            <option value="coach">
-              Coach
-            </option>
+<main>
 
-            <option value="professional">
-              Professional
-            </option>
+  <section class="container auth-container">
 
-            <option value="scout">
-              Scout
-            </option>
+    <div class="auth-card">
 
-            <option value="investor">
-              Investor
-            </option>
+      <h1>Create Account</h1>
 
-          </select>
+      <p>
+        Join TalentGoldPlus and become part of the global sports ecosystem.
+      </p>
 
-          <button type="submit" class="btn-primary auth-btn">
-            Create Account
-          </button>
+      <form id="registerForm">
 
-        </form>
+        <input
+          type="text"
+          id="name"
+          placeholder="Full Name"
+          required
+        >
 
-        <p class="auth-link">
-          Already have an account?
+        <input
+          type="email"
+          id="email"
+          placeholder="Email Address"
+          required
+        >
 
-          <a href="login.html">
-            Login
-          </a>
-        </p>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
 
-      </div>
+        <select id="role" required>
 
-    </section>
+          <option value="">
+            Select Role
+          </option>
 
-  </main>
+          <option value="athlete">
+            Athlete
+          </option>
 
-  <!-- JS -->
-  <script src="../js/navigation.js"></script>
+          <option value="coach">
+            Coach
+          </option>
 
-  <script type="module" src="../js/auth.js"></script>
+          <option value="professional">
+            Professional
+          </option>
+
+          <option value="scout">
+            Scout
+          </option>
+
+          <option value="investor">
+            Investor
+          </option>
+
+        </select>
+
+        <select id="category" required>
+
+          <option value="">
+            Select Category
+          </option>
+
+        </select>
+
+        <button type="submit" class="btn-primary auth-btn">
+          Create Account
+        </button>
+
+      </form>
+
+      <p class="auth-link">
+
+        Already have an account?
+
+        <a href="login.html">
+          Login
+        </a>
+
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+
+  const roleSelect =
+    document.getElementById("role");
+
+  const categorySelect =
+    document.getElementById("category");
+
+  const categories = {
+
+    athlete: [
+      "Football",
+      "Athletics",
+      "Basketball",
+      "Rugby",
+      "Tennis",
+      "Combat Sports",
+      "Other"
+    ],
+
+    coach: [
+      "Football Coach",
+      "Athletics Coach",
+      "Basketball Coach",
+      "Rugby Coach",
+      "Tennis Coach",
+      "Strength & Conditioning Coach",
+      "Other"
+    ],
+
+    professional: [
+      "Physiotherapist",
+      "Sports Therapist",
+      "Nutritionist",
+      "Psychologist",
+      "Wellbeing Specialist",
+      "Recovery Expert",
+      "Mentor",
+      "Performance Specialist"
+    ],
+
+    scout: [
+      "Football Scout",
+      "Athletics Scout",
+      "Basketball Scout",
+      "Rugby Scout",
+      "Tennis Scout",
+      "Multi-Sport Scout"
+    ],
+
+    investor: [
+      "Athlete Sponsor",
+      "Grassroots Supporter",
+      "Club Investor",
+      "Brand Partner",
+      "Donor",
+      "Other"
+    ]
+
+  };
+
+  roleSelect.addEventListener("change", () => {
+
+    const selectedRole = roleSelect.value;
+
+    categorySelect.innerHTML =
+      '<option value="">Select Category</option>';
+
+    if (categories[selectedRole]) {
+
+      categories[selectedRole].forEach((category) => {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          category
+            .toLowerCase()
+            .replaceAll(" ", "-")
+            .replaceAll("&", "and");
+
+        option.textContent = category;
+
+        categorySelect.appendChild(option);
+
+      });
+
+    }
+
+  });
+
+</script>
+
+<script src="../js/navigation.js"></script>
+
+<script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

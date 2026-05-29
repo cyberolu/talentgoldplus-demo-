@@ -12,36 +12,65 @@
 <body>
 
   <!-- HEADER -->
-  <header>
-    <nav>
-      <div class="logo">
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
-      </div>
+  <!-- HEADER -->
+<header>
+  <nav>
 
-      <div class="menu-toggle">☰</div>
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-      <ul class="nav-links">
-  <li><a href="../index.html">Home</a></li>
-  <li><a href="athletes.html">Athletes</a></li>
-  <li><a href="coaches.html">Coaches</a></li>
-  <li><a href="investors.html">Investors</a></li>
-  <li><a href="services.html">Professionals</a></li>
-  <li><a href="scouts.html">Scouts</a></li>
-  <li><a href="community.html">Community</a></li>
-  <li><a href="marketplace.html">Marketplace</a></li>
-  <li id="authNavItem">
-  <a href="../auth/login.html">Login</a>
-</li>
-</ul>
-        
-      </ul>
+    <div class="menu-toggle">☰</div>
 
-      <a href="../auth/register.html" class="btn-primary nav-btn">Join Now</a>
-    </nav>
-  </header>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+
+      <li class="dropdown">
+        <a href="athletes.html">Sports ▾</a>
+
+        <ul class="dropdown-menu">
+          <li><a href="athletes.html?sport=football">Football</a></li>
+          <li><a href="athletes.html?sport=athletics">Athletics</a></li>
+          <li><a href="athletes.html?sport=basketball">Basketball</a></li>
+          <li><a href="athletes.html?sport=rugby">Rugby</a></li>
+          <li><a href="athletes.html?sport=tennis">Tennis</a></li>
+          <li><a href="athletes.html?sport=combat-sports">Combat Sports</a></li>
+          <li><a href="athletes.html">More Sports</a></li>
+        </ul>
+      </li>
+
+      <li><a href="community.html">Community</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+
+      <li class="dropdown">
+        <a href="services.html">Professionals ▾</a>
+
+        <ul class="dropdown-menu">
+          <li><a href="services.html?category=physiotherapists">Physiotherapists</a></li>
+          <li><a href="services.html?category=sports-therapists">Sports Therapists</a></li>
+          <li><a href="services.html?category=nutritionists">Nutritionists</a></li>
+          <li><a href="services.html?category=psychologists">Psychologists</a></li>
+          <li><a href="services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
+          <li><a href="services.html?category=recovery-experts">Recovery Experts</a></li>
+          <li><a href="services.html?category=mentors">Mentors</a></li>
+          <li><a href="services.html?category=performance-specialists">Performance Specialists</a></li>
+        </ul>
+      </li>
+
+      <li id="authNavItem">
+        <a href="../auth/login.html">Login</a>
+      </li>
+    </ul>
+
+    <a id="joinBtn" href="../auth/register.html" class="btn-primary nav-btn">
+      Join Now
+    </a>
+
+  </nav>
+</header>
 
   <!-- MAIN -->
   <main>
@@ -147,6 +176,7 @@
   <!-- JS -->
   <script src="../js/navigation.js"></script>
   <script src="../js/app.js"></script>
+  <script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

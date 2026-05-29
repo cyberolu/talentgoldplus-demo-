@@ -355,3 +355,22 @@
   text-decoration: underline;
 
 }
+.dashboard-card-link{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+
+.dashboard-card-link:hover{
+  text-decoration:none;
+  color:inherit;
+}
+
+.dashboard-card-link .athlete-card{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.dashboard-card-link .athlete-card:hover{
+  transform:translateY(-5px);
+}

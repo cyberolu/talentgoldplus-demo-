@@ -12,98 +12,127 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <nav>
+<header>
+  <nav>
 
-      <div class="logo">
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+    <div class="menu-toggle">☰</div>
 
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
+    <ul class="nav-links">
 
-      </div>
+      <li>
+        <a href="../index.html">Home</a>
+      </li>
 
-      <div class="menu-toggle">☰</div>
+      <li>
+        <a href="../pages/about.html">About</a>
+      </li>
 
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-      </ul>
+      <li class="dropdown">
+        <a href="../pages/sports.html">Sports ▾</a>
 
-    </nav>
-  </header>
+        <ul class="dropdown-menu">
+          <li><a href="../pages/athletes.html?sport=football">Football</a></li>
+          <li><a href="../pages/athletes.html?sport=athletics">Athletics</a></li>
+          <li><a href="../pages/athletes.html?sport=basketball">Basketball</a></li>
+          <li><a href="../pages/athletes.html?sport=rugby">Rugby</a></li>
+          <li><a href="../pages/athletes.html?sport=tennis">Tennis</a></li>
+          <li><a href="../pages/athletes.html?sport=combat-sports">Combat Sports</a></li>
+          <li><a href="../pages/athletes.html">More Sports</a></li>
+        </ul>
+      </li>
 
-  <!-- MAIN -->
-  <main>
+      <li>
+        <a href="../pages/community.html">Community</a>
+      </li>
 
-    <section class="container auth-container">
+      <li>
+        <a href="../pages/marketplace.html">Marketplace</a>
+      </li>
 
-      <div class="auth-card">
+      <li class="dropdown">
+        <a href="../pages/services.html">Professionals ▾</a>
 
-        <h1>Welcome Back</h1>
+        <ul class="dropdown-menu">
+          <li><a href="../pages/services.html?category=physiotherapists">Physiotherapists</a></li>
+          <li><a href="../pages/services.html?category=sports-therapists">Sports Therapists</a></li>
+          <li><a href="../pages/services.html?category=nutritionists">Nutritionists</a></li>
+          <li><a href="../pages/services.html?category=psychologists">Psychologists</a></li>
+          <li><a href="../pages/services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
+          <li><a href="../pages/services.html?category=recovery-experts">Recovery Experts</a></li>
+          <li><a href="../pages/services.html?category=mentors">Mentors</a></li>
+          <li><a href="../pages/services.html?category=performance-specialists">Performance Specialists</a></li>
+        </ul>
+      </li>
 
-        <p>
-          Login to continue your TalentGoldPlus journey.
-        </p>
+    </ul>
 
-        <!-- LOGIN FORM -->
-        <form id="loginForm">
+  </nav>
+</header>
 
-          <input
-            type="email"
-            id="email"
-            placeholder="Email Address"
-            required
-          >
+<main>
 
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-          >
+  <section class="container auth-container">
 
-          <button type="submit" class="btn-primary auth-btn">
-            Login
-          </button>
+    <div class="auth-card">
 
-        </form>
+      <h1>Welcome Back</h1>
 
-        <!-- DIVIDER -->
-        <div class="auth-divider">
-          <span>OR</span>
-        </div>
+      <p>
+        Login to continue your TalentGoldPlus journey.
+      </p>
 
-        <!-- GOOGLE LOGIN -->
-        <button id="googleLoginBtn" class="btn-secondary auth-btn">
+      <form id="loginForm">
 
-          Continue with Google
+        <input
+          type="email"
+          id="email"
+          placeholder="Email Address"
+          required
+        >
 
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
+
+        <button type="submit" class="btn-primary auth-btn">
+          Login
         </button>
 
-        <!-- REGISTER -->
-        <p class="auth-switch">
+      </form>
 
-          Don’t have an account?
-
-          <a href="register.html">
-            Create Account
-          </a>
-
-        </p>
-
+      <div class="auth-divider">
+        <span>OR</span>
       </div>
 
-    </section>
+      <button id="googleLoginBtn" class="btn-secondary auth-btn">
+        Continue with Google
+      </button>
 
-  </main>
+      <p class="auth-switch">
+        Don’t have an account?
 
-  <!-- JS -->
-  <script src="../js/navigation.js"></script>
+        <a href="register.html">
+          Create Account
+        </a>
+      </p>
 
-  <script type="module" src="../js/auth.js"></script>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

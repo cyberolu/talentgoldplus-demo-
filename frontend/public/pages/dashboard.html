@@ -12,60 +12,99 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+<header>
+  <nav>
 
-    <nav>
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-      <div class="logo">
+    <div class="menu-toggle">☰</div>
 
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+    <ul class="nav-links" id="dashboardNav">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="profile-setup.html">Profile</a></li>
+    </ul>
 
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
+    <button id="logoutBtn" class="btn-primary nav-btn">
+      Logout
+    </button>
 
+  </nav>
+</header>
+
+<main>
+
+  <section class="dashboard-hero">
+    <div class="container dashboard-hero-inner">
+
+      <div>
+        <p class="hero-sub">YOUR TALENTGOLDPLUS HUB</p>
+
+        <h1 id="welcomeMessage">
+          Welcome
+        </h1>
+
+        <p id="roleText">
+          Loading dashboard...
+        </p>
+        <div id="profilePreview" class="dashboard-profile-preview"></div>
       </div>
 
-      <div class="menu-toggle">☰</div>
+      <a href="profile-setup.html" class="btn-primary">
+        Complete Profile
+      </a>
 
-      <ul class="nav-links" id="dashboardNav">
+    </div>
+  </section>
 
-      </ul>
+  <section class="container dashboard-section">
 
-      <button id="logoutBtn" class="btn-primary nav-btn">
-        Logout
-      </button>
+    <div class="dashboard-stats">
 
-    </nav>
+      <a href="profile-setup.html" class="dashboard-card-link">
+    
+        <div class="dashboard-stat">
+          <h3>Profile</h3>
+          <p>Build your public identity.</p>
+        </div>
+    
+      </a>
+    
+      <a href="community.html" class="dashboard-card-link">
+    
+        <div class="dashboard-stat">
+          <h3>Community</h3>
+          <p>Connect with the ecosystem.</p>
+        </div>
+    
+      </a>
+    
+      <a href="marketplace.html" class="dashboard-card-link">
+    
+        <div class="dashboard-stat">
+          <h3>Marketplace</h3>
+          <p>Find services and opportunities.</p>
+        </div>
+    
+      </a>
+    
+    </div>
 
-  </header>
+    <h2>Your Quick Actions</h2>
 
-  <!-- MAIN -->
-  <main>
+    <div class="athlete-grid" id="dashboardCards"></div>
 
-    <section class="container">
-  
-      <h1 id="welcomeMessage">
-        Welcome
-      </h1>
-  
-      <p id="roleText">
-        Loading dashboard...
-      </p>
-  
-      <div class="athlete-grid" id="dashboardCards">
-  
-      </div>
-  
-    </section>
-  
-  </main>
+  </section>
 
-  <!-- JS -->
-  <script src="../js/navigation.js"></script>
+</main>
 
-  <script type="module" src="../js/auth.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

@@ -12,131 +12,113 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+<header>
+  <nav>
 
-    <nav>
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-      <div class="logo">
+    <div class="menu-toggle">☰</div>
 
-        <img src="../assets/images/Talentgoldplus.png" alt="TalentGoldPlus Logo">
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="profile-setup.html">Profile</a></li>
+    </ul>
 
-        <span class="logo-text">
-          Talent<span class="gold">Gold</span>Plus
-        </span>
+    <button id="logoutBtn" class="btn-primary nav-btn">
+      Logout
+    </button>
 
-      </div>
+  </nav>
+</header>
 
-      <div class="menu-toggle">☰</div>
+<main>
 
-      <ul class="nav-links">
+  <section class="dashboard-hero">
 
-        <li><a href="../index.html">Home</a></li>
+    <div class="container">
 
-        <li><a href="dashboard.html">Dashboard</a></li>
+      <p class="hero-sub">
+        PROFILE SETUP
+      </p>
 
-        <li><a href="community.html">Community</a></li>
+      <h1>
+        Complete Your Profile
+      </h1>
 
-      </ul>
+      <p>
+        Build your TalentGoldPlus identity so athletes, coaches,
+        scouts, professionals and supporters can discover you.
+      </p>
 
-      <button id="logoutBtn" class="btn-primary nav-btn">
-        Logout
-      </button>
+    </div>
 
-    </nav>
+  </section>
 
-  </header>
+  <section class="container auth-container">
 
-  <!-- MAIN -->
-  <main>
+    <div class="auth-card profile-setup-card">
 
-    <section class="container auth-container">
+      <form id="profileForm" class="profile-form">
 
-      <div class="auth-card">
+        <div class="form-group">
+          <label for="profileImage">
+            Profile Picture
+          </label>
 
-        <h1>Complete Your Profile</h1>
+          <input
+            type="file"
+            id="profileImage"
+            accept="image/*"
+          >
+        </div>
 
-        <p>
-          Build your TalentGoldPlus identity and let the world discover your talent.
-        </p>
+        <div class="form-group">
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Full Name"
+            required
+          >
+        </div>
 
-        <form id="profileForm" class="profile-form">
+        <div class="form-group">
+          <input
+            type="text"
+            id="location"
+            placeholder="Location"
+          >
+        </div>
 
-          <!-- PROFILE IMAGE -->
-          <div class="form-group">
-        
-            <label for="profileImage">
-              Profile Picture
-            </label>
-        
-            <input
-              type="file"
-              id="profileImage"
-              accept="image/*"
-            >
-        
-          </div>
-        
-        
-          <!-- COMMON FIELDS -->
-        
-          <div class="form-group">
-        
-            <input
-              type="text"
-              id="fullName"
-              placeholder="Full Name"
-              required
-            >
-        
-          </div>
-        
-          <div class="form-group">
-        
-            <input
-              type="text"
-              id="location"
-              placeholder="Location"
-            >
-        
-          </div>
-        
-          <div class="form-group">
-        
-            <textarea
-              id="bio"
-              placeholder="Tell us about yourself"
-            ></textarea>
-        
-          </div>
-        
-        
-          <!-- DYNAMIC ROLE FIELDS -->
-          <div id="dynamicProfileFields"></div>
-        
-        
-          <!-- SAVE BUTTON -->
-        
-          <button
-            type="submit"
-            class="btn-primary">
-        
-            Save Profile
-        
-          </button>
-        
-        </form>
+        <div class="form-group">
+          <textarea
+            id="bio"
+            placeholder="Tell us about yourself"
+          ></textarea>
+        </div>
 
-      </div>
+        <div id="dynamicProfileFields"></div>
 
-    </section>
+        <button type="submit" class="btn-primary auth-btn">
+          Save Profile
+        </button>
 
-  </main>
+      </form>
 
-  <!-- JS -->
-  <script src="../js/navigation.js"></script>
+    </div>
 
-  <script type="module" src="../js/profile.js"></script>
+  </section>
+
+</main>
+
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/profile.js"></script>
 
 </body>
 </html>

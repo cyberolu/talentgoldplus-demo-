@@ -1,191 +1,442 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TalentGoldPlus | Under Maintenance</title>
+  <title>TalentGoldPlus | Discover, Develop and Fund Talent</title>
 
-<meta name="description" content="TalentGoldPlus is currently undergoing maintenance and redevelopment as we prepare to launch a new global platform for athletes, coaches, scouts, investors and the sports community.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Arial,sans-serif;
-background:
-linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.92)),
-url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:30px;
-color:#ffffff;
-overflow:hidden;
-position:relative;
-}
-
-body::before{
-content:'';
-position:absolute;
-width:600px;
-height:600px;
-background:rgba(212,175,55,0.08);
-border-radius:50%;
-top:-250px;
-right:-150px;
-filter:blur(40px);
-}
-
-body::after{
-content:'';
-position:absolute;
-width:500px;
-height:500px;
-background:rgba(212,175,55,0.05);
-border-radius:50%;
-bottom:-250px;
-left:-150px;
-filter:blur(40px);
-}
-
-.container{
-position:relative;
-z-index:2;
-width:100%;
-max-width:900px;
-padding:60px 50px;
-background:rgba(10,10,10,0.78);
-backdrop-filter:blur(12px);
-border:1px solid rgba(212,175,55,0.18);
-border-radius:24px;
-text-align:center;
-box-shadow:0 20px 60px rgba(0,0,0,0.55);
-}
-
-.logo{
-font-size:20px;
-letter-spacing:5px;
-color:#d4af37;
-margin-bottom:25px;
-font-weight:bold;
-text-transform:uppercase;
-}
-
-h1{
-font-size:72px;
-line-height:1.1;
-margin-bottom:30px;
-font-weight:800;
-color:#d4af37;
-}
-
-p{
-font-size:21px;
-line-height:1.9;
-color:#f1f1f1;
-margin-bottom:24px;
-}
-
-.highlight{
-color:#d4af37;
-font-weight:bold;
-}
-
-.launching{
-display:inline-block;
-margin-top:20px;
-padding:14px 28px;
-border:1px solid #d4af37;
-border-radius:50px;
-font-size:16px;
-letter-spacing:2px;
-text-transform:uppercase;
-color:#d4af37;
-background:rgba(212,175,55,0.08);
-}
-
-.footer{
-margin-top:45px;
-font-size:14px;
-color:#9d9d9d;
-letter-spacing:1px;
-}
-
-@media (max-width:768px){
-
-.container{
-padding:45px 25px;
-}
-
-h1{
-font-size:48px;
-}
-
-p{
-font-size:18px;
-line-height:1.7;
-}
-
-.logo{
-font-size:16px;
-letter-spacing:3px;
-}
-
-.launching{
-font-size:14px;
-padding:12px 22px;
-}
-
-}
-
-</style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-<div class="container">
+<header>
+  <nav>
 
-<div class="logo">
-TalentGoldPlus
-</div>
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
 
-<h1>
-Launching Something Bigger
-</h1>
+    <div class="menu-toggle">☰</div>
 
-<p>
-Our platform is currently undergoing
-<span class="highlight">maintenance, redevelopment and major upgrades</span>
-as we prepare to launch a more powerful experience for athletes, coaches, scouts, investors and the global sports community.
-</p>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="pages/about.html">About</a></li>
+      <li class="dropdown">
+        <a href="pages/sports.html">Sports ▾</a>
+      
+        <ul class="dropdown-menu">
+          <li><a href="pages/athletes.html?sport=football">Football</a></li>
+          <li><a href="pages/athletes.html?sport=athletics">Athletics</a></li>
+          <li><a href="pages/athletes.html?sport=basketball">Basketball</a></li>
+          <li><a href="pages/athletes.html?sport=rugby">Rugby</a></li>
+          <li><a href="pages/athletes.html?sport=tennis">Tennis</a></li>
+          <li><a href="pages/athletes.html?sport=combat-sports">Combat Sports</a></li>
+          <li><a href="pages/athletes.html">More Sports</a></li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="pages/community.html">Community</a>
+      </li>
+      <li><a href="pages/marketplace.html">Marketplace</a></li>
+      <li class="dropdown">
+        <a href="pages/services.html">Professionals ▾</a>
+      
+        <ul class="dropdown-menu">
+          <li><a href="pages/services.html?category=physiotherapists">Physiotherapists</a></li>
+          <li><a href="pages/services.html?category=sports-therapists">Sports Therapists</a></li>
+          <li><a href="pages/services.html?category=nutritionists">Nutritionists</a></li>
+          <li><a href="pages/services.html?category=psychologists">Psychologists</a></li>
+          <li><a href="pages/services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
+          <li><a href="pages/services.html?category=recovery-experts">Recovery Experts</a></li>
+          <li><a href="pages/services.html?category=mentors">Mentors</a></li>
+          <li><a href="pages/services.html?category=performance-specialists">Performance Specialists</a></li>
+        </ul>
+      </li>
 
-<p>
-TalentGoldPlus is being built to help discover, develop, support and connect talent around the world through sport, education, opportunity and community impact.
-</p>
+      <li id="authNavItem">
+        <a href="auth/login.html">Login</a>
+      </li>
+    </ul>
 
-<p>
-We appreciate your patience and support while we work behind the scenes to deliver something truly special.
-</p>
+    <a id="joinBtn" href="auth/register.html" class="btn-primary nav-btn">
+      Join Now
+    </a>
 
-<div class="launching">
-Launching Soon
-</div>
+  </nav>
+</header>
 
-<div class="footer">
-© 2026 TalentGoldPlus. All rights reserved.
-</div>
+<main>
 
-</div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+
+      <div class="hero-left">
+
+        <p class="hero-sub">
+          DREAM ALIVE
+        </p>
+
+        <h1 class="hero-title">
+
+          Discover Talent.
+        
+          <span>
+            Develop Potential.
+          </span>
+        
+          Create Opportunity.
+        
+        </h1>
+
+        <p class="hero-main">
+          TalentGoldPlus connects athletes, grassroots footballers, coaches,
+          mentors, scouts and verified wellbeing professionals through one
+          powerful global sports ecosystem.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="auth/register.html" class="btn-primary">
+            Join Now
+          </a>
+
+          <a href="pages/community.html" class="btn-secondary">
+            Explore Community
+          </a>
+        </div>
+
+      </div>
+
+      <div class="hero-right">
+
+        <img
+          src="assets/images/female football.jpg"
+          alt="Female football athletes"
+          class="hero-image"
+        >
+      
+        <div class="hero-floating-card">
+      
+          <h3>
+            Real Talent.
+            Real Opportunity.
+          </h3>
+      
+          <p>
+            Supporting athletes, footballers and communities through sport,
+            wellbeing and opportunity.
+          </p>
+      
+        </div>
+      
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PATHWAY -->
+  <section id="user-types">
+    <div class="container">
+
+      <h2>Choose Your Pathway</h2>
+
+      <div class="user-cards">
+
+        <article>
+          <h3>For Athletes</h3>
+          <p>
+            Create your profile, showcase your talent and connect with support.
+          </p>
+          <a href="pages/community.html" class="btn-primary">
+            Join Community
+          </a>
+        </article>
+
+        <article>
+          <h3>For Coaches & Professionals</h3>
+          <p>
+            Offer coaching, therapy, nutrition, mentoring, recovery and wellbeing support.
+          </p>
+          <a href="pages/services.html" class="btn-primary">
+            View Professionals
+          </a>
+        </article>
+
+        <article>
+          <h3>For Scouts & Supporters</h3>
+          <p>
+            Discover emerging talent, support development and create opportunities.
+          </p>
+          <a href="pages/marketplace.html" class="btn-primary">
+            Explore Marketplace
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="container">
+
+      <h2>More Than Sport. A Movement for Change.</h2>
+
+      <p>
+        TalentGoldPlus is not just about performance. It is about purpose.
+        We are building a platform that empowers athletes and footballers,
+        with a strong focus on grassroots and female football, mental health
+        and wellbeing, and creating real opportunities for young people.
+      </p>
+
+      <div class="mission-cards">
+
+        <div class="card">
+          <h3>Grassroots & Female Football</h3>
+          <p>Supporting athletes from foundation level to elite performance.</p>
+        </div>
+
+        <div class="card">
+          <h3>Mental Health & Wellbeing</h3>
+          <p>Connecting athletes with trusted wellbeing support.</p>
+        </div>
+
+        <div class="card">
+          <h3>Positive Pathways</h3>
+          <p>Creating opportunities that redirect young people towards purpose.</p>
+        </div>
+
+        <div class="card">
+          <h3>Professional Support</h3>
+          <p>Helping specialists connect with athletes who need their expertise.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!-- BANNER SECTION -->
+
+<section class="impact-banner">
+
+  <img
+    src="assets/images/Banner1.png"
+    alt="TalentGoldPlus Banner"
+  >
+
+</section>
+  <!-- PROFESSIONALS -->
+  <section id="for-professionals">
+    <div class="container">
+
+      <h2>Professionals on TalentGoldPlus</h2>
+
+      <p>
+        Our professionals include physiotherapists, sports therapists,
+        nutritionists, psychologists, wellbeing specialists, recovery experts,
+        mentors and performance specialists.
+      </p>
+
+      <div class="solution-cards">
+
+        <div class="card">
+          <h3>Verified Support</h3>
+          <p>Help athletes access trusted services that support development.</p>
+        </div>
+
+        <div class="card">
+          <h3>Wellbeing First</h3>
+          <p>Support physical, emotional and mental performance needs.</p>
+        </div>
+
+        <div class="card">
+          <h3>Grow Your Reach</h3>
+          <p>Connect your services with athletes, parents and organisations.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="container">
+
+      <h2>How TalentGoldPlus Works</h2>
+
+      <div class="steps">
+
+        <article>
+          <h3>1. Create Your Profile</h3>
+          <p>
+            Athletes, coaches and professionals join and build their platform identity.
+          </p>
+        </article>
+
+        <article>
+          <h3>2. Connect and Develop</h3>
+          <p>
+            Users connect through community, marketplace and professional services.
+          </p>
+        </article>
+
+        <article>
+          <h3>3. Access Opportunities</h3>
+          <p>
+            Talent can be discovered, supported, funded and developed through the ecosystem.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section id="get-involved">
+    <div class="container">
+
+      <h2>Get Involved</h2>
+
+      <p>
+        Be part of the mission to change lives through sport.
+      </p>
+
+      <div class="involvement-cards">
+
+        <article>
+          <h3>Volunteer</h3>
+          <p>Support athletes and community initiatives.</p>
+          <a href="pages/volunteer.html" class="btn-secondary">
+            Join Us
+          </a>
+        </article>
+
+        <article>
+          <h3>Ambassadors</h3>
+          <p>Represent and inspire the next generation.</p>
+          <a href="pages/ambassadors.html" class="btn-secondary">
+            Become One
+          </a>
+        </article>
+
+        <article>
+          <h3>Partners</h3>
+          <p>Work with us to expand impact and opportunities.</p>
+          <a href="pages/partners.html" class="btn-secondary">
+            Partner With Us
+          </a>
+        </article>
+
+        <article>
+          <h3>Donate</h3>
+          <p>Help fund athletes and life changing programmes.</p>
+          <a href="pages/donate.html" class="btn-primary">
+            Donate Now
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="final-cta">
+    <div class="container">
+
+      <h2>Be Part of the Future of Sports Talent</h2>
+
+      <p>
+        Join the global ecosystem helping athletes turn potential into opportunity.
+      </p>
+
+      <div class="cta-buttons">
+        <a href="auth/register.html" class="btn-primary">
+          Create Account
+        </a>
+
+        <a href="pages/marketplace.html" class="btn-primary">
+          Explore Marketplace
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
+  Chat on WhatsApp
+</a>
+
+<footer>
+  <div class="container">
+
+    <h2>TalentGoldPlus</h2>
+
+    <p>
+      Discover, develop and fund the next generation of sports talent while
+      creating positive change in communities across the world.
+    </p>
+
+    <div class="footer-grid">
+
+      <div class="footer-column">
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/community.html">Community</a>
+        <a href="pages/marketplace.html">Marketplace</a>
+        <a href="pages/services.html">Professionals</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Community</h4>
+        <a href="pages/athletes.html">Athletes</a>
+        <a href="pages/coaches.html">Coaches</a>
+        <a href="pages/scouts.html">Scouts</a>
+        <a href="pages/investors.html">Investors</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Get Involved</h4>
+        <a href="pages/volunteer.html">Volunteer</a>
+        <a href="pages/ambassadors.html">Ambassadors</a>
+        <a href="pages/partners.html">Partners</a>
+        <a href="pages/donate.html">Donate</a>
+      </div>
+
+    </div>
+
+    <p class="footer-copy">
+      © 2026 TalentGoldPlus. All rights reserved.
+    </p>
+
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav-links");
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
+</script>
+
+<script type="module" src="js/auth.js"></script>
 
 </body>
 </html>

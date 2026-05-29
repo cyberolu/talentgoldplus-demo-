@@ -20,7 +20,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyBKRL9hPbhFlcqg1fLEy35kZa0g_4hLEKQ",
     authDomain: "talentgoldplus-96542.firebaseapp.com",
     projectId: "talentgoldplus-96542",
-    storageBucket:"talentgoldplus-96542.appspot.com",
+    storageBucket: "talentgoldplus-96542.firebasestorage.app",
     messagingSenderId: "511413432305",
     appId: "1:511413432305:web:6cb785607c9749e3271e50"
 };

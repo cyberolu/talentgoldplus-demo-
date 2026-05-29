@@ -44,6 +44,8 @@ if (registerForm) {
     const password = document.getElementById("password").value;
 
     const role = document.getElementById("role").value;
+    const category =
+      document.getElementById("category").value;
 
     try {
 
@@ -63,6 +65,7 @@ if (registerForm) {
         name: name,
         email: email,
         role: role,
+        category: category,
         createdAt: new Date()
 
       });
@@ -225,6 +228,9 @@ const roleText =
 const dashboardCards =
   document.getElementById("dashboardCards");
 
+const profilePreview =
+  document.getElementById("profilePreview");
+
 const isDashboardPage =
   window.location.pathname.includes("dashboard.html");
 
@@ -276,8 +282,46 @@ onAuthStateChanged(auth, async (user) => {
       welcomeMessage.textContent =
         `Welcome ${name}`;
 
-      roleText.textContent =
-        `Role: ${role}`;
+        const sport =
+        userData.sport || userData.category || "";
+      
+      const location =
+        userData.location || "";
+      
+      const completed =
+        userData.profileCompleted
+          ? "✅ Complete"
+          : "⚠️ Incomplete";
+      
+      roleText.innerHTML = `
+        <strong>Role:</strong> ${role}<br>
+        <strong>Sport/Category:</strong> ${sport}<br>
+        <strong>Location:</strong> ${location}<br>
+        <strong>Profile:</strong> ${completed}
+      `;
+      if (profilePreview) {
+
+        profilePreview.innerHTML = `
+      
+          <div class="dashboard-profile-card">
+      
+            <img
+              src="${userData.profileImage || "../assets/images/default-profile.png"}"
+              alt="${name}"
+            >
+      
+            <div>
+              <h3>${name}</h3>
+              <p>${role}</p>
+              <p>${sport}</p>
+              <p>${location}</p>
+            </div>
+      
+          </div>
+      
+        `;
+      
+      }
 
 
       // CLEAR
@@ -351,26 +395,101 @@ onAuthStateChanged(auth, async (user) => {
 
         dashboardCards.innerHTML = `
 
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>My Profile</h3>
-              <p>Manage your athlete profile.</p>
-            </div>
-          </div>
+          <a href="profile-setup.html" class="dashboard-card-link">
 
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>Upload Media</h3>
-              <p>Share videos and achievements.</p>
-            </div>
-          </div>
+            <div class="athlete-card">
 
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>Marketplace</h3>
-              <p>Access services and opportunities.</p>
+              <div class="athlete-info">
+
+                <h3>My Profile</h3>
+
+                <p>Manage your athlete profile.</p>
+
+              </div>
+
             </div>
-          </div>
+
+          </a>
+
+          <a href="community.html" class="dashboard-card-link">
+
+            <div class="athlete-card">
+
+              <div class="athlete-info">
+
+                <h3>Community</h3>
+
+                <p>Connect with athletes, coaches and supporters.</p>
+
+              </div>
+
+            </div>
+
+          </a>
+
+          <a href="marketplace.html" class="dashboard-card-link">
+
+            <div class="athlete-card">
+
+              <div class="athlete-info">
+
+                <h3>Marketplace</h3>
+
+                <p>Find services and opportunities.</p>
+
+              </div>
+
+            </div>
+
+          </a>
+
+          <a href="upload-media.html" class="dashboard-card-link">
+
+            <div class="athlete-card">
+
+              <div class="athlete-info">
+
+                <h3>Upload Media</h3>
+
+                <p>Share videos and achievements.</p>
+
+              </div>
+
+            </div>
+
+          </a>
+
+          <a href="opportunities.html" class="dashboard-card-link">
+
+            <div class="athlete-card">
+
+              <div class="athlete-info">
+
+                <h3>My Opportunities</h3>
+
+                <p>View scouts, trials and sponsorships.</p>
+
+              </div>
+
+            </div>
+
+          </a>
+
+          <a href="messages.html" class="dashboard-card-link">
+
+            <div class="athlete-card">
+
+              <div class="athlete-info">
+
+                <h3>Messages</h3>
+
+                <p>Communicate with coaches and scouts.</p>
+
+              </div>
+
+            </div>
+
+          </a>
 
         `;
 
@@ -379,7 +498,6 @@ onAuthStateChanged(auth, async (user) => {
 
       // =========================
       // COACH
-      // =========================
 
       else if (role === "coach") {
 
@@ -419,6 +537,9 @@ const joinBtn =
 onAuthStateChanged(auth, async (user) => {
 
   if (user) {
+    if (isCommunityPage) {
+      document.body.style.display = "block";
+    }
 
 
     // DASHBOARD LINK

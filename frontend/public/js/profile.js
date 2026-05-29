@@ -6,7 +6,8 @@ import {
 
 import {
   doc,
-  updateDoc
+  getDoc,
+  setDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 import {
@@ -15,141 +16,247 @@ import {
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-storage.js";
 
+const profileForm =
+  document.getElementById("profileForm");
+
+const dynamicProfileFields =
+  document.getElementById("dynamicProfileFields");
+
+let currentRole = "";
+
+// =========================
+// DYNAMIC FIELDS
+// =========================
+
+function renderDynamicFields(role) {
+
+  if (!dynamicProfileFields) return;
+
+  if (role === "athlete") {
+
+    dynamicProfileFields.innerHTML = `
+      <input type="text" id="sport" placeholder="Sport">
+
+      <input type="text" id="pbs" placeholder="Personal bests / position">
+
+      <textarea id="achievements" placeholder="Achievements"></textarea>
+    `;
+
+  } else if (role === "coach") {
+
+    dynamicProfileFields.innerHTML = `
+      <input type="text" id="sport" placeholder="Coaching sport">
+
+      <input type="text" id="qualifications" placeholder="Coaching qualifications">
+
+      <textarea id="services" placeholder="Coaching services offered"></textarea>
+    `;
+
+  } else if (role === "professional") {
+
+    dynamicProfileFields.innerHTML = `
+      <select id="professionalCategory">
+        <option value="">Select Professional Category</option>
+        <option value="physiotherapist">Physiotherapist</option>
+        <option value="sports-therapist">Sports Therapist</option>
+        <option value="nutritionist">Nutritionist</option>
+        <option value="psychologist">Psychologist</option>
+        <option value="wellbeing-specialist">Wellbeing Specialist</option>
+        <option value="recovery-expert">Recovery Expert</option>
+        <option value="mentor">Mentor</option>
+        <option value="performance-specialist">Performance Specialist</option>
+      </select>
+
+      <input type="text" id="qualifications" placeholder="Qualifications">
+
+      <textarea id="services" placeholder="Services offered"></textarea>
+    `;
+
+  } else if (role === "scout") {
+
+    dynamicProfileFields.innerHTML = `
+      <input type="text" id="sport" placeholder="Sport focus">
+
+      <input type="text" id="organisation" placeholder="Organisation">
+
+      <input type="text" id="scoutingRegion" placeholder="Scouting region">
+    `;
+
+  } else if (role === "investor") {
+
+    dynamicProfileFields.innerHTML = `
+      <input type="text" id="companyName" placeholder="Company / Organisation name">
+
+      <input type="text" id="investmentInterests" placeholder="Investment interests">
+
+      <input type="text" id="fundingRange" placeholder="Funding range">
+    `;
+
+  } else {
+
+    dynamicProfileFields.innerHTML = "";
+
+  }
+
+}
 
 // =========================
 // PROFILE SAVE
 // =========================
 
-const profileForm =
-  document.getElementById("profileForm");
-
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
 
     window.location.href = "../auth/login.html";
 
     return;
+
   }
 
-  if (profileForm) {
+  try {
 
-    profileForm.addEventListener("submit", async (e) => {
+    const userRef =
+      doc(db, "users", user.uid);
 
-      e.preventDefault();
+    const userSnap =
+      await getDoc(userRef);
 
-      try {
+    if (userSnap.exists()) {
 
-        // FORM VALUES
+      const userData =
+        userSnap.data();
 
-        const fullName =
-         document.getElementById("fullName")?.value || "";
+      currentRole =
+        userData.role || "";
 
-        const sport =
-         document.getElementById("sport")?.value || "";
+      renderDynamicFields(currentRole);
 
-        const location =
-         document.getElementById("location")?.value || "";
+    }
 
-        const bio =
-          document.getElementById("bio")?.value || "";
+  } catch (error) {
 
-        const achievements =
-         document.getElementById("achievements")?.value || "";
+    console.error(error);
 
-        const services =
-         document.getElementById("services")?.value || "";
+  }
 
-        const pbs =
-          document.getElementById("pbs")?.value || "";
+  if (!profileForm) return;
 
-        const companyName =
-         document.getElementById("companyName")?.value || "";
+  profileForm.addEventListener("submit", async (e) => {
 
-        const investmentInterests =
-          document.getElementById("investmentInterests")?.value || "";
+    e.preventDefault();
 
-        const fundingRange =
-          document.getElementById("fundingRange")?.value || "";
+    try {
 
-        const imageFile =
-          document.getElementById("profileImage").files[0];
+      const fullName =
+        document.getElementById("fullName")?.value || "";
 
+      const location =
+        document.getElementById("location")?.value || "";
 
-        let imageUrl = "";
+      const bio =
+        document.getElementById("bio")?.value || "";
 
+      const sport =
+        document.getElementById("sport")?.value || "";
 
-        // =========================
-        // IMAGE UPLOAD
-        // =========================
+      const pbs =
+        document.getElementById("pbs")?.value || "";
 
-        if (imageFile) {
+      const achievements =
+        document.getElementById("achievements")?.value || "";
 
-          const storageRef = ref(
-            storage,
-            `profileImages/${user.uid}`
-          );
+      const services =
+        document.getElementById("services")?.value || "";
 
-          await uploadBytes(storageRef, imageFile);
+      const qualifications =
+        document.getElementById("qualifications")?.value || "";
 
-          imageUrl =
-            await getDownloadURL(storageRef);
+      const professionalCategory =
+        document.getElementById("professionalCategory")?.value || "";
 
-        }
+      const organisation =
+        document.getElementById("organisation")?.value || "";
 
+      const scoutingRegion =
+        document.getElementById("scoutingRegion")?.value || "";
 
-        // =========================
-        // UPDATE FIRESTORE
-        // =========================
+      const companyName =
+        document.getElementById("companyName")?.value || "";
 
-        await updateDoc(
-          doc(db, "users", user.uid),
-          {
+      const investmentInterests =
+        document.getElementById("investmentInterests")?.value || "";
 
-            fullName: fullName,
+      const fundingRange =
+        document.getElementById("fundingRange")?.value || "";
 
-            sport: sport,
+      const imageInput =
+        document.getElementById("profileImage");
 
-            location: location,
+      const imageFile =
+        imageInput?.files?.[0];
 
-            bio: bio,
+      let imageUrl = "";
 
-            achievements: achievements,
+      if (imageFile) {
 
-            services: services,
+        const safeFileName =
+          imageFile.name.replaceAll(" ", "-");
 
-            pbs: pbs,
-
-            companyName: companyName,
-
-            investmentInterests: investmentInterests,
-
-            fundingRange: fundingRange,
-
-            profileImage: imageUrl || "",
-
-            profileCompleted: true
-
-          }
+        const storageRef = ref(
+          storage,
+          `profileImages/${user.uid}/${Date.now()}-${safeFileName}`
         );
 
+        await uploadBytes(storageRef, imageFile);
 
-        alert("Profile updated successfully!");
-
-
-        // REDIRECT
-        window.location.href = "dashboard.html";
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(error.message);
+        imageUrl =
+          await getDownloadURL(storageRef);
 
       }
 
-    });
+      const profileData = {
+        fullName,
+        location,
+        bio,
+        role: currentRole,
+        sport,
+        pbs,
+        achievements,
+        services,
+        qualifications,
+        professionalCategory,
+        organisation,
+        scoutingRegion,
+        companyName,
+        investmentInterests,
+        fundingRange,
+        profileCompleted: true,
+        updatedAt: new Date()
+      };
 
-  }
+      if (imageUrl) {
+        profileData.profileImage = imageUrl;
+      }
+
+      await setDoc(
+        doc(db, "users", user.uid),
+        profileData,
+        { merge: true }
+      );
+
+      alert("Profile updated successfully!");
+
+      window.location.href = "dashboard.html";
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(error.message);
+
+    }
+
+  });
 
 });
