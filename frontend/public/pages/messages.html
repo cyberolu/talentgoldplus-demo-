@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Messages | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+<header>
+  <nav>
+
+    <div class="logo">
+      <span class="logo-text">
+        Talent<span class="gold">Gold</span>Plus
+      </span>
+    </div>
+
+    <div class="menu-toggle">☰</div>
+
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="profile-setup.html">Profile</a></li>
+    </ul>
+
+    <button id="logoutBtn" class="btn-primary nav-btn">
+      Logout
+    </button>
+
+  </nav>
+</header>
+
+<main>
+
+  <section class="messages-page">
+
+    <div class="messages-layout">
+
+      <aside class="messages-sidebar">
+
+        <div class="messages-sidebar-header">
+          <h2>Messages</h2>
+          <button id="newChatBtn" class="btn-primary">
+            New Chat
+          </button>
+        </div>
+
+        <div id="conversationList" class="conversation-list">
+          <p>Loading conversations...</p>
+        </div>
+
+      </aside>
+
+      <section class="messages-main">
+
+        <div id="chatHeader" class="chat-header">
+          <h2>Select a conversation</h2>
+          <p>Choose a conversation or start a new chat.</p>
+        </div>
+
+        <div id="messagesList" class="messages-list"></div>
+
+        <form id="messageForm" class="message-form">
+
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type your message..."
+            autocomplete="off"
+          >
+
+          <button type="submit" class="btn-primary">
+            Send
+          </button>
+
+        </form>
+
+      </section>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/messages.js"></script>
+
+</body>
+</html>
