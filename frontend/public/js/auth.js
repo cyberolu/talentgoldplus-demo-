@@ -57,8 +57,9 @@ const isProtectedPage =
     window.location.pathname.includes(page)
   );
 
-const isDashboardPage =
-  window.location.pathname.includes("dashboard.html");
+  const isDashboardPage =
+    window.location.pathname.includes("dashboard.html") ||
+    window.location.pathname.includes("/dashboard");
 
 // =========================
 // REGISTER
