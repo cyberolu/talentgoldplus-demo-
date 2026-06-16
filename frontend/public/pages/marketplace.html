@@ -7,7 +7,9 @@
   <title>Marketplace | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/marketplace.css">
 </head>
 
 <body>
@@ -16,9 +18,13 @@
   <nav>
 
     <div class="logo">
-      <span class="logo-text">
-        Talent<span class="gold">Gold</span>Plus
-      </span>
+      <a href="../index.html">
+        <img
+          src="../assets/images/TalentGoldPlus.png"
+          alt="Talent Gold"
+          class="site-logo"
+        >
+      </a>
     </div>
 
     <div class="menu-toggle">☰</div>
@@ -26,36 +32,10 @@
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-
-      <li class="dropdown">
-        <a href="sports.html">Sports ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="athletes.html?sport=football">Football</a></li>
-          <li><a href="athletes.html?sport=athletics">Athletics</a></li>
-          <li><a href="athletes.html?sport=basketball">Basketball</a></li>
-          <li><a href="athletes.html?sport=rugby">Rugby</a></li>
-          <li><a href="athletes.html?sport=tennis">Tennis</a></li>
-          <li><a href="athletes.html?sport=combat-sports">Combat Sports</a></li>
-          <li><a href="athletes.html">More Sports</a></li>
-        </ul>
-      </li>
-
+      <li><a href="sports.html">Sports</a></li>
       <li><a href="community.html">Community</a></li>
       <li><a href="marketplace.html">Marketplace</a></li>
-
-      <li class="dropdown">
-        <a href="services.html">Professionals ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="services.html?category=physiotherapists">Physiotherapists</a></li>
-          <li><a href="services.html?category=sports-therapists">Sports Therapists</a></li>
-          <li><a href="services.html?category=nutritionists">Nutritionists</a></li>
-          <li><a href="services.html?category=psychologists">Psychologists</a></li>
-          <li><a href="services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
-          <li><a href="services.html?category=recovery-experts">Recovery Experts</a></li>
-          <li><a href="services.html?category=mentors">Mentors</a></li>
-          <li><a href="services.html?category=performance-specialists">Performance Specialists</a></li>
-        </ul>
-      </li>
+      <li><a href="services.html">Professionals</a></li>
 
       <li id="authNavItem">
         <a href="../auth/login.html">Login</a>
@@ -71,170 +51,80 @@
 
 <main>
 
-  <section class="services-hero">
+  <section class="services-hero marketplace-hero">
     <div class="container">
+
       <h1>Talent Marketplace</h1>
+
       <p>
         Browse trusted sports services, athlete opportunities, programmes and products.
-        Login is required to book, apply or contact providers.
+        You can view listings freely, but login is required to contact, book or apply.
       </p>
-    </div>
-  </section>
 
-  <section class="container">
-    <h2>Marketplace Categories</h2>
+      <div class="hero-buttons">
+        <a href="create-listing.html" class="btn-primary">
+          Create Listing
+        </a>
 
-    <div class="services-grid">
-
-      <article class="service-category-card">
-        <h3>Services</h3>
-        <p>Coaching, therapy, nutrition, recovery and wellbeing support.</p>
-        <a href="#services" class="btn-primary">Browse</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Opportunities</h3>
-        <p>Trials, sponsorships, showcases and athlete funding pathways.</p>
-        <a href="#opportunities" class="btn-primary">Browse</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Programmes</h3>
-        <p>Training plans, mentoring schemes and athlete development packages.</p>
-        <a href="#programmes" class="btn-primary">Browse</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Products</h3>
-        <p>Sports equipment, recovery tools and athlete support products.</p>
-        <a href="#products" class="btn-primary">Browse</a>
-      </article>
+        <a href="#marketplaceListings" class="btn-secondary">
+          Browse Listings
+        </a>
+      </div>
 
     </div>
   </section>
 
-  <section id="services" class="featured-section">
+  <section class="container marketplace-controls">
+
+    <h2>Browse Marketplace</h2>
+
+    <div class="marketplace-filter-bar">
+
+      <input
+        type="text"
+        id="marketplaceSearch"
+        placeholder="Search listings..."
+      >
+
+      <select id="marketplaceCategoryFilter">
+        <option value="all">All categories</option>
+        <option value="coach">Coaches</option>
+        <option value="physiotherapist">Physiotherapists</option>
+        <option value="nutritionist">Nutritionists</option>
+        <option value="sports-therapist">Sports Therapists</option>
+        <option value="psychologist">Psychologists</option>
+        <option value="mentor">Mentors</option>
+        <option value="opportunity">Opportunities</option>
+        <option value="equipment">Equipment</option>
+      </select>
+
+    </div>
+
+  </section>
+
+  <section id="marketplaceListings" class="featured-section">
+
     <div class="container">
-      <h2>Services</h2>
 
-      <div class="athlete-grid">
+      <div class="marketplace-section-header">
 
-        <div class="athlete-card">
-          <img src="../assets/images/pro1.jpg" alt="Sports Recovery Session">
-          <div class="athlete-info">
-            <h3>Sports Recovery Session</h3>
-            <p class="sport">Dr Emily Carter</p>
-            <p>Recovery & Rehabilitation</p>
-            <p class="pb">£75/session</p>
-            <a href="../auth/login.html" class="btn-primary">Login to Book</a>
-          </div>
-        </div>
+        <h2>Latest Listings</h2>
 
-        <div class="athlete-card">
-          <img src="../assets/images/pro2.jpg" alt="Elite Nutrition Plan">
-          <div class="athlete-info">
-            <h3>Elite Nutrition Plan</h3>
-            <p class="sport">Michael Brown</p>
-            <p>Performance Nutrition</p>
-            <p class="pb">£35/programme</p>
-            <a href="../auth/login.html" class="btn-primary">Login to View</a>
-          </div>
-        </div>
+        <p>
+          Explore available services, opportunities and support offers.
+        </p>
 
       </div>
-    </div>
-  </section>
 
-  <section id="opportunities">
-    <div class="container">
-      <h2>Opportunities</h2>
-
-      <div class="athlete-grid">
-
-        <div class="athlete-card">
-          <img src="../assets/images/investor1.jpg" alt="Youth Athlete Sponsorship">
-          <div class="athlete-info">
-            <h3>Youth Athlete Sponsorship</h3>
-            <p class="sport">Future Sports Capital</p>
-            <p>Funding Opportunity</p>
-            <p class="pb">Apply Now</p>
-            <a href="../auth/login.html" class="btn-primary">Login to Apply</a>
-          </div>
-        </div>
-
-        <div class="athlete-card">
-          <img src="../assets/images/scout1.jpg" alt="Football Trial Opportunity">
-          <div class="athlete-info">
-            <h3>Football Trial Opportunity</h3>
-            <p class="sport">Elite Youth Showcase</p>
-            <p>Trial & Showcase</p>
-            <p class="pb">Limited Spaces</p>
-            <a href="../auth/login.html" class="btn-primary">Login to Apply</a>
-          </div>
-        </div>
-
+      <div id="marketplaceGrid" class="athlete-grid">
+        Loading marketplace listings...
       </div>
+
     </div>
-  </section>
 
-  <section id="programmes" class="featured-section">
-    <div class="container">
-      <h2>Programmes</h2>
-
-      <div class="athlete-grid">
-
-        <div class="athlete-card">
-          <img src="../assets/images/coach1.jpg" alt="Elite Sprint Coaching">
-          <div class="athlete-info">
-            <h3>Elite Sprint Coaching</h3>
-            <p class="sport">James Carter</p>
-            <p>Online Performance Programme</p>
-            <p class="pb">£49/month</p>
-            <a href="../auth/login.html" class="btn-primary">Login to View</a>
-          </div>
-        </div>
-
-        <div class="athlete-card">
-          <img src="../assets/images/coach2.jpg" alt="Football Coaching">
-          <div class="athlete-info">
-            <h3>1 to 1 Football Coaching</h3>
-            <p class="sport">Maria Lopez</p>
-            <p>Technical Development</p>
-            <p class="pb">£60/session</p>
-            <a href="../auth/login.html" class="btn-primary">Login to Book</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="products">
-    <div class="container">
-      <h2>Products</h2>
-
-      <div class="athlete-grid">
-
-        <div class="athlete-card">
-          <img src="../assets/images/product1.jpg" alt="Recovery Kit">
-          <div class="athlete-info">
-            <h3>Recovery Kit</h3>
-            <p class="sport">Athlete Essentials</p>
-            <p>Recovery tools for training and performance.</p>
-            <p class="pb">Coming Soon</p>
-            <a href="../auth/login.html" class="btn-primary">Login to View</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
   </section>
 
 </main>
-
-<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
-  Chat on WhatsApp
-</a>
 
 <footer>
   <div class="container">
@@ -246,45 +136,12 @@
       creating positive change in communities across the world.
     </p>
 
-    <div class="footer-grid">
-
-      <div class="footer-column">
-        <h4>Platform</h4>
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="sports.html">Sports</a>
-        <a href="community.html">Community</a>
-        <a href="marketplace.html">Marketplace</a>
-        <a href="services.html">Professionals</a>
-      </div>
-
-      <div class="footer-column">
-        <h4>Community</h4>
-        <a href="athletes.html">Athletes</a>
-        <a href="coaches.html">Coaches</a>
-        <a href="scouts.html">Scouts</a>
-        <a href="investors.html">Investors</a>
-      </div>
-
-      <div class="footer-column">
-        <h4>Get Involved</h4>
-        <a href="volunteer.html">Volunteer</a>
-        <a href="ambassadors.html">Ambassadors</a>
-        <a href="partners.html">Partners</a>
-        <a href="donate.html">Donate</a>
-      </div>
-
-    </div>
-
-    <p class="footer-copy">
-      © 2026 TalentGoldPlus. All rights reserved.
-    </p>
-
   </div>
 </footer>
 
 <script src="../js/navigation.js"></script>
 <script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/marketplace.js"></script>
 
 </body>
 </html>

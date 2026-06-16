@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Listing | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/marketplace.css">
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../assets/images/TalentGoldPlus.png" alt="Talent Gold" class="site-logo">
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="container auth-container">
+
+    <div class="auth-card">
+
+      <h1>Create Marketplace Listing</h1>
+
+      <p>
+        Add a service, opportunity, professional offer or sports-related listing.
+      </p>
+
+      <form id="listingForm">
+
+        <input type="text" id="listingTitle" placeholder="Listing title" required>
+
+        <select id="listingCategory" required>
+          <option value="">Select category</option>
+          <option value="coach">Coach</option>
+          <option value="physiotherapist">Physiotherapist</option>
+          <option value="nutritionist">Nutritionist</option>
+          <option value="sports-therapist">Sports Therapist</option>
+          <option value="psychologist">Psychologist</option>
+          <option value="mentor">Mentor</option>
+          <option value="opportunity">Opportunity</option>
+          <option value="equipment">Equipment</option>
+        </select>
+
+        <textarea
+            id="listingDescription"
+            placeholder="Describe your listing"
+            required
+            ></textarea>
+
+            <input
+            type="text"
+            id="listingPrice"
+            placeholder="Price or fee, e.g. £50/session"
+            >
+
+            <input
+            type="text"
+            id="listingLocation"
+            placeholder="Location or online"
+            >
+
+            <label for="listingImage">
+            Listing Image
+            </label>
+
+            <input
+            type="file"
+            id="listingImage"
+            accept="image/*"
+            >
+
+            <button
+            type="submit"
+            class="btn-primary auth-btn"
+            >
+            Submit Listing
+            </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/marketplace.js"></script>
+
+</body>
+</html>

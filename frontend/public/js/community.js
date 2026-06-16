@@ -35,6 +35,7 @@ const postUserImage = document.getElementById("postUserImage");
 
 let currentUser = null;
 let currentUserData = null;
+let unsubscribePosts = null;
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -44,20 +45,105 @@ onAuthStateChanged(auth, async (user) => {
 
   currentUser = user;
 
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
+  const userSnap = await getDoc(doc(db, "users", user.uid));
 
   if (userSnap.exists()) {
     currentUserData = userSnap.data();
 
     if (postUserImage) {
       postUserImage.src =
-        currentUserData.profileImage ||
-        "../assets/images/default-profile.png";
+        currentUserData.profileImage &&
+        currentUserData.profileImage.startsWith("http")
+          ? currentUserData.profileImage
+          : "../assets/images/avatar-placeholder.png";
     }
   }
 
   loadCommunityPosts();
+});
+
+document.addEventListener("click", async (e) => {
+  const button = e.target.closest(".report-post-btn");
+
+  if (!button) return;
+
+  const postId = button.dataset.postId;
+
+  const reason = prompt("Why are you reporting this post?");
+
+  if (!reason) return;
+
+  try {
+    await addDoc(
+      collection(db, "reports"),
+      {
+        type: "community_post",
+        itemId: postId,
+        reportedPostText: button.dataset.postText || "",
+        reportedPostMedia: button.dataset.postMedia || "",
+        reportedPostAuthor: button.dataset.postAuthor || "",
+        reportedBy: currentUser.uid,
+        reportedByName:
+          currentUserData?.fullName ||
+          currentUserData?.name ||
+          "Unknown User",
+        reason,
+        status: "open",
+        createdAt: serverTimestamp()
+      }
+    );
+
+    alert("Report submitted. Thank you.");
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+});
+
+document.addEventListener("click", async (e) => {
+
+  const button = e.target.closest(".share-post-btn");
+
+  if (!button) return;
+
+  const postId =
+    button.dataset.postId;
+
+  const postText =
+    button.dataset.postText || "";
+
+  const shareUrl =
+    `${window.location.origin}${window.location.pathname}?post=${postId}`;
+
+  const shareData = {
+    title: "TalentGoldPlus Community Post",
+    text: postText || "Check out this TalentGoldPlus community post.",
+    url: shareUrl
+  };
+
+  try {
+
+    if (navigator.share) {
+
+      await navigator.share(shareData);
+
+      return;
+    }
+
+    await navigator.clipboard.writeText(shareUrl);
+
+    alert("Post link copied to clipboard.");
+
+  } catch (error) {
+
+    console.error(error);
+
+    await navigator.clipboard.writeText(shareUrl);
+
+    alert("Post link copied to clipboard.");
+
+  }
+
 });
 
 if (chooseMediaBtn && postMedia) {
@@ -121,6 +207,7 @@ if (postForm) {
         mediaUrl,
         mediaType,
         likes: [],
+        hidden: false,
         createdAt: serverTimestamp()
       });
 
@@ -138,11 +225,16 @@ if (postForm) {
 }
 
 function loadCommunityPosts() {
-  const postsRef = collection(db, "communityPosts");
+  if (unsubscribePosts) {
+    unsubscribePosts();
+  }
 
-  const q = query(postsRef, orderBy("createdAt", "desc"));
+  const q = query(
+    collection(db, "communityPosts"),
+    orderBy("createdAt", "desc")
+  );
 
-  onSnapshot(q, (snapshot) => {
+  unsubscribePosts = onSnapshot(q, (snapshot) => {
     communityFeed.innerHTML = "";
 
     if (snapshot.empty) {
@@ -155,11 +247,18 @@ function loadCommunityPosts() {
       const post = docSnap.data();
       const postId = docSnap.id;
 
+      if (post.hidden === true) {
+        return;
+      }
+
       const likes = post.likes || [];
       const hasLiked = likes.includes(currentUser.uid);
 
-      const article = document.createElement("article");
-      article.classList.add("feed-card");
+      const profileImage =
+        post.profileImage &&
+        post.profileImage.startsWith("http")
+          ? post.profileImage
+          : "../assets/images/avatar-placeholder.png";
 
       const mediaHtml = post.mediaUrl
         ? post.mediaType === "video"
@@ -167,16 +266,20 @@ function loadCommunityPosts() {
           : `<img class="feed-image" src="${post.mediaUrl}" alt="Post media">`
         : "";
 
+      const article = document.createElement("article");
+      article.classList.add("feed-card");
+
       article.innerHTML = `
         <div class="feed-header">
           <img
-            src="${post.profileImage || "../assets/images/default-profile.png"}"
-            alt="${post.name}"
+            src="${profileImage}"
+            alt="${post.name || "User"}"
+            onerror="this.src='../assets/images/avatar-placeholder.png'"
           >
 
           <div>
-            <h3>${post.name}</h3>
-            <p>${post.role} • Just now</p>
+            <h3>${post.name || "TalentGoldPlus User"}</h3>
+            <p>${post.role || "Member"} • Just now</p>
           </div>
         </div>
 
@@ -204,8 +307,24 @@ function loadCommunityPosts() {
             💬 Comment
           </button>
 
-          <button type="button" class="feed-action-btn">
+          <button
+            type="button"
+            class="feed-action-btn share-post-btn"
+            data-post-id="${postId}"
+            data-post-text="${post.text || ""}"
+          >
             ↗️ Share
+          </button>
+
+          <button
+            type="button"
+            class="feed-action-btn report-post-btn"
+            data-post-id="${postId}"
+            data-post-text="${post.text || ""}"
+            data-post-author="${post.name || ""}"
+            data-post-media="${post.mediaUrl || ""}"
+          >
+            🚩 Report
           </button>
         </div>
 
@@ -218,6 +337,7 @@ function loadCommunityPosts() {
               placeholder="Write a comment..."
               required
             >
+
             <button type="submit">
               Post
             </button>
@@ -228,62 +348,63 @@ function loadCommunityPosts() {
       communityFeed.appendChild(article);
     });
 
-    document.querySelectorAll(".like-btn").forEach((button) => {
-      button.addEventListener("click", async () => {
-        const postId = button.dataset.postId;
-        const liked = button.dataset.liked === "true";
+    attachPostEvents();
+  });
+}
 
-        const postRef = doc(db, "communityPosts", postId);
+function attachPostEvents() {
+  document.querySelectorAll(".like-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const postId = button.dataset.postId;
+      const liked = button.dataset.liked === "true";
 
-        if (liked) {
-          await updateDoc(postRef, {
-            likes: arrayRemove(currentUser.uid)
-          });
-        } else {
-          await updateDoc(postRef, {
-            likes: arrayUnion(currentUser.uid)
-          });
+      const postRef = doc(db, "communityPosts", postId);
+
+      if (liked) {
+        await updateDoc(postRef, {
+          likes: arrayRemove(currentUser.uid)
+        });
+      } else {
+        await updateDoc(postRef, {
+          likes: arrayUnion(currentUser.uid)
+        });
+      }
+    });
+  });
+
+  document.querySelectorAll(".comment-form").forEach((form) => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const postId = form.dataset.postId;
+      const input = form.querySelector("input");
+      const comment = input.value.trim();
+
+      if (!comment) return;
+
+      await addDoc(
+        collection(db, "communityPosts", postId, "comments"),
+        {
+          userId: currentUser.uid,
+          name:
+            currentUserData?.fullName ||
+            currentUserData?.name ||
+            "User",
+          profileImage: currentUserData?.profileImage || "",
+          comment,
+          createdAt: serverTimestamp()
         }
-      });
+      );
+
+      input.value = "";
+      loadComments(postId);
     });
+  });
 
-    document.querySelectorAll(".comment-form").forEach((form) => {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const postId = form.dataset.postId;
-        const input = form.querySelector("input");
-        const comment = input.value.trim();
-
-        if (!comment) return;
-
-        await addDoc(
-          collection(db, "communityPosts", postId, "comments"),
-          {
-            userId: currentUser.uid,
-            name:
-              currentUserData?.fullName ||
-              currentUserData?.name ||
-              "User",
-            profileImage:
-              currentUserData?.profileImage ||
-              "",
-            comment,
-            createdAt: serverTimestamp()
-          }
-        );
-
-        input.value = "";
-
-        loadComments(postId);
-      });
-    });
-
-    document.querySelectorAll(".comment-toggle-btn").forEach((button) => {
-      button.addEventListener("click", async () => {
-        const postId = button.dataset.postId;
-        await loadComments(postId);
-      });
+  document.querySelectorAll(".comment-toggle-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const postId = button.dataset.postId;
+      await loadComments(postId);
     });
   });
 }
@@ -294,11 +415,11 @@ async function loadComments(postId) {
 
   if (!commentsContainer) return;
 
-  const commentsRef =
-    collection(db, "communityPosts", postId, "comments");
-
   const commentsQuery =
-    query(commentsRef, orderBy("createdAt", "asc"));
+    query(
+      collection(db, "communityPosts", postId, "comments"),
+      orderBy("createdAt", "asc")
+    );
 
   const commentsSnapshot =
     await getDocs(commentsQuery);
@@ -316,7 +437,7 @@ async function loadComments(postId) {
 
     commentsContainer.innerHTML += `
       <div class="comment-item">
-        <strong>${comment.name}</strong>
+        <strong>${comment.name || "User"}</strong>
         <p>${comment.comment}</p>
       </div>
     `;

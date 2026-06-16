@@ -1,0 +1,214 @@
+/* =========================
+   LAYOUT SYSTEM
+========================= */
+
+.page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .wide-container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* =========================
+     GRID HELPERS
+  ========================= */
+  
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  
+  .auto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  
+  /* =========================
+     PAGE LAYOUTS
+  ========================= */
+  
+  .two-column-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  
+  .three-column-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) 280px;
+    gap: 24px;
+    align-items: start;
+  }
+  
+  /* =========================
+     SIDEBAR LAYOUTS
+  ========================= */
+  
+  .left-sidebar,
+  .right-sidebar {
+    position: sticky;
+    top: 110px;
+  }
+  
+  .sidebar-panel {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  
+  /* =========================
+     PORTAL LAYOUT
+  ========================= */
+  
+  .portal-layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    background: #f4f6f8;
+  }
+  
+  .portal-sidebar {
+    min-height: 100vh;
+  }
+  
+  .portal-main {
+    min-width: 0;
+  }
+  
+  /* =========================
+     SECTION SPACING
+  ========================= */
+  
+  .section-sm {
+    padding: 40px 20px;
+  }
+  
+  .section-md {
+    padding: 70px 20px;
+  }
+  
+  .section-lg {
+    padding: 95px 20px;
+  }
+  
+  /* =========================
+     FLEX HELPERS
+  ========================= */
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .gap-sm {
+    gap: 12px;
+  }
+  
+  .gap-md {
+    gap: 24px;
+  }
+  
+  .gap-lg {
+    gap: 40px;
+  }
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  
+  @media (max-width: 1200px) {
+    .three-column-layout {
+      grid-template-columns: 220px 1fr;
+    }
+  
+    .three-column-layout .right-sidebar {
+      display: none;
+    }
+  
+    .grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .portal-layout,
+    .two-column-layout,
+    .three-column-layout {
+      grid-template-columns: 1fr;
+    }
+  
+    .left-sidebar,
+    .right-sidebar {
+      position: static;
+    }
+  
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .container,
+    .wide-container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  
+    .section-sm {
+      padding: 30px 16px;
+    }
+  
+    .section-md {
+      padding: 50px 16px;
+    }
+  
+    .section-lg {
+      padding: 70px 16px;
+    }
+  }

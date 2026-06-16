@@ -6,17 +6,15 @@ import {
 
 import {
   collection,
+  addDoc,
+  doc,
+  getDoc,
   query,
   where,
   orderBy,
   onSnapshot,
-  addDoc,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-  updateDoc,
-  serverTimestamp
+  serverTimestamp,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const conversationList =
@@ -40,206 +38,235 @@ const newChatBtn =
 let currentUser = null;
 let activeConversationId = null;
 let unsubscribeMessages = null;
-
-// =========================
-// AUTH CHECK
-// =========================
+let unsubscribeConversations = null;
 
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
-
     window.location.href = "../auth/login.html";
-
     return;
-
   }
 
   currentUser = user;
 
-  loadConversations();
+  await loadConversations();
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const conversationId =
+    params.get("conversation");
+
+  if (conversationId) {
+    await openConversationFromUrl(conversationId);
+  }
 
 });
 
-// =========================
-// LOAD CONVERSATIONS
-// =========================
+async function loadConversations() {
 
-function loadConversations() {
+  conversationList.innerHTML =
+    "<p>Loading conversations...</p>";
 
-  const conversationsRef =
-    collection(db, "conversations");
-
-  const q =
+    const conversationsQuery =
     query(
-      conversationsRef,
-      where("participants", "array-contains", currentUser.uid),
-      orderBy("updatedAt", "desc")
+      collection(db, "conversations"),
+      where("participants", "array-contains", currentUser.uid)
     );
 
-  onSnapshot(q, async (snapshot) => {
+  if (unsubscribeConversations) {
+    unsubscribeConversations();
+  }
 
-    conversationList.innerHTML = "";
+  unsubscribeConversations =
+    onSnapshot(conversationsQuery, async (snapshot) => {
 
-    if (snapshot.empty) {
+      conversationList.innerHTML = "";
 
-      conversationList.innerHTML =
-        "<p>No conversations yet.</p>";
+      if (snapshot.empty) {
+        conversationList.innerHTML =
+          "<p>No conversations yet.</p>";
+        return;
+      }
 
-      return;
+      for (const conversationDoc of snapshot.docs) {
 
-    }
+        const conversation =
+          conversationDoc.data();
 
-    snapshot.forEach(async (docSnap) => {
+        const otherUserId =
+          conversation.participants.find(
+            (id) => id !== currentUser.uid
+          );
 
-      const conversation =
-        docSnap.data();
+        const otherUser =
+          await getUserData(otherUserId);
 
-      const otherUserId =
-        conversation.participants.find(
-          (id) => id !== currentUser.uid
-        );
+        const item =
+          document.createElement("div");
 
-      const otherUser =
-        await getUserData(otherUserId);
+        item.classList.add("conversation-item");
 
-      const conversationItem =
-        document.createElement("div");
+        if (conversationDoc.id === activeConversationId) {
+          item.classList.add("active");
+        }
 
-      conversationItem.classList.add("conversation-item");
+        item.dataset.conversationId =
+          conversationDoc.id;
 
-      conversationItem.innerHTML = `
+        item.innerHTML = `
+          <img
+            src="${getProfileImage(otherUser)}"
+            alt="${getDisplayName(otherUser)}"
+            onerror="this.src='../assets/images/avatar-placeholder.png'"
+          >
 
-        <img
-          src="${otherUser.profileImage || "../assets/images/default-profile.png"}"
-          alt="${otherUser.name || "User"}"
-        >
+          <div>
+            <h3>${getDisplayName(otherUser)}</h3>
+            <p>${conversation.lastMessage || "No messages yet."}</p>
+          </div>
+        `;
 
-        <div>
-          <h4>${otherUser.name || otherUser.fullName || "User"}</h4>
-          <p>${conversation.lastMessage || "No messages yet"}</p>
-        </div>
+        item.addEventListener("click", () => {
+          openConversation(
+            conversationDoc.id,
+            otherUser
+          );
 
-      `;
+          window.history.replaceState(
+            null,
+            "",
+            `messages.html?conversation=${conversationDoc.id}`
+          );
+        });
 
-      conversationItem.addEventListener("click", () => {
+        conversationList.appendChild(item);
 
-        openConversation(
-          docSnap.id,
-          otherUser
-        );
-
-      });
-
-      conversationList.appendChild(conversationItem);
+      }
 
     });
 
-  });
-
 }
 
-// =========================
-// GET USER DATA
-// =========================
+async function openConversationFromUrl(conversationId) {
 
-async function getUserData(userId) {
+  const conversationRef =
+    doc(db, "conversations", conversationId);
 
-  const userRef =
-    doc(db, "users", userId);
+  const conversationSnap =
+    await getDoc(conversationRef);
 
-  const userSnap =
-    await getDoc(userRef);
-
-  if (userSnap.exists()) {
-
-    return userSnap.data();
-
+  if (!conversationSnap.exists()) {
+    chatHeader.innerHTML = `
+      <h2>Conversation not found</h2>
+      <p>This conversation may have been deleted.</p>
+    `;
+    return;
   }
 
-  return {
-    name: "User",
-    profileImage: ""
-  };
+  const conversation =
+    conversationSnap.data();
+
+  if (
+    !conversation.participants ||
+    !conversation.participants.includes(currentUser.uid)
+  ) {
+    chatHeader.innerHTML = `
+      <h2>Access denied</h2>
+      <p>You are not part of this conversation.</p>
+    `;
+    return;
+  }
+
+  const otherUserId =
+    conversation.participants.find(
+      (id) => id !== currentUser.uid
+    );
+
+  const otherUser =
+    await getUserData(otherUserId);
+
+  openConversation(
+    conversationId,
+    otherUser
+  );
 
 }
 
-// =========================
-// OPEN CONVERSATION
-// =========================
+async function openConversation(conversationId, otherUser) {
 
-function openConversation(conversationId, otherUser) {
+  activeConversationId =
+    conversationId;
 
-  activeConversationId = conversationId;
+  document.querySelectorAll(".conversation-item")
+    .forEach((item) => {
+      item.classList.toggle(
+        "active",
+        item.dataset.conversationId === conversationId
+      );
+    });
 
   chatHeader.innerHTML = `
-
     <div class="chat-user-header">
-
       <img
-        src="${otherUser.profileImage || "../assets/images/default-profile.png"}"
-        alt="${otherUser.name || "User"}"
+        src="${getProfileImage(otherUser)}"
+        alt="${getDisplayName(otherUser)}"
+        onerror="this.src='../assets/images/avatar-placeholder.png'"
       >
 
       <div>
-        <h2>${otherUser.name || otherUser.fullName || "User"}</h2>
-        <p>${otherUser.role || "TalentGoldPlus User"}</p>
+        <h2>${getDisplayName(otherUser)}</h2>
+        <p>${otherUser.role || "Member"}</p>
       </div>
-
     </div>
-
   `;
 
   if (unsubscribeMessages) {
-
     unsubscribeMessages();
-
   }
 
-  const messagesRef =
-    collection(
-      db,
-      "conversations",
-      conversationId,
-      "messages"
-    );
-
-  const q =
+  const messagesQuery =
     query(
-      messagesRef,
+      collection(
+        db,
+        "conversations",
+        conversationId,
+        "messages"
+      ),
       orderBy("createdAt", "asc")
     );
 
   unsubscribeMessages =
-    onSnapshot(q, (snapshot) => {
+    onSnapshot(messagesQuery, (snapshot) => {
 
       messagesList.innerHTML = "";
 
-      snapshot.forEach((docSnap) => {
+      if (snapshot.empty) {
+        messagesList.innerHTML =
+          "<p class='empty-chat'>No messages yet. Start the conversation.</p>";
+        return;
+      }
+
+      snapshot.forEach((messageDoc) => {
 
         const message =
-          docSnap.data();
+          messageDoc.data();
 
-        const messageBubble =
+        const bubble =
           document.createElement("div");
 
-        messageBubble.classList.add("message-bubble");
+        bubble.classList.add("message-bubble");
 
         if (message.senderId === currentUser.uid) {
-
-          messageBubble.classList.add("sent");
-
+          bubble.classList.add("sent");
         } else {
-
-          messageBubble.classList.add("received");
-
+          bubble.classList.add("received");
         }
 
-        messageBubble.innerHTML = `
-          <p>${message.text}</p>
-        `;
+        bubble.textContent =
+          message.text || "";
 
-        messagesList.appendChild(messageBubble);
+        messagesList.appendChild(bubble);
 
       });
 
@@ -250,10 +277,6 @@ function openConversation(conversationId, otherUser) {
 
 }
 
-// =========================
-// SEND MESSAGE
-// =========================
-
 if (messageForm) {
 
   messageForm.addEventListener("submit", async (e) => {
@@ -263,12 +286,11 @@ if (messageForm) {
     const text =
       messageInput.value.trim();
 
-    if (!text || !activeConversationId) {
+    if (!text) return;
 
-      alert("Select a conversation first.");
-
+    if (!activeConversationId) {
+      alert("Please select a conversation first.");
       return;
-
     }
 
     await addDoc(
@@ -280,7 +302,7 @@ if (messageForm) {
       ),
       {
         senderId: currentUser.uid,
-        text: text,
+        text,
         createdAt: serverTimestamp()
       }
     );
@@ -299,79 +321,62 @@ if (messageForm) {
 
 }
 
-// =========================
-// START NEW CHAT
-// =========================
-
 if (newChatBtn) {
 
   newChatBtn.addEventListener("click", async () => {
 
-    const email =
-      prompt("Enter the email of the user you want to message:");
-
-    if (!email) return;
-
-    const usersRef =
-      collection(db, "users");
-
-    const q =
-      query(
-        usersRef,
-        where("email", "==", email)
-      );
-
-    const snapshot =
-      await getDocs(q);
-
-    if (snapshot.empty) {
-
-      alert("No user found with that email.");
-
-      return;
-
-    }
-
-    const otherUserDoc =
-      snapshot.docs[0];
-
-    const otherUserId =
-      otherUserDoc.id;
-
-    if (otherUserId === currentUser.uid) {
-
-      alert("You cannot message yourself.");
-
-      return;
-
-    }
-
-    const conversationId =
-      [currentUser.uid, otherUserId]
-        .sort()
-        .join("_");
-
-    const conversationRef =
-      doc(db, "conversations", conversationId);
-
-    await setDoc(
-      conversationRef,
-      {
-        participants: [
-          currentUser.uid,
-          otherUserId
-        ],
-        lastMessage: "",
-        updatedAt: serverTimestamp()
-      },
-      { merge: true }
-    );
-
-    openConversation(
-      conversationId,
-      otherUserDoc.data()
+    alert(
+      "For now, start chats from Connections or Marketplace. New Chat search will be added later."
     );
 
   });
+
+}
+
+async function getUserData(userId) {
+
+  if (!userId) {
+    return {
+      name: "Unknown User",
+      role: "Member",
+      profileImage: ""
+    };
+  }
+
+  const userSnap =
+    await getDoc(
+      doc(db, "users", userId)
+    );
+
+  if (!userSnap.exists()) {
+    return {
+      name: "Unknown User",
+      role: "Member",
+      profileImage: ""
+    };
+  }
+
+  return userSnap.data();
+
+}
+
+function getDisplayName(userData) {
+
+  return (
+    userData.fullName ||
+    userData.name ||
+    "TalentGoldPlus User"
+  );
+
+}
+
+function getProfileImage(userData) {
+
+  return (
+    userData.profileImage &&
+    userData.profileImage.startsWith("http")
+  )
+    ? userData.profileImage
+    : "../assets/images/avatar-placeholder.png";
 
 }

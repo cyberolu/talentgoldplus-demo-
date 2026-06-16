@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-
   <style>
     body {
       display: none;
@@ -14,18 +13,23 @@
   <title>Community | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/community.css">
 </head>
 
 <body>
 
 <header>
   <nav>
-
     <div class="logo">
-      <span class="logo-text">
-        Talent<span class="gold">Gold</span>Plus
-      </span>
+      <a href="index.html">
+        <img
+          src="../assets/images/TalentGoldPlus.png"
+          alt="Talent Gold"
+          class="site-logo"
+        >
+      </a>
     </div>
 
     <div class="menu-toggle">☰</div>
@@ -33,38 +37,15 @@
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-
-      <li class="dropdown">
-        <a href="sports.html">Sports ▾</a>
-
-        <ul class="dropdown-menu">
-          <li><a href="athletes.html?sport=football">Football</a></li>
-          <li><a href="athletes.html?sport=athletics">Athletics</a></li>
-          <li><a href="athletes.html?sport=basketball">Basketball</a></li>
-          <li><a href="athletes.html?sport=rugby">Rugby</a></li>
-          <li><a href="athletes.html?sport=tennis">Tennis</a></li>
-          <li><a href="athletes.html?sport=combat-sports">Combat Sports</a></li>
-          <li><a href="athletes.html">More Sports</a></li>
-        </ul>
-      </li>
-
+      <li><a href="sports.html">Sports</a></li>
       <li><a href="community.html">Community</a></li>
-      <li><a href="marketplace.html">Marketplace</a></li>
-
-      <li class="dropdown">
-        <a href="services.html">Professionals ▾</a>
-
-        <ul class="dropdown-menu">
-          <li><a href="services.html?category=physiotherapists">Physiotherapists</a></li>
-          <li><a href="services.html?category=sports-therapists">Sports Therapists</a></li>
-          <li><a href="services.html?category=nutritionists">Nutritionists</a></li>
-          <li><a href="services.html?category=psychologists">Psychologists</a></li>
-          <li><a href="services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
-          <li><a href="services.html?category=recovery-experts">Recovery Experts</a></li>
-          <li><a href="services.html?category=mentors">Mentors</a></li>
-          <li><a href="services.html?category=performance-specialists">Performance Specialists</a></li>
-        </ul>
+      <li>
+        <a href="notifications.html" id="notificationLink">
+          🔔 <span id="notificationCount">0</span>
+        </a>
       </li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="services.html">Professionals</a></li>
 
       <li id="authNavItem">
         <a href="../auth/login.html">Login</a>
@@ -74,7 +55,6 @@
     <a id="joinBtn" href="../auth/register.html" class="btn-primary nav-btn">
       Join Now
     </a>
-
   </nav>
 </header>
 
@@ -88,17 +68,16 @@
 
         <div class="sidebar-card">
           <h3>Community</h3>
-
           <a href="profile-setup.html">👤 My Profile</a>
           <a href="sports.html">🏅 Sports Groups</a>
           <a href="marketplace.html">🛒 Marketplace</a>
           <a href="opportunities.html">🎯 Opportunities</a>
           <a href="messages.html">💬 Messages</a>
+          <a href="connections.html">🤝 Connections</a>
         </div>
 
         <div class="sidebar-card">
           <h3>Sports</h3>
-
           <a href="athletes.html?sport=football">Football</a>
           <a href="athletes.html?sport=athletics">Athletics</a>
           <a href="athletes.html?sport=basketball">Basketball</a>
@@ -111,7 +90,6 @@
 
         <div class="community-top">
           <h1>TalentGoldPlus Community</h1>
-
           <p>
             Share updates, celebrate progress and connect with athletes,
             coaches, scouts and professionals.
@@ -121,7 +99,7 @@
         <div class="create-post-card social-create-card">
 
           <img
-            src="../assets/images/default-profile.png"
+            src="../assets/images/avatar-placeholder.png"
             alt="User"
             id="postUserImage"
           >
@@ -141,7 +119,6 @@
             >
 
             <div class="post-actions">
-
               <button type="button" class="btn-secondary" id="chooseMediaBtn">
                 📷 Photo / 🎥 Video
               </button>
@@ -151,7 +128,6 @@
               <button type="submit" class="btn-primary">
                 Post
               </button>
-
             </div>
 
           </form>
@@ -167,22 +143,9 @@
         <div class="sidebar-card">
           <h3>Suggested Connections</h3>
 
-          <div class="suggestion">
-            <img src="../assets/images/athlete2.jpg" alt="Athlete">
-            <div>
-              <strong>Lana Smith</strong>
-              <p>Football Athlete</p>
-            </div>
+          <div id="suggestedConnections">
+            Loading users...
           </div>
-
-          <div class="suggestion">
-            <img src="../assets/images/pro1.jpg" alt="Professional">
-            <div>
-              <strong>Dr Emily Carter</strong>
-              <p>Sports Therapist</p>
-            </div>
-          </div>
-
         </div>
 
         <div class="sidebar-card">
@@ -204,6 +167,7 @@
 <script src="../js/navigation.js"></script>
 <script type="module" src="../js/auth.js"></script>
 <script type="module" src="../js/community.js"></script>
+<script type="module" src="../js/connections.js"></script>
 
 </body>
 </html>

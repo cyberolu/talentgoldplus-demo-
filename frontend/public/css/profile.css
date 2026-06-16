@@ -1,0 +1,114 @@
+/* =========================
+   PROFILE PAGES
+========================= */
+
+.profile-section {
+    padding: 80px 20px;
+  }
+  
+  .profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .profile-image img {
+    width: 420px;
+    max-width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+  
+  .profile-content {
+    flex: 1;
+    min-width: 320px;
+  }
+  
+  .profile-content h1 {
+    font-size: 52px;
+    margin-bottom: 15px;
+  }
+  
+  .profile-role {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  
+  .profile-location {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+  }
+  
+  .profile-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  
+  .stat-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    min-width: 180px;
+    border: 1px solid #eee;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  }
+  
+  .stat-box h3 {
+    font-size: 36px;
+    color: var(--gold);
+  }
+  
+  .stat-box p {
+    color: #666;
+  }
+  
+  .profile-bio {
+    margin-bottom: 40px;
+  }
+  
+  .profile-bio h2,
+  .profile-specialties h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-bio p,
+  .profile-specialties li {
+    color: #444;
+    line-height: 1.8;
+  }
+  
+  .profile-specialties ul {
+    padding-left: 20px;
+  }
+  
+  .profile-contact {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 900px) {
+    .profile-container {
+      flex-direction: column;
+    }
+  
+    .profile-content h1 {
+      font-size: 38px;
+    }
+  
+    .profile-role {
+      font-size: 24px;
+    }
+  }

@@ -10,11 +10,6 @@ const loginPath =
     ? "../auth/login.html"
     : "auth/login.html";
 
-const registerPath =
-  isPageFolder
-    ? "../auth/register.html"
-    : "auth/register.html";
-
 const dashboardPath =
   isPageFolder
     ? "dashboard.html"
@@ -29,34 +24,48 @@ import { auth, db } from "./firebase.js";
 
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 import {
-    GoogleAuthProvider,
-    signInWithPopup
-  } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-
-import {
-    onAuthStateChanged,
-    signOut
-    } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-
-import {
   doc,
-  setDoc
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-import {
+  setDoc,
   getDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
+// =========================
+// PAGE CHECKS
+// =========================
+
+const protectedPages = [
+  "dashboard.html",
+  "profile-setup.html",
+  "community.html",
+  "connections.html",
+  "messages.html",
+  "notifications.html",
+  "create-listing.html"
+];
+
+const isProtectedPage =
+  protectedPages.some((page) =>
+    window.location.pathname.includes(page)
+  );
+
+const isDashboardPage =
+  window.location.pathname.includes("dashboard.html");
 
 // =========================
 // REGISTER
 // =========================
 
-const registerForm = document.getElementById("registerForm");
+const registerForm =
+  document.getElementById("registerForm");
 
 if (registerForm) {
 
@@ -64,19 +73,23 @@ if (registerForm) {
 
     e.preventDefault();
 
-    const name = document.getElementById("name").value;
+    const name =
+      document.getElementById("name").value.trim();
 
-    const email = document.getElementById("email").value;
+    const email =
+      document.getElementById("email").value.trim();
 
-    const password = document.getElementById("password").value;
+    const password =
+      document.getElementById("password").value;
 
-    const role = document.getElementById("role").value;
+    const role =
+      document.getElementById("role").value || "athlete";
+
     const category =
-      document.getElementById("category").value;
+      document.getElementById("category")?.value || "";
 
     try {
 
-      // CREATE USER
       const userCredential =
         await createUserWithEmailAndPassword(
           auth,
@@ -84,23 +97,25 @@ if (registerForm) {
           password
         );
 
-      const user = userCredential.user;
+      const user =
+        userCredential.user;
 
-      // SAVE USER TO FIRESTORE
-      await setDoc(doc(db, "users", user.uid), {
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          name,
+          email,
+          role,
+          category,
+          profileCompleted: false,
+          createdAt: new Date()
+        }
+      );
 
-        name: name,
-        email: email,
-        role: role,
-        category: category,
-        createdAt: new Date()
+      alert("Account created successfully.");
 
-      });
-
-      alert("Account created successfully!");
-
-      // REDIRECT
-      window.location.href = "../pages/dashboard.html";
+      window.location.href =
+        "../pages/dashboard.html";
 
     } catch (error) {
 
@@ -112,12 +127,12 @@ if (registerForm) {
 
 }
 
-
 // =========================
 // LOGIN
 // =========================
 
-const loginForm = document.getElementById("loginForm");
+const loginForm =
+  document.getElementById("loginForm");
 
 if (loginForm) {
 
@@ -125,9 +140,11 @@ if (loginForm) {
 
     e.preventDefault();
 
-    const email = document.getElementById("email").value;
+    const email =
+      document.getElementById("email").value.trim();
 
-    const password = document.getElementById("password").value;
+    const password =
+      document.getElementById("password").value;
 
     try {
 
@@ -137,9 +154,8 @@ if (loginForm) {
         password
       );
 
-      alert("Login successful!");
-
-      window.location.href = "../pages/dashboard.html";
+      window.location.href =
+        "../pages/dashboard.html";
 
     } catch (error) {
 
@@ -150,6 +166,52 @@ if (loginForm) {
   });
 
 }
+
+// =========================
+// FORGOT PASSWORD
+// =========================
+
+const forgotPasswordLink =
+  document.getElementById("forgotPasswordLink");
+
+if (forgotPasswordLink) {
+
+  forgotPasswordLink.addEventListener("click", async (e) => {
+
+    e.preventDefault();
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    if (!email) {
+
+      alert("Please enter your email address first.");
+
+      return;
+
+    }
+
+    try {
+
+      await sendPasswordResetEmail(
+        auth,
+        email
+      );
+
+      alert(
+        "Password reset email sent.\n\nPlease check your Inbox and Spam/Junk folder.\n\nIf you do not receive the email within a few minutes, verify that the email address is correct and try again."
+      );
+
+    } catch (error) {
+
+      alert(error.message);
+
+    }
+
+  });
+
+}
+
 // =========================
 // GOOGLE LOGIN
 // =========================
@@ -163,45 +225,40 @@ if (googleLoginBtn) {
 
     try {
 
-      const provider = new GoogleAuthProvider();
+      const provider =
+        new GoogleAuthProvider();
 
       const result =
         await signInWithPopup(auth, provider);
 
-        const user = result.user;
+      const user =
+        result.user;
 
+      const userRef =
+        doc(db, "users", user.uid);
 
-        // SAVE USER TO FIRESTORE
-        const userRef =
-  doc(db, "users", user.uid);
+      const userSnap =
+        await getDoc(userRef);
 
-const userSnap =
-  await getDoc(userRef);
+      if (!userSnap.exists()) {
 
+        await setDoc(
+          userRef,
+          {
+            name: user.displayName || "User",
+            email: user.email,
+            role: "athlete",
+            category: "",
+            profileImage: user.photoURL || "",
+            profileCompleted: false,
+            createdAt: new Date()
+          }
+        );
 
-// ONLY CREATE USER IF NEW
-if (!userSnap.exists()) {
+      }
 
-  await setDoc(userRef, {
-
-    name: user.displayName || "User",
-
-    email: user.email,
-
-    role: "athlete",
-
-    profileImage: user.photoURL || "",
-
-    createdAt: new Date()
-
-  });
-
-}
-        
-        
-        alert("Google login successful!");
-        
-        window.location.href = "../pages/dashboard.html";
+      window.location.href =
+        "../pages/dashboard.html";
 
     } catch (error) {
 
@@ -212,38 +269,43 @@ if (!userSnap.exists()) {
   });
 
 }
-  
-  
-  // =========================
-  // LOGOUT
-  // =========================
-  
-  const logoutBtn =
-    document.getElementById("logoutBtn");
-  
-  if (logoutBtn) {
-  
-    logoutBtn.addEventListener("click", async () => {
-  
-      try {
-  
-        await signOut(auth);
-  
-        alert("Logged out successfully!");
-  
-        window.location.href = homePath;
-  
-      } catch (error) {
-  
-        alert(error.message);
-  
-      }
-  
-    });
-  
-  }
-  // =========================
-// DASHBOARD SYSTEM
+
+// =========================
+// LOGOUT BUTTONS
+// =========================
+
+function setupLogoutButton(buttonId) {
+
+  const button =
+    document.getElementById(buttonId);
+
+  if (!button) return;
+
+  button.addEventListener("click", async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      await signOut(auth);
+
+      window.location.href =
+        homePath;
+
+    } catch (error) {
+
+      alert(error.message);
+
+    }
+
+  });
+
+}
+
+setupLogoutButton("logoutBtn");
+
+// =========================
+// DASHBOARD ELEMENTS
 // =========================
 
 const welcomeMessage =
@@ -258,298 +320,27 @@ const dashboardCards =
 const profilePreview =
   document.getElementById("profilePreview");
 
-const isDashboardPage =
-  window.location.pathname.includes("dashboard.html");
-
-const isProfilePage =
-  window.location.pathname.includes("profile-setup.html");
-
 const dashboardNav =
   document.getElementById("dashboardNav");
 
-const isCommunityPage =
-  window.location.pathname.includes("community.html");
+const dashboardName =
+  document.getElementById("dashboardName");
 
+const dashboardAvatar =
+  document.getElementById("dashboardAvatar");
 
-onAuthStateChanged(auth, async (user) => {
+const profileCompletion =
+  document.getElementById("profileCompletion");
 
+const connectionsCount =
+  document.getElementById("connectionsCount");
 
+const messagesCount =
+  document.getElementById("messagesCount");
 
-  if (!user && (isDashboardPage || isProfilePage)) {
+const listingsCount =
+  document.getElementById("listingsCount");
 
-    window.location.href = loginPath;
-  
-    return;
-  }
-
-  if (!dashboardCards) return;
-  document.body.style.display = "block";
-
-  try {
-
-    const userRef =
-      doc(db, "users", user.uid);
-
-    const userSnap =
-      await getDoc(userRef);
-
-    if (userSnap.exists()) {
-
-      const userData = userSnap.data();
-
-      const role = userData.role;
-
-      const name =
-        userData.name ||
-        userData.fullName ||
-        "User";
-
-
-      // WELCOME
-      welcomeMessage.textContent =
-        `Welcome ${name}`;
-
-        const sport =
-        userData.sport || userData.category || "";
-      
-      const location =
-        userData.location || "";
-      
-      const completed =
-        userData.profileCompleted
-          ? "✅ Complete"
-          : "⚠️ Incomplete";
-      
-      roleText.innerHTML = `
-        <strong>Role:</strong> ${role}<br>
-        <strong>Sport/Category:</strong> ${sport}<br>
-        <strong>Location:</strong> ${location}<br>
-        <strong>Profile:</strong> ${completed}
-      `;
-      if (profilePreview) {
-
-        profilePreview.innerHTML = `
-      
-          <div class="dashboard-profile-card">
-      
-            <img
-              src="${userData.profileImage || "../assets/images/default-profile.png"}"
-              alt="${name}"
-            >
-      
-            <div>
-              <h3>${name}</h3>
-              <p>${role}</p>
-              <p>${sport}</p>
-              <p>${location}</p>
-            </div>
-      
-          </div>
-      
-        `;
-      
-      }
-
-
-      // CLEAR
-      dashboardCards.innerHTML = "";
-
-
-      // =========================
-      // SUPERADMIN
-      // =========================
-
-      if (role === "superadmin") {
-        
-        dashboardNav.innerHTML = `
-
-          <li><a href="dashboard.html">Dashboard</a></li>
-
-          <li><a href="community.html">Community</a></li>
-
-          <li><a href="marketplace.html">Marketplace</a></li>
-
-          <li><a href="profile-setup.html">Profile</a></li>
-
-          <li><a href="#">Admin Panel</a></li>
-
-        `;
-        dashboardCards.innerHTML = `
-
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>Admin Panel</h3>
-              <p>Manage platform users and approvals.</p>
-            </div>
-          </div>
-
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>Marketplace Control</h3>
-              <p>Manage listings and commissions.</p>
-            </div>
-          </div>
-
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>Community Moderation</h3>
-              <p>Review reports and content.</p>
-            </div>
-          </div>
-
-        `;
-
-      }
-
-
-      // =========================
-      // ATHLETE
-      // =========================
-
-      else if (role === "athlete") {
-
-        dashboardNav.innerHTML = `
-
-          <li><a href="dashboard.html">Dashboard</a></li>
-
-          <li><a href="community.html">Community</a></li>
-
-          <li><a href="marketplace.html">Marketplace</a></li>
-
-          <li><a href="profile-setup.html">Profile</a></li>
-
-        `;
-
-        dashboardCards.innerHTML = `
-
-          <a href="profile-setup.html" class="dashboard-card-link">
-
-            <div class="athlete-card">
-
-              <div class="athlete-info">
-
-                <h3>My Profile</h3>
-
-                <p>Manage your athlete profile.</p>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="community.html" class="dashboard-card-link">
-
-            <div class="athlete-card">
-
-              <div class="athlete-info">
-
-                <h3>Community</h3>
-
-                <p>Connect with athletes, coaches and supporters.</p>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="marketplace.html" class="dashboard-card-link">
-
-            <div class="athlete-card">
-
-              <div class="athlete-info">
-
-                <h3>Marketplace</h3>
-
-                <p>Find services and opportunities.</p>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="upload-media.html" class="dashboard-card-link">
-
-            <div class="athlete-card">
-
-              <div class="athlete-info">
-
-                <h3>Upload Media</h3>
-
-                <p>Share videos and achievements.</p>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="opportunities.html" class="dashboard-card-link">
-
-            <div class="athlete-card">
-
-              <div class="athlete-info">
-
-                <h3>My Opportunities</h3>
-
-                <p>View scouts, trials and sponsorships.</p>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="messages.html" class="dashboard-card-link">
-
-            <div class="athlete-card">
-
-              <div class="athlete-info">
-
-                <h3>Messages</h3>
-
-                <p>Communicate with coaches and scouts.</p>
-
-              </div>
-
-            </div>
-
-          </a>
-
-        `;
-
-      }
-
-
-      // =========================
-      // COACH
-
-      else if (role === "coach") {
-
-        dashboardCards.innerHTML = `
-
-          <div class="athlete-card">
-            <div class="athlete-info">
-              <h3>Coaching Programmes</h3>
-              <p>Manage athlete coaching services.</p>
-            </div>
-          </div>
-
-        `;
-
-      }
-
-    }
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
-
-});
 // =========================
 // GLOBAL NAVBAR AUTH
 // =========================
@@ -560,106 +351,344 @@ const authNavItem =
 const joinBtn =
   document.getElementById("joinBtn");
 
+// =========================
+// AUTH STATE
+// =========================
 
 onAuthStateChanged(auth, async (user) => {
 
-  if (user) {
-    if (isCommunityPage) {
-      document.body.style.display = "block";
-    }
+  if (!user && isProtectedPage) {
 
 
-    // DASHBOARD LINK
+    window.location.href =
+      loginPath;
+
+    return;
+
+  }
+
+  if (!user) {
+
+    updatePublicNavbar(false);
+  
+    document.body.style.display = "block";
+  
+    return;
+  
+  }
+
+  updatePublicNavbar(true);
+  document.body.style.display = "block";
+
+  const userRef =
+    doc(db, "users", user.uid);
+
+  const userSnap =
+    await getDoc(userRef);
+
+  if (!userSnap.exists()) return;
+
+  const userData =
+    userSnap.data();
+
+  if (isDashboardPage) {
+
+    renderDashboard(userData);
+
+  }
+
+});
+
+// =========================
+// PUBLIC NAVBAR
+// =========================
+
+function updatePublicNavbar(isLoggedIn) {
+
+  if (isLoggedIn) {
+
     if (authNavItem) {
 
       authNavItem.innerHTML = `
-
-      <div class="auth-links">
-
-        <a href="${dashboardPath}">
-          Dashboard
-        </a>
-
-        <button id="publicLogoutBtn"
-                class="btn-primary logout-btn">
-
-          Logout
-
-        </button>
-
-      </div>
-
-    `;
-    }
-
-
-    // HIDE JOIN BUTTON
-    document.querySelectorAll("#joinBtn").forEach((btn) => {
-
-      btn.style.display = "none";
-    
-    });
-
-
-    // LOGOUT
-    const publicLogoutBtn =
-      document.getElementById("publicLogoutBtn");
-
-    if (publicLogoutBtn) {
-
-      publicLogoutBtn.addEventListener("click", async (e) => {
-
-        e.preventDefault();
-
-        await signOut(auth);
-
-        authNavItem.innerHTML = `
-          <a href="${loginPath}">
-            Login
+        <div class="auth-links">
+          <a href="${dashboardPath}">
+            Dashboard
           </a>
-        `;
 
-        document.querySelectorAll("#joinBtn").forEach((btn) => {
+          <button
+            id="publicLogoutBtn"
+            class="btn-primary logout-btn"
+          >
+            Logout
+          </button>
+        </div>
+      `;
 
-          btn.style.display = "inline-block";
-
-        });
-
-        window.location.href = homePath;
-
-      });
+      setupLogoutButton("publicLogoutBtn");
 
     }
+
+    document.querySelectorAll("#joinBtn").forEach((btn) => {
+      btn.style.display = "none";
+    });
 
   } else {
 
-  
-    if (isCommunityPage) {
-
-      alert("Please login or create an account to access the community.");
-    
-      window.location.href = loginPath;
-    
-      return;
-    
-    }
-
-    // LOGIN LINK
     if (authNavItem) {
-  
+
       authNavItem.innerHTML = `
         <a href="${loginPath}">
           Login
         </a>
       `;
+
     }
-  
-    // SHOW JOIN BUTTON
+
     document.querySelectorAll("#joinBtn").forEach((btn) => {
-  
       btn.style.display = "inline-block";
-  
     });
-  
+
   }
-});
+
+}
+
+// =========================
+// DASHBOARD RENDER
+// =========================
+
+function renderDashboard(userData) {
+
+  const role =
+    userData.role || "athlete";
+
+  const name =
+    userData.fullName ||
+    userData.name ||
+    "User";
+
+  const sport =
+    userData.sport ||
+    userData.category ||
+    "";
+
+  const location =
+    userData.location ||
+    "";
+
+  const completed =
+    userData.profileCompleted
+      ? "Complete"
+      : "Incomplete";
+
+  const profileImage =
+    userData.profileImage &&
+    userData.profileImage.startsWith("http")
+      ? userData.profileImage
+      : "../assets/images/default-profile.png";
+
+  if (welcomeMessage) {
+    welcomeMessage.textContent =
+      name;
+  }
+
+  if (dashboardName) {
+    dashboardName.textContent =
+      name;
+  }
+
+  if (dashboardAvatar) {
+
+    dashboardAvatar.textContent =
+      getInitials(name);
+
+  }
+
+  if (roleText) {
+
+    roleText.innerHTML = `
+      <strong>Role:</strong> ${role}<br>
+      <strong>Sport/Category:</strong> ${sport || "Not set"}<br>
+      <strong>Location:</strong> ${location || "Not set"}<br>
+      <strong>Profile:</strong> ${completed}
+    `;
+
+  }
+
+  if (profileCompletion) {
+    profileCompletion.textContent =
+      userData.profileCompleted ? "100%" : "40%";
+  }
+
+  if (connectionsCount) {
+    connectionsCount.textContent = "0";
+  }
+
+  if (messagesCount) {
+    messagesCount.textContent = "0";
+  }
+
+  if (listingsCount) {
+    listingsCount.textContent = "0";
+  }
+
+  if (profilePreview) {
+
+    profilePreview.innerHTML = `
+      <div class="dashboard-profile-card">
+        <img
+          src="${profileImage}"
+          alt="${name}"
+          onerror="this.src='../assets/images/default-profile.png'"
+        >
+
+        <div>
+          <h3>${name}</h3>
+          <p>${role}</p>
+          <p>${sport || "No category set"}</p>
+        </div>
+      </div>
+    `;
+
+  }
+
+  renderDashboardNav(role);
+
+  renderDashboardCards(role);
+
+}
+
+// =========================
+// DASHBOARD NAV
+// =========================
+
+function renderDashboardNav(role) {
+
+  if (!dashboardNav) return;
+
+  dashboardNav.innerHTML = `
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="profile-setup.html">My Profile</a>
+    <a href="community.html">Community</a>
+    <a href="connections.html">Connections</a>
+    <a href="messages.html">Messages</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="notifications.html">Notifications</a>
+    ${
+      role === "moderator" ||
+      role === "admin" ||
+      role === "superadmin"
+        ? `<a href="moderation.html">Moderation</a>`
+        : ""
+    }
+    ${
+      role === "admin" ||
+      role === "superadmin"
+        ? `<a href="../admin/index.html">Admin</a>`
+        : ""
+    }
+  `;
+
+}
+
+// =========================
+// DASHBOARD CARDS
+// =========================
+
+function renderDashboardCards(role) {
+
+  if (!dashboardCards) return;
+
+  dashboardCards.innerHTML = "";
+
+  const commonCards = `
+    <a href="profile-setup.html" class="dashboard-card-link">
+      <div class="athlete-card">
+        <div class="athlete-info">
+          <h3>My Profile</h3>
+          <p>Manage your TalentGoldPlus profile.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="community.html" class="dashboard-card-link">
+      <div class="athlete-card">
+        <div class="athlete-info">
+          <h3>Community</h3>
+          <p>Connect with athletes, coaches and professionals.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="marketplace.html" class="dashboard-card-link">
+      <div class="athlete-card">
+        <div class="athlete-info">
+          <h3>Marketplace</h3>
+          <p>Find services, opportunities and support.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="messages.html" class="dashboard-card-link">
+      <div class="athlete-card">
+        <div class="athlete-info">
+          <h3>Messages</h3>
+          <p>Communicate with your network.</p>
+        </div>
+      </div>
+    </a>
+  `;
+
+  const moderatorCards = `
+    <a href="moderation.html" class="dashboard-card-link">
+      <div class="athlete-card">
+        <div class="athlete-info">
+          <h3>Moderation</h3>
+          <p>Review reports, posts and marketplace listings.</p>
+        </div>
+      </div>
+    </a>
+  `;
+
+  const adminCards = `
+    <a href="admin.html" class="dashboard-card-link">
+      <div class="athlete-card">
+        <div class="athlete-info">
+          <h3>Admin Panel</h3>
+          <p>Manage users, approvals and platform settings.</p>
+        </div>
+      </div>
+    </a>
+  `;
+
+  dashboardCards.innerHTML =
+    commonCards +
+    (
+      role === "moderator" ||
+      role === "admin" ||
+      role === "superadmin"
+        ? moderatorCards
+        : ""
+    ) +
+    (
+      role === "admin" ||
+      role === "superadmin"
+        ? adminCards
+        : ""
+    );
+
+}
+
+// =========================
+// HELPERS
+// =========================
+
+function getInitials(name) {
+
+  return name
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Connections | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/connections.css">
+</head>
+
+<body>
+
+<header>
+  <nav>
+
+    <div class="logo">
+      <a href="../index.html">
+        <img
+          src="../assets/images/TalentGoldPlus.png"
+          alt="Talent Gold"
+          class="site-logo"
+        >
+      </a>
+    </div>
+
+    <div class="menu-toggle">☰</div>
+
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="connections.html">Connections</a></li>
+      <li><a href="marketplace.html">Marketplace</a></li>
+      <li><a href="profile-setup.html">Profile</a></li>
+    </ul>
+
+    <button id="logoutBtn" class="btn-primary nav-btn">
+      Logout
+    </button>
+
+  </nav>
+</header>
+
+<main>
+
+  <section class="connections-page">
+
+    <div class="container">
+
+      <div class="connections-hero">
+        <h1>My Connections</h1>
+
+        <p>
+          Manage your TalentGoldPlus network, connection requests and accepted contacts.
+        </p>
+      </div>
+
+      <div class="connections-grid">
+
+        <section class="connections-panel">
+
+          <h2>Pending Requests</h2>
+
+          <div id="pendingRequests">
+            Loading requests...
+          </div>
+
+        </section>
+
+        <section class="connections-panel">
+
+          <h2>My Connections</h2>
+
+          <div id="acceptedConnections">
+            Loading connections...
+          </div>
+
+        </section>
+
+        <section class="connections-panel">
+
+          <h2>Sent Requests</h2>
+
+          <div id="sentRequests">
+            Loading sent requests...
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/connections-dashboard.js"></script>
+
+</body>
+</html>

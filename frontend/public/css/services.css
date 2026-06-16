@@ -1,0 +1,80 @@
+/* =========================
+   SERVICES PAGE
+========================= */
+
+.services-hero {
+    padding: 90px 20px 60px;
+    background: linear-gradient(135deg, #ffffff, #f7f7f7);
+  }
+  
+  .services-hero h1 {
+    font-size: 56px;
+    line-height: 1.05;
+    max-width: 760px;
+    margin-bottom: 18px;
+  }
+  
+  .services-hero p {
+    max-width: 760px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 44px;
+  }
+  
+  .service-category-card {
+    background: white;
+    padding: 32px 24px;
+    border-radius: 20px;
+    border: 1px solid #ececec;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+  
+  .service-category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+  }
+  
+  .service-category-card h3 {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  
+  .service-category-card p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  
+  .featured-section {
+    padding: 80px 20px;
+    background: #f3f3f3;
+  }
+  
+  @media (max-width: 1100px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .services-hero h1 {
+      font-size: 40px;
+    }
+  }

@@ -1,0 +1,71 @@
+/* =========================
+   CONNECTIONS
+========================= */
+
+.connection-card,
+.connection-dashboard-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.connection-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.connection-user img,
+.connection-dashboard-card img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.connection-dashboard-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.connection-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.connect-btn,
+.accept-btn,
+.decline-btn,
+.message-connection-btn {
+  padding: 10px 16px;
+  min-height: 40px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.connect-btn,
+.accept-btn,
+.message-connection-btn {
+  background: var(--gold);
+  color: white;
+}
+
+.decline-btn {
+  background: #eeeeee;
+  color: #111;
+}
+
+.pending-label {
+  display: inline-block;
+  margin-top: 6px;
+  color: #777;
+  font-size: 13px;
+}

@@ -7,103 +7,108 @@
   <title>Dashboard | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
 
-<header>
-  <nav>
+<div class="portal-layout">
 
-    <div class="logo">
-      <span class="logo-text">
-        Talent<span class="gold">Gold</span>Plus
-      </span>
+  <aside class="portal-sidebar">
+
+    <div class="portal-brand">
+      <img
+        src="../assets/images/TalentGoldPlus.png"
+        alt="Talent Gold"
+      >
+      <div>
+        <h2>TalentGoldPlus</h2>
+        <p>Member Portal</p>
+      </div>
     </div>
 
-    <div class="menu-toggle">☰</div>
+    <nav class="portal-menu" id="dashboardNav">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="profile-setup.html">My Profile</a>
+      <a href="community.html">Community</a>
+      <a href="connections.html">Connections</a>
+      <a href="messages.html">Messages</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="notifications.html">Notifications</a>
+    </nav>
 
-    <ul class="nav-links" id="dashboardNav">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="community.html">Community</a></li>
-      <li><a href="marketplace.html">Marketplace</a></li>
-      <li><a href="profile-setup.html">Profile</a></li>
-    </ul>
+    <div class="portal-user-mini" id="profilePreview"></div>
 
-    <button id="logoutBtn" class="btn-primary nav-btn">
+    <button id="logoutBtn" class="portal-logout">
       Logout
     </button>
 
-  </nav>
-</header>
+  </aside>
 
-<main>
+  <main class="portal-main">
 
-  <section class="dashboard-hero">
-    <div class="container dashboard-hero-inner">
+    <header class="portal-topbar">
+      <h1>Dashboard</h1>
 
-      <div>
-        <p class="hero-sub">YOUR TALENTGOLDPLUS HUB</p>
+      <div class="portal-top-user">
+        <span id="welcomeMessage">Welcome</span>
+      </div>
+    </header>
 
-        <h1 id="welcomeMessage">
-          Welcome
-        </h1>
+    <section class="portal-profile-hero">
 
-        <p id="roleText">
-          Loading dashboard...
-        </p>
-        <div id="profilePreview" class="dashboard-profile-preview"></div>
+      <div class="portal-avatar" id="dashboardAvatar">
+        TG
       </div>
 
-      <a href="profile-setup.html" class="btn-primary">
-        Complete Profile
-      </a>
+      <div>
+        <h2 id="dashboardName">Loading...</h2>
+        <p id="roleText">Loading dashboard...</p>
+        <span class="portal-status">Active</span>
+      </div>
 
-    </div>
-  </section>
+    </section>
 
-  <section class="container dashboard-section">
+    <section class="portal-stats">
 
-    <div class="dashboard-stats">
+      <div class="portal-stat-card">
+        <p>Profile</p>
+        <h3 id="profileCompletion">0%</h3>
+      </div>
 
-      <a href="profile-setup.html" class="dashboard-card-link">
-    
-        <div class="dashboard-stat">
-          <h3>Profile</h3>
-          <p>Build your public identity.</p>
-        </div>
-    
-      </a>
-    
-      <a href="community.html" class="dashboard-card-link">
-    
-        <div class="dashboard-stat">
-          <h3>Community</h3>
-          <p>Connect with the ecosystem.</p>
-        </div>
-    
-      </a>
-    
-      <a href="marketplace.html" class="dashboard-card-link">
-    
-        <div class="dashboard-stat">
-          <h3>Marketplace</h3>
-          <p>Find services and opportunities.</p>
-        </div>
-    
-      </a>
-    
-    </div>
+      <div class="portal-stat-card">
+        <p>Connections</p>
+        <h3 id="connectionsCount">0</h3>
+      </div>
 
-    <h2>Your Quick Actions</h2>
+      <div class="portal-stat-card">
+        <p>Messages</p>
+        <h3 id="messagesCount">0</h3>
+      </div>
 
-    <div class="athlete-grid" id="dashboardCards"></div>
+      <div class="portal-stat-card">
+        <p>Listings</p>
+        <h3 id="listingsCount">0</h3>
+      </div>
 
-  </section>
+    </section>
 
-</main>
+    <section class="portal-panel">
 
-<script src="../js/navigation.js"></script>
+      <div class="portal-panel-header">
+        <h2>Quick Actions</h2>
+      </div>
+
+      <div class="portal-actions" id="dashboardCards"></div>
+
+    </section>
+
+  </main>
+
+</div>
+
 <script type="module" src="../js/auth.js"></script>
 
 </body>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Manage Users | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <h2>TalentGoldPlus</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="admin-menu">
+      <a href="index.html">Dashboard</a>
+      <a href="users.html" class="active">Users</a>
+      <a href="approvals.html">Approvals</a>
+      <a href="reports.html">Reports</a>
+      <a href="../pages/dashboard.html">User Dashboard</a>
+    </nav>
+
+    <button id="logoutBtn" class="admin-logout">
+      Logout
+    </button>
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-topbar">
+      <div>
+        <h1>Manage Users</h1>
+        <p id="adminWelcome">Checking access...</p>
+      </div>
+    </header>
+
+    <section class="admin-panel">
+
+      <h2>All Users</h2>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Current Role</th>
+              <th>Change Role</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="usersTableBody">
+            <tr>
+              <td colspan="5">Loading users...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script type="module" src="../js/admin/users.js"></script>
+
+</body>
+</html>

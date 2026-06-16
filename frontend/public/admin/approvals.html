@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Approvals | TalentGoldPlus</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+<aside class="admin-sidebar">
+
+<div class="admin-brand">
+<h2>TalentGoldPlus</h2>
+<p>Admin Panel</p>
+</div>
+
+<nav class="admin-menu">
+<a href="index.html">Dashboard</a>
+<a href="users.html">Users</a>
+<a href="approvals.html" class="active">Approvals</a>
+<a href="reports.html">Reports</a>
+<a href="../pages/dashboard.html">User Dashboard</a>
+</nav>
+
+<button id="logoutBtn" class="admin-logout">
+Logout
+</button>
+
+</aside>
+
+<main class="admin-main">
+
+<header class="admin-topbar">
+<div>
+<h1>Marketplace Approvals</h1>
+<p>Review pending listings before publication.</p>
+</div>
+</header>
+
+<section class="admin-panel">
+
+<h2>Pending Listings</h2>
+
+<div id="pendingListingsGrid" class="admin-approval-grid">
+
+<p>Loading listings...</p>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script type="module" src="../js/admin/approvals.js"></script>
+
+</body>
+</html>

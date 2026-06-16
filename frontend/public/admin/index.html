@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard | TalentGoldPlus</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+      <h2>TalentGoldPlus</h2>
+      <p>Admin Panel</p>
+    </div>
+
+    <nav class="admin-menu">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="approvals.html">Approvals</a>
+      <a href="reports.html">Reports</a>
+      <a href="../pages/dashboard.html">User Dashboard</a>
+    </nav>
+
+    <button id="logoutBtn" class="admin-logout">
+      Logout
+    </button>
+
+  </aside>
+
+  <main class="admin-main">
+
+    <header class="admin-topbar">
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p id="adminWelcome">Checking access...</p>
+      </div>
+    </header>
+
+    <section class="admin-stats">
+
+      <div class="admin-stat-card">
+        <p>Total Users</p>
+        <h3 id="totalUsers">0</h3>
+      </div>
+
+      <div class="admin-stat-card">
+        <p>Pending Listings</p>
+        <h3 id="pendingListings">0</h3>
+      </div>
+
+      <div class="admin-stat-card">
+        <p>Approved Listings</p>
+        <h3 id="approvedListings">0</h3>
+      </div>
+
+      <div class="admin-stat-card">
+        <p>Reports</p>
+        <h3 id="totalReports">0</h3>
+      </div>
+
+    </section>
+
+    <section class="admin-panel">
+
+      <h2>Quick Actions</h2>
+
+      <div class="admin-actions">
+
+        <a href="users.html" class="admin-action-card">
+          <h3>Manage Users</h3>
+          <p>View users and update roles.</p>
+        </a>
+
+        <a href="approvals.html" class="admin-action-card">
+          <h3>Review Approvals</h3>
+          <p>Approve or reject marketplace listings.</p>
+        </a>
+
+        <a href="reports.html" class="admin-action-card">
+          <h3>Review Reports</h3>
+          <p>Handle reported posts, users and listings.</p>
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script type="module" src="../js/admin/admin.js"></script>
+
+</body>
+</html>
