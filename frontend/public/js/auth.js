@@ -650,7 +650,7 @@ function renderDashboardCards(role) {
   `;
 
   const adminCards = `
-    <a href="admin.html" class="dashboard-card-link">
+    <a href="../admin/index.html" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
           <h3>Admin Panel</h3>
