@@ -383,18 +383,42 @@ onAuthStateChanged(auth, async (user) => {
   const userRef =
     doc(db, "users", user.uid);
 
-  const userSnap =
+    const userSnap =
     await getDoc(userRef);
-
-  if (!userSnap.exists()) return;
-
+  
+  console.log("User UID:", user.uid);
+  
+  if (!userSnap.exists()) {
+  
+    console.error(
+      "User document does not exist"
+    );
+  
+    return;
+  
+  }
+  
   const userData =
     userSnap.data();
-
+  
+  console.log(
+    "Dashboard User Data:",
+    userData
+  );
+  
+  console.log(
+    "Is Dashboard Page:",
+    isDashboardPage
+  );
+  
   if (isDashboardPage) {
-
+  
+    console.log(
+      "Rendering Dashboard"
+    );
+  
     renderDashboard(userData);
-
+  
   }
 
 });
