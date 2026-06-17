@@ -69,3 +69,90 @@
   color: #777;
   font-size: 13px;
 }
+/* =========================
+   CONNECTIONS LAYOUT FIX
+========================= */
+
+.connections-page .connection-dashboard-card {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+  gap: 16px !important;
+}
+
+.connections-page .connection-dashboard-card img {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}
+
+.connections-page .connection-dashboard-card div {
+  flex: 1;
+}
+
+.connections-page .message-connection-btn {
+  flex-shrink: 0;
+}
+.connection-search {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.connection-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.connection-list-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.connection-list-left img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.connection-list-info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.connection-list-info p {
+  margin: 0;
+  color: #777777;
+}
+.back-dashboard-btn {
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.connection-list-info a,
+.connection-dashboard-card a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.connection-list-info a:hover,
+.connection-dashboard-card a:hover {
+  color: var(--gold);
+}

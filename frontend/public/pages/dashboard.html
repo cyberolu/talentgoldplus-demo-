@@ -50,12 +50,29 @@
   <main class="portal-main">
 
     <header class="portal-topbar">
+    
       <h1>Dashboard</h1>
-
+    
       <div class="portal-top-user">
         <span id="welcomeMessage">Welcome</span>
       </div>
+    
     </header>
+    <div class="mobile-dashboard-menu">
+      <a href="profile-setup.html">Profile</a>
+      <a href="community.html">Community</a>
+      <a href="connections.html">Connections</a>
+      <a href="messages.html">Messages</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="notifications.html">Notifications</a>
+    
+      <button
+        id="mobileLogoutBtn"
+        class="mobile-logout-btn"
+      >
+        Logout
+      </button>
+    </div>
 
     <section class="portal-profile-hero">
 
@@ -73,38 +90,57 @@
 
     <section class="portal-stats">
 
-      <div class="portal-stat-card">
+      <a
+        href="profile-setup.html"
+        class="portal-stat-card stat-link"
+      >
         <p>Profile</p>
         <h3 id="profileCompletion">0%</h3>
-      </div>
-
-      <div class="portal-stat-card">
+      </a>
+    
+      <a
+        href="connections.html"
+        class="portal-stat-card stat-link"
+      >
         <p>Connections</p>
         <h3 id="connectionsCount">0</h3>
-      </div>
-
-      <div class="portal-stat-card">
+      </a>
+    
+      <a
+        href="messages.html"
+        class="portal-stat-card stat-link"
+      >
         <p>Messages</p>
         <h3 id="messagesCount">0</h3>
-      </div>
-
-      <div class="portal-stat-card">
+      </a>
+    
+      <a
+        href="marketplace.html"
+        class="portal-stat-card stat-link"
+      >
         <p>Listings</p>
         <h3 id="listingsCount">0</h3>
-      </div>
+      </a>
 
+      <a
+        href="notifications.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>Notifications</p>
+        <h3 id="notificationsCount">0</h3>
+      </a>
+    
     </section>
-
+    
     <section class="portal-panel">
-
+    
       <div class="portal-panel-header">
         <h2>Quick Actions</h2>
       </div>
-
+    
       <div class="portal-actions" id="dashboardCards"></div>
-
+    
     </section>
-
   </main>
 
 </div>

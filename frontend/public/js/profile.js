@@ -23,6 +23,7 @@ const dynamicProfileFields =
   document.getElementById("dynamicProfileFields");
 
 let currentRole = "";
+let existingProfileImage = "";
 
 // =========================
 // DYNAMIC FIELDS
@@ -36,9 +37,7 @@ function renderDynamicFields(role) {
 
     dynamicProfileFields.innerHTML = `
       <input type="text" id="sport" placeholder="Sport">
-
       <input type="text" id="pbs" placeholder="Personal bests / position">
-
       <textarea id="achievements" placeholder="Achievements"></textarea>
     `;
 
@@ -46,9 +45,7 @@ function renderDynamicFields(role) {
 
     dynamicProfileFields.innerHTML = `
       <input type="text" id="sport" placeholder="Coaching sport">
-
       <input type="text" id="qualifications" placeholder="Coaching qualifications">
-
       <textarea id="services" placeholder="Coaching services offered"></textarea>
     `;
 
@@ -68,7 +65,6 @@ function renderDynamicFields(role) {
       </select>
 
       <input type="text" id="qualifications" placeholder="Qualifications">
-
       <textarea id="services" placeholder="Services offered"></textarea>
     `;
 
@@ -76,9 +72,7 @@ function renderDynamicFields(role) {
 
     dynamicProfileFields.innerHTML = `
       <input type="text" id="sport" placeholder="Sport focus">
-
       <input type="text" id="organisation" placeholder="Organisation">
-
       <input type="text" id="scoutingRegion" placeholder="Scouting region">
     `;
 
@@ -86,9 +80,7 @@ function renderDynamicFields(role) {
 
     dynamicProfileFields.innerHTML = `
       <input type="text" id="companyName" placeholder="Company / Organisation name">
-
       <input type="text" id="investmentInterests" placeholder="Investment interests">
-
       <input type="text" id="fundingRange" placeholder="Funding range">
     `;
 
@@ -101,44 +93,142 @@ function renderDynamicFields(role) {
 }
 
 // =========================
-// PROFILE SAVE
+// LOAD EXISTING PROFILE
+// =========================
+
+function setValue(id, value) {
+
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+    element.value = value || "";
+  }
+
+}
+
+function updateProfilePageTitle(isCompleted) {
+
+  const heroSub =
+    document.querySelector(".hero-sub");
+
+  const heroTitle =
+    document.querySelector(".dashboard-hero h1");
+
+  const heroText =
+    document.querySelector(".dashboard-hero p:last-child");
+
+  const saveButton =
+    profileForm?.querySelector("button[type='submit']");
+
+  if (isCompleted) {
+
+    if (heroSub) {
+      heroSub.textContent = "EDIT PROFILE";
+    }
+
+    if (heroTitle) {
+      heroTitle.textContent = "Edit Your Profile";
+    }
+
+    if (heroText) {
+      heroText.textContent =
+        "Update your TalentGoldPlus profile details so your information stays accurate.";
+    }
+
+    if (saveButton) {
+      saveButton.textContent = "Update Profile";
+    }
+
+  } else {
+
+    if (heroSub) {
+      heroSub.textContent = "PROFILE SETUP";
+    }
+
+    if (heroTitle) {
+      heroTitle.textContent = "Complete Your Profile";
+    }
+
+    if (heroText) {
+      heroText.textContent =
+        "Build your TalentGoldPlus identity so athletes, coaches, scouts, professionals and supporters can discover you.";
+    }
+
+    if (saveButton) {
+      saveButton.textContent = "Save Profile";
+    }
+
+  }
+
+}
+
+function populateProfileForm(userData) {
+
+  setValue("fullName", userData.fullName || userData.name || "");
+  setValue("location", userData.location || "");
+  setValue("bio", userData.bio || "");
+
+  setValue("sport", userData.sport || userData.category || "");
+  setValue("pbs", userData.pbs || "");
+  setValue("achievements", userData.achievements || "");
+
+  setValue("services", userData.services || "");
+  setValue("qualifications", userData.qualifications || "");
+  setValue("professionalCategory", userData.professionalCategory || "");
+
+  setValue("organisation", userData.organisation || "");
+  setValue("scoutingRegion", userData.scoutingRegion || "");
+
+  setValue("companyName", userData.companyName || "");
+  setValue("investmentInterests", userData.investmentInterests || "");
+  setValue("fundingRange", userData.fundingRange || "");
+
+}
+
+// =========================
+// AUTH + PROFILE SAVE
 // =========================
 
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
-
     window.location.href = "../auth/login.html";
-
     return;
+  }
+
+  const userRef =
+    doc(db, "users", user.uid);
+
+  const userSnap =
+    await getDoc(userRef);
+
+  let userData = {};
+
+  if (userSnap.exists()) {
+
+    userData =
+      userSnap.data();
+
+    currentRole =
+      userData.role || "athlete";
+
+    existingProfileImage =
+      userData.profileImage || "";
+
+  } else {
+
+    currentRole = "athlete";
 
   }
 
-  try {
+  renderDynamicFields(currentRole);
 
-    const userRef =
-      doc(db, "users", user.uid);
+  populateProfileForm(userData);
 
-    const userSnap =
-      await getDoc(userRef);
-
-    if (userSnap.exists()) {
-
-      const userData =
-        userSnap.data();
-
-      currentRole =
-        userData.role || "";
-
-      renderDynamicFields(currentRole);
-
-    }
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
+  updateProfilePageTitle(
+    userData.profileCompleted === true
+  );
 
   if (!profileForm) return;
 
@@ -148,55 +238,14 @@ onAuthStateChanged(auth, async (user) => {
 
     try {
 
-      const fullName =
-        document.getElementById("fullName")?.value || "";
-
-      const location =
-        document.getElementById("location")?.value || "";
-
-      const bio =
-        document.getElementById("bio")?.value || "";
-
-      const sport =
-        document.getElementById("sport")?.value || "";
-
-      const pbs =
-        document.getElementById("pbs")?.value || "";
-
-      const achievements =
-        document.getElementById("achievements")?.value || "";
-
-      const services =
-        document.getElementById("services")?.value || "";
-
-      const qualifications =
-        document.getElementById("qualifications")?.value || "";
-
-      const professionalCategory =
-        document.getElementById("professionalCategory")?.value || "";
-
-      const organisation =
-        document.getElementById("organisation")?.value || "";
-
-      const scoutingRegion =
-        document.getElementById("scoutingRegion")?.value || "";
-
-      const companyName =
-        document.getElementById("companyName")?.value || "";
-
-      const investmentInterests =
-        document.getElementById("investmentInterests")?.value || "";
-
-      const fundingRange =
-        document.getElementById("fundingRange")?.value || "";
-
       const imageInput =
         document.getElementById("profileImage");
 
       const imageFile =
         imageInput?.files?.[0];
 
-      let imageUrl = "";
+      let imageUrl =
+        existingProfileImage;
 
       if (imageFile) {
 
@@ -216,31 +265,48 @@ onAuthStateChanged(auth, async (user) => {
       }
 
       const profileData = {
-        fullName,
-        location,
-        bio,
+        fullName:
+          document.getElementById("fullName")?.value.trim() || "",
+        location:
+          document.getElementById("location")?.value.trim() || "",
+        bio:
+          document.getElementById("bio")?.value.trim() || "",
+
         role: currentRole,
-        sport,
-        pbs,
-        achievements,
-        services,
-        qualifications,
-        professionalCategory,
-        organisation,
-        scoutingRegion,
-        companyName,
-        investmentInterests,
-        fundingRange,
+
+        sport:
+          document.getElementById("sport")?.value.trim() || "",
+        pbs:
+          document.getElementById("pbs")?.value.trim() || "",
+        achievements:
+          document.getElementById("achievements")?.value.trim() || "",
+
+        services:
+          document.getElementById("services")?.value.trim() || "",
+        qualifications:
+          document.getElementById("qualifications")?.value.trim() || "",
+        professionalCategory:
+          document.getElementById("professionalCategory")?.value || "",
+
+        organisation:
+          document.getElementById("organisation")?.value.trim() || "",
+        scoutingRegion:
+          document.getElementById("scoutingRegion")?.value.trim() || "",
+
+        companyName:
+          document.getElementById("companyName")?.value.trim() || "",
+        investmentInterests:
+          document.getElementById("investmentInterests")?.value.trim() || "",
+        fundingRange:
+          document.getElementById("fundingRange")?.value.trim() || "",
+
+        profileImage: imageUrl,
         profileCompleted: true,
         updatedAt: new Date()
       };
 
-      if (imageUrl) {
-        profileData.profileImage = imageUrl;
-      }
-
       await setDoc(
-        doc(db, "users", user.uid),
+        userRef,
         profileData,
         { merge: true }
       );
@@ -252,7 +318,6 @@ onAuthStateChanged(auth, async (user) => {
     } catch (error) {
 
       console.error(error);
-
       alert(error.message);
 
     }

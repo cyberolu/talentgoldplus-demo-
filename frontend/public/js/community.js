@@ -278,7 +278,11 @@ function loadCommunityPosts() {
           >
 
           <div>
-            <h3>${post.name || "TalentGoldPlus User"}</h3>
+            <h3>
+              <a href="profile.html?user=${post.userId}">
+                ${post.name || "TalentGoldPlus User"}
+              </a>
+            </h3>
             <p>${post.role || "Member"} • Just now</p>
           </div>
         </div>

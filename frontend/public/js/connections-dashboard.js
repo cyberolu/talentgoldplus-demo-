@@ -26,6 +26,9 @@ const acceptedConnections =
 const sentRequests =
   document.getElementById("sentRequests");
 
+const connectionSearch =
+  document.getElementById("connectionSearch");
+
 let currentUser = null;
 
 onAuthStateChanged(auth, async (user) => {
@@ -37,9 +40,17 @@ onAuthStateChanged(auth, async (user) => {
 
   currentUser = user;
 
-  loadConnectionsDashboard();
+  await loadConnectionsDashboard();
 
 });
+
+async function loadConnectionsDashboard() {
+
+  await loadPendingRequests();
+  await loadAcceptedConnections();
+  await loadSentRequests();
+
+}
 
 async function getUserData(userId) {
 
@@ -56,21 +67,8 @@ async function getUserData(userId) {
   return {
     name: "TalentGoldPlus User",
     role: "Member",
-    profileImage: "../assets/images/avatar-placeholder.png"
+    profileImage: ""
   };
-
-}
-
-function getProfileImage(userData) {
-
-  if (
-    userData.profileImage &&
-    userData.profileImage.startsWith("http")
-  ) {
-    return userData.profileImage;
-  }
-
-  return "../assets/images/avatar-placeholder.png";
 
 }
 
@@ -84,11 +82,16 @@ function getDisplayName(userData) {
 
 }
 
-async function loadConnectionsDashboard() {
+function getProfileImage(userData) {
 
-  await loadPendingRequests();
-  await loadAcceptedConnections();
-  await loadSentRequests();
+  if (
+    userData.profileImage &&
+    userData.profileImage.startsWith("http")
+  ) {
+    return userData.profileImage;
+  }
+
+  return "../assets/images/avatar-placeholder.png";
 
 }
 
@@ -136,7 +139,11 @@ async function loadPendingRequests() {
       >
 
       <div>
-        <h3>${getDisplayName(senderData)}</h3>
+        <h3>
+          <a href="profile.html?user=${connection.senderId}">
+            ${getDisplayName(senderData)}
+          </a>
+        </h3>
         <p>${senderData.role || "Member"}</p>
       </div>
 
@@ -160,6 +167,12 @@ async function loadPendingRequests() {
     pendingRequests.appendChild(card);
 
   }
+
+  attachRequestButtons();
+
+}
+
+function attachRequestButtons() {
 
   document.querySelectorAll(".accept-btn").forEach((button) => {
 
@@ -197,7 +210,7 @@ async function loadPendingRequests() {
         }
       );
 
-      loadConnectionsDashboard();
+      await loadConnectionsDashboard();
 
     });
 
@@ -217,7 +230,7 @@ async function loadPendingRequests() {
         }
       );
 
-      loadConnectionsDashboard();
+      await loadConnectionsDashboard();
 
     });
 
@@ -279,18 +292,26 @@ async function loadAcceptedConnections() {
     const card =
       document.createElement("div");
 
-    card.classList.add("connection-dashboard-card");
+    card.classList.add("connection-list-item");
 
     card.innerHTML = `
-      <img
-        src="${getProfileImage(otherUser)}"
-        alt="${getDisplayName(otherUser)}"
-        onerror="this.src='../assets/images/avatar-placeholder.png'"
-      >
+      <div class="connection-list-left">
 
-      <div>
-        <h3>${getDisplayName(otherUser)}</h3>
-        <p>${otherUser.role || "Member"}</p>
+        <img
+          src="${getProfileImage(otherUser)}"
+          alt="${getDisplayName(otherUser)}"
+          onerror="this.src='../assets/images/avatar-placeholder.png'"
+        >
+
+        <div class="connection-list-info">
+          <h3>
+            <a href="profile.html?user=${otherUserId}">
+              ${getDisplayName(otherUser)}
+            </a>
+          </h3>
+          <p>${otherUser.role || "Member"}</p>
+        </div>
+
       </div>
 
       <button
@@ -354,7 +375,11 @@ async function loadSentRequests() {
       >
 
       <div>
-        <h3>${getDisplayName(receiverData)}</h3>
+        <h3>
+          <a href="profile.html?user=${connection.receiverId}">
+            ${getDisplayName(receiverData)}
+          </a>
+        </h3>
         <p>${receiverData.role || "Member"}</p>
         <span class="pending-label">Request sent</span>
       </div>
@@ -426,5 +451,30 @@ function attachMessageButtons() {
       });
 
     });
+
+}
+
+if (connectionSearch) {
+
+  connectionSearch.addEventListener("input", () => {
+
+    const search =
+      connectionSearch.value.toLowerCase();
+
+    document
+      .querySelectorAll(".connection-list-item")
+      .forEach((item) => {
+
+        const text =
+          item.textContent.toLowerCase();
+
+        item.style.display =
+          text.includes(search)
+            ? "flex"
+            : "none";
+
+      });
+
+  });
 
 }

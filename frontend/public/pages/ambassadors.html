@@ -3,32 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ambassadors | TalentGoldPlus</title>
+
+  <title>Ambassadors | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/ambassadors.css">
 </head>
+
 <body>
 
-  <section class="coming-page">
+<main>
 
-    <div class="container">
+  <section class="container ambassadors-page">
 
-      <h1>Ambassadors Section</h1>
+    <h1>TalentGoldPlus Ambassadors</h1>
 
-      <p>
-        This section is currently under development.
-        We are building a powerful space for athletes to showcase talent,
-        connect with opportunities and grow.
-      </p>
+    <p class="ambassadors-intro">
+      Meet the founder, ambassadors and platform developer supporting the
+      TalentGoldPlus mission.
+    </p>
 
-      <a href="../index.html" class="btn-primary">
-        ← Back to Home
-      </a>
+    <div class="ambassadors-grid">
+
+      <article class="ambassador-card" data-ambassador="chioma">
+        <img src="../assets/images/chioma1.jpg.jpeg" alt="Chioma Ajunwa">
+        <h3>Chioma Ajunwa</h3>
+        <p>Founder | Olympic Champion</p>
+        <button>View Bio</button>
+      </article>
+
+      <article class="ambassador-card" data-ambassador="ruth">
+        <img src="../assets/images/Ruth-Ogbeifo-Balofin.jpg.jpeg" alt="Ruth Ogbeifo-Balofin">
+        <h3>Ruth Ogbeifo-Balofin</h3>
+        <p>Ambassador | Olympian</p>
+        <button>View Bio</button>
+      </article>
+
+      <article class="ambassador-card" data-ambassador="marcus">
+        <img src="../assets/images/marcus-adam.jpeg" alt="Marcus Adam">
+        <h3>Marcus Adam</h3>
+        <p>Ambassador | Olympian</p>
+        <button>View Bio</button>
+      </article>
+
+      <article class="ambassador-card" data-ambassador="stephi">
+        <img src="../assets/images/stephanie-douglas.jpg.jpeg" alt="Stephi Douglas">
+        <h3>Stephi Douglas</h3>
+        <p>Ambassador | Olympian</p>
+        <button>View Bio</button>
+      </article>
+
+      <article class="ambassador-card" data-ambassador="glory">
+        <img src="../assets/images/Glory Alozie.jpeg" alt="Glory Alozie">
+        <h3>Glory Alozie</h3>
+        <p>Ambassador | Olympian</p>
+        <button>View Bio</button>
+      </article>
+
+      <article class="ambassador-card" data-ambassador="michael">
+        <img src="../assets/images/michael-bruce.jpg" alt="Dr Michael Bruce">
+        <h3>Dr Michael Bruce</h3>
+        <p>Ambassador | Performance Expert</p>
+        <button>View Bio</button>
+      </article>
+
+      <article class="ambassador-card" data-ambassador="olusoji">
+        <img src="../assets/images/olusoji-fasuba.jpg" alt="Olusoji Fasuba">
+        <h3>Olusoji Fasuba</h3>
+        <p>Website Designer & Platform Developer</p>
+        <button>View Bio</button>
+      </article>
 
     </div>
 
+    <a href="../index.html" class="btn-primary ambassadors-back">
+      Back to Home
+    </a>
+
   </section>
+
+</main>
+
+<div class="ambassador-modal" id="ambassadorModal">
+  <div class="ambassador-modal-content">
+
+    <button class="ambassador-modal-close" id="closeAmbassadorModal">
+      ×
+    </button>
+
+    <img id="modalImage" src="" alt="">
+
+    <h2 id="modalName"></h2>
+
+    <p class="modal-title" id="modalTitle"></p>
+
+    <p id="modalBio"></p>
+
+  </div>
+</div>
+
+<script src="../js/ambassadors.js"></script>
 
 </body>
 </html>

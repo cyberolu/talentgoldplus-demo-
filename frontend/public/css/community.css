@@ -172,3 +172,11 @@
     order: 1;
   }
 }
+.feed-header h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.feed-header h3 a:hover {
+  color: var(--gold);
+}

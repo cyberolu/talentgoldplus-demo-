@@ -35,7 +35,11 @@ import {
 import {
   doc,
   setDoc,
-  getDoc
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 // =========================
@@ -44,6 +48,7 @@ import {
 
 const protectedPages = [
   "dashboard.html",
+  "/dashboard",
   "profile-setup.html",
   "community.html",
   "connections.html",
@@ -304,6 +309,7 @@ function setupLogoutButton(buttonId) {
 }
 
 setupLogoutButton("logoutBtn");
+setupLogoutButton("mobileLogoutBtn");
 
 // =========================
 // DASHBOARD ELEMENTS
@@ -505,11 +511,30 @@ function renderDashboard(userData) {
       ? "Complete"
       : "Incomplete";
 
-  const profileImage =
+  const hasProfileImage =
     userData.profileImage &&
-    userData.profileImage.startsWith("http")
+    userData.profileImage.startsWith("http");
+
+  const profileImage =
+    hasProfileImage
       ? userData.profileImage
-      : "../assets/images/default-profile.png";
+      : "";
+
+  const sidebarAvatarHtml =
+    hasProfileImage
+      ? `
+        <img
+          src="${profileImage}"
+          alt="${name}"
+          class="portal-user-avatar"
+          onerror="this.outerHTML='<div class=&quot;portal-user-avatar initials-avatar&quot;>${getInitials(name)}</div>'"
+        >
+      `
+      : `
+        <div class="portal-user-avatar initials-avatar">
+          ${getInitials(name)}
+        </div>
+      `;
 
   if (welcomeMessage) {
     welcomeMessage.textContent =
@@ -522,21 +547,17 @@ function renderDashboard(userData) {
   }
 
   if (dashboardAvatar) {
-
     dashboardAvatar.textContent =
       getInitials(name);
-
   }
 
   if (roleText) {
-
     roleText.innerHTML = `
       <strong>Role:</strong> ${role}<br>
       <strong>Sport/Category:</strong> ${sport || "Not set"}<br>
       <strong>Location:</strong> ${location || "Not set"}<br>
       <strong>Profile:</strong> ${completed}
     `;
-
   }
 
   if (profileCompletion) {
@@ -557,14 +578,9 @@ function renderDashboard(userData) {
   }
 
   if (profilePreview) {
-
     profilePreview.innerHTML = `
       <div class="dashboard-profile-card">
-        <img
-          src="${profileImage}"
-          alt="${name}"
-          onerror="this.src='../assets/images/default-profile.png'"
-        >
+        ${sidebarAvatarHtml}
 
         <div>
           <h3>${name}</h3>
@@ -573,15 +589,15 @@ function renderDashboard(userData) {
         </div>
       </div>
     `;
-
   }
 
   renderDashboardNav(role);
 
   renderDashboardCards(role);
 
-}
+  loadDashboardStats(auth.currentUser.uid);
 
+}
 // =========================
 // DASHBOARD NAV
 // =========================
@@ -598,13 +614,7 @@ function renderDashboardNav(role) {
     <a href="messages.html">Messages</a>
     <a href="marketplace.html">Marketplace</a>
     <a href="notifications.html">Notifications</a>
-    ${
-      role === "moderator" ||
-      role === "admin" ||
-      role === "superadmin"
-        ? `<a href="moderation.html">Moderation</a>`
-        : ""
-    }
+    
     ${
       role === "admin" ||
       role === "superadmin"
@@ -663,16 +673,7 @@ function renderDashboardCards(role) {
     </a>
   `;
 
-  const moderatorCards = `
-    <a href="moderation.html" class="dashboard-card-link">
-      <div class="athlete-card">
-        <div class="athlete-info">
-          <h3>Moderation</h3>
-          <p>Review reports, posts and marketplace listings.</p>
-        </div>
-      </div>
-    </a>
-  `;
+  
 
   const adminCards = `
     <a href="../admin/index.html" class="dashboard-card-link">
@@ -686,20 +687,13 @@ function renderDashboardCards(role) {
   `;
 
   dashboardCards.innerHTML =
-    commonCards +
-    (
-      role === "moderator" ||
-      role === "admin" ||
-      role === "superadmin"
-        ? moderatorCards
-        : ""
-    ) +
-    (
-      role === "admin" ||
-      role === "superadmin"
-        ? adminCards
-        : ""
-    );
+  commonCards +
+  (
+    role === "admin" ||
+    role === "superadmin"
+      ? adminCards
+      : ""
+  );
 
 }
 
@@ -715,5 +709,89 @@ function getInitials(name) {
     .join("")
     .substring(0, 2)
     .toUpperCase();
+
+}
+async function loadDashboardStats(userId) {
+
+  try {
+
+    const sentConnections =
+      await getDocs(
+        query(
+          collection(db, "connections"),
+          where("senderId", "==", userId),
+          where("status", "==", "accepted")
+        )
+      );
+
+    const receivedConnections =
+      await getDocs(
+        query(
+          collection(db, "connections"),
+          where("receiverId", "==", userId),
+          where("status", "==", "accepted")
+        )
+      );
+
+    const totalConnections =
+      sentConnections.size +
+      receivedConnections.size;
+
+    if (connectionsCount) {
+      connectionsCount.textContent =
+        totalConnections;
+    }
+
+    const conversationsSnapshot =
+      await getDocs(
+        query(
+          collection(db, "conversations"),
+          where("participants", "array-contains", userId)
+        )
+      );
+
+    if (messagesCount) {
+      messagesCount.textContent =
+        conversationsSnapshot.size;
+    }
+
+    const listingsSnapshot =
+      await getDocs(
+        query(
+          collection(db, "marketplaceListings"),
+          where("userId", "==", userId)
+        )
+      );
+
+    if (listingsCount) {
+      listingsCount.textContent =
+        listingsSnapshot.size;
+    }
+
+    const notificationsSnapshot =
+      await getDocs(
+        query(
+          collection(db, "notifications"),
+          where("userId", "==", userId),
+          where("read", "==", false)
+        )
+      );
+
+    const notificationsCount =
+      document.getElementById("notificationsCount");
+
+    if (notificationsCount) {
+      notificationsCount.textContent =
+        notificationsSnapshot.size;
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Dashboard stats error:",
+      error
+    );
+
+  }
 
 }
