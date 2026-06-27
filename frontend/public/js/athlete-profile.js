@@ -1,37 +1,70 @@
-const athletes = {
-    1: {
-      name: "Rose Collings",
-      sport: "Sprint Athlete",
-      location: "U15 | United Kingdom",
-      extra: "100m: 11.51s",
-      image: "../assets/images/athlete1.jpg"
-    },
-    2: {
-      name: "Lana Smith",
-      sport: "Football",
-      location: "U18 | London",
-      extra: "Forward",
-      image: "../assets/images/athlete2.jpg"
-    },
-    3: {
-      name: "Sarah Johnson",
-      sport: "Basketball",
-      location: "U17 | Manchester",
-      extra: "Guard",
-      image: "../assets/images/athlete3.jpg"
-    }
-  };
-  
-  // Get ID from URL
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  
-  const athlete = athletes[id];
-  
-  if (athlete) {
-    document.getElementById("name").textContent = athlete.name;
-    document.getElementById("sport").textContent = athlete.sport;
-    document.getElementById("location").textContent = athlete.location;
-    document.getElementById("extra").textContent = athlete.extra;
-    document.getElementById("profile-image").src = athlete.image;
+import { db } from "./firebase.js";
+
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const params = new URLSearchParams(window.location.search);
+const userId = params.get("user");
+
+if (!userId) {
+  document.getElementById("name").textContent = "Athlete not found";
+  throw new Error("Missing user ID.");
+}
+
+async function loadAthlete() {
+  const athleteRef = doc(db, "users", userId);
+  const athleteSnap = await getDoc(athleteRef);
+
+  if (!athleteSnap.exists()) {
+    document.getElementById("name").textContent = "Athlete not found";
+    return;
   }
+
+  const athlete = athleteSnap.data();
+
+  document.getElementById("name").textContent =
+    athlete.fullName ||
+    athlete.name ||
+    "Athlete";
+
+  document.getElementById("sport").textContent =
+    formatText(athlete.sport || athlete.category);
+
+  document.getElementById("location").textContent =
+    athlete.location ||
+    "Location unavailable";
+
+  document.getElementById("extra").textContent =
+    athlete.pbs ||
+    athlete.achievements ||
+    "Performance details coming soon";
+
+  document.getElementById("bio").textContent =
+    athlete.bio ||
+    "No biography available.";
+
+    const profileImage = document.getElementById("profile-image");
+
+    if (athlete.profileImage && athlete.profileImage.trim() !== "") {
+      profileImage.src = athlete.profileImage;
+    } else {
+      profileImage.src = "../assets/images/avatar-placeholder.png";
+    }
+
+  const contactBtn = document.getElementById("contactAthleteBtn");
+
+  if (contactBtn) {
+    contactBtn.href = `messages.html?to=${userId}`;
+  }
+}
+
+function formatText(value) {
+  return (value || "")
+    .toString()
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+loadAthlete();

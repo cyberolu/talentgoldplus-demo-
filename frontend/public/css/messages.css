@@ -134,3 +134,71 @@
       min-height: 70vh;
     }
   }
+  /* =========================
+   NEW CHAT SEARCH
+========================= */
+
+.new-chat-search {
+  margin-bottom: 18px;
+  padding: 14px;
+  background: #f8f8f8;
+  border-radius: 16px;
+  border: 1px solid #eee;
+}
+
+.new-chat-search input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.user-search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-search-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+}
+
+.user-search-result img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-search-result div {
+  flex: 1;
+}
+
+.user-search-result h3 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.user-search-result p {
+  font-size: 13px;
+  color: #666;
+  margin: 2px 0;
+}
+
+.user-search-result small {
+  color: #888;
+  font-size: 12px;
+}
+
+.start-chat-btn {
+  padding: 8px 12px;
+  font-size: 12px;
+  white-space: nowrap;
+}

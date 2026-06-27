@@ -21,11 +21,23 @@ const allowedRoles = [
 const roleOptions = [
   "athlete",
   "coach",
-  "scout",
   "professional",
+  "scout",
   "moderator",
   "admin",
   "superadmin"
+];
+
+const professionalCategoryOptions = [
+  "coach",
+  "physiotherapist",
+  "sports-therapist",
+  "nutritionist",
+  "psychologist",
+  "wellbeing-specialist",
+  "recovery-expert",
+  "mentor",
+  "performance-specialist"
 ];
 
 const adminWelcome =
@@ -216,11 +228,23 @@ function attachRoleChangeEvents() {
 
         try {
 
+          const updateData = {};
+
+          if (professionalCategoryOptions.includes(newRole)) {
+
+            updateData.role = "professional";
+            updateData.professionalCategory = newRole;
+
+          } else {
+
+            updateData.role = newRole;
+            updateData.professionalCategory = "";
+
+          }
+          
           await updateDoc(
             doc(db, "users", userId),
-            {
-              role: newRole
-            }
+            updateData
           );
 
           alert("User role updated successfully.");

@@ -194,7 +194,7 @@ function renderMarketplaceListings(listings) {
     ${
       currentUser
         ? `
-          <a href="messages.html" class="btn-primary marketplace-btn">
+          <a href="messages.html?to=${listing.userId}" class="btn-primary marketplace-btn">
             Contact Provider
           </a>
         `

@@ -68,6 +68,42 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  .directory-filters {
+    margin-top: 30px;
+  }
+  
+  .directory-search {
+    width: 100%;
+    max-width: 600px;
+    padding: 14px 16px;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .category-filter-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    border: 1px solid #dddddd;
+    background: white;
+    color: #111111;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
   
   @media (max-width: 700px) {
     .services-grid {

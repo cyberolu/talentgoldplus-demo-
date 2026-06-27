@@ -13,69 +13,7 @@
 
 <body>
 
-<header>
-  <nav>
-
-    <div class="logo">
-      <a href="index.html">
-        <img
-          src="../assets/images/TalentGoldPlus.png"
-          alt="Talent Gold"
-          class="site-logo"
-        >
-      </a>
-    </div>
-
-
-    <div class="menu-toggle">☰</div>
-
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-
-      <li class="dropdown">
-        <a href="athletes.html">Sports ▾</a>
-
-        <ul class="dropdown-menu">
-          <li><a href="athletes.html?sport=football">Football</a></li>
-          <li><a href="athletes.html?sport=athletics">Athletics</a></li>
-          <li><a href="athletes.html?sport=basketball">Basketball</a></li>
-          <li><a href="athletes.html?sport=rugby">Rugby</a></li>
-          <li><a href="athletes.html?sport=tennis">Tennis</a></li>
-          <li><a href="athletes.html?sport=combat-sports">Combat Sports</a></li>
-          <li><a href="athletes.html">More Sports</a></li>
-        </ul>
-      </li>
-
-      <li><a href="community.html">Community</a></li>
-      <li><a href="marketplace.html">Marketplace</a></li>
-
-      <li class="dropdown">
-        <a href="services.html">Professionals ▾</a>
-
-        <ul class="dropdown-menu">
-          <li><a href="services.html?category=physiotherapists">Physiotherapists</a></li>
-          <li><a href="services.html?category=sports-therapists">Sports Therapists</a></li>
-          <li><a href="services.html?category=nutritionists">Nutritionists</a></li>
-          <li><a href="services.html?category=psychologists">Psychologists</a></li>
-          <li><a href="services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
-          <li><a href="services.html?category=recovery-experts">Recovery Experts</a></li>
-          <li><a href="services.html?category=mentors">Mentors</a></li>
-          <li><a href="services.html?category=performance-specialists">Performance Specialists</a></li>
-        </ul>
-      </li>
-
-      <li id="authNavItem">
-        <a href="../auth/login.html">Login</a>
-      </li>
-    </ul>
-
-    <a id="joinBtn" href="../auth/register.html" class="btn-primary nav-btn">
-      Join Now
-    </a>
-
-  </nav>
-</header>
+<div id="siteHeader"></div>
 
 <main>
 
@@ -86,53 +24,8 @@
       Explore talented athletes across different sports and pathways.
     </p>
 
-    <div class="athlete-grid">
-
-      <div class="athlete-card" data-sport="athletics">
-        <img src="../assets/images/athlete1.jpg" alt="Rose Collings">
-
-        <div class="athlete-info">
-          <h3>Rose Collings</h3>
-          <p class="sport">Athletics</p>
-          <p>U15 | United Kingdom</p>
-          <p class="pb">100m: 11.51s</p>
-
-          <a href="athlete-profile.html?id=1" class="btn-primary">
-            View Profile
-          </a>
-        </div>
-      </div>
-
-      <div class="athlete-card" data-sport="football">
-        <img src="../assets/images/athlete2.jpg" alt="Lana Smith">
-
-        <div class="athlete-info">
-          <h3>Lana Smith</h3>
-          <p class="sport">Football</p>
-          <p>U18 | London</p>
-          <p class="pb">Forward</p>
-
-          <a href="athlete-profile.html?id=2" class="btn-primary">
-            View Profile
-          </a>
-        </div>
-      </div>
-
-      <div class="athlete-card" data-sport="basketball">
-        <img src="../assets/images/athlete3.jpg" alt="Sarah Johnson">
-
-        <div class="athlete-info">
-          <h3>Sarah Johnson</h3>
-          <p class="sport">Basketball</p>
-          <p>U17 | Manchester</p>
-          <p class="pb">Guard</p>
-
-          <a href="athlete-profile.html?id=3" class="btn-primary">
-            View Profile
-          </a>
-        </div>
-      </div>
-
+    <div id="athletesGrid" class="athlete-grid">
+      <p>Loading athletes...</p>
     </div>
   </section>
 
@@ -142,74 +35,12 @@
   Chat on WhatsApp
 </a>
 
-<footer>
-  <div class="container">
+<div id="siteFooter"></div>
 
-    <h2>TalentGoldPlus</h2>
-
-    <p>
-      Discover, develop and fund the next generation of sports talent while
-      creating positive change in communities across the world.
-    </p>
-
-    <div class="footer-grid">
-
-      <div class="footer-column">
-        <h4>Platform</h4>
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="athletes.html">Athletes</a>
-        <a href="coaches.html">Coaches</a>
-        <a href="investors.html">Investors</a>
-        <a href="services.html">Professionals</a>
-        <a href="scouts.html">Scouts</a>
-        <a href="community.html">Community</a>
-        <a href="marketplace.html">Marketplace</a>
-      </div>
-
-      <div class="footer-column">
-        <h4>Get Involved</h4>
-        <a href="volunteer.html">Volunteer</a>
-        <a href="ambassadors.html">Ambassadors</a>
-        <a href="partners.html">Partners</a>
-        <a href="donate.html">Donate</a>
-      </div>
-
-    </div>
-
-    <p class="footer-copy">
-      © 2026 TalentGoldPlus. All rights reserved.
-    </p>
-
-  </div>
-</footer>
-
+<script src="../js/components-loader.js"></script>
 <script src="../js/navigation.js"></script>
-<script src="../js/app.js"></script>
-<script type="module" src="../js/auth.js"></script>
-
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const selectedSport = params.get("sport");
-  const cards = document.querySelectorAll(".athlete-card");
-
-  if (selectedSport) {
-    const readableSport =
-      selectedSport
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-
-    document.getElementById("athletesTitle").textContent =
-      readableSport + " Athletes";
-
-    cards.forEach((card) => {
-      if (card.dataset.sport !== selectedSport) {
-        card.style.display = "none";
-      }
-    });
-  }
-</script>
+<script type="module" src="../js/auth.js?v=2"></script>
+<script type="module" src="../js/athletes-directory.js?v=1"></script>
 
 </body>
 </html>

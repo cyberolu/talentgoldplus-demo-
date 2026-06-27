@@ -14,78 +14,7 @@
 
 <body>
 
-  <header>
-    <nav>
-  
-      <div class="logo">
-        <a href="index.html">
-          <img
-            src="../assets/images/Talentgoldplus.png"
-            alt="Talent Gold"
-            class="site-logo"
-          >
-        </a>
-      </div>
-  
-      <div class="menu-toggle">☰</div>
-  
-      <ul class="nav-links">
-  
-        <li><a href="../index.html">Home</a></li>
-  
-        <li><a href="about.html">About</a></li>
-  
-        <li class="dropdown">
-          <a href="sports.html">Sports ▾</a>
-  
-          <ul class="dropdown-menu">
-            <li><a href="athletes.html?sport=football">Football</a></li>
-            <li><a href="athletes.html?sport=athletics">Athletics</a></li>
-            <li><a href="athletes.html?sport=basketball">Basketball</a></li>
-            <li><a href="athletes.html?sport=rugby">Rugby</a></li>
-            <li><a href="athletes.html?sport=tennis">Tennis</a></li>
-            <li><a href="athletes.html?sport=combat-sports">Combat Sports</a></li>
-            <li><a href="athletes.html">More Sports</a></li>
-          </ul>
-        </li>
-  
-        <li>
-          <a href="community.html">Community</a>
-        </li>
-  
-        <li><a href="marketplace.html">Marketplace</a></li>
-  
-        <li class="dropdown">
-          <a href="services.html">Professionals ▾</a>
-  
-          <ul class="dropdown-menu">
-            <li><a href="services.html?category=physiotherapists">Physiotherapists</a></li>
-            <li><a href="services.html?category=sports-therapists">Sports Therapists</a></li>
-            <li><a href="services.html?category=nutritionists">Nutritionists</a></li>
-            <li><a href="services.html?category=psychologists">Psychologists</a></li>
-            <li><a href="services.html?category=wellbeing-specialists">Wellbeing Specialists</a></li>
-            <li><a href="services.html?category=recovery-experts">Recovery Experts</a></li>
-            <li><a href="services.html?category=mentors">Mentors</a></li>
-            <li><a href="services.html?category=performance-specialists">Performance Specialists</a></li>
-          </ul>
-        </li>
-  
-        <li id="authNavItem">
-          <a href="../auth/login.html">Login</a>
-        </li>
-  
-      </ul>
-  
-      <a id="joinBtn"
-         href="../auth/register.html"
-         class="btn-primary nav-btn">
-  
-        Join Now
-  
-      </a>
-  
-    </nav>
-  </header>
+ <div id="siteHeader"></div>
 
 <main>
 
@@ -98,114 +27,72 @@
       Connect with trusted professionals supporting athletes with performance,
       recovery, wellbeing and long term development.
     </p>
+    <div class="directory-filters">
 
-    <div class="user-cards">
-
-      <article class="service-category-card">
-        <h3>Physiotherapists</h3>
-        <p>Support injury prevention, rehabilitation and movement health.</p>
-        <a href="services.html?category=physiotherapists" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Sports Therapists</h3>
-        <p>Help athletes recover, prepare and manage physical performance demands.</p>
-        <a href="services.html?category=sports-therapists" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Nutritionists</h3>
-        <p>Support performance nutrition, recovery and healthy athlete development.</p>
-        <a href="services.html?category=nutritionists" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Psychologists</h3>
-        <p>Support confidence, focus, pressure management and athlete wellbeing.</p>
-        <a href="services.html?category=psychologists" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Wellbeing Specialists</h3>
-        <p>Help athletes balance sport, education, lifestyle and mental wellbeing.</p>
-        <a href="services.html?category=wellbeing-specialists" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Recovery Experts</h3>
-        <p>Support rest, recovery, regeneration and sustainable performance.</p>
-        <a href="services.html?category=recovery-experts" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Mentors</h3>
-        <p>Guide young athletes through sport, life choices and personal growth.</p>
-        <a href="services.html?category=mentors" class="btn-primary">View Category</a>
-      </article>
-
-      <article class="service-category-card">
-        <h3>Performance Specialists</h3>
-        <p>Support technical, physical and performance development.</p>
-        <a href="services.html?category=performance-specialists" class="btn-primary">View Category</a>
-      </article>
-
+      <input
+        type="text"
+        id="professionalSearch"
+        placeholder="Search by name, service or location..."
+        class="directory-search"
+      >
+    
+      <div class="category-filter-buttons">
+        <button class="filter-btn active" data-category="">
+          All
+        </button>
+        
+        <button class="filter-btn" data-category="coach">
+          Coaches
+        </button>
+    
+        <button class="filter-btn" data-category="physiotherapist">
+          Physiotherapists
+        </button>
+    
+        <button class="filter-btn" data-category="sports-therapist">
+          Sports Therapists
+        </button>
+    
+        <button class="filter-btn" data-category="nutritionist">
+          Nutritionists
+        </button>
+    
+        <button class="filter-btn" data-category="psychologist">
+          Psychologists
+        </button>
+    
+        <button class="filter-btn" data-category="wellbeing-specialist">
+          Wellbeing
+        </button>
+    
+        <button class="filter-btn" data-category="recovery-expert">
+          Recovery
+        </button>
+    
+        <button class="filter-btn" data-category="mentor">
+          Mentors
+        </button>
+    
+        <button class="filter-btn" data-category="performance-specialist">
+          Performance
+        </button>
+      </div>
+    
     </div>
+    
     </div>
   </section>
 
-  <section class="container">
+  <section class="container" id="professionalsDirectory">
 
-    <h2>Featured Professionals</h2>
-
-    <div class="athlete-grid">
-
-      <div class="athlete-card">
-        <img src="../assets/images/pro1.jpg" alt="Sports Therapist">
-
-        <div class="athlete-info">
-          <h3>Dr Emily Carter</h3>
-          <p class="sport">Sports Therapist</p>
-          <p>London | United Kingdom</p>
-          <p class="pb">Recovery & Injury Prevention</p>
-
-          <a href="professional-profile.html?id=1" class="btn-primary">
-            View Profile
-          </a>
-        </div>
-      </div>
-
-      <div class="athlete-card">
-        <img src="../assets/images/pro2.jpg" alt="Nutritionist">
-
-        <div class="athlete-info">
-          <h3>Michael Brown</h3>
-          <p class="sport">Performance Nutritionist</p>
-          <p>Manchester | United Kingdom</p>
-          <p class="pb">Elite Athlete Nutrition</p>
-
-          <a href="professional-profile.html?id=2" class="btn-primary">
-            View Profile
-          </a>
-        </div>
-      </div>
-
-      <div class="athlete-card">
-        <img src="../assets/images/pro3.jpg" alt="Mental Health Specialist">
-
-        <div class="athlete-info">
-          <h3>Sarah Williams</h3>
-          <p class="sport">Mental Health Specialist</p>
-          <p>Birmingham | United Kingdom</p>
-          <p class="pb">Athlete Wellbeing</p>
-
-          <a href="professional-profile.html?id=3" class="btn-primary">
-            View Profile
-          </a>
-        </div>
-      </div>
-
+    <h2 id="directoryTitle">
+      Professionals Directory
+    </h2>
+  
+    <div id="professionalsGrid" class="athlete-grid">
+      <p>Loading professionals...</p>
     </div>
-
+  
   </section>
 
 </main>
@@ -214,66 +101,11 @@
   Chat on WhatsApp
 </a>
 
-<footer>
+<div id="siteFooter"></div>
 
-  <div class="container">
-
-    <h2>TalentGoldPlus</h2>
-
-    <p>
-      Discover, develop and fund the next generation of sports talent while
-      creating positive change in communities across the world.
-    </p>
-
-    <div class="footer-grid">
-
-      <div class="footer-column">
-
-        <h4>Platform</h4>
-
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="sports.html">Sports</a>
-        <a href="community.html">Community</a>
-        <a href="marketplace.html">Marketplace</a>
-        <a href="services.html">Professionals</a>
-
-      </div>
-
-      <div class="footer-column">
-
-        <h4>Community</h4>
-
-        <a href="athletes.html">Athletes</a>
-        <a href="coaches.html">Coaches</a>
-        <a href="scouts.html">Scouts</a>
-        <a href="investors.html">Investors</a>
-
-      </div>
-
-      <div class="footer-column">
-
-        <h4>Get Involved</h4>
-
-        <a href="volunteer.html">Volunteer</a>
-        <a href="ambassadors.html">Ambassadors</a>
-        <a href="partners.html">Partners</a>
-        <a href="donate.html">Donate</a>
-
-      </div>
-
-    </div>
-
-    <p class="footer-copy">
-      © 2026 TalentGoldPlus. All rights reserved.
-    </p>
-
-  </div>
-
-</footer>
-
+<script src="../js/components-loader.js"></script>
 <script src="../js/navigation.js"></script>
-<script src="../js/app.js"></script>
+<script type="module" src="../js/services-directory.js?v=3"></script>
 <script type="module" src="../js/auth.js"></script>
 
 </body>

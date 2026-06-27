@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Athlete Profile | TalentGoldPlus</title>
 
   <link rel="stylesheet" href="../css/styles.css">
@@ -12,66 +13,50 @@
 
 <body>
 
-<!-- HEADER -->
-<header>
-  <nav>
-    <div class="logo">
-      <img src="../assets/images/Talentgoldplus.png">
-      <span class="logo-text">
-        Talent<span class="gold">Gold</span>Plus
-      </span>
-    </div>
+<div id="siteHeader"></div>
 
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="athletes.html">Athletes</a></li>
-    </ul>
-  </nav>
-</header>
-
-<!-- MAIN -->
 <main>
 
-  <!-- PROFILE SECTION -->
   <section class="container profile-page">
-
     <div class="profile-card">
 
-      <img id="profile-image" src="" alt="Athlete">
+      <img
+        id="profile-image"
+        src=""
+        alt="Athlete profile image"
+      >
 
       <div class="profile-info">
-        <h1 id="name"></h1>
+        <h1 id="name">Loading...</h1>
         <p class="sport" id="sport"></p>
         <p id="location"></p>
         <p id="extra"></p>
 
-        <button class="btn-primary">Contact Athlete</button>
+        <a id="contactAthleteBtn" href="#" class="btn-primary">
+          Contact Athlete
+        </a>
       </div>
 
     </div>
-
   </section>
 
-  <!-- BIO SECTION -->
   <section class="container profile-bio">
-
     <h2>About</h2>
-
-    <p id="bio">
-      <!-- This will be filled dynamically -->
-    </p>
-
+    <p id="bio"></p>
   </section>
 
 </main>
 
-<!-- WHATSAPP -->
 <a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
   Chat on WhatsApp
 </a>
 
-<!-- JS -->
-<script src="../js/athlete-profile.js"></script>
+<div id="siteFooter"></div>
+
+<script src="../js/components-loader.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/athlete-profile.js?v=1"></script>
+<script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

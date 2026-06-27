@@ -1,3 +1,9 @@
+let headerReady = false;
+
+document.addEventListener("siteHeaderLoaded", () => {
+  headerReady = true;
+});
+
 // =========================
 // PATHS
 // =========================
@@ -39,7 +45,8 @@ import {
   collection,
   query,
   where,
-  getDocs
+  getDocs,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 // =========================
@@ -352,17 +359,28 @@ const listingsCount =
 // GLOBAL NAVBAR AUTH
 // =========================
 
-const authNavItem =
-  document.getElementById("authNavItem");
-
-const joinBtn =
-  document.getElementById("joinBtn");
+  function waitForHeader() {
+    return new Promise((resolve) => {
+      if (document.getElementById("authNavItem")) {
+        resolve();
+        return;
+      }
+  
+      document.addEventListener("siteHeaderLoaded", () => {
+        resolve();
+      }, { once: true });
+    });
+  }
 
 // =========================
 // AUTH STATE
 // =========================
 
 onAuthStateChanged(auth, async (user) => {
+
+  if (document.getElementById("siteHeader")) {
+    await waitForHeader();
+  }
 
   if (!user && isProtectedPage) {
 
@@ -384,8 +402,7 @@ onAuthStateChanged(auth, async (user) => {
   
   }
 
-  updatePublicNavbar(true);
-  document.body.style.display = "block";
+  
 
   const userRef =
     doc(db, "users", user.uid);
@@ -408,6 +425,12 @@ onAuthStateChanged(auth, async (user) => {
   const userData =
     userSnap.data();
   
+    updatePublicNavbar(true, userData);
+
+    listenForNotifications(user.uid);
+    
+    document.body.style.display = "block";
+    
   console.log(
     "Dashboard User Data:",
     userData
@@ -434,26 +457,91 @@ onAuthStateChanged(auth, async (user) => {
 // PUBLIC NAVBAR
 // =========================
 
-function updatePublicNavbar(isLoggedIn) {
+function updatePublicNavbar(isLoggedIn, userData = null) {
+
+  const authNavItem =
+  document.getElementById("authNavItem");
+
+const joinBtn =
+  document.getElementById("joinBtn");
 
   if (isLoggedIn) {
+
+    const name =
+      userData?.fullName ||
+      userData?.name ||
+      "User";
+
+    const profileImage =
+      userData?.profileImage &&
+      userData.profileImage.startsWith("http")
+        ? userData.profileImage
+        : "";
+
+    const userAvatar =
+      profileImage
+        ? `
+          <img
+            src="${profileImage}"
+            alt="${name}"
+            class="nav-user-avatar"
+            onerror="this.outerHTML='<span class=&quot;nav-user-initials&quot;>${getInitials(name)}</span>'"
+          >
+        `
+        : `
+          <span class="nav-user-initials">
+            ${getInitials(name)}
+          </span>
+        `;
 
     if (authNavItem) {
 
       authNavItem.innerHTML = `
-        <div class="auth-links">
-          <a href="${dashboardPath}">
-            Dashboard
-          </a>
+        <div class="nav-user-menu">
 
           <button
-            id="publicLogoutBtn"
-            class="btn-primary logout-btn"
+            class="nav-user-toggle"
+            id="navUserToggle"
+            type="button"
           >
-            Logout
+            ${userAvatar}
+
+            <span class="nav-user-name">
+              ${name}
+            </span>
+
+            <span class="nav-user-arrow">▼</span>
           </button>
+
+          <div class="nav-user-dropdown" id="navUserDropdown">
+
+            <a href="${dashboardPath}">
+              Dashboard
+            </a>
+
+            <a href="${isPageFolder ? "profile-setup.html" : "pages/profile-setup.html"}">
+              My Profile
+            </a>
+
+            <a href="${isPageFolder ? "messages.html" : "pages/messages.html"}">
+              Messages
+            </a>
+
+            <a href="${isPageFolder ? "notifications.html" : "pages/notifications.html"}">
+              Notifications
+            </a>
+
+            <button id="publicLogoutBtn">
+              Logout
+            </button>
+
+          </div>
+
         </div>
       `;
+
+setupLogoutButton("publicLogoutBtn");
+setupUserDropdown();
 
       setupLogoutButton("publicLogoutBtn");
 
@@ -483,6 +571,26 @@ function updatePublicNavbar(isLoggedIn) {
 
 }
 
+function setupUserDropdown() {
+
+  const toggle =
+    document.getElementById("navUserToggle");
+
+  const dropdown =
+    document.getElementById("navUserDropdown");
+
+  if (!toggle || !dropdown) return;
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle("active");
+  });
+
+  document.addEventListener("click", () => {
+    dropdown.classList.remove("active");
+  });
+
+}
 // =========================
 // DASHBOARD RENDER
 // =========================
@@ -596,6 +704,7 @@ function renderDashboard(userData) {
   renderDashboardCards(role);
 
   loadDashboardStats(auth.currentUser.uid);
+  listenForNotifications(auth.currentUser.uid);
 
 }
 // =========================
@@ -793,5 +902,27 @@ async function loadDashboardStats(userId) {
     );
 
   }
+
+}
+function listenForNotifications(userId) {
+
+  const notificationsQuery =
+    query(
+      collection(db, "notifications"),
+      where("userId", "==", userId),
+      where("read", "==", false)
+    );
+
+  onSnapshot(notificationsQuery, (snapshot) => {
+
+    const notificationsCount =
+      document.getElementById("notificationsCount");
+
+    if (notificationsCount) {
+      notificationsCount.textContent =
+        snapshot.size;
+    }
+
+  });
 
 }

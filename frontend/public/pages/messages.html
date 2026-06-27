@@ -14,34 +14,8 @@
 
 <body>
 
-<header>
-  <nav>
-
-    <div class="logo">
-      <a href="index.html">
-        <img
-          src="../assets/images/TalentGoldPlus.png"
-          alt="Talent Gold"
-          class="site-logo"
-        >
-      </a>
-    </div>
-
-    <div class="menu-toggle">☰</div>
-
-    <ul class="nav-links">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="community.html">Community</a></li>
-      <li><a href="marketplace.html">Marketplace</a></li>
-      <li><a href="profile-setup.html">Profile</a></li>
-    </ul>
-
-    <button id="logoutBtn" class="btn-primary nav-btn">
-      Logout
-    </button>
-
-  </nav>
-</header>
+<!-- HEADER -->
+<div id="siteHeader"></div>
 
 <main>
 
@@ -57,7 +31,18 @@
             New Chat
           </button>
         </div>
-
+        
+        <div id="newChatSearch" class="new-chat-search" style="display: none;">
+          <input
+            type="text"
+            id="userSearchInput"
+            placeholder="Search members..."
+            autocomplete="off"
+          >
+        
+          <div id="userSearchResults" class="user-search-results"></div>
+        </div>
+        
         <div id="conversationList" class="conversation-list">
           <p>Loading conversations...</p>
         </div>
@@ -95,10 +80,12 @@
   </section>
 
 </main>
+<div id="siteFooter"></div>
 
+<script src="../js/components-loader.js"></script>
 <script src="../js/navigation.js"></script>
-<script type="module" src="../js/auth.js"></script>
-<script type="module" src="../js/messages.js"></script>
+<script type="module" src="../js/auth.js?v=2"></script>
+<script type="module" src="../js/messages.js?v=2"></script>
 
 </body>
 </html>
