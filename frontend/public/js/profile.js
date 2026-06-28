@@ -36,24 +36,37 @@ function renderDynamicFields(role) {
   if (role === "athlete") {
 
     dynamicProfileFields.innerHTML = `
-      <input type="text" id="sport" placeholder="Sport">
-      <input type="text" id="pbs" placeholder="Personal bests / position">
-      <textarea id="achievements" placeholder="Achievements"></textarea>
-    `;
+  <select id="sport" required>
+    <option value="">Select Your Sport</option>
+    <option value="football">Football</option>
+    <option value="athletics">Athletics</option>
+    <option value="basketball">Basketball</option>
+    <option value="rugby">Rugby</option>
+    <option value="tennis">Tennis</option>
+    <option value="combat-sports">Combat Sports</option>
+    <option value="other-sports">Other Sports</option>
+  </select>
 
-  } else if (role === "coach") {
+  <input
+    type="text"
+    id="pbs"
+    placeholder="Personal Best, Position or Event"
+  >
 
-    dynamicProfileFields.innerHTML = `
-      <input type="text" id="sport" placeholder="Coaching sport">
-      <input type="text" id="qualifications" placeholder="Coaching qualifications">
-      <textarea id="services" placeholder="Coaching services offered"></textarea>
-    `;
+  <textarea
+    id="achievements"
+    placeholder="Achievements"
+  ></textarea>
+`;
 
   } else if (role === "professional") {
 
     dynamicProfileFields.innerHTML = `
-      <select id="professionalCategory">
+      <select id="professionalCategory" required>
+
         <option value="">Select Professional Category</option>
+
+        <option value="coach">Coach</option>
         <option value="physiotherapist">Physiotherapist</option>
         <option value="sports-therapist">Sports Therapist</option>
         <option value="nutritionist">Nutritionist</option>
@@ -62,26 +75,77 @@ function renderDynamicFields(role) {
         <option value="recovery-expert">Recovery Expert</option>
         <option value="mentor">Mentor</option>
         <option value="performance-specialist">Performance Specialist</option>
+
       </select>
 
-      <input type="text" id="qualifications" placeholder="Qualifications">
-      <textarea id="services" placeholder="Services offered"></textarea>
+      <input
+        type="text"
+        id="qualifications"
+        placeholder="Qualifications"
+      >
+
+      <textarea
+        id="services"
+        placeholder="Services Offered"
+      ></textarea>
     `;
 
   } else if (role === "scout") {
 
     dynamicProfileFields.innerHTML = `
-      <input type="text" id="sport" placeholder="Sport focus">
-      <input type="text" id="organisation" placeholder="Organisation">
-      <input type="text" id="scoutingRegion" placeholder="Scouting region">
+      <select id="sport">
+
+        <option value="">Primary Sport</option>
+
+        <option value="football">Football</option>
+        <option value="athletics">Athletics</option>
+        <option value="basketball">Basketball</option>
+        <option value="rugby">Rugby</option>
+        <option value="tennis">Tennis</option>
+        <option value="combat-sports">Combat Sports</option>
+        <option value="swimming">Swimming</option>
+        <option value="cycling">Cycling</option>
+        <option value="cricket">Cricket</option>
+        <option value="gymnastics">Gymnastics</option>
+        <option value="netball">Netball</option>
+        <option value="volleyball">Volleyball</option>
+        <option value="other-sports">Other Sports</option>
+
+      </select>
+
+      <input
+        type="text"
+        id="organisation"
+        placeholder="Organisation"
+      >
+
+      <input
+        type="text"
+        id="scoutingRegion"
+        placeholder="Scouting Region"
+      >
     `;
 
   } else if (role === "investor") {
 
     dynamicProfileFields.innerHTML = `
-      <input type="text" id="companyName" placeholder="Company / Organisation name">
-      <input type="text" id="investmentInterests" placeholder="Investment interests">
-      <input type="text" id="fundingRange" placeholder="Funding range">
+      <input
+        type="text"
+        id="companyName"
+        placeholder="Company / Organisation"
+      >
+
+      <input
+        type="text"
+        id="investmentInterests"
+        placeholder="Investment Interests"
+      >
+
+      <input
+        type="text"
+        id="fundingRange"
+        placeholder="Funding Range"
+      >
     `;
 
   } else {

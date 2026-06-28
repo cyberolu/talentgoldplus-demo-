@@ -1303,3 +1303,76 @@ body {
   background: #f5f5f5;
   color: var(--gold);
 }
+#notificationsNavItem{
+  display:none;
+}
+.footer-tagline{
+  margin:40px 0 25px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:.5px;
+}
+
+.footer-divider{
+  border:none;
+  border-top:1px solid rgba(255,255,255,.15);
+  margin:20px 0 25px;
+}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footer-contact{
+  margin:0;
+}
+
+.footer-contact a{
+  color:var(--gold);
+  text-decoration:none;
+}
+
+.footer-contact a:hover{
+  text-decoration:underline;
+}
+
+@media (max-width:768px){
+
+  .footer-bottom{
+      flex-direction:column;
+      text-align:center;
+  }
+
+  .footer-tagline{
+      font-size:18px;
+  }
+
+}
+.empty-state {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 50px 30px;
+  text-align: center;
+  background: white;
+  border-radius: 24px;
+  border: 1px solid #eee;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+}
+
+.empty-state h2 {
+  font-size: 34px;
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  color: #555;
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 26px;
+}

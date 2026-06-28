@@ -234,12 +234,17 @@ function attachRoleChangeEvents() {
 
             updateData.role = "professional";
             updateData.professionalCategory = newRole;
-
+          
+            updateData.sport = "";
+            updateData.category = "";
+            updateData.pbs = "";
+            updateData.achievements = "";
+          
           } else {
-
+          
             updateData.role = newRole;
             updateData.professionalCategory = "";
-
+          
           }
           
           await updateDoc(

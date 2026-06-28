@@ -229,12 +229,21 @@ function applyMarketplaceFilters() {
       listing.location?.toLowerCase().includes(searchTerm) ||
       listing.userName?.toLowerCase().includes(searchTerm);
 
+      const listingCategory =
+      normaliseCategory(listing.category);
+    
+    const selected =
+      normaliseCategory(selectedCategory);
+    
     const matchesCategory =
-      selectedCategory === "all" ||
-      listing.category === selectedCategory;
-
-    return matchesSearch && matchesCategory;
-  });
+        selected === "all" ||
+        listingCategory === selected ||
+        (
+          selected === "products" &&
+          listingCategory === "equipment"
+        );
+      return matchesSearch && matchesCategory;
+    });
 
   renderMarketplaceListings(filtered);
 }
@@ -248,9 +257,19 @@ if (marketplaceCategoryFilter) {
 }
 
 /* HELPERS */
+function normaliseCategory(category) {
+  return (category || "")
+    .toString()
+    .trim()
+    .toLowerCase();
+}
 
 function formatCategory(category) {
   if (!category) return "General";
+
+  if (normaliseCategory(category) === "equipment") {
+    return "Products";
+  }
 
   return category
     .split("-")

@@ -355,6 +355,9 @@ const messagesCount =
 const listingsCount =
   document.getElementById("listingsCount");
 
+const mediaCount =
+  document.getElementById("mediaCount");
+
 // =========================
 // GLOBAL NAVBAR AUTH
 // =========================
@@ -410,7 +413,6 @@ onAuthStateChanged(auth, async (user) => {
     const userSnap =
     await getDoc(userRef);
   
-  console.log("User UID:", user.uid);
   
   if (!userSnap.exists()) {
   
@@ -431,21 +433,9 @@ onAuthStateChanged(auth, async (user) => {
     
     document.body.style.display = "block";
     
-  console.log(
-    "Dashboard User Data:",
-    userData
-  );
-  
-  console.log(
-    "Is Dashboard Page:",
-    isDashboardPage
-  );
-  
+
   if (isDashboardPage) {
   
-    console.log(
-      "Rendering Dashboard"
-    );
   
     renderDashboard(userData);
   
@@ -459,13 +449,20 @@ onAuthStateChanged(auth, async (user) => {
 
 function updatePublicNavbar(isLoggedIn, userData = null) {
 
-  const authNavItem =
+const authNavItem =
   document.getElementById("authNavItem");
 
 const joinBtn =
   document.getElementById("joinBtn");
 
+const notificationsNavItem =
+  document.getElementById("notificationsNavItem");
+
   if (isLoggedIn) {
+
+  if (notificationsNavItem) {
+    notificationsNavItem.style.display = "block";
+  }
 
     const name =
       userData?.fullName ||
@@ -543,7 +540,7 @@ const joinBtn =
 setupLogoutButton("publicLogoutBtn");
 setupUserDropdown();
 
-      setupLogoutButton("publicLogoutBtn");
+      
 
     }
 
@@ -553,20 +550,24 @@ setupUserDropdown();
 
   } else {
 
+    if (notificationsNavItem) {
+      notificationsNavItem.style.display = "none";
+    }
+  
     if (authNavItem) {
-
+  
       authNavItem.innerHTML = `
         <a href="${loginPath}">
           Login
         </a>
       `;
-
+  
     }
-
+  
     document.querySelectorAll("#joinBtn").forEach((btn) => {
       btn.style.display = "inline-block";
     });
-
+  
   }
 
 }
@@ -670,7 +671,7 @@ function renderDashboard(userData) {
 
   if (profileCompletion) {
     profileCompletion.textContent =
-      userData.profileCompleted ? "100%" : "40%";
+      `${calculateProfileStrength(userData)}%`;
   }
 
   if (connectionsCount) {
@@ -715,15 +716,20 @@ function renderDashboardNav(role) {
 
   if (!dashboardNav) return;
 
+  const userId =
+    auth.currentUser?.uid;
+
   dashboardNav.innerHTML = `
     <a href="dashboard.html" class="active">Dashboard</a>
-    <a href="profile-setup.html">My Profile</a>
+    <a href="profile.html?user=${userId}">View My Profile</a>
+    <a href="profile-setup.html">Edit Profile</a>
+    <a href="media.html">My Media</a>
     <a href="community.html">Community</a>
     <a href="connections.html">Connections</a>
     <a href="messages.html">Messages</a>
     <a href="marketplace.html">Marketplace</a>
     <a href="notifications.html">Notifications</a>
-    
+
     ${
       role === "admin" ||
       role === "superadmin"
@@ -745,11 +751,11 @@ function renderDashboardCards(role) {
   dashboardCards.innerHTML = "";
 
   const commonCards = `
-    <a href="profile-setup.html" class="dashboard-card-link">
+    <a href="profile.html?user=${auth.currentUser?.uid}" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
-          <h3>My Profile</h3>
-          <p>Manage your TalentGoldPlus profile.</p>
+          <h3>View My Profile</h3>
+          <p>See how your public profile appears to others.</p>
         </div>
       </div>
     </a>
@@ -877,6 +883,18 @@ async function loadDashboardStats(userId) {
         listingsSnapshot.size;
     }
 
+    const mediaSnapshot =
+      await getDocs(
+        query(
+          collection(db, "userMedia"),
+          where("userId", "==", userId)
+        )
+      );
+
+    if (mediaCount) {
+      mediaCount.textContent =
+        mediaSnapshot.size;
+    }
     const notificationsSnapshot =
       await getDocs(
         query(
@@ -924,5 +942,41 @@ function listenForNotifications(userId) {
     }
 
   });
+
+}
+function calculateProfileStrength(userData) {
+
+  const checks = [
+    !!(userData.fullName || userData.name),
+    !!userData.location,
+    !!userData.bio,
+    !!(
+      userData.profileImage &&
+      userData.profileImage.startsWith("http")
+    )
+  ];
+
+  if (userData.role === "athlete") {
+    checks.push(
+      !!userData.sport,
+      !!userData.pbs,
+      !!userData.achievements
+    );
+  }
+
+  if (userData.role === "professional") {
+    checks.push(
+      !!userData.professionalCategory,
+      !!userData.qualifications,
+      !!userData.services
+    );
+  }
+
+  const completed =
+    checks.filter(Boolean).length;
+
+  return Math.round(
+    (completed / checks.length) * 100
+  );
 
 }

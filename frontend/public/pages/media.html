@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Media | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/media.css">
+</head>
+
+<body>
+
+<div id="siteHeader"></div>
+
+<main>
+
+  <section class="media-page">
+    <div class="container">
+
+      <div class="media-header">
+        <div>
+          <p class="hero-sub">MY MEDIA</p>
+          <h1>Build Your Media Portfolio</h1>
+          <p>
+            Upload photos, certificates, awards and video links to strengthen your TalentGoldPlus profile.
+          </p>
+        </div>
+      </div>
+
+      <section class="media-upload-card">
+
+        <h2>Add New Media</h2>
+
+        <form id="mediaForm">
+
+          <div class="form-group">
+            <label for="mediaTitle">Title</label>
+            <input type="text" id="mediaTitle" placeholder="e.g. 100m Final, Training Session, Award Certificate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="mediaType">Media Type</label>
+            <select id="mediaType" required>
+              <option value="">Select type</option>
+              <option value="photo">Photo</option>
+              <option value="certificate">Certificate / Award</option>
+              <option value="video-link">Video Link</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="fileUploadGroup">
+            <label for="mediaFile">Upload Image</label>
+            <input type="file" id="mediaFile" accept="image/*">
+          </div>
+
+          <div class="form-group" id="videoLinkGroup" style="display:none;">
+            <label for="videoUrl">Video URL</label>
+            <input type="url" id="videoUrl" placeholder="YouTube, Vimeo, Hudl or other video link">
+          </div>
+
+          <div class="form-group">
+            <label for="mediaDescription">Description</label>
+            <textarea id="mediaDescription" rows="4" placeholder="Add context about this media item."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Save Media
+          </button>
+
+        </form>
+
+      </section>
+
+      <section class="media-gallery-section">
+
+        <div class="media-section-title">
+          <h2>My Uploaded Media</h2>
+          <p>Your photos, certificates and videos will appear here.</p>
+        </div>
+
+        <div id="mediaGrid" class="media-grid">
+          <p>Loading media...</p>
+        </div>
+
+      </section>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="siteFooter"></div>
+
+<script src="../js/components-loader.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js?v=5"></script>
+<script type="module" src="../js/media.js?v=1"></script>
+
+</body>
+</html>

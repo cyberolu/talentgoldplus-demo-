@@ -32,12 +32,28 @@ async function loadAthletes() {
     });
   });
 
+  const mainSports = [
+    "football",
+    "athletics",
+    "basketball",
+    "rugby",
+    "tennis",
+    "combat sports"
+  ];
+  
   const filteredAthletes = athletes.filter((user) => {
     const sport = normalise(user.sport || user.category);
-
-    return !selectedSport || sport === selectedSport;
+  
+    if (!selectedSport) {
+      return true;
+    }
+  
+    if (selectedSport === "other sports") {
+      return sport && !mainSports.includes(sport);
+    }
+  
+    return sport === selectedSport;
   });
-
   if (selectedSport && athletesTitle) {
 
     if (selectedSport === "athletics") {
@@ -106,7 +122,7 @@ async function loadAthletes() {
           ${extra}
         </p>
 
-        <a href="athlete-profile.html?user=${user.id}" class="btn-primary">
+        <a href="profile.html?user=${user.id}" class="btn-primary">
           View Profile
         </a>
       </div>

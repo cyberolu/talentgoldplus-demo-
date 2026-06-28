@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Create Listing | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -37,10 +38,10 @@
 
     <div class="auth-card">
 
-      <h1>Create Marketplace Listing</h1>
+      <h1>Create a Listing</h1>
 
       <p>
-        Add a service, opportunity, professional offer or sports-related listing.
+        Create a listing to promote your professional services, products, opportunities, courses or events to the TalentGoldPlus community.
       </p>
 
       <form id="listingForm">
@@ -48,15 +49,25 @@
         <input type="text" id="listingTitle" placeholder="Listing title" required>
 
         <select id="listingCategory" required>
-          <option value="">Select category</option>
-          <option value="coach">Coach</option>
-          <option value="physiotherapist">Physiotherapist</option>
-          <option value="nutritionist">Nutritionist</option>
-          <option value="sports-therapist">Sports Therapist</option>
-          <option value="psychologist">Psychologist</option>
-          <option value="mentor">Mentor</option>
-          <option value="opportunity">Opportunity</option>
-          <option value="equipment">Equipment</option>
+
+          <option value="">Select Category</option>
+        
+          <optgroup label="Professional Services">
+            <option value="coach">Coach</option>
+            <option value="physiotherapist">Physiotherapist</option>
+            <option value="sports-therapist">Sports Therapist</option>
+            <option value="nutritionist">Nutritionist</option>
+            <option value="psychologist">Psychologist</option>
+            <option value="mentor">Mentor</option>
+          </optgroup>
+        
+          <optgroup label="Marketplace">
+            <option value="products">Products</option>
+            <option value="opportunity">Opportunities</option>
+            <option value="courses">Courses</option>
+            <option value="events">Events</option>
+          </optgroup>
+        
         </select>
 
         <textarea

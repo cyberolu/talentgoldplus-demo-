@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Scouts | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -13,107 +14,59 @@
 
 <body>
 
-  <!-- HEADER -->
-  <div id="siteHeader"></div>
-  <!-- MAIN -->
-  <main>
+<div id="siteHeader"></div>
 
-    <section class="container">
+<main>
 
-      <h2>Verified Scouts</h2>
+  <section class="services-hero">
+
+    <div class="container">
+
+      <h1>Verified Scouts</h1>
 
       <p>
         Connect with trusted scouts identifying the next generation of talent across multiple sports.
       </p>
 
-      <div class="athlete-grid">
+    </div>
 
-        <!-- SCOUT 1 -->
-        <div class="athlete-card">
+  </section>
 
-          <img src="../assets/images/scout1.jpg" alt="Scout">
+  <section class="container">
 
-          <div class="athlete-info">
+    <div class="empty-state">
 
-            <h3>Daniel Moore</h3>
+      <h2>No Verified Scouts Yet</h2>
 
-            <p class="sport">Football Scout</p>
+      <p>
+        We are currently onboarding verified scouts from around the world.
+        Check back soon as new scouts join the TalentGoldPlus community.
+      </p>
 
-            <p>Premier Youth Network</p>
+      <a href="../auth/register.html" class="btn-primary">
+        Join TalentGoldPlus
+      </a>
 
-            <p class="pb">England & Europe</p>
+    </div>
 
-            <a href="scout-profile.html?id=1" class="btn-primary">
-              View Profile
-            </a>
+  </section>
 
-          </div>
+</main>
 
-        </div>
+<a
+  href="https://wa.me/447438065365?text=Hello%20TalentGoldPlus,%20I%20would%20like%20to%20find%20out%20more."
+  class="whatsapp-button"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Chat on WhatsApp
+</a>
 
-        <!-- SCOUT 2 -->
-        <div class="athlete-card">
-
-          <img src="../assets/images/scout2.jpg" alt="Scout">
-
-          <div class="athlete-info">
-
-            <h3>Sophia Williams</h3>
-
-            <p class="sport">Athletics Scout</p>
-
-            <p>Elite Talent Pathways</p>
-
-            <p class="pb">International Recruitment</p>
-
-            <a href="scout-profile.html?id=2" class="btn-primary">
-              View Profile
-            </a>
-
-          </div>
-
-        </div>
-
-        <!-- SCOUT 3 -->
-        <div class="athlete-card">
-
-          <img src="../assets/images/scout3.jpg" alt="Scout">
-
-          <div class="athlete-info">
-
-            <h3>Michael Johnson</h3>
-
-            <p class="sport">Basketball Scout</p>
-
-            <p>Global Hoops Recruitment</p>
-
-            <p class="pb">US & Europe Pathways</p>
-
-            <a href="scout-profile.html?id=3" class="btn-primary">
-              View Profile
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <!-- WHATSAPP -->
-  <a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
-    Chat on WhatsApp
-  </a>
-
-  <div id="siteFooter"></div>
-
-  <!-- JS -->
-  <script src="../js/navigation.js"></script>
+<div id="siteFooter"></div>
 
 <script src="../js/components-loader.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
 
 </body>
 </html>

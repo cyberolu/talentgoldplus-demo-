@@ -1,14 +1,11 @@
-const isPageFolder =
-  window.location.pathname.includes("/pages/");
-
-const isAuthFolder =
-  window.location.pathname.includes("/auth/");
-
-const isAdminFolder =
-  window.location.pathname.includes("/admin/");
+const isSubFolder =
+  window.location.pathname.includes("/pages/") ||
+  window.location.pathname.includes("/auth/") ||
+  window.location.pathname.includes("/admin/") ||
+  window.location.pathname.includes("/legal/");
 
 const basePath =
-  isPageFolder || isAuthFolder || isAdminFolder
+  isSubFolder
     ? "../"
     : "";
 
@@ -45,7 +42,14 @@ const links = {
   mentors: `${basePath}pages/services.html?category=mentor`,
   performance: `${basePath}pages/services.html?category=performance-specialist`,
   login: `${basePath}auth/login.html`,
-  register: `${basePath}auth/register.html`
+  register: `${basePath}auth/register.html`,
+  terms: `${basePath}legal/terms.html`,
+privacy: `${basePath}legal/privacy.html`,
+cookies: `${basePath}legal/cookies.html`,
+communityGuidelines: `${basePath}legal/community-guidelines.html`,
+safeguarding: `${basePath}legal/safeguarding.html`,
+copyright: `${basePath}legal/copyright.html`,
+contact: `${basePath}legal/contact.html`
 };
 
 async function loadComponent(elementId, fileName) {

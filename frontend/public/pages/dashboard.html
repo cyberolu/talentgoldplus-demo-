@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Dashboard | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -19,10 +20,7 @@
   <aside class="portal-sidebar">
 
     <div class="portal-brand">
-      <img
-        src="../assets/images/TalentGoldPlus.png"
-        alt="Talent Gold"
-      >
+      <img src="../assets/images/TalentGoldPlus.png" alt="Talent Gold">
       <div>
         <h2>TalentGoldPlus</h2>
         <p>Member Portal</p>
@@ -31,7 +29,9 @@
 
     <nav class="portal-menu" id="dashboardNav">
       <a href="dashboard.html" class="active">Dashboard</a>
-      <a href="profile-setup.html">My Profile</a>
+      <a href="profile.html">View My Profile</a>
+      <a href="profile-setup.html">Edit Profile</a>
+      <a href="media.html">My Media</a>
       <a href="community.html">Community</a>
       <a href="connections.html">Connections</a>
       <a href="messages.html">Messages</a>
@@ -50,26 +50,24 @@
   <main class="portal-main">
 
     <header class="portal-topbar">
-    
       <h1>Dashboard</h1>
-    
+
       <div class="portal-top-user">
         <span id="welcomeMessage">Welcome</span>
       </div>
-    
     </header>
+
     <div class="mobile-dashboard-menu">
-      <a href="profile-setup.html">Profile</a>
+      <a href="profile.html">View Profile</a>
+      <a href="profile-setup.html">Edit Profile</a>
+      <a href="media.html">Media</a>
       <a href="community.html">Community</a>
       <a href="connections.html">Connections</a>
       <a href="messages.html">Messages</a>
       <a href="marketplace.html">Marketplace</a>
       <a href="notifications.html">Notifications</a>
-    
-      <button
-        id="mobileLogoutBtn"
-        class="mobile-logout-btn"
-      >
+
+      <button id="mobileLogoutBtn" class="mobile-logout-btn">
         Logout
       </button>
     </div>
@@ -90,63 +88,54 @@
 
     <section class="portal-stats">
 
-      <a
-        href="profile-setup.html"
-        class="portal-stat-card stat-link"
-      >
-        <p>Profile</p>
+      <a href="profile-setup.html" class="portal-stat-card stat-link">
+        <p>Profile Strength</p>
         <h3 id="profileCompletion">0%</h3>
       </a>
-    
-      <a
-        href="connections.html"
-        class="portal-stat-card stat-link"
-      >
+
+      <a href="media.html" class="portal-stat-card stat-link">
+        <p>Media</p>
+        <h3 id="mediaCount">0</h3>
+      </a>
+
+      <a href="connections.html" class="portal-stat-card stat-link">
         <p>Connections</p>
         <h3 id="connectionsCount">0</h3>
       </a>
-    
-      <a
-        href="messages.html"
-        class="portal-stat-card stat-link"
-      >
+
+      <a href="messages.html" class="portal-stat-card stat-link">
         <p>Messages</p>
         <h3 id="messagesCount">0</h3>
       </a>
-    
-      <a
-        href="marketplace.html"
-        class="portal-stat-card stat-link"
-      >
+
+      <a href="marketplace.html" class="portal-stat-card stat-link">
         <p>Listings</p>
         <h3 id="listingsCount">0</h3>
       </a>
 
-      <a
-        href="notifications.html"
-        class="portal-stat-card stat-link"
-      >
+      <a href="notifications.html" class="portal-stat-card stat-link">
         <p>Notifications</p>
         <h3 id="notificationsCount">0</h3>
       </a>
-    
+
     </section>
-    
+
     <section class="portal-panel">
-    
+
       <div class="portal-panel-header">
         <h2>Quick Actions</h2>
       </div>
-    
+
       <div class="portal-actions" id="dashboardCards"></div>
-    
+
     </section>
+
   </main>
 
 </div>
 
 <script src="../js/components-loader.js"></script>
-<script type="module" src="../js/auth.js?v=4"></script>
+<script type="module" src="../js/auth.js?v=5"></script>
 
 </body>
 </html>
