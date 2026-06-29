@@ -1,12 +1,27 @@
-const toggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
+document.addEventListener("siteHeaderLoaded", () => {
+  initialiseMobileMenu();
+});
 
-if (toggle && navLinks) {
+document.addEventListener("DOMContentLoaded", () => {
+  initialiseMobileMenu();
+});
 
-  toggle.addEventListener("click", () => {
+function initialiseMobileMenu() {
 
+  const menuToggle =
+    document.querySelector(".menu-toggle");
+
+  const navLinks =
+    document.querySelector(".nav-links");
+
+  if (!menuToggle || !navLinks) return;
+
+  if (menuToggle.dataset.ready === "true") return;
+
+  menuToggle.dataset.ready = "true";
+
+  menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
-
   });
 
 }
