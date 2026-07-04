@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Opportunities | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/opportunities.css">
+</head>
+
+<body>
+
+<div id="siteHeader"></div>
+
+<main>
+
+  <section class="services-hero">
+    <div class="container">
+
+      <h1>Opportunities</h1>
+
+      <p>
+        Discover trials, scholarships, funding, courses, events, jobs and volunteering opportunities across the sports ecosystem.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="create-opportunity.html" class="btn-primary">
+          Post Opportunity
+        </a>
+
+        <a href="#opportunitiesList" class="btn-secondary">
+          Browse Opportunities
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="container opportunities-controls">
+
+    <h2>Browse Opportunities</h2>
+
+    <div class="opportunities-filter-bar">
+
+      <input
+        type="text"
+        id="opportunitySearch"
+        placeholder="Search opportunities..."
+      >
+
+      <select id="opportunityCategoryFilter">
+        <option value="all">All categories</option>
+        <option value="trials">Trials</option>
+        <option value="scholarships">Scholarships</option>
+        <option value="funding">Funding</option>
+        <option value="courses">Courses</option>
+        <option value="events">Events</option>
+        <option value="jobs">Jobs</option>
+        <option value="volunteering">Volunteering</option>
+        <option value="other">Other</option>
+      </select>
+
+    </div>
+
+  </section>
+
+  <section id="opportunitiesList" class="featured-section">
+
+    <div class="container">
+
+      <div class="marketplace-section-header">
+
+        <h2>Latest Opportunities</h2>
+
+        <p>
+          Approved opportunities from the TalentGoldPlus community will appear here.
+        </p>
+
+      </div>
+
+      <div id="opportunitiesGrid" class="opportunities-grid">
+        Loading opportunities...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<a
+  href="https://wa.me/447438065365?text=Hello%20TalentGoldPlus,%20I%20would%20like%20to%20find%20out%20more."
+  class="whatsapp-button"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Chat on WhatsApp
+</a>
+
+<div id="siteFooter"></div>
+
+<script src="../js/components-loader.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/opportunities.js"></script>
+
+</body>
+</html>

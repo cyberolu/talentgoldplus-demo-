@@ -10,7 +10,8 @@ import {
   getDocs,
   doc,
   getDoc,
-  updateDoc
+  updateDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const allowedRoles = [
@@ -83,6 +84,7 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "../pages/dashboard.html";
     return;
   }
+  document.body.style.display = "block";
 
   adminWelcome.textContent =
     `Welcome ${adminData.name || adminData.fullName || "Admin"} (${currentAdminRole})`;
@@ -95,7 +97,7 @@ async function loadUsers() {
 
   usersTableBody.innerHTML = `
     <tr>
-      <td colspan="5">Loading users...</td>
+      <td colspan="6">Loading users...</td>
     </tr>
   `;
 
@@ -108,7 +110,7 @@ async function loadUsers() {
 
     usersTableBody.innerHTML = `
       <tr>
-        <td colspan="5">No users found.</td>
+        <td colspan="6">No users found.</td>
       </tr>
     `;
 
@@ -188,6 +190,24 @@ async function loadUsers() {
       <td>
         ${user.profileCompleted ? "Profile complete" : "Profile incomplete"}
       </td>
+
+      <td>
+        <span class="admin-status">
+          ${user.status || "active"}
+        </span>
+
+        <button
+          class="admin-status-btn"
+          data-user-id="${userId}"
+          data-user-role="${role}"
+          data-user-status="${user.status || "active"}"
+          ${currentAdmin.uid === userId ? "disabled" : ""}
+        >
+          ${(user.status || "active") === "suspended"
+            ? "Reactivate"
+            : "Suspend"}
+        </button>
+      </td>
     `;
 
     usersTableBody.appendChild(tr);
@@ -195,6 +215,7 @@ async function loadUsers() {
   });
 
   attachRoleChangeEvents();
+  attachStatusChangeEvents();
 
 }
 
@@ -279,5 +300,72 @@ if (logoutBtn) {
       "../index.html";
 
   });
+
+}
+function attachStatusChangeEvents() {
+
+  document.querySelectorAll(".admin-status-btn")
+    .forEach((button) => {
+
+      button.addEventListener("click", async () => {
+
+        const userId = button.dataset.userId;
+        const targetRole = button.dataset.userRole;
+        const currentStatus =
+          (button.dataset.userStatus || "active").toLowerCase();
+
+        if (currentAdmin.uid === userId) {
+          alert("You cannot suspend your own account.");
+          return;
+        }
+
+        if (
+          currentAdminRole !== "superadmin" &&
+          (
+            targetRole === "admin" ||
+            targetRole === "superadmin"
+          )
+        ) {
+          alert("Only a superadmin can suspend or reactivate admins.");
+          return;
+        }
+
+        const newStatus =
+          currentStatus === "suspended"
+            ? "active"
+            : "suspended";
+
+        const confirmChange =
+          confirm(
+            `Are you sure you want to set this user to ${newStatus}?`
+          );
+
+        if (!confirmChange) return;
+
+        try {
+
+          await updateDoc(
+            doc(db, "users", userId),
+            {
+              status: newStatus,
+              statusUpdatedAt: serverTimestamp(),
+              statusUpdatedBy: currentAdmin.uid
+            }
+          );
+
+          alert(`User status updated to ${newStatus}.`);
+
+          await loadUsers();
+
+        } catch (error) {
+
+          console.error(error);
+          alert(error.message);
+
+        }
+
+      });
+
+    });
 
 }

@@ -62,6 +62,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  document.body.style.display = "block";
   await loadReports();
 
 });

@@ -67,6 +67,8 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  document.body.style.display = "block";
+  
   adminWelcome.textContent =
     `Welcome ${userData.name || userData.fullName || "Admin"} (${role})`;
 

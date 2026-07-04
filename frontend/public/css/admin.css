@@ -353,3 +353,56 @@
   border-radius: 10px;
   cursor: pointer;
 }
+/* =========================
+   ADMIN LAYOUT
+========================= */
+
+.admin-main{
+  overflow-x:hidden;
+}
+
+.admin-panel{
+  width:100%;
+  overflow:visible;
+}
+
+/* =========================
+ TABLES
+========================= */
+
+.admin-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.admin-table{
+  width:100%;
+  min-width:950px;
+}
+
+/* =========================
+ APPROVALS
+========================= */
+
+.admin-approval-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:24px;
+}
+
+/* =========================
+ MOBILE
+========================= */
+
+@media (max-width:768px){
+
+  .admin-main{
+      padding:20px;
+  }
+
+  .admin-panel{
+      padding:20px;
+  }
+
+}

@@ -425,21 +425,66 @@ onAuthStateChanged(auth, async (user) => {
   }
   
   const userData =
-    userSnap.data();
-  
-    updatePublicNavbar(true, userData);
+  userSnap.data();
 
-    listenForNotifications(user.uid);
-    
-    document.body.style.display = "block";
-    
+/* =========================
+   ACCOUNT STATUS CHECK
+========================= */
 
-  if (isDashboardPage) {
-  
-  
-    renderDashboard(userData);
-  
+const accountStatus =
+  (userData.status || "active").toLowerCase();
+
+if (accountStatus !== "active") {
+
+  let message =
+    "Your TalentGoldPlus account is currently unavailable.";
+
+  switch (accountStatus) {
+
+    case "pending":
+      message =
+        "Your account is awaiting approval. Please check back later.";
+      break;
+
+    case "under-review":
+      message =
+        "Your account is currently under review. Please contact TalentGoldPlus if you require further information.";
+      break;
+
+    case "suspended":
+      message =
+        "Your account has been suspended. Please contact TalentGoldPlus support if you believe this is an error.";
+      break;
+
+    case "banned":
+      message =
+        "Your account has been permanently restricted from using TalentGoldPlus.";
+      break;
+
   }
+
+  alert(message);
+
+  await signOut(auth);
+
+  window.location.href =
+    isAuthPage ? "login.html" : "../auth/login.html";
+
+  return;
+
+}
+
+updatePublicNavbar(true, userData);
+
+listenForNotifications(user.uid);
+
+document.body.style.display = "block";
+
+if (isDashboardPage) {
+
+  renderDashboard(userData);
+
+}
 
 });
 
