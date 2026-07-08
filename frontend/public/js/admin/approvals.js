@@ -20,6 +20,9 @@ const listingsGrid =
 const opportunitiesGrid =
   document.getElementById("pendingOpportunitiesGrid");
 
+const fundraisersGrid =
+  document.getElementById("pendingFundraisersGrid");
+
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
@@ -59,6 +62,7 @@ onAuthStateChanged(auth, async (user) => {
 
   await loadPendingListings();
   await loadPendingOpportunities();
+  await loadPendingFundraisers();
 
 });
 
@@ -75,6 +79,7 @@ async function loadPendingListings() {
 
   const snapshot =
     await getDocs(q);
+     
 
   listingsGrid.innerHTML = "";
 
@@ -328,6 +333,153 @@ function attachOpportunityButtons() {
         );
 
         await loadPendingOpportunities();
+
+      });
+
+    });
+
+}
+
+/* =========================
+   FUNDRAISER APPROVALS
+========================= */
+
+async function loadPendingFundraisers() {
+
+  const q = query(
+    collection(db, "fundraisers"),
+    where("status", "==", "pending")
+  );
+
+  const snapshot =
+    await getDocs(q);
+
+  fundraisersGrid.innerHTML = "";
+
+  if (snapshot.empty) {
+    fundraisersGrid.innerHTML =
+      "<p>No pending fundraisers.</p>";
+    return;
+  }
+
+  snapshot.forEach((fundraiserDoc) => {
+
+    const fundraiser =
+      fundraiserDoc.data();
+
+    const image =
+      fundraiser.fundraiserImage ||
+      "../assets/images/TalentGoldPlus.png";
+
+    const card =
+      document.createElement("div");
+
+    card.classList.add("approval-card");
+
+    card.innerHTML = `
+      <img src="${image}" alt="${fundraiser.title}">
+
+      <div class="approval-content">
+
+        <h3>${fundraiser.title}</h3>
+
+        <p>${fundraiser.story || "No story provided."}</p>
+
+        <p>
+          <strong>Purpose:</strong>
+          ${formatText(fundraiser.purpose)}
+        </p>
+
+        <p>
+          <strong>Sport:</strong>
+          ${fundraiser.sport || "Not specified"}
+        </p>
+
+        <p>
+          <strong>Target:</strong>
+          £${Number(fundraiser.targetAmount || 0).toLocaleString()}
+        </p>
+
+        <p>
+          <strong>Deadline:</strong>
+          ${fundraiser.deadline || "Not specified"}
+        </p>
+
+        <p>
+          <strong>Submitted By:</strong>
+          ${fundraiser.createdByName || "TalentGoldPlus User"}
+        </p>
+
+        <div class="approval-actions">
+
+          <button
+            class="approve-fundraiser-btn"
+            data-id="${fundraiserDoc.id}">
+            Approve
+          </button>
+
+          <button
+            class="reject-fundraiser-btn"
+            data-id="${fundraiserDoc.id}">
+            Reject
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    fundraisersGrid.appendChild(card);
+
+  });
+
+  attachFundraiserButtons();
+
+}
+
+function attachFundraiserButtons() {
+
+  document
+    .querySelectorAll(".approve-fundraiser-btn")
+    .forEach((button) => {
+
+      button.addEventListener("click", async () => {
+
+        await updateDoc(
+          doc(
+            db,
+            "fundraisers",
+            button.dataset.id
+          ),
+          {
+            status: "approved"
+          }
+        );
+
+        await loadPendingFundraisers();
+
+      });
+
+    });
+
+  document
+    .querySelectorAll(".reject-fundraiser-btn")
+    .forEach((button) => {
+
+      button.addEventListener("click", async () => {
+
+        await updateDoc(
+          doc(
+            db,
+            "fundraisers",
+            button.dataset.id
+          ),
+          {
+            status: "rejected"
+          }
+        );
+
+        await loadPendingFundraisers();
 
       });
 

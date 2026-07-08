@@ -31,9 +31,9 @@
       <a href="../pages/dashboard.html">User Dashboard</a>
     </nav>
 
-    <button id="logoutBtn" class="admin-logout">
+    <button id="logoutBtn" class="admin-logout" type="button">
       Logout
-    </button>
+    </button>    
   </aside>
 
   <main class="admin-main">
@@ -53,18 +53,18 @@
         <table class="admin-table">
           <thead>
             <tr>
-              <th>User</th>
-              <th>Email</th>
-              <th>Current Role</th>
-              <th>Change Role</th>
-              <th>Profile</th>
-              <th>Status</th>>
+              <th scope="col">User</th>
+              <th scope="col">Email</th>
+              <th scope="col">Current Role</th>
+              <th scope="col">Change Role</th>
+              <th scope="col">Profile</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
 
           <tbody id="usersTableBody">
             <tr>
-              <td colspan="5">Loading users...</td>
+              <td colspan="6">Loading users...</td>
             </tr>
           </tbody>
         </table>

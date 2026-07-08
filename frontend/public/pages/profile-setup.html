@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Profile Setup | TalentGoldPlus</title>
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
-
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
@@ -15,72 +13,41 @@
 
 <body style="display: none;">
 
- <!-- HEADER -->
- <div id="siteHeader"></div>
+<div id="siteHeader"></div>
 
 <main>
 
   <section class="dashboard-hero">
-
     <div class="container">
-
-      <p class="hero-sub" id="profileHeroSub">
-        PROFILE SETUP
-      </p>
-
-      <h1 id="profileHeroTitle">
-        Complete Your Profile
-      </h1>
-
+      <p class="hero-sub" id="profileHeroSub">PROFILE SETUP</p>
+      <h1 id="profileHeroTitle">Complete Your Profile</h1>
       <p id="profileHeroText">
         Build your TalentGoldPlus identity so athletes, coaches,
         scouts, professionals and supporters can discover you.
       </p>
-
     </div>
-
   </section>
 
-  <section class="container auth-container">
-
+  <div class="container auth-container">
     <div class="auth-card profile-setup-card">
 
       <form id="profileForm" class="profile-form">
 
         <div class="form-group">
-          <label for="profileImage">
-            Profile Picture
-          </label>
-
-          <input
-            type="file"
-            id="profileImage"
-            accept="image/*"
-          >
+          <label for="profileImage">Profile Picture</label>
+          <input type="file" id="profileImage" accept="image/*">
         </div>
 
         <div class="form-group">
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Full Name"
-            required
-          >
+          <input type="text" id="fullName" placeholder="Full Name" required>
         </div>
 
         <div class="form-group">
-          <input
-            type="text"
-            id="location"
-            placeholder="Location"
-          >
+          <input type="text" id="location" placeholder="Location">
         </div>
 
         <div class="form-group">
-          <label for="bio">
-            About Me
-          </label>
-        
+          <label for="bio">About Me</label>
           <textarea
             id="bio"
             rows="5"
@@ -101,15 +68,13 @@
       </form>
 
     </div>
-
-  </section>
+  </div>
 
 </main>
 
 <script src="../js/navigation.js"></script>
 <script type="module" src="../js/auth.js"></script>
 <script type="module" src="../js/profile.js"></script>
-
 <script src="../js/components-loader.js"></script>
 
 </body>

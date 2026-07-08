@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Professionals | TalentGoldPlus</title>
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
-
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
@@ -15,92 +13,54 @@
 
 <body>
 
- <div id="siteHeader"></div>
+<div id="siteHeader"></div>
 
 <main>
 
   <section class="services-hero">
     <div class="container">
+      <h1>Professional Services</h1>
+      <p>
+        Connect with trusted professionals supporting athletes with performance,
+        recovery, wellbeing and long term development.
+      </p>
 
-    <h1>Professional Services</h1>
+      <div class="directory-filters">
+        <input
+          type="text"
+          id="professionalSearch"
+          placeholder="Search by name, service or location..."
+          class="directory-search"
+        >
 
-    <p>
-      Connect with trusted professionals supporting athletes with performance,
-      recovery, wellbeing and long term development.
-    </p>
-    <div class="directory-filters">
-
-      <input
-        type="text"
-        id="professionalSearch"
-        placeholder="Search by name, service or location..."
-        class="directory-search"
-      >
-    
-      <div class="category-filter-buttons">
-        <button class="filter-btn active" data-category="">
-          All
-        </button>
-        
-        <button class="filter-btn" data-category="coach">
-          Coaches
-        </button>
-    
-        <button class="filter-btn" data-category="physiotherapist">
-          Physiotherapists
-        </button>
-    
-        <button class="filter-btn" data-category="sports-therapist">
-          Sports Therapists
-        </button>
-    
-        <button class="filter-btn" data-category="nutritionist">
-          Nutritionists
-        </button>
-    
-        <button class="filter-btn" data-category="psychologist">
-          Psychologists
-        </button>
-    
-        <button class="filter-btn" data-category="wellbeing-specialist">
-          Wellbeing
-        </button>
-    
-        <button class="filter-btn" data-category="recovery-expert">
-          Recovery
-        </button>
-    
-        <button class="filter-btn" data-category="mentor">
-          Mentors
-        </button>
-    
-        <button class="filter-btn" data-category="performance-specialist">
-          Performance
-        </button>
+        <div class="category-filter-buttons">
+          <button class="filter-btn active" data-category="">All</button>
+          <button class="filter-btn" data-category="coach">Coaches</button>
+          <button class="filter-btn" data-category="physiotherapist">Physiotherapists</button>
+          <button class="filter-btn" data-category="sports-therapist">Sports Therapists</button>
+          <button class="filter-btn" data-category="nutritionist">Nutritionists</button>
+          <button class="filter-btn" data-category="psychologist">Psychologists</button>
+          <button class="filter-btn" data-category="wellbeing-specialist">Wellbeing</button>
+          <button class="filter-btn" data-category="recovery-expert">Recovery</button>
+          <button class="filter-btn" data-category="mentor">Mentors</button>
+          <button class="filter-btn" data-category="performance-specialist">Performance</button>
+        </div>
       </div>
-    
-    </div>
-    
+
     </div>
   </section>
 
   <section class="container" id="professionalsDirectory">
+    <h2 id="directoryTitle">Professionals Directory</h2>
 
-    <h2 id="directoryTitle">
-      Professionals Directory
-    </h2>
-  
     <div id="professionalsGrid" class="athlete-grid">
       <p>Loading professionals...</p>
     </div>
-  
   </section>
 
 </main>
 
-<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
-  Chat on WhatsApp
-</a>
+<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">Chat on WhatsApp</a>
 
 <div id="siteFooter"></div>
 

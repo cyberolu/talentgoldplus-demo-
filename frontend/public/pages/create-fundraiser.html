@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Start Fundraising | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/fundraising.css">
+</head>
+
+<body>
+
+<div id="siteHeader"></div>
+
+<main>
+
+  <section class="container auth-container">
+
+    <div class="auth-card">
+
+      <h1>Start Fundraising</h1>
+
+      <p>
+        Create a fundraising page for approved sporting needs. All requests are reviewed before publication.
+      </p>
+
+      <form id="fundraiserForm">
+
+        <input type="text" id="fundraiserTitle" placeholder="Fundraising title" required>
+
+        <select id="fundraiserPurpose" required>
+          <option value="">Select Purpose</option>
+          <option value="training">Training</option>
+          <option value="competition-travel">Competition Travel</option>
+          <option value="equipment">Equipment</option>
+          <option value="medical-support">Medical Support</option>
+          <option value="education">Education</option>
+          <option value="nutrition">Nutrition</option>
+          <option value="club-development">Club Development</option>
+          <option value="community-project">Community Project</option>
+          <option value="other">Other</option>
+        </select>
+
+        <input type="text" id="fundraiserSport" placeholder="Sport, e.g. Athletics, Football">
+
+        <input type="number" id="targetAmount" placeholder="Target amount, e.g. 1500" min="1" required>
+
+        <input type="text" id="fundraiserLocation" placeholder="Location">
+
+        <label for="fundraiserDeadline">
+          Fundraising Deadline
+        </label>
+
+        <input type="date" id="fundraiserDeadline">
+
+        <textarea
+          id="fundraiserStory"
+          placeholder="Tell your story. Explain what the money is needed for and how it will help."
+          required
+        ></textarea>
+
+        <label for="fundraiserImage">
+          Fundraising Image
+        </label>
+
+        <input type="file" id="fundraiserImage" accept="image/*">
+
+        <button type="submit" class="btn-primary auth-btn">
+          Submit Fundraiser
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</main>
+
+<div id="siteFooter"></div>
+
+<script src="../js/components-loader.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth.js"></script>
+<script type="module" src="../js/fundraising.js"></script>
+
+</body>
+</html>

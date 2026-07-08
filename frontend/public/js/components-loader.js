@@ -44,13 +44,14 @@ const links = {
   login: `${basePath}auth/login.html`,
   register: `${basePath}auth/register.html`,
   terms: `${basePath}legal/terms.html`,
-privacy: `${basePath}legal/privacy.html`,
-cookies: `${basePath}legal/cookies.html`,
-communityGuidelines: `${basePath}legal/community-guidelines.html`,
-safeguarding: `${basePath}legal/safeguarding.html`,
-copyright: `${basePath}legal/copyright.html`,
-contact: `${basePath}legal/contact.html`
-};
+  privacy: `${basePath}legal/privacy.html`,
+  cookies: `${basePath}legal/cookies.html`,
+  communityGuidelines: `${basePath}legal/community-guidelines.html`,
+  safeguarding: `${basePath}legal/safeguarding.html`,
+  copyright: `${basePath}legal/copyright.html`,
+  raiseFunds: `${basePath}pages/raise-funds.html`,
+  contact: `${basePath}legal/contact.html`
+  };
 
 async function loadComponent(elementId, fileName) {
 

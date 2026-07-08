@@ -1,0 +1,149 @@
+/* =========================
+   FUNDRAISING
+========================= */
+
+.fundraisers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+  }
+  
+  .fundraiser-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,.07);
+  }
+  
+  .fundraiser-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+  }
+  
+  .fundraiser-body {
+    padding: 26px;
+  }
+  
+  .fundraiser-purpose {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  
+  .fundraiser-body h3 {
+    font-size: 25px;
+    margin-bottom: 14px;
+  }
+  
+  .fundraiser-story {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  
+  .fundraiser-progress {
+    width: 100%;
+    height: 12px;
+    background: #eee;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 20px 0 10px;
+  }
+  
+  .fundraiser-progress-bar {
+    height: 100%;
+    background: var(--gold);
+  }
+  
+  .fundraiser-money {
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .fundraiser-donate-btn {
+    width: 100%;
+    margin-top: 18px;
+    opacity: .75;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    .fundraisers-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .fundraiser-body {
+      padding: 22px;
+    }
+  }
+  /* =========================
+   FUNDRAISER DETAIL PAGE
+========================= */
+
+.fundraiser-detail-section {
+  padding: 70px 20px;
+}
+
+.fundraiser-detail-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(0,0,0,.08);
+}
+
+.fundraiser-detail-image {
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+}
+
+.fundraiser-detail-content {
+  padding: 45px;
+}
+
+.fundraiser-detail-content h1 {
+  font-size: clamp(34px, 5vw, 56px);
+  margin: 18px 0 24px;
+}
+
+.fundraiser-detail-content h2 {
+  margin-top: 35px;
+  margin-bottom: 14px;
+}
+
+.fundraiser-full-story {
+  color: #555;
+  font-size: 17px;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.fundraiser-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.fundraiser-actions .btn-primary,
+.fundraiser-actions .btn-secondary {
+  flex: 1;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .fundraiser-detail-content {
+    padding: 28px;
+  }
+
+  .fundraiser-actions {
+    flex-direction: column;
+  }
+}
