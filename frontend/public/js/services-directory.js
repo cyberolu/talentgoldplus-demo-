@@ -7,208 +7,219 @@ import {
   where
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
+import {
+  createProfileCard
+} from "./profile-card.js";
+
 const professionalsGrid =
-  document.getElementById("professionalsGrid");
+  document.getElementById(
+    "professionalsGrid"
+  );
 
 const professionalSearch =
-  document.getElementById("professionalSearch");
+  document.getElementById(
+    "professionalSearch"
+  );
 
 const directoryTitle =
-  document.getElementById("directoryTitle");
+  document.getElementById(
+    "directoryTitle"
+  );
 
 const filterButtons =
-  document.querySelectorAll(".filter-btn");
+  document.querySelectorAll(
+    ".filter-btn"
+  );
 
-  let allProfessionals = [];
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
-  const params =
-    new URLSearchParams(window.location.search);
-  
-  let activeCategory =
-    params.get("category") || "";
+let activeCategory =
+  params.get("category") || "";
+
+let allProfessionals = [];
 
 async function loadProfessionals() {
 
-  const professionalsQuery =
-    query(
-      collection(db, "users"),
-      where("role", "==", "professional")
+  if (!professionalsGrid) return;
+
+  professionalsGrid.innerHTML = `
+    <div class="directory-message">
+      <p>Loading professionals...</p>
+    </div>
+  `;
+
+  try {
+
+    const professionalsQuery =
+      query(
+        collection(db, "users"),
+        where(
+          "role",
+          "==",
+          "professional"
+        )
+      );
+
+    const snapshot =
+      await getDocs(
+        professionalsQuery
+      );
+
+    allProfessionals =
+      snapshot.docs.map((docSnap) => ({
+        id: docSnap.id,
+        ...docSnap.data()
+      }));
+
+    setActiveFilterButton();
+    renderProfessionals();
+
+  } catch (error) {
+
+    console.error(
+      "Unable to load professionals:",
+      error
     );
 
-  const snapshot =
-    await getDocs(professionalsQuery);
+    professionalsGrid.innerHTML = `
+      <div class="directory-message directory-error">
 
-  allProfessionals = [];
+        <h3>
+          Unable to load professionals
+        </h3>
 
-  snapshot.forEach((docSnap) => {
+        <p>
+          Please refresh the page and try again.
+        </p>
 
-    allProfessionals.push({
-      id: docSnap.id,
-      ...docSnap.data()
-    });
+      </div>
+    `;
 
-  });
-
-  setActiveFilterButton();
-  renderProfessionals();
+  }
 
 }
 
 function renderProfessionals() {
 
+  if (!professionalsGrid) return;
+
   const searchText =
-    professionalSearch
-      ? normalise(professionalSearch.value)
-      : "";
-    professionalsGrid.innerHTML = "";
+    normalise(
+      professionalSearch?.value
+    );
 
   const filteredProfessionals =
     allProfessionals.filter((user) => {
 
       const category =
-        normalise(user.professionalCategory);
+        normalise(
+          user.professionalCategory
+        );
 
-      const name =
-        normalise(user.fullName || user.name);
-
-      const location =
-        normalise(user.location);
-
-      const services =
-        normalise(user.services);
-
-      const qualifications =
-        normalise(user.qualifications);
-
-      const bio =
-        normalise(user.bio);
+      const searchableText =
+        normalise([
+          user.fullName,
+          user.name,
+          user.location,
+          user.city,
+          user.country,
+          user.services,
+          user.qualifications,
+          user.bio,
+          user.organisation,
+          user.companyName,
+          user.specialisms,
+          user.specialties,
+          user.professionalCategory
+        ]);
 
       const matchesCategory =
         !activeCategory ||
-        category === normalise(activeCategory);
+        category ===
+        normalise(activeCategory);
 
       const matchesSearch =
         !searchText ||
-        name.includes(searchText) ||
-        location.includes(searchText) ||
-        services.includes(searchText) ||
-        qualifications.includes(searchText) ||
-        bio.includes(searchText) ||
-        category.includes(searchText);
+        searchableText.includes(
+          searchText
+        );
 
-      return matchesCategory && matchesSearch;
+      return (
+        matchesCategory &&
+        matchesSearch
+      );
 
     });
 
-  if (directoryTitle) {
+  updateDirectoryTitle(
+    filteredProfessionals.length
+  );
 
-    directoryTitle.textContent =
-      activeCategory
-        ? `${formatCategory(activeCategory)} Directory`
-        : "Professionals Directory";
+  professionalsGrid.innerHTML = "";
 
-  }
+  if (
+    filteredProfessionals.length === 0
+  ) {
 
-  if (filteredProfessionals.length === 0) {
+    professionalsGrid.innerHTML = `
+      <div class="directory-message">
 
-    professionalsGrid.innerHTML =
-      "<p>No professionals found.</p>";
+        <h3>
+          No professionals found
+        </h3>
+
+        <p>
+          Try another search term or category.
+        </p>
+
+      </div>
+    `;
 
     return;
 
   }
 
-  filteredProfessionals.forEach((user) => {
+  filteredProfessionals.forEach(
+    (user) => {
 
-    const image =
-      user.profileImage &&
-      user.profileImage.trim() !== ""
-        ? user.profileImage
-        : "../assets/images/avatar-placeholder.png";
+      const card =
+        createProfileCard(
+          user,
+          {
+            profilePage: "profile.html",
+            roleLabel: "Professional",
+            fallbackImage:
+              "../assets/images/avatar-placeholder.png"
+          }
+        );
 
-    const name =
-      user.fullName ||
-      user.name ||
-      "Professional Member";
+      professionalsGrid.appendChild(
+        card
+      );
 
-    const category =
-      user.professionalCategory ||
-      "Professional";
-
-      const location =
-        user.location ||
-        user.organisation ||
-        user.companyName ||
-        "Location unavailable";
-
-      const services =
-        user.services ||
-        user.bio ||
-        user.qualifications ||
-        "Professional support services";
-
-    const card =
-      document.createElement("div");
-
-    card.classList.add("athlete-card");
-
-    card.innerHTML = `
-      <img
-        src="${image}"
-        alt="${name}"
-        onerror="this.src='../assets/images/avatar-placeholder.png'"
-      >
-
-      <div class="athlete-info">
-        <h3>${name}</h3>
-
-        <p class="sport">
-          ${formatCategory(category)}
-        </p>
-
-        <p>
-          ${location}
-        </p>
-
-        <p class="pb">
-          ${services}
-        </p>
-
-        <a href="profile.html?user=${user.id}" class="btn-primary">
-          View Profile
-        </a>
-      </div>
-    `;
-
-    professionalsGrid.appendChild(card);
-
-  });
+    }
+  );
 
 }
 
-function normalise(value) {
-  if (!value) return "";
+function updateDirectoryTitle(
+  resultCount
+) {
 
-  if (Array.isArray(value)) {
-    return value.join(" ");
-  }
+  if (!directoryTitle) return;
 
-  if (typeof value === "object") {
-    return Object.values(value).join(" ");
-  }
+  const title =
+    activeCategory
+      ? `${formatCategory(
+          activeCategory
+        )} Directory`
+      : "Professionals Directory";
 
-  return value
-    .toString()
-    .replaceAll("-", " ")
-    .trim()
-    .toLowerCase();
-}
-
-function formatCategory(category) {
-
-  return (category || "Professional")
-    .replaceAll("-", " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  directoryTitle.textContent =
+    `${title} (${resultCount})`;
 
 }
 
@@ -216,49 +227,145 @@ function setActiveFilterButton() {
 
   filterButtons.forEach((button) => {
 
-    const buttonCategory =
+    const category =
       button.dataset.category || "";
 
     button.classList.toggle(
       "active",
-      normalise(buttonCategory) === normalise(activeCategory)
+      normalise(category) ===
+      normalise(activeCategory)
     );
 
   });
 
 }
 
-filterButtons.forEach((button) => {
+function updatePageURL() {
 
-  button.addEventListener("click", () => {
+  const url =
+    new URL(
+      window.location.href
+    );
 
-    filterButtons.forEach((btn) => {
-      btn.classList.remove("active");
+  if (activeCategory) {
+
+    url.searchParams.set(
+      "category",
+      activeCategory
+    );
+
+  } else {
+
+    url.searchParams.delete(
+      "category"
+    );
+
+  }
+
+  window.history.replaceState(
+    {},
+    "",
+    url
+  );
+
+}
+
+function normalise(value) {
+
+  if (!value) return "";
+
+  if (Array.isArray(value)) {
+
+    return value
+      .map((item) => {
+
+        if (
+          item &&
+          typeof item === "object"
+        ) {
+
+          return Object
+            .values(item)
+            .join(" ");
+
+        }
+
+        return item || "";
+
+      })
+      .join(" ")
+      .replaceAll("-", " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+
+  }
+
+  if (
+    typeof value === "object"
+  ) {
+
+    return Object
+      .values(value)
+      .join(" ")
+      .replaceAll("-", " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+
+  }
+
+  return String(value)
+    .replaceAll("-", " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+
+}
+
+function formatCategory(category) {
+
+  return (
+    category ||
+    "Professional"
+  )
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, (letter) => {
+      return letter.toUpperCase();
     });
 
-    button.classList.add("active");
+}
 
-    activeCategory =
-      button.dataset.category || "";
+filterButtons.forEach((button) => {
 
-    renderProfessionals();
+  button.addEventListener(
+    "click",
+    () => {
 
-    document
-      .getElementById("professionalsDirectory")
-      ?.scrollIntoView({
-        behavior: "smooth"
-      });
+      activeCategory =
+        button.dataset.category || "";
 
-  });
+      setActiveFilterButton();
+      updatePageURL();
+      renderProfessionals();
+
+      document
+        .getElementById(
+          "professionalsDirectory"
+        )
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    }
+  );
 
 });
 
-if (professionalSearch) {
-
-  professionalSearch.addEventListener("input", () => {
-    renderProfessionals();
-  });
-
-}
+professionalSearch?.addEventListener(
+  "input",
+  renderProfessionals
+);
 
 loadProfessionals();

@@ -45,6 +45,14 @@
   <section class="container marketplace-controls">
 
     <h2>Browse Marketplace</h2>
+    
+    <div class="marketplace-trust">
+        <strong>Trusted Marketplace</strong>
+
+        <p>
+            Every listing is reviewed before publication. TalentGoldPlus verifies submitted listings where possible, but users should always carry out their own checks before making payments, signing agreements or attending trials.
+        </p>
+    </div>
 
     <div class="marketplace-filter-bar">
 
@@ -55,15 +63,24 @@
       >
 
       <select id="marketplaceCategoryFilter">
-        <option value="all">All categories</option>
-        <option value="coach">Coaches</option>
-        <option value="physiotherapist">Physiotherapists</option>
-        <option value="nutritionist">Nutritionists</option>
-        <option value="sports-therapist">Sports Therapists</option>
-        <option value="psychologist">Psychologists</option>
-        <option value="mentor">Mentors</option>
-        <option value="opportunity">Opportunities</option>
-        <option value="products">Products</option>
+        <option value="all">All Listings</option>
+
+        <optgroup label="Professional Services">
+            <option value="coach">Coaches</option>
+            <option value="physiotherapist">Physiotherapists</option>
+            <option value="nutritionist">Nutritionists</option>
+            <option value="sports-therapist">Sports Therapists</option>
+            <option value="psychologist">Psychologists</option>
+            <option value="mentor">Mentors</option>
+        </optgroup>
+
+        <optgroup label="Opportunities">
+            <option value="opportunity">Trials & Opportunities</option>
+        </optgroup>
+
+        <optgroup label="Marketplace">
+            <option value="products">Products & Equipment</option>
+        </optgroup>
       </select>
 
     </div>

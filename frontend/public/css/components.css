@@ -1376,3 +1376,52 @@ body {
   line-height: 1.7;
   margin-bottom: 26px;
 }
+.leader-badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:12px 0 18px;
+}
+
+.leader-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:7px 14px;
+    border-radius:999px;
+    background:#f3f4f6;
+    color:#222;
+    font-size:0.82rem;
+    font-weight:600;
+}
+
+.leader-badge.gold{
+    background:#d4af37;
+    color:#fff;
+}
+.leader-bio-more {
+  display: none;
+}
+
+.leader-bio-more.is-open {
+  display: block;
+}
+
+.leader-read-more {
+  margin-top: 8px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #b28d1b;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.leader-read-more:hover {
+  text-decoration: underline;
+}
+
+.leader-read-more:focus-visible {
+  outline: 2px solid #d4af37;
+  outline-offset: 4px;
+}

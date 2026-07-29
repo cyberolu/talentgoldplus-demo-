@@ -16,6 +16,12 @@ import {
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-storage.js";
 
+import {
+  renderRoleFields,
+  populateRoleFields,
+  collectRoleFields
+} from "./profile-fields.js";
+
 const profileForm =
   document.getElementById("profileForm");
 
@@ -24,137 +30,6 @@ const dynamicProfileFields =
 
 let currentRole = "";
 let existingProfileImage = "";
-
-// =========================
-// DYNAMIC FIELDS
-// =========================
-
-function renderDynamicFields(role) {
-
-  if (!dynamicProfileFields) return;
-
-  if (role === "athlete") {
-
-    dynamicProfileFields.innerHTML = `
-  <select id="sport" required>
-    <option value="">Select Your Sport</option>
-    <option value="football">Football</option>
-    <option value="athletics">Athletics</option>
-    <option value="basketball">Basketball</option>
-    <option value="rugby">Rugby</option>
-    <option value="tennis">Tennis</option>
-    <option value="combat-sports">Combat Sports</option>
-    <option value="other-sports">Other Sports</option>
-  </select>
-
-  <input
-    type="text"
-    id="pbs"
-    placeholder="Personal Best, Position or Event"
-  >
-
-  <textarea
-    id="achievements"
-    placeholder="Achievements"
-  ></textarea>
-`;
-
-  } else if (role === "professional") {
-
-    dynamicProfileFields.innerHTML = `
-      <select id="professionalCategory" required>
-
-        <option value="">Select Professional Category</option>
-
-        <option value="coach">Coach</option>
-        <option value="physiotherapist">Physiotherapist</option>
-        <option value="sports-therapist">Sports Therapist</option>
-        <option value="nutritionist">Nutritionist</option>
-        <option value="psychologist">Psychologist</option>
-        <option value="wellbeing-specialist">Wellbeing Specialist</option>
-        <option value="recovery-expert">Recovery Expert</option>
-        <option value="mentor">Mentor</option>
-        <option value="performance-specialist">Performance Specialist</option>
-
-      </select>
-
-      <input
-        type="text"
-        id="qualifications"
-        placeholder="Qualifications"
-      >
-
-      <textarea
-        id="services"
-        placeholder="Services Offered"
-      ></textarea>
-    `;
-
-  } else if (role === "scout") {
-
-    dynamicProfileFields.innerHTML = `
-      <select id="sport">
-
-        <option value="">Primary Sport</option>
-
-        <option value="football">Football</option>
-        <option value="athletics">Athletics</option>
-        <option value="basketball">Basketball</option>
-        <option value="rugby">Rugby</option>
-        <option value="tennis">Tennis</option>
-        <option value="combat-sports">Combat Sports</option>
-        <option value="swimming">Swimming</option>
-        <option value="cycling">Cycling</option>
-        <option value="cricket">Cricket</option>
-        <option value="gymnastics">Gymnastics</option>
-        <option value="netball">Netball</option>
-        <option value="volleyball">Volleyball</option>
-        <option value="other-sports">Other Sports</option>
-
-      </select>
-
-      <input
-        type="text"
-        id="organisation"
-        placeholder="Organisation"
-      >
-
-      <input
-        type="text"
-        id="scoutingRegion"
-        placeholder="Scouting Region"
-      >
-    `;
-
-  } else if (role === "investor") {
-
-    dynamicProfileFields.innerHTML = `
-      <input
-        type="text"
-        id="companyName"
-        placeholder="Company / Organisation"
-      >
-
-      <input
-        type="text"
-        id="investmentInterests"
-        placeholder="Investment Interests"
-      >
-
-      <input
-        type="text"
-        id="fundingRange"
-        placeholder="Funding Range"
-      >
-    `;
-
-  } else {
-
-    dynamicProfileFields.innerHTML = "";
-
-  }
-
-}
 
 // =========================
 // LOAD EXISTING PROFILE
@@ -171,83 +46,109 @@ function setValue(id, value) {
 
 }
 
-function updateProfilePageTitle(isCompleted) {
+function updateProfilePageTitle(isCompleted, role) {
 
   const heroSub =
-    document.querySelector(".hero-sub");
+    document.getElementById("profileHeroSub");
 
   const heroTitle =
-    document.querySelector(".dashboard-hero h1");
+    document.getElementById("profileHeroTitle");
 
   const heroText =
-    document.querySelector(".dashboard-hero p:last-child");
+    document.getElementById("profileHeroText");
 
   const saveButton =
-    profileForm?.querySelector("button[type='submit']");
+    document.getElementById("profileSaveBtn");
+
+  const isPartner =
+    role === "partner";
 
   if (isCompleted) {
 
     if (heroSub) {
-      heroSub.textContent = "EDIT PROFILE";
+      heroSub.textContent =
+        isPartner
+          ? "EDIT ORGANISATION"
+          : "EDIT PROFILE";
     }
 
     if (heroTitle) {
-      heroTitle.textContent = "Edit Your Profile";
+      heroTitle.textContent =
+        isPartner
+          ? "Edit Your Organisation Profile"
+          : "Edit Your Profile";
     }
 
     if (heroText) {
       heroText.textContent =
-        "Update your TalentGoldPlus profile details so your information stays accurate.";
+        isPartner
+          ? "Update your organisation information and partnership details."
+          : "Update your TalentGoldPlus profile details so your information stays accurate.";
     }
 
     if (saveButton) {
-      saveButton.textContent = "Update Profile";
+      saveButton.textContent =
+        isPartner
+          ? "Update Organisation"
+          : "Update Profile";
     }
 
-  } else {
+    return;
+  }
 
-    if (heroSub) {
-      heroSub.textContent = "PROFILE SETUP";
-    }
+  if (heroSub) {
+    heroSub.textContent =
+      isPartner
+        ? "PARTNER PROFILE SETUP"
+        : "PROFILE SETUP";
+  }
 
-    if (heroTitle) {
-      heroTitle.textContent = "Complete Your Profile";
-    }
+  if (heroTitle) {
+    heroTitle.textContent =
+      isPartner
+        ? "Complete Your Organisation Profile"
+        : "Complete Your Profile";
+  }
 
-    if (heroText) {
-      heroText.textContent =
-        "Build your TalentGoldPlus identity so athletes, coaches, scouts, professionals and supporters can discover you.";
-    }
+  if (heroText) {
+    heroText.textContent =
+      isPartner
+        ? "Add your organisation information so the TalentGoldPlus community can discover your work."
+        : "Build your TalentGoldPlus identity so athletes, coaches, scouts, professionals and supporters can discover you.";
+  }
 
-    if (saveButton) {
-      saveButton.textContent = "Save Profile";
-    }
-
+  if (saveButton) {
+    saveButton.textContent =
+      isPartner
+        ? "Save Organisation"
+        : "Save Profile";
   }
 
 }
 
 function populateProfileForm(userData) {
 
-  setValue("fullName", userData.fullName || userData.name || "");
-  setValue("location", userData.location || "");
-  setValue("bio", userData.bio || "");
+  setValue(
+    "fullName",
+    userData.fullName ||
+    userData.name ||
+    ""
+  );
 
-  setValue("sport", userData.sport || userData.category || "");
-  setValue("pbs", userData.pbs || "");
-  setValue("achievements", userData.achievements || "");
+  setValue(
+    "location",
+    userData.location || ""
+  );
 
-  setValue("services", userData.services || "");
-  setValue("qualifications", userData.qualifications || "");
-  setValue("professionalCategory", userData.professionalCategory || "");
+  setValue(
+    "bio",
+    userData.bio || ""
+  );
 
-  setValue("organisation", userData.organisation || "");
-  setValue("scoutingRegion", userData.scoutingRegion || "");
-
-  setValue("companyName", userData.companyName || "");
-  setValue("investmentInterests", userData.investmentInterests || "");
-  setValue("fundingRange", userData.fundingRange || "");
-
+  populateRoleFields(
+    currentRole,
+    userData
+  );
 }
 
 // =========================
@@ -286,12 +187,16 @@ onAuthStateChanged(auth, async (user) => {
 
   }
 
-  renderDynamicFields(currentRole);
+  renderRoleFields(
+    dynamicProfileFields,
+    currentRole
+  );
 
   populateProfileForm(userData);
 
   updateProfilePageTitle(
-    userData.profileCompleted === true
+    userData.profileCompleted === true,
+    currentRole
   );
 
   if (!profileForm) return;
@@ -328,46 +233,38 @@ onAuthStateChanged(auth, async (user) => {
 
       }
 
-      const profileData = {
-        fullName:
-          document.getElementById("fullName")?.value.trim() || "",
-        location:
-          document.getElementById("location")?.value.trim() || "",
-        bio:
-          document.getElementById("bio")?.value.trim() || "",
+    const roleProfileData =
+      collectRoleFields(currentRole);
 
-        role: currentRole,
+    const profileData = {
 
-        sport:
-          document.getElementById("sport")?.value.trim() || "",
-        pbs:
-          document.getElementById("pbs")?.value.trim() || "",
-        achievements:
-          document.getElementById("achievements")?.value.trim() || "",
+      fullName:
+        document
+          .getElementById("fullName")
+          ?.value
+          .trim() || "",
 
-        services:
-          document.getElementById("services")?.value.trim() || "",
-        qualifications:
-          document.getElementById("qualifications")?.value.trim() || "",
-        professionalCategory:
-          document.getElementById("professionalCategory")?.value || "",
+      location:
+        document
+          .getElementById("location")
+          ?.value
+          .trim() || "",
 
-        organisation:
-          document.getElementById("organisation")?.value.trim() || "",
-        scoutingRegion:
-          document.getElementById("scoutingRegion")?.value.trim() || "",
+      bio:
+        document
+          .getElementById("bio")
+          ?.value
+          .trim() || "",
 
-        companyName:
-          document.getElementById("companyName")?.value.trim() || "",
-        investmentInterests:
-          document.getElementById("investmentInterests")?.value.trim() || "",
-        fundingRange:
-          document.getElementById("fundingRange")?.value.trim() || "",
+      role: currentRole,
 
-        profileImage: imageUrl,
-        profileCompleted: true,
-        updatedAt: new Date()
-      };
+      ...roleProfileData,
+
+      profileImage: imageUrl,
+      profileCompleted: true,
+      updatedAt: new Date()
+
+    };
 
       await setDoc(
         userRef,

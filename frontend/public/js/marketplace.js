@@ -140,9 +140,22 @@ function renderMarketplaceListings(listings) {
   marketplaceGrid.innerHTML = "";
 
   if (!listings.length) {
-    marketplaceGrid.innerHTML = "<p>No marketplace listings found.</p>";
-    return;
-  }
+  marketplaceGrid.innerHTML = `
+    <div class="empty-state">
+      <h2>No Listings Found</h2>
+
+      <p>
+        No marketplace listings match your search or selected category.
+        Try a different search, choose another category, or check back soon as new listings are added regularly.
+      </p>
+
+      <a href="create-listing.html" class="btn-primary">
+        Create a Listing
+      </a>
+    </div>
+  `;
+  return;
+}
 
   listings.forEach((listing) => {
     const image =

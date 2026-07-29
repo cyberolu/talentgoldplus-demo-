@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professionals | TalentGoldPlus</title>
+
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/services.css">
+  <link rel="stylesheet" href="../css/profile-card.css">
 </head>
 
 <body>
@@ -19,13 +22,19 @@
 
   <section class="services-hero">
     <div class="container">
-      <h1>Professional Services</h1>
+
+      <span class="about-label">Professional Services</span>
+
+      <h1>Find Trusted Sports Professionals</h1>
+
       <p>
-        Connect with trusted professionals supporting athletes with performance,
-        recovery, wellbeing and long term development.
+        Connect with verified coaches, therapists, nutritionists,
+        psychologists and performance specialists dedicated to helping
+        athletes maximise their potential both on and off the field.
       </p>
 
       <div class="directory-filters">
+
         <input
           type="text"
           id="professionalSearch"
@@ -45,22 +54,210 @@
           <button class="filter-btn" data-category="mentor">Mentors</button>
           <button class="filter-btn" data-category="performance-specialist">Performance</button>
         </div>
+
       </div>
 
     </div>
   </section>
 
+  <section class="featured-services">
+
+    <div class="container">
+
+      <div class="section-heading-center">
+
+        <span class="about-label">Featured Professionals</span>
+
+        <h2>Meet Some of Our Trusted Experts</h2>
+
+        <p>
+          Every professional is reviewed before appearing on TalentGoldPlus,
+          giving athletes confidence when choosing the right support.
+        </p>
+
+      </div>
+
+      <div class="featured-professionals-grid">
+
+        <article class="professional-preview-card">
+
+          <img src="../assets/images/placeholders/profile-placeholder.jpg" alt="Sports Psychologist">
+
+          <div class="verified-tag">✔ Verified</div>
+
+          <h3>Sports Psychologist</h3>
+
+          <p class="location">📍 London</p>
+
+          <p>
+            Helping athletes build confidence, resilience and elite competition mindset.
+          </p>
+
+        </article>
+
+        <article class="professional-preview-card">
+
+          <img src="../assets/images/placeholders/profile-placeholder.jpg" alt="Strength Coach">
+
+          <div class="verified-tag">✔ Verified</div>
+
+          <h3>Strength & Conditioning Coach</h3>
+
+          <p class="location">📍 Birmingham</p>
+
+          <p>
+            Developing speed, power and injury prevention programmes.
+          </p>
+
+        </article>
+
+        <article class="professional-preview-card">
+
+          <img src="../assets/images/placeholders/profile-placeholder.jpg" alt="Nutritionist">
+
+          <div class="verified-tag">✔ Verified</div>
+
+          <h3>Sports Nutritionist</h3>
+
+          <p class="location">📍 Manchester</p>
+
+          <p>
+            Personalised nutrition plans designed for performance and recovery.
+          </p>
+
+        </article>
+
+        <article class="professional-preview-card">
+
+          <img src="../assets/images/placeholders/profile-placeholder.jpg" alt="Physiotherapist">
+
+          <div class="verified-tag">✔ Verified</div>
+
+          <h3>Physiotherapist</h3>
+
+          <p class="location">📍 Plymouth</p>
+
+          <p>
+            Rehabilitation and return to competition programmes for athletes.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="why-professionals">
+
+    <div class="container">
+
+      <div class="section-heading-center">
+
+        <span class="about-label">Why Choose TalentGoldPlus</span>
+
+        <h2>Trusted Support For Every Athlete</h2>
+
+      </div>
+
+      <div class="about-impact-grid">
+
+        <article>
+
+          <h3>✔ Verified Professionals</h3>
+
+          <p>
+            Every profile is reviewed before becoming visible on the platform.
+          </p>
+
+        </article>
+
+        <article>
+
+          <h3>✔ Trusted Network</h3>
+
+          <p>
+            Access experienced professionals from multiple sporting disciplines.
+          </p>
+
+        </article>
+
+        <article>
+
+          <h3>✔ Athlete Focused</h3>
+
+          <p>
+            Supporting performance, recovery, wellbeing and long term development.
+          </p>
+
+        </article>
+
+        <article>
+
+          <h3>✔ Secure Platform</h3>
+
+          <p>
+            Built with safeguarding, privacy and trust at the centre of everything.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
   <section class="container" id="professionalsDirectory">
-    <h2 id="directoryTitle">Professionals Directory</h2>
+
+    <div class="section-heading-center">
+
+      <span class="about-label">Browse</span>
+
+      <h2 id="directoryTitle">Professionals Directory</h2>
+
+      <p>
+        Browse our growing network of experts ready to support athletes at every stage of their journey.
+      </p>
+
+    </div>
 
     <div id="professionalsGrid" class="athlete-grid">
+
       <p>Loading professionals...</p>
+
     </div>
+
+  </section>
+
+  <section class="professional-cta">
+
+    <div class="container">
+
+      <h2>Are You a Sports Professional?</h2>
+
+      <p>
+        Join our growing community of verified professionals helping athletes
+        achieve success in sport and life.
+      </p>
+
+      <a
+        href="../auth/register.html?role=professional"
+        class="btn-primary"
+      >
+        Register as a Professional
+      </a>
+
+    </div>
+
   </section>
 
 </main>
 
-<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">Chat on WhatsApp</a>
+<a href="https://wa.me/447XXXXXXXXX" class="whatsapp-button">
+  Chat on WhatsApp
+</a>
 
 <div id="siteFooter"></div>
 
