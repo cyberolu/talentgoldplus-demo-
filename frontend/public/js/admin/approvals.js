@@ -23,6 +23,9 @@ const opportunitiesGrid =
 const fundraisersGrid =
   document.getElementById("pendingFundraisersGrid");
 
+const eventsGrid =
+  document.getElementById("pendingEventsGrid");
+
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
@@ -63,6 +66,7 @@ onAuthStateChanged(auth, async (user) => {
   await loadPendingListings();
   await loadPendingOpportunities();
   await loadPendingFundraisers();
+  await loadPendingEvents();
 
 });
 
@@ -482,6 +486,204 @@ function attachFundraiserButtons() {
         await loadPendingFundraisers();
 
       });
+
+    });
+
+}
+
+/* =========================
+   EVENT APPROVALS
+========================= */
+
+async function loadPendingEvents() {
+
+  if (!eventsGrid) {
+    return;
+  }
+
+  const q = query(
+    collection(db, "events"),
+    where("status", "==", "pending")
+  );
+
+  const snapshot =
+    await getDocs(q);
+
+  eventsGrid.innerHTML = "";
+
+  if (snapshot.empty) {
+    eventsGrid.innerHTML =
+      "<p>No pending events.</p>";
+
+    return;
+  }
+
+  snapshot.forEach((eventDoc) => {
+
+    const event =
+      eventDoc.data();
+
+    const image =
+      event.imageUrl ||
+      "../assets/images/TalentGoldPlus.png";
+
+    const startDate =
+      event.startDate?.toDate
+        ? event.startDate.toDate()
+        : null;
+
+    const formattedDate =
+      startDate
+        ? startDate.toLocaleDateString(
+            "en-GB",
+            {
+              day: "numeric",
+              month: "long",
+              year: "numeric"
+            }
+          )
+        : "Not specified";
+
+    const location =
+      event.isOnline
+        ? "Online"
+        : [
+            event.venueName,
+            event.town,
+            event.country
+          ]
+            .filter(Boolean)
+            .join(", ") ||
+          "Not specified";
+
+    const card =
+      document.createElement("div");
+
+    card.classList.add("approval-card");
+
+    card.innerHTML = `
+      <img
+        src="${image}"
+        alt="${event.title || "Event"}"
+      >
+
+      <div class="approval-content">
+
+        <h3>
+          ${event.title || "Untitled Event"}
+        </h3>
+
+        <p>
+          ${event.summary ||
+          event.description ||
+          "No description provided."}
+        </p>
+
+        <p>
+          <strong>Category:</strong>
+          ${formatText(event.category)}
+        </p>
+
+        <p>
+          <strong>Sport:</strong>
+          ${formatText(event.sport)}
+        </p>
+
+        <p>
+          <strong>Date:</strong>
+          ${formattedDate}
+        </p>
+
+        <p>
+          <strong>Location:</strong>
+          ${location}
+        </p>
+
+        <p>
+          <strong>Organiser:</strong>
+          ${event.organiserName ||
+          event.organiserEmail ||
+          "TalentGoldPlus User"}
+        </p>
+
+        <div class="approval-actions">
+
+          <button
+            class="approve-event-btn"
+            data-id="${eventDoc.id}">
+            Approve
+          </button>
+
+          <button
+            class="reject-event-btn"
+            data-id="${eventDoc.id}">
+            Reject
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    eventsGrid.appendChild(card);
+
+  });
+
+  attachEventButtons();
+
+}
+
+function attachEventButtons() {
+
+  document
+    .querySelectorAll(".approve-event-btn")
+    .forEach((button) => {
+
+      button.addEventListener(
+        "click",
+        async () => {
+
+          await updateDoc(
+            doc(
+              db,
+              "events",
+              button.dataset.id
+            ),
+            {
+              status: "published"
+            }
+          );
+
+          await loadPendingEvents();
+
+        }
+      );
+
+    });
+
+  document
+    .querySelectorAll(".reject-event-btn")
+    .forEach((button) => {
+
+      button.addEventListener(
+        "click",
+        async () => {
+
+          await updateDoc(
+            doc(
+              db,
+              "events",
+              button.dataset.id
+            ),
+            {
+              status: "rejected"
+            }
+          );
+
+          await loadPendingEvents();
+
+        }
+      );
 
     });
 

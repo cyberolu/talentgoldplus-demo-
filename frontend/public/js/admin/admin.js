@@ -25,8 +25,8 @@ const adminWelcome =
 const totalUsers =
   document.getElementById("totalUsers");
 
-const pendingListings =
-  document.getElementById("pendingListings");
+const pendingApprovals =
+  document.getElementById("pendingApprovals");
 
 const approvedListings =
   document.getElementById("approvedListings");
@@ -84,17 +84,49 @@ async function loadAdminStats() {
   totalUsers.textContent =
     usersSnapshot.size;
 
-  const pendingQuery =
-    query(
-      collection(db, "marketplaceListings"),
-      where("status", "==", "pending")
-    );
+  const [
+    pendingListingsSnapshot,
+    pendingOpportunitiesSnapshot,
+    pendingFundraisersSnapshot,
+    pendingEventsSnapshot
+  ] = await Promise.all([
+    getDocs(
+      query(
+        collection(db, "marketplaceListings"),
+        where("status", "==", "pending")
+      )
+    ),
 
-  const pendingSnapshot =
-    await getDocs(pendingQuery);
+    getDocs(
+      query(
+        collection(db, "opportunities"),
+        where("status", "==", "pending")
+      )
+    ),
 
-  pendingListings.textContent =
-    pendingSnapshot.size;
+    getDocs(
+      query(
+        collection(db, "fundraisers"),
+        where("status", "==", "pending")
+      )
+    ),
+
+    getDocs(
+      query(
+        collection(db, "events"),
+        where("status", "==", "pending")
+      )
+    )
+  ]);
+
+  const totalPendingApprovals =
+    pendingListingsSnapshot.size +
+    pendingOpportunitiesSnapshot.size +
+    pendingFundraisersSnapshot.size +
+    pendingEventsSnapshot.size;
+
+  pendingApprovals.textContent =
+    totalPendingApprovals;
 
   const approvedQuery =
     query(

@@ -25,14 +25,37 @@
     </div>
 
     <nav class="admin-menu">
-      <a href="index.html">Dashboard</a>
-      <a href="users.html">Users</a>
-      <a href="approvals.html" class="active">Approvals</a>
-      <a href="reports.html">Reports</a>
-      <a href="../pages/dashboard.html">User Dashboard</a>
+
+      <a href="index.html">
+        Dashboard
+      </a>
+
+      <a href="users.html">
+        Users
+      </a>
+
+      <a
+        href="approvals.html"
+        class="active"
+      >
+        Approvals
+      </a>
+
+      <a href="reports.html">
+        Reports
+      </a>
+
+      <a href="../pages/dashboard.html">
+        User Dashboard
+      </a>
+
     </nav>
 
-    <button id="logoutBtn" class="admin-logout" type="button">
+    <button
+      id="logoutBtn"
+      class="admin-logout"
+      type="button"
+    >
       Logout
     </button>
 
@@ -41,42 +64,106 @@
   <main class="admin-main">
 
     <header class="admin-topbar">
+
       <div>
-        <h1>Approvals</h1>
-        <p>Review marketplace listings and opportunities before publication.</p>
+
+        <h1>
+          Approvals
+        </h1>
+
+        <p>
+          Review marketplace listings, opportunities,
+          fundraisers and events before publication.
+        </p>
+
       </div>
+
     </header>
 
+    <!-- MARKETPLACE -->
     <section class="admin-panel">
-      <h2>Pending Marketplace Listings</h2>
 
-      <div id="pendingListingsGrid" class="admin-approval-grid">
-        <p>Loading listings...</p>
+      <h2>
+        Pending Marketplace Listings
+      </h2>
+
+      <div
+        id="pendingListingsGrid"
+        class="admin-approval-grid"
+      >
+        <p>
+          Loading listings...
+        </p>
       </div>
+
     </section>
 
+    <!-- OPPORTUNITIES -->
     <section class="admin-panel">
-      <h2>Pending Opportunities</h2>
 
-      <div id="pendingOpportunitiesGrid" class="admin-approval-grid">
-        <p>Loading opportunities...</p>
+      <h2>
+        Pending Opportunities
+      </h2>
+
+      <div
+        id="pendingOpportunitiesGrid"
+        class="admin-approval-grid"
+      >
+        <p>
+          Loading opportunities...
+        </p>
       </div>
+
     </section>
 
+    <!-- FUNDRAISERS -->
     <section class="admin-panel">
-      <h2>Pending Fundraisers</h2>
-    
-      <div id="pendingFundraisersGrid" class="admin-approval-grid">
-        <p>Loading fundraisers...</p>
+
+      <h2>
+        Pending Fundraisers
+      </h2>
+
+      <div
+        id="pendingFundraisersGrid"
+        class="admin-approval-grid"
+      >
+        <p>
+          Loading fundraisers...
+        </p>
       </div>
+
+    </section>
+
+    <!-- EVENTS -->
+    <section class="admin-panel">
+
+      <h2>
+        Pending Events
+      </h2>
+
+      <div
+        id="pendingEventsGrid"
+        class="admin-approval-grid"
+      >
+        <p>
+          Loading events...
+        </p>
+      </div>
+
     </section>
 
   </main>
 
 </div>
 
-<script type="module" src="../js/admin/approvals.js"></script>
-<script src="../js/components-loader.js"></script>
+<script
+  type="module"
+  src="../js/admin/approvals.js"
+></script>
+
+<script
+  src="../js/components-loader.js"
+></script>
 
 </body>
 </html>

@@ -1,0 +1,420 @@
+.events-controls {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.events-controls h2 {
+  margin-bottom: 1.5rem;
+}
+
+.events-filter-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.events-filter-bar input,
+.events-filter-bar select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(260px, 1fr)
+    );
+  gap: 1.5rem;
+}
+
+.event-card {
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.event-card-image-link {
+  display: block;
+}
+
+.event-card-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+.event-card-content {
+  padding: 1.25rem;
+}
+
+.event-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.event-card-meta span {
+  padding: 0.3rem 0.65rem;
+  border-radius: 20px;
+  background: #f3f3f3;
+  font-size: 0.8rem;
+}
+
+.event-card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.event-date,
+.event-location,
+.event-organiser {
+  margin-bottom: 0.5rem;
+}
+
+.event-card-footer {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.empty-state {
+  padding: 2rem 0;
+}
+
+@media (max-width: 900px) {
+
+  .events-filter-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .events-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================
+   CREATE EVENT
+========================= */
+
+.event-form-section {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+.event-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.event-form-group {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.event-form-group h2 {
+  margin-bottom: 1.5rem;
+}
+
+.event-form-group label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.event-form-group input,
+.event-form-group select,
+.event-form-group textarea {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+}
+
+.event-form-group textarea {
+  resize: vertical;
+}
+
+.event-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  gap: 1rem;
+}
+
+.event-checkbox {
+  display: flex !important;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.25rem;
+  font-weight: 500 !important;
+}
+
+.event-checkbox input {
+  width: auto;
+  margin: 0;
+}
+
+.event-image-preview {
+  margin-top: 1rem;
+}
+
+.event-image-preview img {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.event-form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 700px) {
+
+  .event-form-group {
+    padding: 1.25rem;
+  }
+
+  .event-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-form-actions {
+    flex-direction: column;
+  }
+
+}
+/* =========================
+   EVENT DETAILS
+========================= */
+
+.event-details-section {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+.event-details-banner {
+  margin-bottom: 2rem;
+}
+
+.event-details-banner img {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.event-details-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(280px, 1fr);
+  gap: 3rem;
+}
+
+.event-details-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.event-details-tags span {
+  padding: 0.35rem 0.7rem;
+  border-radius: 20px;
+  background: #f2f2f2;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.event-details-main h1 {
+  margin-bottom: 1rem;
+}
+
+.event-details-summary {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.event-details-block {
+  margin-top: 2.5rem;
+}
+
+.event-details-block h2 {
+  margin-bottom: 1rem;
+}
+
+.event-description {
+  line-height: 1.7;
+}
+
+.event-info-list p {
+  margin-bottom: 0.8rem;
+}
+
+.event-booking-card {
+  position: sticky;
+  top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.event-booking-card h2 {
+  margin-bottom: 1.5rem;
+}
+
+.event-booking-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.event-register-button {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.event-payment-note,
+.event-status-message {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.event-details-message {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.event-details-message p {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 800px) {
+
+  .event-details-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .event-booking-card {
+    position: static;
+  }
+
+}
+.events-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.event-card {
+  display: block;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-card-image-wrap {
+  height: 180px;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+.event-card-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  padding: 14px;
+}
+
+.event-card-content {
+  padding: 20px;
+}
+
+.event-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.event-card-meta span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.event-card h3 {
+  margin: 0 0 12px;
+}
+
+.event-date,
+.event-location,
+.event-organiser {
+  margin: 8px 0;
+}
+
+.event-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.event-card-footer .btn-secondary {
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

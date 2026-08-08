@@ -2,16 +2,19 @@
 // FIREBASE IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
-import { 
-  getAuth 
+import {
+  getAuth,
+  connectAuthEmulator
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-import { 
-  getFirestore 
+import {
+  getFirestore,
+  connectFirestoreEmulator
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 import {
-  getStorage
+  getStorage,
+  connectStorageEmulator
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-storage.js";
 
 
@@ -36,6 +39,23 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const storage = getStorage(app);
+
+// CONNECT TO FIREBASE EMULATORS DURING LOCAL DEVELOPMENT
+const isLocalhost =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+if (isLocalhost) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", {
+    disableWarnings: true
+  });
+
+  connectFirestoreEmulator(db, "127.0.0.1", 8080);
+
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
+
+  console.log("Connected to Firebase Emulators");
+}
 
 
 // EXPORTS

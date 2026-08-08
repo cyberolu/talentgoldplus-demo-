@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Event | TalentGoldPlus</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/events.css">
+</head>
+
+<body>
+
+<div id="siteHeader"></div>
+
+<main>
+
+  <section class="services-hero">
+    <div class="container">
+
+      <h1>Create Event</h1>
+
+      <p>
+        Add a sporting event, trial, camp, workshop, course, webinar,
+        showcase or community activity to TalentGoldPlus.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="container event-form-section">
+
+    <form id="createEventForm" class="event-form">
+
+      <!-- BASIC INFORMATION -->
+      <div class="event-form-group">
+
+        <h2>Basic Information</h2>
+
+        <label for="eventTitle">
+          Event Title
+        </label>
+
+        <input
+          type="text"
+          id="eventTitle"
+          required
+        >
+
+        <label for="eventSummary">
+          Short Summary
+        </label>
+
+        <input
+          type="text"
+          id="eventSummary"
+          maxlength="180"
+          required
+        >
+
+        <label for="eventDescription">
+          Full Description
+        </label>
+
+        <textarea
+          id="eventDescription"
+          rows="6"
+          required
+        ></textarea>
+
+        <label for="eventCategory">
+          Category
+        </label>
+
+        <select
+          id="eventCategory"
+          required
+        >
+
+          <option value="">
+            Select Category
+          </option>
+
+          <option value="sporting-event">
+            Sporting Event
+          </option>
+
+          <option value="trial">
+            Trial
+          </option>
+
+          <option value="training-camp">
+            Training Camp
+          </option>
+
+          <option value="coaching-course">
+            Coaching Course
+          </option>
+
+          <option value="workshop">
+            Workshop
+          </option>
+
+          <option value="conference">
+            Conference
+          </option>
+
+          <option value="webinar">
+            Webinar
+          </option>
+
+          <option value="community-event">
+            Community Event
+          </option>
+
+          <option value="fundraiser">
+            Fundraiser
+          </option>
+
+          <option value="award-ceremony">
+            Award Ceremony
+          </option>
+
+          <option value="talent-showcase">
+            Talent Showcase
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+
+        </select>
+
+        <label for="eventSport">
+          Sport
+        </label>
+
+        <select
+          id="eventSport"
+          required
+        >
+
+          <option value="">
+            Select Sport
+          </option>
+
+          <option value="football">
+            Football
+          </option>
+
+          <option value="athletics">
+            Athletics
+          </option>
+
+          <option value="basketball">
+            Basketball
+          </option>
+
+          <option value="rugby">
+            Rugby
+          </option>
+
+          <option value="tennis">
+            Tennis
+          </option>
+
+          <option value="combat-sports">
+            Combat Sports
+          </option>
+
+          <option value="multi-sport">
+            Multi-Sport
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- DATE AND TIME -->
+      <div class="event-form-group">
+
+        <h2>Date &amp; Time</h2>
+
+        <div class="event-form-grid">
+
+          <div>
+
+            <label for="startDate">
+              Start Date
+            </label>
+
+            <input
+              type="date"
+              id="startDate"
+              required
+            >
+
+          </div>
+
+          <div>
+
+            <label for="startTime">
+              Start Time
+            </label>
+
+            <input
+              type="time"
+              id="startTime"
+              required
+            >
+
+          </div>
+
+          <div>
+
+            <label for="endDate">
+              End Date
+            </label>
+
+            <input
+              type="date"
+              id="endDate"
+            >
+
+          </div>
+
+          <div>
+
+            <label for="endTime">
+              End Time
+            </label>
+
+            <input
+              type="time"
+              id="endTime"
+            >
+
+          </div>
+
+        </div>
+
+        <label class="event-checkbox">
+
+          <input
+            type="checkbox"
+            id="allDayEvent"
+          >
+
+          <span>
+            This is an all-day event
+          </span>
+
+        </label>
+
+      </div>
+
+      <!-- LOCATION -->
+      <div class="event-form-group">
+
+        <h2>Location</h2>
+
+        <label class="event-checkbox">
+
+          <input
+            type="checkbox"
+            id="isOnline"
+          >
+
+          <span>
+            This is an online event
+          </span>
+
+        </label>
+
+        <div id="physicalLocationFields">
+
+          <label for="venueName">
+            Venue Name
+          </label>
+
+          <input
+            type="text"
+            id="venueName"
+          >
+
+          <label for="eventAddress">
+            Address
+          </label>
+
+          <input
+            type="text"
+            id="eventAddress"
+          >
+
+          <div class="event-form-grid">
+
+            <div>
+
+              <label for="eventTown">
+                Town / City
+              </label>
+
+              <input
+                type="text"
+                id="eventTown"
+              >
+
+            </div>
+
+            <div>
+
+              <label for="eventCounty">
+                County / State
+              </label>
+
+              <input
+                type="text"
+                id="eventCounty"
+              >
+
+            </div>
+
+            <div>
+
+              <label for="eventCountry">
+                Country
+              </label>
+
+              <input
+                type="text"
+                id="eventCountry"
+              >
+
+            </div>
+
+            <div>
+
+              <label for="eventPostcode">
+                Postcode
+              </label>
+
+              <input
+                type="text"
+                id="eventPostcode"
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div id="onlineLocationFields" hidden>
+
+          <label for="meetingPlatform">
+            Online Platform
+          </label>
+
+          <select id="meetingPlatform">
+
+            <option value="">
+              Select Platform
+            </option>
+
+            <option value="zoom">
+              Zoom
+            </option>
+
+            <option value="microsoft-teams">
+              Microsoft Teams
+            </option>
+
+            <option value="google-meet">
+              Google Meet
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+
+          <label for="meetingLink">
+            Meeting Link
+          </label>
+
+          <input
+            type="url"
+            id="meetingLink"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- REGISTRATION -->
+      <div class="event-form-group">
+
+        <h2>Registration</h2>
+
+        <label for="registrationType">
+          Registration Type
+        </label>
+
+        <select
+          id="registrationType"
+          required
+        >
+
+          <option value="">
+            Select Type
+          </option>
+
+          <option value="free">
+            Free
+          </option>
+
+          <option value="registration">
+            Registration Only
+          </option>
+
+          <option value="paid">
+            Paid
+          </option>
+
+        </select>
+
+        <div
+          id="paidEventFields"
+          hidden
+        >
+
+          <div class="event-form-grid">
+
+            <div>
+
+              <label for="eventPrice">
+                Price
+              </label>
+
+              <input
+                type="number"
+                id="eventPrice"
+                min="0"
+                step="0.01"
+              >
+
+            </div>
+
+            <div>
+
+              <label for="eventCurrency">
+                Currency
+              </label>
+
+              <select id="eventCurrency">
+
+                <option value="GBP">
+                  GBP
+                </option>
+
+                <option value="EUR">
+                  EUR
+                </option>
+
+                <option value="USD">
+                  USD
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <label for="eventCapacity">
+          Maximum Capacity
+        </label>
+
+        <input
+          type="number"
+          id="eventCapacity"
+          min="1"
+        >
+
+      </div>
+
+      <!-- AUDIENCE -->
+      <div class="event-form-group">
+
+        <h2>Audience &amp; Requirements</h2>
+
+        <label for="ageGroup">
+          Age Group
+        </label>
+
+        <input
+          type="text"
+          id="ageGroup"
+          placeholder="e.g. U12, U16, Adults, All Ages"
+        >
+
+        <label for="eventLevel">
+          Level
+        </label>
+
+        <select id="eventLevel">
+
+          <option value="">
+            Select Level
+          </option>
+
+          <option value="beginner">
+            Beginner
+          </option>
+
+          <option value="intermediate">
+            Intermediate
+          </option>
+
+          <option value="advanced">
+            Advanced
+          </option>
+
+          <option value="elite">
+            Elite
+          </option>
+
+          <option value="all">
+            All Levels
+          </option>
+
+        </select>
+
+        <label for="equipmentRequired">
+          Equipment / Requirements
+        </label>
+
+        <textarea
+          id="equipmentRequired"
+          rows="3"
+        ></textarea>
+
+        <label for="accessibility">
+          Accessibility Information
+        </label>
+
+        <textarea
+          id="accessibility"
+          rows="3"
+        ></textarea>
+
+      </div>
+
+      <!-- MEDIA -->
+      <div class="event-form-group">
+
+        <h2>Event Image</h2>
+
+        <label for="eventImage">
+          Upload Event Banner
+        </label>
+
+        <input
+          type="file"
+          id="eventImage"
+          accept="image/*"
+        >
+
+        <div
+          id="eventImagePreview"
+          class="event-image-preview"
+        ></div>
+
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="event-form-actions">
+
+        <button
+          type="submit"
+          class="btn-primary"
+        >
+          Submit Event
+        </button>
+
+        <a
+          href="events.html"
+          class="btn-secondary"
+        >
+          Cancel
+        </a>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</main>
+
+<a
+  href="https://wa.me/447438065365?text=Hello%20TalentGoldPlus,%20I%20would%20like%20to%20find%20out%20more."
+  class="whatsapp-button"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Chat on WhatsApp
+</a>
+
+<div id="siteFooter"></div>
+
+<script src="../js/components-loader.js"></script>
+<script src="../js/navigation.js"></script>
+<script type="module" src="../js/auth/auth-state.js"></script>
+<script type="module" src="../js/events/create-event.js"></script>
+
+</body>
+</html>

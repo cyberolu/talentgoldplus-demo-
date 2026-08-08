@@ -267,6 +267,91 @@
 
   </div>
 
+  <!-- EVENTS CALENDAR -->
+  <section id="home-events">
+
+    <div class="container">
+
+      <div class="home-events-header">
+
+        <div>
+          <span class="section-label">
+            What’s Happening
+          </span>
+
+          <h2>
+            Events Calendar
+          </h2>
+
+          <p>
+            Browse upcoming TalentGoldPlus events.
+            Dates with events are marked on the calendar.
+          </p>
+        </div>
+
+        <a
+          href="pages/events.html"
+          class="btn-secondary"
+        >
+          View All Events
+        </a>
+
+      </div>
+
+      <div class="home-calendar-card">
+
+        <div class="home-calendar-header">
+
+          <button
+            type="button"
+            id="calendarPrev"
+            class="calendar-nav-btn"
+            aria-label="Previous month"
+          >
+            ‹
+          </button>
+
+          <h3 id="calendarMonth">
+            Loading...
+          </h3>
+
+          <button
+            type="button"
+            id="calendarNext"
+            class="calendar-nav-btn"
+            aria-label="Next month"
+          >
+            ›
+          </button>
+
+        </div>
+
+        <div class="calendar-weekdays">
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+          <span>Sun</span>
+        </div>
+
+        <div
+          id="calendarGrid"
+          class="calendar-grid"
+        ></div>
+
+        <div class="calendar-key">
+          <span class="calendar-key-dot"></span>
+          <span>Event scheduled</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
   <!-- PROFESSIONALS -->
   <section id="for-professionals">
 
@@ -505,7 +590,8 @@
 
 <script src="js/components-loader.js"></script>
 <script src="js/navigation.js"></script>
-<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/auth/auth-state.js"></script>
+<script type="module" src="js/events/home-events.js"></script>
 
 </body>
 </html>

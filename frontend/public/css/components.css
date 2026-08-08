@@ -1425,3 +1425,30 @@ body {
   outline: 2px solid #d4af37;
   outline-offset: 4px;
 }
+
+/* =========================
+   STICKY NAVIGATION
+========================= */
+
+header{
+  width:100%;
+}
+
+header nav{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:9999;
+
+  background:rgba(255,255,255,.96);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+  transition:all .3s ease;
+
+}

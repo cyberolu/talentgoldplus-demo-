@@ -1,0 +1,274 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function myRole() {
+      return get(
+        /databases/$(database)/documents/users/$(request.auth.uid)
+      ).data.role;
+    }
+
+    function isAdmin() {
+      return signedIn()
+      && myRole() in ["admin", "superadmin"];
+    }
+
+    function isModeratorOrAdmin() {
+      return signedIn()
+      && myRole() in ["moderator", "admin", "superadmin"];
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.role in [
+          "athlete",
+          "coach",
+          "professional",
+          "scout",
+          "investor",
+          "partner",
+          "volunteer"
+        ];
+
+      allow update: if signedIn()
+        && (
+          isAdmin()
+          ||
+          (
+            request.auth.uid == userId
+
+            // Users cannot change their own role
+            && request.resource.data.role == resource.data.role
+
+            // Users cannot change their own account status
+            && request.resource.data.status == resource.data.status
+          )
+        );
+
+      allow delete: if signedIn()
+        && myRole() == "superadmin";
+    }
+    
+    match /userMedia/{mediaId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+      && request.resource.data.userId == request.auth.uid;
+
+      allow update, delete: if signedIn()
+      && resource.data.userId == request.auth.uid;
+    }
+
+    match /conversations/{conversationId} {
+      allow create: if request.auth != null
+        && request.auth.uid in request.resource.data.participants;
+
+      allow read, update: if request.auth != null
+        && request.auth.uid in resource.data.participants;
+
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        allow read, create: if request.auth != null
+          && request.auth.uid in get(
+            /databases/$(database)/documents/conversations/$(conversationId)
+          ).data.participants;
+
+        allow update, delete: if false;
+      }
+    }
+
+    match /communityPosts/{postId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn();
+
+      allow update: if signedIn();
+
+      allow delete: if signedIn()
+      && (
+        request.auth.uid == resource.data.userId ||
+        isModeratorOrAdmin()
+      );
+    }
+
+    match /communityPosts/{postId}/comments/{commentId} {
+      allow read, create: if signedIn();
+
+      allow update, delete: if signedIn()
+      && request.auth.uid == resource.data.userId;
+    }
+
+    match /connections/{connectionId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+      && request.auth.uid == request.resource.data.senderId;
+
+      allow update, delete: if signedIn()
+      && (
+        request.auth.uid == resource.data.senderId ||
+        request.auth.uid == resource.data.receiverId
+      );
+    }
+
+    match /notifications/{notificationId} {
+      allow read, update, delete: if signedIn()
+      && request.auth.uid == resource.data.userId;
+
+      allow create: if signedIn();
+    }
+
+    match /marketplaceListings/{listingId} {
+      allow read: if true;
+
+      allow create: if signedIn();
+
+      allow update: if signedIn()
+      && (
+        request.auth.uid == resource.data.userId ||
+        isModeratorOrAdmin()
+      );
+
+      allow delete: if signedIn()
+      && (
+        request.auth.uid == resource.data.userId ||
+        myRole() == "superadmin"
+      );
+    }
+    
+    match /opportunities/{opportunityId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+      && request.resource.data.createdBy == request.auth.uid;
+
+      allow update: if signedIn()
+      && (
+        request.auth.uid == resource.data.createdBy ||
+        isModeratorOrAdmin()
+      );
+
+      allow delete: if signedIn()
+      && (
+        request.auth.uid == resource.data.createdBy ||
+        myRole() == "superadmin"
+      );
+    }
+    
+    match /fundraisers/{fundraiserId} {
+      allow read: if true;
+
+      allow create: if signedIn()
+      && request.resource.data.createdBy == request.auth.uid;
+
+      allow update: if signedIn()
+      && (
+        request.auth.uid == resource.data.createdBy ||
+        isModeratorOrAdmin()
+      );
+
+      allow delete: if signedIn()
+      && (
+        request.auth.uid == resource.data.createdBy ||
+        myRole() == "superadmin"
+      );
+    }
+    match /reports/{reportId} {
+      allow create: if signedIn();
+
+      allow read, update: if isModeratorOrAdmin();
+
+      allow delete: if signedIn()
+      && myRole() == "superadmin";
+    }
+    match /events/{eventId} {
+
+      // Anyone can view published events.
+      // The event owner and admins can also view pending/draft events.
+      allow read: if
+        resource.data.status == "published"
+        ||
+        (
+          signedIn()
+          &&
+          (
+            resource.data.organiserId == request.auth.uid
+            ||
+            isModeratorOrAdmin()
+          )
+        );
+
+      // Logged-in users can create their own event.
+      // New events must start as pending.
+      allow create: if signedIn()
+        && request.resource.data.organiserId == request.auth.uid
+        && request.resource.data.status == "pending"
+        && request.resource.data.featured == false;
+
+      // Organiser may edit their own event,
+      // but cannot publish or feature it themselves.
+      allow update: if signedIn()
+        && (
+          isModeratorOrAdmin()
+          ||
+          (
+            resource.data.organiserId == request.auth.uid
+            && request.resource.data.organiserId == resource.data.organiserId
+            && request.resource.data.status == resource.data.status
+            && request.resource.data.featured == resource.data.featured
+          )
+        );
+
+      // Owner can remove their own event.
+      // Superadmin can remove any event.
+      allow delete: if signedIn()
+        && (
+          resource.data.organiserId == request.auth.uid
+          ||
+          myRole() == "superadmin"
+        );
+    }
+    match /eventRegistrations/{registrationId} {
+
+      // Attendee can see their own registration.
+      // Event organiser and admins can also see registrations.
+      allow read: if signedIn()
+        && (
+          resource.data.userId == request.auth.uid
+          ||
+          resource.data.organiserId == request.auth.uid
+          ||
+          isModeratorOrAdmin()
+        );
+
+      // Users may only register themselves.
+      allow create: if signedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.registrationStatus == "registered"
+        && request.resource.data.checkedIn == false
+        && request.resource.data.paymentStatus == "not-required";
+
+      // Users cannot currently alter registration records.
+      // We'll control these properly later.
+      allow update: if isModeratorOrAdmin();
+
+      // User can cancel/delete own registration.
+      // Admin can also remove it.
+      allow delete: if signedIn()
+        && (
+          resource.data.userId == request.auth.uid
+          ||
+          isModeratorOrAdmin()
+        );
+    }
+  }
+}
