@@ -105,7 +105,26 @@ async function handleAuthenticationState(
   user
 ) {
 
+  console.log(
+    "AUTH STEP 1 - callback started",
+    {
+      uid:
+        user?.uid ||
+        null,
+
+      path:
+        window.location.pathname
+    }
+  );
+
+
   await waitForHeaderIfRequired();
+
+
+  console.log(
+    "AUTH STEP 2 - header wait finished"
+  );
+
 
   if (!user) {
 
@@ -115,7 +134,13 @@ async function handleAuthenticationState(
 
   }
 
+
   try {
+
+    console.log(
+      "AUTH STEP 3 - getting user document"
+    );
+
 
     const userReference =
       doc(
@@ -124,10 +149,21 @@ async function handleAuthenticationState(
         user.uid
       );
 
+
     const userSnapshot =
       await getDoc(
         userReference
       );
+
+
+    console.log(
+      "AUTH STEP 4 - user document received",
+      {
+        exists:
+          userSnapshot.exists()
+      }
+    );
+
 
     if (!userSnapshot.exists()) {
 
@@ -146,80 +182,139 @@ async function handleAuthenticationState(
 
     }
 
+
     const userData =
       userSnapshot.data();
+
+
+    console.log(
+      "AUTH STEP 5 - user data loaded",
+      {
+        role:
+          userData.role,
+
+        status:
+          userData.status,
+
+        fullName:
+          userData.fullName
+      }
+    );
+
 
     const accountIsAvailable =
       await checkAccountStatus(
         userData
       );
 
+
+    console.log(
+      "AUTH STEP 6 - account status checked",
+      {
+        accountIsAvailable
+      }
+    );
+
+
     if (!accountIsAvailable) {
+
       return;
+
     }
+
 
     if (isDashboardPage) {
 
       console.log(
         "AUTH DEBUG - rendering dashboard",
         {
-          uid: user.uid,
-          role: userData.role,
-          name: userData.fullName,
-          path: window.location.pathname
+          uid:
+            user.uid,
+
+          role:
+            userData.role,
+
+          name:
+            userData.fullName,
+
+          path:
+            window.location.pathname
         }
       );
-    
+
+
       renderDashboard(
         userData
       );
-    
+
+
+      console.log(
+        "AUTH STEP 7 - dashboard render called"
+      );
+
     }
-    
-    
+
+
     /*
       Public navbar is not essential to
       dashboard rendering, so an error here
       must not stop the member dashboard.
     */
     try {
-    
+
       updatePublicNavbar(
         true,
         userData
       );
-    
+
+
+      console.log(
+        "AUTH STEP 8 - navbar updated"
+      );
+
     } catch (navbarError) {
-    
+
       console.error(
         "Navbar update error:",
         navbarError
       );
-    
+
     }
-    
-    
+
+
     /*
       Notification listening is also
       non-critical to rendering the page.
     */
     try {
-    
+
       listenForNotifications(
         user.uid
       );
-    
+
+
+      console.log(
+        "AUTH STEP 9 - notification listener started"
+      );
+
     } catch (notificationError) {
-    
+
       console.error(
         "Notification listener error:",
         notificationError
       );
-    
+
     }
+
 
     document.body.style.display =
       "block";
+
+
+    console.log(
+      "AUTH STEP 10 - page displayed"
+    );
+
 
   } catch (error) {
 
@@ -251,9 +346,11 @@ function handleLoggedOutUser() {
 
   }
 
+
   updatePublicNavbar(
     false
   );
+
 
   document.body.style.display =
     "block";
@@ -309,6 +406,7 @@ async function checkAccountStatus(
 
     }
 
+
     return false;
 
   }
@@ -333,6 +431,7 @@ async function checkAccountStatus(
 
     }
 
+
     return false;
 
   }
@@ -351,12 +450,15 @@ async function checkAccountStatus(
         : "Your account has been suspended. Please contact TalentGoldPlus support if you believe this is an error."
     );
 
+
     await signOut(
       auth
     );
 
+
     window.location.href =
       loginPath;
+
 
     return false;
 
@@ -374,12 +476,15 @@ async function checkAccountStatus(
       "Your account has been permanently restricted from using TalentGoldPlus."
     );
 
+
     await signOut(
       auth
     );
 
+
     window.location.href =
       loginPath;
+
 
     return false;
 
@@ -392,12 +497,15 @@ async function checkAccountStatus(
     "Your TalentGoldPlus account is currently unavailable."
   );
 
+
   await signOut(
     auth
   );
 
+
   window.location.href =
     loginPath;
+
 
   return false;
 
@@ -434,9 +542,6 @@ function waitForHeaderIfRequired() {
 
       /*
         Header has already loaded.
-        This handles cached/fast loads
-        where the event fired before
-        auth-state.js started waiting.
       */
       if (
         siteHeader.innerHTML.trim()
@@ -449,10 +554,6 @@ function waitForHeaderIfRequired() {
       }
 
 
-      /*
-        Listen for a header that is
-        still being loaded.
-      */
       const handleHeaderLoaded =
         () => {
 
@@ -471,9 +572,9 @@ function waitForHeaderIfRequired() {
 
 
       /*
-        Extra race-condition protection:
-        the header could finish between
-        the earlier check and listener setup.
+        Protect against the header
+        loading between the first
+        check and listener setup.
       */
       if (
         siteHeader.innerHTML.trim()
