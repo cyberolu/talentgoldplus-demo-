@@ -11,10 +11,6 @@ import {
   loadDashboardStats
 } from "./dashboard-stats.js";
 
-import {
-  listenForNotifications
-} from "../notifications/notification-listener.js";
-
 
 export function renderDashboard(
   userData
@@ -205,11 +201,6 @@ export function renderDashboard(
 
 
   loadDashboardStats(
-    user.uid
-  );
-
-
-  listenForNotifications(
     user.uid
   );
 

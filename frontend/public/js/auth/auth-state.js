@@ -375,6 +375,11 @@ function waitForHeaderIfRequired() {
           "siteHeader"
         );
 
+
+      /*
+        This page does not use
+        the shared public header.
+      */
       if (!siteHeader) {
 
         resolve();
@@ -383,10 +388,15 @@ function waitForHeaderIfRequired() {
 
       }
 
+
+      /*
+        Header has already loaded.
+        This handles cached/fast loads
+        where the event fired before
+        auth-state.js started waiting.
+      */
       if (
-        document.getElementById(
-          "authNavItem"
-        )
+        siteHeader.innerHTML.trim()
       ) {
 
         resolve();
@@ -395,13 +405,45 @@ function waitForHeaderIfRequired() {
 
       }
 
+
+      /*
+        Listen for a header that is
+        still being loaded.
+      */
+      const handleHeaderLoaded =
+        () => {
+
+          resolve();
+
+        };
+
+
       document.addEventListener(
         "siteHeaderLoaded",
-        resolve,
+        handleHeaderLoaded,
         {
           once: true
         }
       );
+
+
+      /*
+        Extra race-condition protection:
+        the header could finish between
+        the earlier check and listener setup.
+      */
+      if (
+        siteHeader.innerHTML.trim()
+      ) {
+
+        document.removeEventListener(
+          "siteHeaderLoaded",
+          handleHeaderLoaded
+        );
+
+        resolve();
+
+      }
 
     }
   );
