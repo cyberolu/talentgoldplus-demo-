@@ -169,10 +169,20 @@ async function handleAuthenticationState(
 
     if (isDashboardPage) {
 
+      console.log(
+        "AUTH DEBUG - rendering dashboard",
+        {
+          uid: user.uid,
+          role: userData.role,
+          name: userData.fullName,
+          path: window.location.pathname
+        }
+      );
+    
       renderDashboard(
         userData
       );
-
+    
     }
 
     document.body.style.display =
