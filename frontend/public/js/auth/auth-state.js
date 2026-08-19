@@ -158,15 +158,6 @@ async function handleAuthenticationState(
       return;
     }
 
-    updatePublicNavbar(
-      true,
-      userData
-    );
-
-    listenForNotifications(
-      user.uid
-    );
-
     if (isDashboardPage) {
 
       console.log(
@@ -181,6 +172,48 @@ async function handleAuthenticationState(
     
       renderDashboard(
         userData
+      );
+    
+    }
+    
+    
+    /*
+      Public navbar is not essential to
+      dashboard rendering, so an error here
+      must not stop the member dashboard.
+    */
+    try {
+    
+      updatePublicNavbar(
+        true,
+        userData
+      );
+    
+    } catch (navbarError) {
+    
+      console.error(
+        "Navbar update error:",
+        navbarError
+      );
+    
+    }
+    
+    
+    /*
+      Notification listening is also
+      non-critical to rendering the page.
+    */
+    try {
+    
+      listenForNotifications(
+        user.uid
+      );
+    
+    } catch (notificationError) {
+    
+      console.error(
+        "Notification listener error:",
+        notificationError
       );
     
     }
