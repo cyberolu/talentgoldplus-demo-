@@ -16,30 +16,11 @@ export function renderDashboard(
   userData
 ) {
 
-  console.log(
-    "DASHBOARD RENDER START",
-    {
-      currentUser:
-        auth.currentUser?.uid,
-
-      role:
-        userData?.role,
-
-      fullName:
-        userData?.fullName
-    }
-  );
-
-
   const user =
     auth.currentUser;
 
 
   if (!user) {
-
-    console.warn(
-      "Dashboard render stopped because auth.currentUser is missing."
-    );
 
     return;
 
@@ -210,27 +191,9 @@ export function renderDashboard(
   }
 
 
-  console.log(
-    "DASHBOARD ABOUT TO RENDER NAV",
-    {
-      role,
-      userId:
-        user.uid
-    }
-  );
-
-
   renderDashboardNavigation(
     role,
     user.uid
-  );
-
-
-  console.log(
-    "DASHBOARD NAV RENDERED",
-    {
-      role
-    }
   );
 
 
@@ -264,24 +227,9 @@ function renderDashboardNavigation(
 
   if (!dashboardNav) {
 
-    console.warn(
-      "dashboardNav element not found."
-    );
-
     return;
 
   }
-
-
-  console.log(
-    "RENDER DASHBOARD NAVIGATION",
-    {
-      role,
-      isAdmin:
-        role === "admin" ||
-        role === "superadmin"
-    }
-  );
 
 
   dashboardNav.innerHTML = `
@@ -383,10 +331,6 @@ function renderDashboardCards(
 
 
   if (!dashboardCards) {
-
-    console.warn(
-      "dashboardCards element not found."
-    );
 
     return;
 

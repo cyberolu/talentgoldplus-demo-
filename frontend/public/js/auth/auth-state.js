@@ -39,50 +39,52 @@ import {
 ========================= */
 
 const protectedPages = [
-  "dashboard.html",
-
-  "profile.html",
-  "profile-setup.html",
-
-  "media.html",
-
-  "community.html",
-
-  "connections.html",
-
-  "messages.html",
-
-  "notifications.html",
-
-  "my-submissions.html",
-
-  "create-listing.html",
-
-  "create-opportunity.html",
-
-  "create-fundraiser.html",
-
-  "create-event.html"
+  "dashboard",
+  "profile",
+  "profile-setup",
+  "media",
+  "community",
+  "connections",
+  "messages",
+  "notifications",
+  "my-submissions",
+  "create-listing",
+  "create-opportunity",
+  "create-fundraiser",
+  "create-event"
 ];
+
 
 const currentPath =
   window.location.pathname;
 
+
+const currentPage =
+  currentPath
+    .split("/")
+    .filter(Boolean)
+    .pop()
+    ?.replace(
+      /\.html$/,
+      ""
+    ) ||
+  "";
+
+
 const isProtectedPage =
-  protectedPages.some(
-    (page) =>
-      currentPath.includes(page)
+  protectedPages.includes(
+    currentPage
   );
+
 
 const isDashboardPage =
-  currentPath.includes(
-    "dashboard.html"
-  );
+  currentPage ===
+  "dashboard";
+
 
 const isPendingPage =
-  currentPath.includes(
-    "account-pending.html"
-  );
+  currentPage ===
+  "account-pending";
 
 
 /* =========================
@@ -90,6 +92,7 @@ const isPendingPage =
 ========================= */
 
 initialiseLogoutButtons();
+
 
 onAuthStateChanged(
   auth,
@@ -105,25 +108,7 @@ async function handleAuthenticationState(
   user
 ) {
 
-  console.log(
-    "AUTH STEP 1 - callback started",
-    {
-      uid:
-        user?.uid ||
-        null,
-
-      path:
-        window.location.pathname
-    }
-  );
-
-
   await waitForHeaderIfRequired();
-
-
-  console.log(
-    "AUTH STEP 2 - header wait finished"
-  );
 
 
   if (!user) {
@@ -136,11 +121,6 @@ async function handleAuthenticationState(
 
 
   try {
-
-    console.log(
-      "AUTH STEP 3 - getting user document"
-    );
-
 
     const userReference =
       doc(
@@ -156,27 +136,21 @@ async function handleAuthenticationState(
       );
 
 
-    console.log(
-      "AUTH STEP 4 - user document received",
-      {
-        exists:
-          userSnapshot.exists()
-      }
-    );
-
-
     if (!userSnapshot.exists()) {
 
       console.error(
         "User document does not exist."
       );
 
+
       await signOut(
         auth
       );
 
+
       window.location.href =
         loginPath;
+
 
       return;
 
@@ -187,33 +161,10 @@ async function handleAuthenticationState(
       userSnapshot.data();
 
 
-    console.log(
-      "AUTH STEP 5 - user data loaded",
-      {
-        role:
-          userData.role,
-
-        status:
-          userData.status,
-
-        fullName:
-          userData.fullName
-      }
-    );
-
-
     const accountIsAvailable =
       await checkAccountStatus(
         userData
       );
-
-
-    console.log(
-      "AUTH STEP 6 - account status checked",
-      {
-        accountIsAvailable
-      }
-    );
 
 
     if (!accountIsAvailable) {
@@ -223,53 +174,29 @@ async function handleAuthenticationState(
     }
 
 
+    /*
+      Render dashboard before navbar
+      and notification logic so those
+      features cannot block the page.
+    */
     if (isDashboardPage) {
-
-      console.log(
-        "AUTH DEBUG - rendering dashboard",
-        {
-          uid:
-            user.uid,
-
-          role:
-            userData.role,
-
-          name:
-            userData.fullName,
-
-          path:
-            window.location.pathname
-        }
-      );
-
 
       renderDashboard(
         userData
-      );
-
-
-      console.log(
-        "AUTH STEP 7 - dashboard render called"
       );
 
     }
 
 
     /*
-      Public navbar is not essential to
-      dashboard rendering, so an error here
-      must not stop the member dashboard.
+      Public navbar is non-critical
+      to dashboard rendering.
     */
     try {
 
       updatePublicNavbar(
         true,
         userData
-      );
-
-
-      console.log(
-        "AUTH STEP 8 - navbar updated"
       );
 
     } catch (navbarError) {
@@ -284,17 +211,12 @@ async function handleAuthenticationState(
 
     /*
       Notification listening is also
-      non-critical to rendering the page.
+      non-critical to page rendering.
     */
     try {
 
       listenForNotifications(
         user.uid
-      );
-
-
-      console.log(
-        "AUTH STEP 9 - notification listener started"
       );
 
     } catch (notificationError) {
@@ -311,17 +233,13 @@ async function handleAuthenticationState(
       "block";
 
 
-    console.log(
-      "AUTH STEP 10 - page displayed"
-    );
-
-
   } catch (error) {
 
     console.error(
       "Authentication state error:",
       error
     );
+
 
     document.body.style.display =
       "block";
@@ -528,8 +446,8 @@ function waitForHeaderIfRequired() {
 
 
       /*
-        This page does not use
-        the shared public header.
+        Page does not use the
+        shared public header.
       */
       if (!siteHeader) {
 
@@ -584,6 +502,7 @@ function waitForHeaderIfRequired() {
           "siteHeaderLoaded",
           handleHeaderLoaded
         );
+
 
         resolve();
 
