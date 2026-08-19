@@ -1,30 +1,237 @@
 rules_version = '2';
 
 service firebase.storage {
+
   match /b/{bucket}/o {
 
-    match /profileImages/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+
+    function userData() {
+      return firestore.get(
+        /databases/(default)/documents/users/$(request.auth.uid)
+      ).data;
+    }
+
+
+    /*
+      TEMPORARY migration compatibility:
+      accounts without a status field are treated as active.
+
+      Remove this fallback once all live users have
+      a proper status field.
+    */
+    function activeUser() {
+      return signedIn()
+        && (
+          !userData().keys().hasAny([
+            "status"
+          ])
+
+          ||
+
+          userData().status == "active"
+        );
+    }
+
+
+    function ownsFolder(userId) {
+      return activeUser()
         && request.auth.uid == userId;
     }
+
+
+    function isImage() {
+      return request.resource != null
+        && request.resource.contentType != null
+
+        && request.resource.contentType
+          .matches("image/.*");
+    }
+
+
+    function isImageOrVideo() {
+      return request.resource != null
+        && request.resource.contentType != null
+
+        && (
+          request.resource.contentType
+            .matches("image/.*")
+
+          ||
+
+          request.resource.contentType
+            .matches("video/.*")
+        );
+    }
+
+
+    /* =====================================================
+       PROFILE IMAGES
+
+       Public because profile images are displayed
+       throughout public/member-facing areas.
+    ===================================================== */
+
+    match /profileImages/{userId}/{allPaths=**} {
+
+      allow read: if true;
+
+
+      allow create,
+            update: if ownsFolder(userId)
+
+        && request.resource.size
+          < 5 * 1024 * 1024
+
+        && isImage();
+
+
+      allow delete: if ownsFolder(userId);
+    }
+
+
+    /* =====================================================
+       USER MEDIA
+
+       Member media should not automatically be available
+       anonymously to the entire internet.
+
+       Active signed-in users may view it.
+    ===================================================== */
 
     match /userMedia/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null
-        && request.auth.uid == userId;
+
+      allow read: if activeUser();
+
+
+      allow create,
+            update: if ownsFolder(userId)
+
+        && request.resource.size
+          < 50 * 1024 * 1024
+
+        && isImageOrVideo();
+
+
+      allow delete: if ownsFolder(userId);
     }
+
+
+    /* =====================================================
+       MARKETPLACE
+
+       Listing images are public because published
+       Marketplace listings are publicly readable.
+    ===================================================== */
 
     match /marketplaceListings/{userId}/{allPaths=**} {
+
       allow read: if true;
-      allow write: if request.auth != null
-        && request.auth.uid == userId;
+
+
+      allow create,
+            update: if ownsFolder(userId)
+
+        && request.resource.size
+          < 10 * 1024 * 1024
+
+        && isImage();
+
+
+      allow delete: if ownsFolder(userId);
     }
 
+
+    /* =====================================================
+       FUNDRAISERS
+
+       Images are public because fundraiser pages
+       may be publicly viewed.
+    ===================================================== */
+
     match /fundraisers/{userId}/{allPaths=**} {
+
       allow read: if true;
-      allow write: if request.auth != null
-        && request.auth.uid == userId;
+
+
+      allow create,
+            update: if ownsFolder(userId)
+
+        && request.resource.size
+          < 10 * 1024 * 1024
+
+        && isImage();
+
+
+      allow delete: if ownsFolder(userId);
+    }
+
+
+    /* =====================================================
+       EVENTS
+
+       Event images may be publicly displayed.
+    ===================================================== */
+
+    match /events/{userId}/{allPaths=**} {
+
+      allow read: if true;
+
+
+      allow create,
+            update: if ownsFolder(userId)
+
+        && request.resource.size
+          < 10 * 1024 * 1024
+
+        && isImage();
+
+
+      allow delete: if ownsFolder(userId);
+    }
+
+
+    /* =====================================================
+       OPPORTUNITIES
+
+       Included because the Opportunity model already
+       supports image fields in the frontend.
+    ===================================================== */
+
+    match /opportunities/{userId}/{allPaths=**} {
+
+      allow read: if true;
+
+
+      allow create,
+            update: if ownsFolder(userId)
+
+        && request.resource.size
+          < 10 * 1024 * 1024
+
+        && isImage();
+
+
+      allow delete: if ownsFolder(userId);
+    }
+
+
+    /* =====================================================
+       DEFAULT DENY
+    ===================================================== */
+
+    match /{allPaths=**} {
+
+      allow read,
+            write: if false;
     }
 
   }

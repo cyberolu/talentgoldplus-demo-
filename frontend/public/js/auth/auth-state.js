@@ -33,28 +33,61 @@ import {
   listenForNotifications
 } from "../notifications/notification-listener.js";
 
+
+/* =========================
+   PROTECTED PAGES
+========================= */
+
 const protectedPages = [
   "dashboard.html",
+
+  "profile.html",
   "profile-setup.html",
+
+  "media.html",
+
   "community.html",
+
   "connections.html",
+
   "messages.html",
+
   "notifications.html",
-  "create-listing.html"
+
+  "my-submissions.html",
+
+  "create-listing.html",
+
+  "create-opportunity.html",
+
+  "create-fundraiser.html",
+
+  "create-event.html"
 ];
 
 const currentPath =
   window.location.pathname;
 
 const isProtectedPage =
-  protectedPages.some((page) =>
-    currentPath.includes(page)
+  protectedPages.some(
+    (page) =>
+      currentPath.includes(page)
   );
 
 const isDashboardPage =
   currentPath.includes(
     "dashboard.html"
   );
+
+const isPendingPage =
+  currentPath.includes(
+    "account-pending.html"
+  );
+
+
+/* =========================
+   INITIALISE
+========================= */
 
 initialiseLogoutButtons();
 
@@ -63,34 +96,54 @@ onAuthStateChanged(
   handleAuthenticationState
 );
 
+
+/* =========================
+   AUTH STATE
+========================= */
+
 async function handleAuthenticationState(
   user
 ) {
+
   await waitForHeaderIfRequired();
 
   if (!user) {
+
     handleLoggedOutUser();
+
     return;
+
   }
 
   try {
+
     const userReference =
-      doc(db, "users", user.uid);
+      doc(
+        db,
+        "users",
+        user.uid
+      );
 
     const userSnapshot =
-      await getDoc(userReference);
+      await getDoc(
+        userReference
+      );
 
     if (!userSnapshot.exists()) {
+
       console.error(
         "User document does not exist."
       );
 
-      await signOut(auth);
+      await signOut(
+        auth
+      );
 
       window.location.href =
         loginPath;
 
       return;
+
     }
 
     const userData =
@@ -115,13 +168,18 @@ async function handleAuthenticationState(
     );
 
     if (isDashboardPage) {
-      renderDashboard(userData);
+
+      renderDashboard(
+        userData
+      );
+
     }
 
     document.body.style.display =
       "block";
 
   } catch (error) {
+
     console.error(
       "Authentication state error:",
       error
@@ -129,89 +187,223 @@ async function handleAuthenticationState(
 
     document.body.style.display =
       "block";
+
   }
+
 }
 
+
+/* =========================
+   LOGGED OUT
+========================= */
+
 function handleLoggedOutUser() {
+
   if (isProtectedPage) {
+
     window.location.href =
       loginPath;
 
     return;
+
   }
 
-  updatePublicNavbar(false);
+  updatePublicNavbar(
+    false
+  );
 
   document.body.style.display =
     "block";
+
 }
+
+
+/* =========================
+   ACCOUNT STATUS
+========================= */
 
 async function checkAccountStatus(
   userData
 ) {
+
   const accountStatus =
     (
-      userData.status || "active"
+      userData.status ||
+      "active"
     ).toLowerCase();
 
-  if (accountStatus === "active") {
+
+  /* ACTIVE */
+
+  if (
+    accountStatus ===
+    "active"
+  ) {
+
     return true;
+
   }
 
-  const messages = {
-    pending:
-      "Your account is awaiting approval. Please check back later.",
 
-    "under-review":
-      "Your account is currently under review. Please contact TalentGoldPlus if you require further information.",
+  /* PENDING */
 
-    suspended:
-      "Your account has been suspended. Please contact TalentGoldPlus support if you believe this is an error.",
+  if (
+    accountStatus ===
+      "pending" ||
+    accountStatus ===
+      "under-review"
+  ) {
 
-    banned:
+    if (!isPendingPage) {
+
+      window.location.href =
+        "../pages/account-pending.html";
+
+    } else {
+
+      document.body.style.display =
+        "block";
+
+    }
+
+    return false;
+
+  }
+
+
+  /* REJECTED */
+
+  if (
+    accountStatus ===
+    "rejected"
+  ) {
+
+    if (!isPendingPage) {
+
+      window.location.href =
+        "../pages/account-pending.html?status=rejected";
+
+    } else {
+
+      document.body.style.display =
+        "block";
+
+    }
+
+    return false;
+
+  }
+
+
+  /* SUSPENDED */
+
+  if (
+    accountStatus ===
+    "suspended"
+  ) {
+
+    alert(
+      userData.suspensionReason
+        ? `Your account has been suspended.\n\nReason: ${userData.suspensionReason}`
+        : "Your account has been suspended. Please contact TalentGoldPlus support if you believe this is an error."
+    );
+
+    await signOut(
+      auth
+    );
+
+    window.location.href =
+      loginPath;
+
+    return false;
+
+  }
+
+
+  /* BANNED */
+
+  if (
+    accountStatus ===
+    "banned"
+  ) {
+
+    alert(
       "Your account has been permanently restricted from using TalentGoldPlus."
-  };
+    );
+
+    await signOut(
+      auth
+    );
+
+    window.location.href =
+      loginPath;
+
+    return false;
+
+  }
+
+
+  /* ANY UNKNOWN STATUS */
 
   alert(
-    messages[accountStatus] ||
     "Your TalentGoldPlus account is currently unavailable."
   );
 
-  await signOut(auth);
+  await signOut(
+    auth
+  );
 
   window.location.href =
     loginPath;
 
   return false;
+
 }
 
+
+/* =========================
+   HEADER WAIT
+========================= */
+
 function waitForHeaderIfRequired() {
-  return new Promise((resolve) => {
-    const siteHeader =
-      document.getElementById(
-        "siteHeader"
+
+  return new Promise(
+    (resolve) => {
+
+      const siteHeader =
+        document.getElementById(
+          "siteHeader"
+        );
+
+      if (!siteHeader) {
+
+        resolve();
+
+        return;
+
+      }
+
+      if (
+        document.getElementById(
+          "authNavItem"
+        )
+      ) {
+
+        resolve();
+
+        return;
+
+      }
+
+      document.addEventListener(
+        "siteHeaderLoaded",
+        resolve,
+        {
+          once: true
+        }
       );
 
-    if (!siteHeader) {
-      resolve();
-      return;
     }
+  );
 
-    if (
-      document.getElementById(
-        "authNavItem"
-      )
-    ) {
-      resolve();
-      return;
-    }
-
-    document.addEventListener(
-      "siteHeaderLoaded",
-      resolve,
-      {
-        once: true
-      }
-    );
-  });
 }

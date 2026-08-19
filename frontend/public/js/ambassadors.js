@@ -1,14 +1,14 @@
 const ambassadors = {
 
     chioma: {
-      image: "../assets/images/chioma1.jpg.jpeg",
+      image: "../assets/images/chioma1.jpeg",
       name: "Chioma Ajunwa",
       title: "Founder | Olympic Champion",
       bio: `Chioma Ajunwa is Nigeria's first Olympic gold medallist and one of Africa's most influential sporting pioneers. As Founder of TalentGoldPlus, her vision is to create opportunities, connections and pathways that help talented individuals achieve their full potential both on and off the field of play.`
     },
   
     ruth: {
-      image: "../assets/images/Ruth-Ogbeifo-Balofin.jpg.jpeg",
+      image: "../assets/images/Ruth-Ogbeifo-Balofin.jpeg",
       name: "Ruth Ogbeifo-Balofin",
       title: "Ambassador | Olympian",
       bio: `Ruth Ogbeifo-Balofin is an Olympic silver medallist and former Nigerian international weightlifter. At the 1999 World Championships she won bronze medals in the snatch, clean and jerk and overall categories. She later won Olympic silver at the Sydney 2000 Olympic Games and is now a respected physiotherapist based in London.`
@@ -22,14 +22,14 @@ const ambassadors = {
     },
   
     stephi: {
-      image: "../assets/images/stephanie-douglas.jpg.jpeg",
+      image: "../assets/images/stephanie-douglas.jpeg",
       name: "Stephi Douglas",
       title: "Ambassador | Olympian",
       bio: `Stephi Douglas represented Great Britain at the 1992 and 1996 Olympic Games and earned Commonwealth relay medals for England. Beyond her achievements on the track, she has built a successful career as a physiotherapist and continues to support athletes in achieving their physical potential.`
     },
   
     glory: {
-      image: "../assets/images/Glory Alozie.jpeg",
+      image: "../assets/images/Glory_Alozie.jpeg",
       name: "Glory Alozie",
       title: "Ambassador | Olympian",
       bio: `Glory Alozie is one of Africa's most accomplished hurdlers. A multiple African champion and former African and Commonwealth record holder in the 100 metres hurdles, she competed at the highest level internationally and now contributes to athlete development as a coach in Europe.`

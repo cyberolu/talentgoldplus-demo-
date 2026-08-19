@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    My Submissions | TalentGoldPlus
+  </title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../assets/images/favicon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/layout.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/dashboard.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/my-submissions.css"
+  >
+
+</head>
+
+
+<body style="display: none;">
+
+
+<div class="portal-layout">
+
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+
+  <aside class="portal-sidebar">
+
+
+    <div class="portal-brand">
+
+      <img
+        src="../assets/images/TalentGoldPlus.png"
+        alt="TalentGoldPlus"
+      >
+
+      <div>
+
+        <h2>
+          TalentGoldPlus
+        </h2>
+
+        <p>
+          Member Portal
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <nav class="portal-menu">
+
+      <a href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a href="profile.html">
+        View My Profile
+      </a>
+
+      <a href="profile-setup.html">
+        Edit Profile
+      </a>
+
+      <a href="media.html">
+        My Media
+      </a>
+
+      <a href="community.html">
+        Community
+      </a>
+
+      <a href="events.html">
+        Events
+      </a>
+
+      <a href="connections.html">
+        Connections
+      </a>
+
+      <a href="messages.html">
+        Messages
+      </a>
+
+      <a href="marketplace.html">
+        Marketplace
+      </a>
+
+      <a
+        href="my-submissions.html"
+        class="active"
+      >
+        My Submissions
+      </a>
+
+      <a href="notifications.html">
+        Notifications
+      </a>
+
+    </nav>
+
+
+    <div
+      class="portal-user-mini"
+      id="profilePreview"
+    ></div>
+
+
+    <button
+      id="logoutBtn"
+      class="portal-logout"
+      type="button"
+    >
+      Logout
+    </button>
+
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="portal-main">
+
+
+    <header class="portal-topbar">
+
+      <div>
+
+        <h1>
+          My Submissions
+        </h1>
+
+        <p>
+          Track everything you have submitted to TalentGoldPlus.
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         SUMMARY
+    ========================== -->
+
+    <section class="submission-summary">
+
+
+      <div class="submission-summary-card">
+
+        <span>
+          Total
+        </span>
+
+        <strong id="totalSubmissionCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="submission-summary-card approved">
+
+        <span>
+          Approved
+        </span>
+
+        <strong id="totalApprovedCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="submission-summary-card pending">
+
+        <span>
+          Pending
+        </span>
+
+        <strong id="totalPendingCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="submission-summary-card rejected">
+
+        <span>
+          Rejected
+        </span>
+
+        <strong id="totalRejectedCount">
+          0
+        </strong>
+
+      </div>
+
+      <div class="submission-summary-card archived">
+
+        <span>
+          Archived
+        </span>
+      
+        <strong id="totalArchivedCount">
+          0
+        </strong>
+      
+      </div>
+
+      <div class="submission-summary-card expired">
+
+        <span>
+          Expired
+        </span>
+      
+        <strong id="totalExpiredCount">
+          0
+        </strong>
+      
+      </div>
+
+    </section>
+
+    
+
+
+    <!-- =========================
+         FILTERS
+    ========================== -->
+
+    <section class="submission-filter-panel">
+
+      <button
+        class="submission-filter active"
+        data-filter="all"
+        type="button"
+      >
+        All
+      </button>
+
+      <button
+        class="submission-filter"
+        data-filter="approved"
+        type="button"
+      >
+        Approved
+      </button>
+
+      <button
+        class="submission-filter"
+        data-filter="archived"
+        type="button"
+      >
+        Archived
+      </button>
+
+      <button
+        class="submission-filter"
+        data-filter="pending"
+        type="button"
+      >
+        Pending
+      </button>
+
+      <button
+        class="submission-filter"
+        data-filter="expired"
+        type="button"
+      >
+        Expired
+      </button>
+
+      <button
+        class="submission-filter"
+        data-filter="rejected"
+        type="button"
+      >
+        Rejected
+      </button>
+
+    </section>
+
+
+    <!-- =========================
+         MARKETPLACE
+    ========================== -->
+
+    <section
+      class="submission-section"
+      id="marketplace"
+    >
+
+      <div class="submission-section-header">
+
+        <div>
+
+          <span class="submission-section-kicker">
+            Marketplace
+          </span>
+
+          <h2>
+            My Listings
+          </h2>
+
+        </div>
+
+        <a href="create-listing.html">
+          Create Listing
+        </a>
+
+      </div>
+
+
+      <div
+        class="my-submission-grid"
+        id="marketplaceSubmissions"
+      >
+
+        <p class="submission-loading">
+          Loading marketplace listings...
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         EVENTS
+    ========================== -->
+
+    <section
+      class="submission-section"
+      id="events"
+    >
+
+      <div class="submission-section-header">
+
+        <div>
+
+          <span class="submission-section-kicker">
+            Events
+          </span>
+
+          <h2>
+            My Events
+          </h2>
+
+        </div>
+
+        <a href="create-event.html">
+          Create Event
+        </a>
+
+      </div>
+
+
+      <div
+        class="my-submission-grid"
+        id="eventSubmissions"
+      >
+
+        <p class="submission-loading">
+          Loading events...
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         OPPORTUNITIES
+    ========================== -->
+
+    <section
+      class="submission-section"
+      id="opportunities"
+    >
+
+      <div class="submission-section-header">
+
+        <div>
+
+          <span class="submission-section-kicker">
+            Opportunities
+          </span>
+
+          <h2>
+            My Opportunities
+          </h2>
+
+        </div>
+
+        <a href="create-opportunity.html">
+          Create Opportunity
+        </a>
+
+      </div>
+
+
+      <div
+        class="my-submission-grid"
+        id="opportunitySubmissions"
+      >
+
+        <p class="submission-loading">
+          Loading opportunities...
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FUNDRAISERS
+    ========================== -->
+
+    <section
+      class="submission-section"
+      id="fundraisers"
+    >
+
+      <div class="submission-section-header">
+
+        <div>
+
+          <span class="submission-section-kicker">
+            Fundraising
+          </span>
+
+          <h2>
+            My Fundraisers
+          </h2>
+
+        </div>
+
+        <a href="create-fundraiser.html">
+          Create Fundraiser
+        </a>
+
+      </div>
+
+
+      <div
+        class="my-submission-grid"
+        id="fundraiserSubmissions"
+      >
+
+        <p class="submission-loading">
+          Loading fundraisers...
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+</div>
+
+
+<script
+  type="module"
+  src="../js/auth/auth-state.js"
+></script>
+
+<script
+  type="module"
+  src="../js/submissions/my-submissions.js"
+></script>
+
+</body>
+
+</html>

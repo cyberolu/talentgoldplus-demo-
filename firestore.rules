@@ -1,33 +1,118 @@
 rules_version = '2';
 
 service cloud.firestore {
+
   match /databases/{database}/documents {
+
+
+    /* =====================================================
+       SHARED HELPERS
+    ===================================================== */
 
     function signedIn() {
       return request.auth != null;
     }
 
-    function myRole() {
+
+    function userDocument() {
       return get(
         /databases/$(database)/documents/users/$(request.auth.uid)
-      ).data.role;
+      );
     }
+
+
+    function userDocumentExists() {
+      return signedIn()
+        && exists(
+          /databases/$(database)/documents/users/$(request.auth.uid)
+        );
+    }
+
+
+    function myRole() {
+      return userDocument().data.role;
+    }
+
+
+    /*
+      Existing accounts without a status field are
+      temporarily treated as active so older beta
+      accounts are not locked out during migration.
+    */
+    function isActiveUser() {
+      return signedIn()
+        && userDocumentExists()
+        && (
+          !userDocument().data.keys().hasAny([
+            "status"
+          ])
+          ||
+          userDocument().data.status == "active"
+        );
+    }
+
 
     function isAdmin() {
-      return signedIn()
-      && myRole() in ["admin", "superadmin"];
+      return isActiveUser()
+        && myRole() in [
+          "admin",
+          "superadmin"
+        ];
     }
+
+
+    function isSuperAdmin() {
+      return isActiveUser()
+        && myRole() == "superadmin";
+    }
+
 
     function isModeratorOrAdmin() {
-      return signedIn()
-      && myRole() in ["moderator", "admin", "superadmin"];
+      return isActiveUser()
+        && myRole() in [
+          "moderator",
+          "admin",
+          "superadmin"
+        ];
     }
 
-    match /users/{userId} {
-      allow read: if signedIn();
 
+    /* =====================================================
+       USERS
+    ===================================================== */
+
+    match /users/{userId} {
+
+      /*
+        Users must always be able to read their own
+        account status.
+
+        Active users may read other public profiles.
+      */
+      allow read: if signedIn()
+        && (
+          request.auth.uid == userId
+          ||
+          isActiveUser()
+        );
+
+
+      /*
+        New registrations must begin pending.
+      */
       allow create: if signedIn()
+
         && request.auth.uid == userId
+
+        && request.resource.data.uid
+          == request.auth.uid
+
+        && request.resource.data.status
+          == "pending"
+
+        && request.resource.data.approvalStatus
+          == "pending"
+
         && request.resource.data.role in [
           "athlete",
           "coach",
@@ -38,237 +123,889 @@ service cloud.firestore {
           "volunteer"
         ];
 
-      allow update: if signedIn()
-        && (
-          isAdmin()
-          ||
-          (
-            request.auth.uid == userId
 
-            // Users cannot change their own role
-            && request.resource.data.role == resource.data.role
+      /*
+        Users may edit normal profile fields,
+        but not security/admin-controlled fields.
+      */
+      allow update: if isActiveUser()
 
-            // Users cannot change their own account status
-            && request.resource.data.status == resource.data.status
-          )
-        );
+        && request.auth.uid == userId
 
-      allow delete: if signedIn()
-        && myRole() == "superadmin";
+        && !request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasAny([
+            "uid",
+
+            "role",
+            "professionalCategory",
+
+            "status",
+            "approvalStatus",
+
+            "approvedBy",
+            "approvedAt",
+
+            "rejectedBy",
+            "rejectedAt",
+            "rejectionReason",
+
+            "statusUpdatedBy",
+            "statusUpdatedAt",
+            "suspensionReason",
+
+            "roleUpdatedBy",
+            "roleUpdatedAt",
+
+            "verified",
+            "verifiedBy",
+            "verifiedAt",
+
+            "banned",
+            "bannedBy",
+            "bannedAt"
+          ]);
+
+
+      /*
+        Account deletion must go through backend logic
+        so Firebase Authentication can also be removed.
+      */
+      allow delete: if false;
     }
-    
+
+
+    /* =====================================================
+       USER MEDIA
+    ===================================================== */
+
     match /userMedia/{mediaId} {
-      allow read: if signedIn();
 
-      allow create: if signedIn()
-      && request.resource.data.userId == request.auth.uid;
+      allow read: if isActiveUser();
 
-      allow update, delete: if signedIn()
-      && resource.data.userId == request.auth.uid;
+
+      allow create: if isActiveUser()
+
+        && request.resource.data.userId
+          == request.auth.uid;
+
+
+      allow update: if isActiveUser()
+
+        && resource.data.userId
+          == request.auth.uid
+
+        && request.resource.data.userId
+          == resource.data.userId;
+
+
+      allow delete: if isActiveUser()
+
+        && (
+          resource.data.userId
+            == request.auth.uid
+
+          ||
+
+          isModeratorOrAdmin()
+        );
     }
+
+
+    /* =====================================================
+       CONVERSATIONS
+    ===================================================== */
 
     match /conversations/{conversationId} {
-      allow create: if request.auth != null
-        && request.auth.uid in request.resource.data.participants;
 
-      allow read, update: if request.auth != null
-        && request.auth.uid in resource.data.participants;
+      allow create: if isActiveUser()
+
+        && request.auth.uid
+          in request.resource.data.participants;
+
+
+      allow read: if isActiveUser()
+
+        && request.auth.uid
+          in resource.data.participants;
+
+
+      allow update: if isActiveUser()
+
+        && request.auth.uid
+          in resource.data.participants
+
+        && request.resource.data.participants
+          == resource.data.participants;
+
 
       allow delete: if false;
 
+
       match /messages/{messageId} {
-        allow read, create: if request.auth != null
+
+        allow read: if isActiveUser()
+
           && request.auth.uid in get(
             /databases/$(database)/documents/conversations/$(conversationId)
           ).data.participants;
 
-        allow update, delete: if false;
+
+        allow create: if isActiveUser()
+
+          && request.auth.uid in get(
+            /databases/$(database)/documents/conversations/$(conversationId)
+          ).data.participants;
+
+
+        allow update,
+              delete: if false;
       }
     }
 
+
+    /* =====================================================
+       COMMUNITY POSTS
+    ===================================================== */
+
     match /communityPosts/{postId} {
-      allow read: if signedIn();
 
-      allow create: if signedIn();
+      allow read: if isActiveUser();
 
-      allow update: if signedIn();
 
-      allow delete: if signedIn()
-      && (
-        request.auth.uid == resource.data.userId ||
-        isModeratorOrAdmin()
-      );
+      allow create: if isActiveUser()
+
+        && request.resource.data.userId
+          == request.auth.uid;
+
+
+      /*
+        Post owners may edit their own normal content.
+
+        Other users may only change engagement fields.
+
+        Moderation fields remain backend-only.
+      */
+      allow update: if isActiveUser()
+
+        && (
+
+          (
+            resource.data.userId
+              == request.auth.uid
+
+            && request.resource.data.userId
+              == resource.data.userId
+
+            && !request.resource.data
+              .diff(resource.data)
+              .affectedKeys()
+              .hasAny([
+                "hidden",
+                "hiddenAt",
+                "hiddenBy",
+                "restoredAt",
+                "restoredBy",
+                "moderationReason"
+              ])
+          )
+
+          ||
+
+          request.resource.data
+            .diff(resource.data)
+            .affectedKeys()
+            .hasOnly([
+              "likes",
+              "likeCount",
+              "reactionCount",
+              "commentCount",
+              "shareCount",
+              "reactions",
+              "updatedAt"
+            ])
+
+        );
+
+
+      allow delete: if isActiveUser()
+
+        && (
+          request.auth.uid
+            == resource.data.userId
+
+          ||
+
+          isModeratorOrAdmin()
+        );
+
+
+      match /comments/{commentId} {
+
+        allow read: if isActiveUser();
+
+
+        allow create: if isActiveUser()
+
+          && request.resource.data.userId
+            == request.auth.uid;
+
+
+        allow update,
+              delete: if isActiveUser()
+
+          && (
+            request.auth.uid
+              == resource.data.userId
+
+            ||
+
+            isModeratorOrAdmin()
+          );
+      }
     }
 
-    match /communityPosts/{postId}/comments/{commentId} {
-      allow read, create: if signedIn();
 
-      allow update, delete: if signedIn()
-      && request.auth.uid == resource.data.userId;
-    }
+    /* =====================================================
+       CONNECTIONS
+    ===================================================== */
 
     match /connections/{connectionId} {
-      allow read: if signedIn();
 
-      allow create: if signedIn()
-      && request.auth.uid == request.resource.data.senderId;
+      allow read: if isActiveUser();
 
-      allow update, delete: if signedIn()
-      && (
-        request.auth.uid == resource.data.senderId ||
-        request.auth.uid == resource.data.receiverId
-      );
+
+      allow create: if isActiveUser()
+
+        && request.auth.uid
+          == request.resource.data.senderId;
+
+
+      allow update: if isActiveUser()
+
+        && (
+          request.auth.uid
+            == resource.data.senderId
+
+          ||
+
+          request.auth.uid
+            == resource.data.receiverId
+        )
+
+        && request.resource.data.senderId
+          == resource.data.senderId
+
+        && request.resource.data.receiverId
+          == resource.data.receiverId;
+
+
+      allow delete: if isActiveUser()
+
+        && (
+          resource.data.senderId
+            == request.auth.uid
+
+          ||
+
+          resource.data.receiverId
+            == request.auth.uid
+        );
     }
+
+
+    /* =====================================================
+       NOTIFICATIONS
+    ===================================================== */
 
     match /notifications/{notificationId} {
-      allow read, update, delete: if signedIn()
-      && request.auth.uid == resource.data.userId;
 
-      allow create: if signedIn();
+      allow read: if signedIn()
+
+        && request.auth.uid
+          == resource.data.userId;
+
+
+      /*
+        User may only change the read field.
+      */
+      allow update: if signedIn()
+
+        && request.auth.uid
+          == resource.data.userId
+
+        && request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasOnly([
+            "read"
+          ]);
+
+
+      allow delete: if signedIn()
+
+        && request.auth.uid
+          == resource.data.userId;
+
+
+      /*
+        TEMPORARY migration compatibility.
+
+        Remaining browser-created notifications
+        should eventually move to Cloud Functions.
+      */
+      allow create: if isActiveUser()
+
+        && request.resource.data.userId
+          is string
+
+        && request.resource.data.read
+          == false;
     }
+
+
+    /* =====================================================
+       MARKETPLACE
+    ===================================================== */
 
     match /marketplaceListings/{listingId} {
+
       allow read: if true;
 
-      allow create: if signedIn();
 
-      allow update: if signedIn()
-      && (
-        request.auth.uid == resource.data.userId ||
-        isModeratorOrAdmin()
-      );
+      allow create: if isActiveUser()
 
-      allow delete: if signedIn()
-      && (
-        request.auth.uid == resource.data.userId ||
-        myRole() == "superadmin"
-      );
+        && request.resource.data.userId
+          == request.auth.uid
+
+        && request.resource.data.status
+          == "pending";
+
+
+      /*
+        Owner may edit pending/rejected listings only.
+
+        Approved, expired and archived listings are
+        controlled by backend functions.
+      */
+      allow update: if isActiveUser()
+
+        && resource.data.userId
+          == request.auth.uid
+
+        && request.resource.data.userId
+          == resource.data.userId
+
+        && resource.data.status in [
+          "pending",
+          "rejected"
+        ]
+
+        && request.resource.data.status
+          == "pending"
+
+        && !request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasAny([
+            "approvedBy",
+            "approvedAt",
+            "expiresAt",
+            "expiredAt",
+            "renewedAt",
+            "renewedBy",
+            "archivedAt",
+            "archivedBy",
+            "archiveReason",
+            "deleteAt"
+          ])
+
+        && (
+          resource.data.status != "rejected"
+
+          ||
+
+          (
+            request.resource.data.rejectionReason
+              == ""
+
+            && request.resource.data.rejectedBy
+              == ""
+
+            && request.resource.data.rejectedAt
+              == null
+          )
+        );
+
+
+      allow delete: if isActiveUser()
+
+        && (
+          resource.data.userId
+            == request.auth.uid
+
+          ||
+
+          isSuperAdmin()
+        );
     }
-    
+
+
+    /* =====================================================
+       OPPORTUNITIES
+    ===================================================== */
+
     match /opportunities/{opportunityId} {
-      allow read: if signedIn();
 
-      allow create: if signedIn()
-      && request.resource.data.createdBy == request.auth.uid;
+      allow read: if isActiveUser();
 
-      allow update: if signedIn()
-      && (
-        request.auth.uid == resource.data.createdBy ||
-        isModeratorOrAdmin()
-      );
 
-      allow delete: if signedIn()
-      && (
-        request.auth.uid == resource.data.createdBy ||
-        myRole() == "superadmin"
-      );
+      allow create: if isActiveUser()
+
+        && request.resource.data.createdBy
+          == request.auth.uid
+
+        && request.resource.data.status
+          == "pending";
+
+
+      allow update: if isActiveUser()
+
+        && resource.data.createdBy
+          == request.auth.uid
+
+        && request.resource.data.createdBy
+          == resource.data.createdBy
+
+        && resource.data.status in [
+          "pending",
+          "rejected"
+        ]
+
+        && request.resource.data.status
+          == "pending"
+
+        && !request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasAny([
+            "approvedBy",
+            "approvedAt",
+            "archivedAt",
+            "archivedBy",
+            "archiveReason",
+            "deleteAt"
+          ])
+
+        && (
+          resource.data.status != "rejected"
+
+          ||
+
+          (
+            request.resource.data.rejectionReason
+              == ""
+
+            && request.resource.data.rejectedBy
+              == ""
+
+            && request.resource.data.rejectedAt
+              == null
+          )
+        );
+
+
+      allow delete: if isActiveUser()
+
+        && (
+          resource.data.createdBy
+            == request.auth.uid
+
+          ||
+
+          isSuperAdmin()
+        );
     }
-    
+
+
+    /* =====================================================
+       FUNDRAISERS
+    ===================================================== */
+
     match /fundraisers/{fundraiserId} {
+
       allow read: if true;
 
-      allow create: if signedIn()
-      && request.resource.data.createdBy == request.auth.uid;
 
-      allow update: if signedIn()
-      && (
-        request.auth.uid == resource.data.createdBy ||
-        isModeratorOrAdmin()
-      );
+      allow create: if isActiveUser()
 
-      allow delete: if signedIn()
-      && (
-        request.auth.uid == resource.data.createdBy ||
-        myRole() == "superadmin"
-      );
+        && request.resource.data.createdBy
+          == request.auth.uid
+
+        && request.resource.data.status
+          == "pending";
+
+
+      allow update: if isActiveUser()
+
+        && resource.data.createdBy
+          == request.auth.uid
+
+        && request.resource.data.createdBy
+          == resource.data.createdBy
+
+        && resource.data.status in [
+          "pending",
+          "rejected"
+        ]
+
+        && (
+
+          (
+            resource.data.status
+              == "pending"
+
+            && request.resource.data.status
+              == "pending"
+          )
+
+          ||
+
+          (
+            resource.data.status
+              == "rejected"
+
+            && request.resource.data.status
+              == "pending"
+          )
+
+        )
+
+        && !request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasAny([
+            "approvedBy",
+            "approvedAt",
+            "archivedAt",
+            "archivedBy",
+            "archiveReason",
+            "deleteAt"
+          ])
+
+        && (
+
+          resource.data.status
+            != "rejected"
+
+          ||
+
+          (
+            request.resource.data.rejectionReason
+              == ""
+
+            && request.resource.data.rejectedBy
+              == ""
+
+            && request.resource.data.rejectedAt
+              == null
+          )
+
+        );
+
+
+      allow delete: if isActiveUser()
+
+        && (
+          resource.data.createdBy
+            == request.auth.uid
+
+          ||
+
+          isSuperAdmin()
+        );
     }
+
+
+    /* =====================================================
+       REPORTS
+    ===================================================== */
+
     match /reports/{reportId} {
-      allow create: if signedIn();
 
-      allow read, update: if isModeratorOrAdmin();
+      /*
+        Active users may submit reports.
 
-      allow delete: if signedIn()
-      && myRole() == "superadmin";
+        New reports must start in open state.
+      */
+      allow create: if isActiveUser()
+
+        && request.resource.data.reportedBy
+          == request.auth.uid
+
+        && request.resource.data.itemId
+          is string
+
+        && request.resource.data.type
+          is string
+
+        && request.resource.data.reason
+          is string
+
+        && request.resource.data.status
+          == "open";
+
+
+      /*
+        Moderators/admins may review reports.
+
+        Changes are backend-only.
+      */
+      allow read: if isModeratorOrAdmin();
+
+
+      allow update,
+            delete: if false;
     }
+
+
+    /* =====================================================
+       EVENTS
+    ===================================================== */
+
     match /events/{eventId} {
 
-      // Anyone can view published events.
-      // The event owner and admins can also view pending/draft events.
+      /*
+        Published events are public.
+
+        Owners and moderators may view
+        unpublished events.
+      */
       allow read: if
-        resource.data.status == "published"
+
+        resource.data.status
+          == "published"
+
         ||
+
         (
-          signedIn()
-          &&
-          (
-            resource.data.organiserId == request.auth.uid
+          isActiveUser()
+
+          && (
+            resource.data.organiserId
+              == request.auth.uid
+
             ||
+
             isModeratorOrAdmin()
           )
         );
 
-      // Logged-in users can create their own event.
-      // New events must start as pending.
-      allow create: if signedIn()
-        && request.resource.data.organiserId == request.auth.uid
-        && request.resource.data.status == "pending"
-        && request.resource.data.featured == false;
 
-      // Organiser may edit their own event,
-      // but cannot publish or feature it themselves.
-      allow update: if signedIn()
+      allow create: if isActiveUser()
+
+        && request.resource.data.organiserId
+          == request.auth.uid
+
+        && request.resource.data.status
+          == "pending"
+
+        && request.resource.data.featured
+          == false;
+
+
+      allow update: if isActiveUser()
+
+        && resource.data.organiserId
+          == request.auth.uid
+
+        && request.resource.data.organiserId
+          == resource.data.organiserId
+
+        && resource.data.status in [
+          "pending",
+          "rejected"
+        ]
+
+        && request.resource.data.status
+          == "pending"
+
+        && request.resource.data.featured
+          == false
+
+        && !request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasAny([
+            "approvedBy",
+            "approvedAt",
+            "archivedAt",
+            "archivedBy",
+            "archiveReason",
+            "deleteAt"
+          ])
+
         && (
-          isModeratorOrAdmin()
+          resource.data.status != "rejected"
+
           ||
+
           (
-            resource.data.organiserId == request.auth.uid
-            && request.resource.data.organiserId == resource.data.organiserId
-            && request.resource.data.status == resource.data.status
-            && request.resource.data.featured == resource.data.featured
+            request.resource.data.rejectionReason
+              == ""
+
+            && request.resource.data.rejectedBy
+              == ""
+
+            && request.resource.data.rejectedAt
+              == null
           )
         );
 
-      // Owner can remove their own event.
-      // Superadmin can remove any event.
-      allow delete: if signedIn()
+
+      allow delete: if isActiveUser()
+
         && (
-          resource.data.organiserId == request.auth.uid
+          resource.data.organiserId
+            == request.auth.uid
+
           ||
-          myRole() == "superadmin"
+
+          isSuperAdmin()
         );
     }
+
+
+    /* =====================================================
+       EVENT REGISTRATIONS
+    ===================================================== */
+
     match /eventRegistrations/{registrationId} {
 
-      // Attendee can see their own registration.
-      // Event organiser and admins can also see registrations.
-      allow read: if signedIn()
+      allow read: if isActiveUser()
+
         && (
-          resource.data.userId == request.auth.uid
+          resource.data.userId
+            == request.auth.uid
+
           ||
-          resource.data.organiserId == request.auth.uid
+
+          resource.data.organiserId
+            == request.auth.uid
+
           ||
+
           isModeratorOrAdmin()
         );
 
-      // Users may only register themselves.
-      allow create: if signedIn()
-        && request.resource.data.userId == request.auth.uid
-        && request.resource.data.registrationStatus == "registered"
-        && request.resource.data.checkedIn == false
-        && request.resource.data.paymentStatus == "not-required";
 
-      // Users cannot currently alter registration records.
-      // We'll control these properly later.
-      allow update: if isModeratorOrAdmin();
+      allow create: if isActiveUser()
 
-      // User can cancel/delete own registration.
-      // Admin can also remove it.
-      allow delete: if signedIn()
+        && request.resource.data.userId
+          == request.auth.uid
+
+        && request.resource.data.registrationStatus
+          == "registered"
+
+        && request.resource.data.checkedIn
+          == false
+
+        && request.resource.data.paymentStatus
+          == "not-required";
+
+
+      /*
+        Moderator/admin may update registration state,
+        but cannot change identity or event ownership.
+      */
+      allow update: if isModeratorOrAdmin()
+
+        && !request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasAny([
+            "userId",
+            "organiserId",
+            "eventId",
+            "createdAt"
+          ]);
+
+
+      allow delete: if isActiveUser()
+
         && (
-          resource.data.userId == request.auth.uid
+          resource.data.userId
+            == request.auth.uid
+
           ||
+
           isModeratorOrAdmin()
         );
     }
+
+
+    /* =====================================================
+       AUDIT LOGS
+    ===================================================== */
+
+    match /auditLogs/{auditId} {
+
+      allow read: if isAdmin();
+
+
+      allow create,
+            update,
+            delete: if false;
+    }
+
+
+    /* =====================================================
+       ARCHIVE RECORDS
+    ===================================================== */
+
+    match /archiveRecords/{recordId} {
+
+      allow get,
+            list: if isAdmin();
+
+
+      allow create,
+            update,
+            delete: if false;
+    }
+
+
+    /* =====================================================
+       MODERATION NOTIFICATIONS
+    ===================================================== */
+
+    match /moderationNotifications/{notificationId} {
+
+      /*
+        Created by backend functions.
+
+        Admins can later use this for an
+        admin appeal/moderation notification feed.
+      */
+      allow read: if isAdmin();
+
+
+      allow create,
+            update,
+            delete: if false;
+    }
+
+
+    /* =====================================================
+       DEFAULT DENY
+    ===================================================== */
+
+    match /{document=**} {
+
+      allow read,
+            write: if false;
+    }
+
   }
 }

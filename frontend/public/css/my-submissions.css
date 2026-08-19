@@ -1,0 +1,664 @@
+/* =========================================================
+   MY SUBMISSIONS
+========================================================= */
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.submission-summary {
+    display: grid;
+  
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(0, 1fr)
+      );
+  
+    gap: 18px;
+  
+    margin-bottom: 25px;
+  }
+  
+  
+  .submission-summary-card {
+    min-height: 125px;
+  
+    padding: 22px;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    justify-content:
+      space-between;
+  
+    background: #ffffff;
+  
+    border:
+      1px solid #e9e9e9;
+  
+    border-radius: 16px;
+  
+    box-shadow:
+      0 8px 25px
+      rgba(0, 0, 0, 0.05);
+  }
+  
+  
+  .submission-summary-card span {
+    color: #666666;
+  
+    font-size: 14px;
+  
+    font-weight: 700;
+  }
+  
+  
+  .submission-summary-card strong {
+    font-size: 36px;
+  
+    line-height: 1;
+  
+    color: #111111;
+  }
+  
+  
+  .submission-summary-card.approved {
+    border-top:
+      4px solid #22c55e;
+  }
+  
+  
+  .submission-summary-card.pending {
+    border-top:
+      4px solid #d4af37;
+  }
+  
+  
+  .submission-summary-card.rejected {
+    border-top:
+      4px solid #ef4444;
+  }
+
+  .submission-summary-card.archived {
+    border-top-color: #6b7280;
+  }
+  
+  
+  /* =========================
+     FILTERS
+  ========================= */
+  
+  .submission-filter-panel {
+    display: flex;
+  
+    flex-wrap: wrap;
+  
+    gap: 10px;
+  
+    margin-bottom: 30px;
+  }
+  
+  
+  .submission-filter {
+    padding:
+      10px 18px;
+  
+    border:
+      1px solid #dddddd;
+  
+    border-radius: 999px;
+  
+    background: #ffffff;
+  
+    color: #555555;
+  
+    font-weight: 700;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  
+  
+  .submission-filter:hover {
+    border-color:
+      var(--gold);
+  
+    color:
+      #111111;
+  }
+  
+  
+  .submission-filter.active {
+    background:
+      #111111;
+  
+    border-color:
+      #111111;
+  
+    color:
+      #ffffff;
+  }
+  
+  
+  /* =========================
+     SECTION
+  ========================= */
+  
+  .submission-section {
+    margin-bottom: 30px;
+  
+    padding: 28px;
+  
+    background: #ffffff;
+  
+    border:
+      1px solid #eeeeee;
+  
+    border-radius: 18px;
+  
+    box-shadow:
+      0 8px 30px
+      rgba(0, 0, 0, 0.04);
+  }
+  
+  
+  .submission-section-header {
+    display: flex;
+  
+    justify-content:
+      space-between;
+  
+    align-items:
+      center;
+  
+    gap: 20px;
+  
+    margin-bottom: 22px;
+  }
+  
+  
+  .submission-section-kicker {
+    display: block;
+  
+    margin-bottom: 4px;
+  
+    color:
+      var(--gold);
+  
+    font-size: 11px;
+  
+    font-weight: 800;
+  
+    text-transform: uppercase;
+  
+    letter-spacing: 1px;
+  }
+  
+  
+  .submission-section-header h2 {
+    margin: 0;
+  
+    font-size: 24px;
+  
+    color: #111111;
+  }
+  
+  
+  .submission-section-header > a {
+    padding:
+      10px 15px;
+  
+    border-radius: 10px;
+  
+    background:
+      #111111;
+  
+    color:
+      #ffffff;
+  
+    text-decoration: none;
+  
+    font-size: 13px;
+  
+    font-weight: 700;
+  }
+  
+  
+  /* =========================
+     GRID
+  ========================= */
+  
+  .my-submission-grid {
+    display: grid;
+  
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(
+          280px,
+          1fr
+        )
+      );
+  
+    gap: 20px;
+  }
+  
+  
+  /* =========================
+     CARD
+  ========================= */
+  
+  .my-submission-card {
+    overflow: hidden;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    background: #ffffff;
+  
+    border:
+      1px solid #e7e7e7;
+  
+    border-radius: 16px;
+  
+    box-shadow:
+      0 5px 18px
+      rgba(0, 0, 0, 0.045);
+  }
+  
+  
+  .my-submission-card.submission-approved {
+    border-top:
+      4px solid #22c55e;
+  }
+  
+  
+  .my-submission-card.submission-pending {
+    border-top:
+      4px solid #d4af37;
+  }
+  
+  
+  .my-submission-card.submission-rejected {
+    border-top:
+      4px solid #ef4444;
+  }
+  
+  
+  /* =========================
+     IMAGE
+  ========================= */
+  
+  .my-submission-image-wrap {
+    width: 100%;
+  
+    height: 180px;
+  
+    padding: 15px;
+  
+    background: #f8f8f8;
+  
+    box-sizing: border-box;
+  
+    border-bottom:
+      1px solid #eeeeee;
+  }
+  
+  
+  .my-submission-image {
+    width: 100%;
+  
+    height: 100%;
+  
+    object-fit: contain;
+  
+    border-radius: 10px;
+  }
+  
+  
+  /* =========================
+     BODY
+  ========================= */
+  
+  .my-submission-body {
+    flex: 1;
+  
+    padding: 20px;
+  
+    display: flex;
+  
+    flex-direction: column;
+  }
+  
+  
+  .my-submission-top {
+    display: flex;
+  
+    justify-content:
+      space-between;
+  
+    align-items:
+      center;
+  
+    gap: 12px;
+  
+    margin-bottom: 14px;
+  }
+  
+  
+  .my-submission-body h3 {
+    margin:
+      0 0 10px;
+  
+    font-size: 20px;
+  
+    color: #111111;
+  }
+  
+  
+  .submission-description {
+    margin:
+      0 0 14px;
+  
+    color: #666666;
+  
+    font-size: 14px;
+  
+    line-height: 1.6;
+  
+    display: -webkit-box;
+  
+    -webkit-line-clamp: 3;
+  
+    -webkit-box-orient: vertical;
+  
+    overflow: hidden;
+  }
+  
+  
+  /* =========================
+     BADGES
+  ========================= */
+  
+  .submission-status-badge {
+    display: inline-block;
+  
+    padding:
+      6px 10px;
+  
+    border-radius: 999px;
+  
+    font-size: 11px;
+  
+    font-weight: 800;
+  }
+  
+  
+  .submission-status-badge.approved {
+    background:
+      rgba(
+        34,
+        197,
+        94,
+        0.12
+      );
+  
+    color:
+      #15803d;
+  }
+  
+  
+  .submission-status-badge.pending {
+    background:
+      rgba(
+        212,
+        175,
+        55,
+        0.16
+      );
+  
+    color:
+      #8a6c00;
+  }
+  
+  
+  .submission-status-badge.rejected {
+    background:
+      rgba(
+        239,
+        68,
+        68,
+        0.1
+      );
+  
+    color:
+      #dc2626;
+  }
+
+  .submission-status-badge.archived {
+    background: #f3f4f6;
+    color: #4b5563;
+  }
+  
+  
+  .submission-type-label {
+    color: #999999;
+  
+    font-size: 11px;
+  
+    font-weight: 700;
+  }
+  
+  
+  /* =========================
+     META
+  ========================= */
+  
+  .submission-meta {
+    margin-bottom: 15px;
+  
+    color: #999999;
+  
+    font-size: 12px;
+  }
+  
+  
+  /* =========================
+     STATUS MESSAGE
+  ========================= */
+  
+  .submission-status-message {
+    margin-top: 8px;
+  
+    padding: 14px;
+  
+    border-radius: 12px;
+  }
+  
+  
+  .submission-status-message strong {
+    display: block;
+  
+    margin-bottom: 5px;
+  
+    font-size: 13px;
+  }
+  
+  
+  .submission-status-message p {
+    margin: 0;
+  
+    font-size: 13px;
+  
+    line-height: 1.5;
+  }
+  
+  
+  .pending-message {
+    background:
+      #fff9e8;
+  
+    color:
+      #715900;
+  }
+  
+  
+  .approved-message {
+    background:
+      #eefbf2;
+  
+    color:
+      #166534;
+  }
+  
+  
+  .rejected-message {
+    background:
+      #fff1f1;
+  
+    color:
+      #991b1b;
+  }
+  
+  
+  /* =========================
+     ACTIONS
+  ========================= */
+  
+  .submission-card-actions {
+    margin-top: auto;
+  
+    padding-top: 18px;
+  }
+  
+  
+  .submission-view-btn {
+    display: inline-block;
+  
+    padding:
+      9px 14px;
+  
+    border:
+      1px solid #dddddd;
+  
+    border-radius: 9px;
+  
+    color:
+      #111111;
+  
+    text-decoration: none;
+  
+    font-size: 13px;
+  
+    font-weight: 700;
+  }
+  
+  
+  .submission-view-btn:hover {
+    border-color:
+      var(--gold);
+  }
+  
+  
+  /* =========================
+     EMPTY
+  ========================= */
+  
+  .submission-empty {
+    grid-column:
+      1 / -1;
+  
+    padding:
+      35px 20px;
+  
+    text-align: center;
+  
+    border:
+      1px dashed #dddddd;
+  
+    border-radius: 14px;
+  
+    background:
+      #fafafa;
+  }
+  
+  
+  .submission-empty h3 {
+    margin:
+      0 0 8px;
+  
+    font-size: 17px;
+  }
+  
+  
+  .submission-empty p {
+    margin: 0;
+  
+    color: #777777;
+  
+    font-size: 14px;
+  }
+  
+  
+  .submission-loading {
+    color: #777777;
+  }
+  
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  
+  @media (
+    max-width: 900px
+  ) {
+  
+    .submission-summary {
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+    }
+  
+  }
+  
+  
+  @media (
+    max-width: 600px
+  ) {
+  
+    .submission-summary {
+      grid-template-columns:
+        1fr;
+    }
+  
+  
+    .submission-section {
+      padding: 20px;
+    }
+  
+  
+    .submission-section-header {
+      align-items:
+        flex-start;
+  
+      flex-direction:
+        column;
+    }
+  
+  
+    .my-submission-grid {
+      grid-template-columns:
+        1fr;
+    }
+  
+  }

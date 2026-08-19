@@ -20,120 +20,628 @@
   <aside class="portal-sidebar">
 
     <div class="portal-brand">
-      <img src="../assets/images/TalentGoldPlus.png" alt="Talent Gold">
+      <img
+        src="../assets/images/TalentGoldPlus.png"
+        alt="Talent Gold"
+      >
+
       <div>
         <h2>TalentGoldPlus</h2>
         <p>Member Portal</p>
       </div>
     </div>
 
-    <nav class="portal-menu" id="dashboardNav">
-      <a href="dashboard.html" class="active">Dashboard</a>
-      <a href="profile.html">View My Profile</a>
-      <a href="profile-setup.html">Edit Profile</a>
-      <a href="media.html">My Media</a>
-      <a href="community.html">Community</a>
-      <a href="connections.html">Connections</a>
-      <a href="messages.html">Messages</a>
-      <a href="marketplace.html">Marketplace</a>
-      <a href="raise-funds.html">Raise Funds</a>
-      <a href="notifications.html">Notifications</a>
+
+    <nav
+      class="portal-menu"
+      id="dashboardNav"
+    >
+      <a
+        href="dashboard.html"
+        class="active"
+      >
+        Dashboard
+      </a>
+
+      <a href="profile.html">
+        View My Profile
+      </a>
+
+      <a href="profile-setup.html">
+        Edit Profile
+      </a>
+
+      <a href="media.html">
+        My Media
+      </a>
+
+      <a href="community.html">
+        Community
+      </a>
+
+      <a href="connections.html">
+        Connections
+      </a>
+
+      <a href="messages.html">
+        Messages
+      </a>
+
+      <a href="marketplace.html">
+        Marketplace
+      </a>
+
+      <a href="my-submissions.html">
+        My Submissions
+      </a>
+
+      <a href="raise-funds.html">
+        Raise Funds
+      </a>
+
+      <a href="notifications.html">
+        Notifications
+      </a>
     </nav>
 
-    <div class="portal-user-mini" id="profilePreview"></div>
 
-    <button id="logoutBtn" class="portal-logout">
+    <div
+      class="portal-user-mini"
+      id="profilePreview"
+    ></div>
+
+
+    <button
+      id="logoutBtn"
+      class="portal-logout"
+    >
       Logout
     </button>
 
   </aside>
 
+
   <main class="portal-main">
 
     <header class="portal-topbar">
-      <h1>Dashboard</h1>
+
+      <h1>
+        Dashboard
+      </h1>
 
       <div class="portal-top-user">
-        <span id="welcomeMessage">Welcome</span>
+        <span id="welcomeMessage">
+          Welcome
+        </span>
       </div>
+
     </header>
 
-    <div class="mobile-dashboard-menu">
-      <a href="profile.html">View Profile</a>
-      <a href="profile-setup.html">Edit Profile</a>
-      <a href="media.html">Media</a>
-      <a href="community.html">Community</a>
-      <a href="connections.html">Connections</a>
-      <a href="messages.html">Messages</a>
-      <a href="marketplace.html">Marketplace</a>
-      <a href="raise-funds.html">Raise Funds</a>
-      <a href="notifications.html">Notifications</a>
 
-      <button id="mobileLogoutBtn" class="mobile-logout-btn">
+    <div class="mobile-dashboard-menu">
+
+      <a href="profile.html">
+        View Profile
+      </a>
+
+      <a href="profile-setup.html">
+        Edit Profile
+      </a>
+
+      <a href="media.html">
+        Media
+      </a>
+
+      <a href="community.html">
+        Community
+      </a>
+
+      <a href="connections.html">
+        Connections
+      </a>
+
+      <a href="messages.html">
+        Messages
+      </a>
+
+      <a href="marketplace.html">
+        Marketplace
+      </a>
+
+      <a href="my-submissions.html">
+        My Submissions
+      </a>
+
+      <a href="raise-funds.html">
+        Raise Funds
+      </a>
+
+      <a href="notifications.html">
+        Notifications
+      </a>
+
+      <button
+        id="mobileLogoutBtn"
+        class="mobile-logout-btn"
+      >
         Logout
       </button>
+
     </div>
+
 
     <section class="portal-profile-hero">
 
-      <div class="portal-avatar" id="dashboardAvatar">
+      <div
+        class="portal-avatar"
+        id="dashboardAvatar"
+      >
         TG
       </div>
 
       <div>
-        <h2 id="dashboardName">Loading...</h2>
-        <p id="roleText">Loading dashboard...</p>
-        <span class="portal-status">Active</span>
+
+        <h2 id="dashboardName">
+          Loading...
+        </h2>
+
+        <p id="roleText">
+          Loading dashboard...
+        </p>
+
+        <span class="portal-status">
+          Active
+        </span>
+
       </div>
 
     </section>
 
+
+    <!-- =========================
+         MAIN DASHBOARD STATS
+    ========================== -->
+
     <section class="portal-stats">
 
-      <a href="profile-setup.html" class="portal-stat-card stat-link">
-        <p>Profile Strength</p>
-        <h3 id="profileCompletion">0%</h3>
+      <a
+        href="profile-setup.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>
+          Profile Strength
+        </p>
+
+        <h3 id="profileCompletion">
+          0%
+        </h3>
       </a>
 
-      <a href="media.html" class="portal-stat-card stat-link">
-        <p>Media</p>
-        <h3 id="mediaCount">0</h3>
+
+      <a
+        href="media.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>
+          Media
+        </p>
+
+        <h3 id="mediaCount">
+          0
+        </h3>
       </a>
 
-      <a href="connections.html" class="portal-stat-card stat-link">
-        <p>Connections</p>
-        <h3 id="connectionsCount">0</h3>
+
+      <a
+        href="connections.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>
+          Connections
+        </p>
+
+        <h3 id="connectionsCount">
+          0
+        </h3>
       </a>
 
-      <a href="messages.html" class="portal-stat-card stat-link">
-        <p>Messages</p>
-        <h3 id="messagesCount">0</h3>
+
+      <a
+        href="messages.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>
+          Messages
+        </p>
+
+        <h3 id="messagesCount">
+          0
+        </h3>
       </a>
 
-      <a href="marketplace.html" class="portal-stat-card stat-link">
-        <p>Listings</p>
-        <h3 id="listingsCount">0</h3>
+
+      <a
+        href="raise-funds.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>
+          Raise Funds
+        </p>
+
+        <h3>
+          £0
+        </h3>
       </a>
 
-      <a href="raise-funds.html" class="portal-stat-card stat-link">
-        <p>Raise Funds</p>
-        <h3>£0</h3>
-      </a>
 
-      <a href="notifications.html" class="portal-stat-card stat-link">
-        <p>Notifications</p>
-        <h3 id="notificationsCount">0</h3>
+      <a
+        href="notifications.html"
+        class="portal-stat-card stat-link"
+      >
+        <p>
+          Notifications
+        </p>
+
+        <h3 id="notificationsCount">
+          0
+        </h3>
       </a>
 
     </section>
+
+
+    <!-- =========================
+         MY SUBMISSIONS
+    ========================== -->
+
+    <section class="portal-panel submission-status-panel">
+
+      <div class="portal-panel-header">
+
+        <div>
+
+          <h2>
+            My Submissions
+          </h2>
+
+          <p>
+            Track the approval status of your TalentGoldPlus submissions.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="submission-status-grid">
+
+
+        <!-- MARKETPLACE -->
+
+        <div class="submission-status-group">
+
+          <div class="submission-status-header">
+
+            <div>
+
+              <span class="submission-label">
+                Marketplace
+              </span>
+
+              <h3>
+                My Listings
+              </h3>
+
+            </div>
+
+            <a href="my-submissions.html#marketplace">
+              View
+            </a>
+
+          </div>
+
+
+          <div class="submission-status-counts">
+
+            <div class="submission-count approved">
+
+              <span class="status-dot"></span>
+
+              <strong id="approvedListingsCount">
+                0
+              </strong>
+
+              <p>
+                Approved
+              </p>
+
+            </div>
+
+
+            <div class="submission-count pending">
+
+              <span class="status-dot"></span>
+
+              <strong id="pendingListingsCount">
+                0
+              </strong>
+
+              <p>
+                Pending
+              </p>
+
+            </div>
+
+
+            <div class="submission-count rejected">
+
+              <span class="status-dot"></span>
+
+              <strong id="rejectedListingsCount">
+                0
+              </strong>
+
+              <p>
+                Rejected
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- EVENTS -->
+
+        <div class="submission-status-group">
+
+          <div class="submission-status-header">
+
+            <div>
+
+              <span class="submission-label">
+                Events
+              </span>
+
+              <h3>
+                My Events
+              </h3>
+
+            </div>
+
+            <a href="my-submissions.html#events">
+              View
+            </a>
+
+          </div>
+
+
+          <div class="submission-status-counts">
+
+            <div class="submission-count approved">
+
+              <span class="status-dot"></span>
+
+              <strong id="approvedEventsCount">
+                0
+              </strong>
+
+              <p>
+                Approved
+              </p>
+
+            </div>
+
+
+            <div class="submission-count pending">
+
+              <span class="status-dot"></span>
+
+              <strong id="pendingEventsCount">
+                0
+              </strong>
+
+              <p>
+                Pending
+              </p>
+
+            </div>
+
+
+            <div class="submission-count rejected">
+
+              <span class="status-dot"></span>
+
+              <strong id="rejectedEventsCount">
+                0
+              </strong>
+
+              <p>
+                Rejected
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- OPPORTUNITIES -->
+
+        <div class="submission-status-group">
+
+          <div class="submission-status-header">
+
+            <div>
+
+              <span class="submission-label">
+                Opportunities
+              </span>
+
+              <h3>
+                My Opportunities
+              </h3>
+
+            </div>
+
+            <a href="my-submissions.html#opportunities">
+              View
+            </a>
+
+          </div>
+
+
+          <div class="submission-status-counts">
+
+            <div class="submission-count approved">
+
+              <span class="status-dot"></span>
+
+              <strong id="approvedOpportunitiesCount">
+                0
+              </strong>
+
+              <p>
+                Approved
+              </p>
+
+            </div>
+
+
+            <div class="submission-count pending">
+
+              <span class="status-dot"></span>
+
+              <strong id="pendingOpportunitiesCount">
+                0
+              </strong>
+
+              <p>
+                Pending
+              </p>
+
+            </div>
+
+
+            <div class="submission-count rejected">
+
+              <span class="status-dot"></span>
+
+              <strong id="rejectedOpportunitiesCount">
+                0
+              </strong>
+
+              <p>
+                Rejected
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FUNDRAISERS -->
+
+        <div class="submission-status-group">
+
+          <div class="submission-status-header">
+
+            <div>
+
+              <span class="submission-label">
+                Fundraising
+              </span>
+
+              <h3>
+                My Fundraisers
+              </h3>
+
+            </div>
+
+            <a href="my-submissions.html#fundraisers">
+              View
+            </a>
+
+          </div>
+
+
+          <div class="submission-status-counts">
+
+            <div class="submission-count approved">
+
+              <span class="status-dot"></span>
+
+              <strong id="approvedFundraisersCount">
+                0
+              </strong>
+
+              <p>
+                Approved
+              </p>
+
+            </div>
+
+
+            <div class="submission-count pending">
+
+              <span class="status-dot"></span>
+
+              <strong id="pendingFundraisersCount">
+                0
+              </strong>
+
+              <p>
+                Pending
+              </p>
+
+            </div>
+
+
+            <div class="submission-count rejected">
+
+              <span class="status-dot"></span>
+
+              <strong id="rejectedFundraisersCount">
+                0
+              </strong>
+
+              <p>
+                Rejected
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUICK ACTIONS
+    ========================== -->
 
     <section class="portal-panel">
 
       <div class="portal-panel-header">
-        <h2>Quick Actions</h2>
+
+        <h2>
+          Quick Actions
+        </h2>
+
       </div>
 
-      <div class="portal-actions" id="dashboardCards"></div>
+      <div
+        class="portal-actions"
+        id="dashboardCards"
+      ></div>
 
     </section>
 
@@ -141,8 +649,13 @@
 
 </div>
 
+
 <script src="../js/components-loader.js"></script>
-<script type="module" src="../js/auth/auth-state.js"></script>
+
+<script
+  type="module"
+  src="../js/auth/auth-state.js"
+></script>
 
 </body>
 </html>

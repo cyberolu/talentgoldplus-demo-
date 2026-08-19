@@ -1,62 +1,332 @@
 <!DOCTYPE html>
 <html lang="en-GB">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reports | TalentGoldPlus</title>
-<link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <meta charset="UTF-8">
 
-<link rel="stylesheet" href="../css/styles.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/admin.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Reports | TalentGoldPlus
+  </title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../assets/images/favicon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/layout.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/admin.css"
+  >
+
 </head>
+
 
 <body style="display: none;">
 
+
 <div class="admin-layout">
 
-<aside class="admin-sidebar">
 
-<div class="admin-brand">
-<h2>TalentGoldPlus</h2>
-<p>Admin Panel</p>
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+
+      <h2>
+        TalentGoldPlus
+      </h2>
+
+      <p>
+        Admin Panel
+      </p>
+
+    </div>
+
+
+    <nav class="admin-menu">
+
+      <a href="index.html">
+        Admin Dashboard
+      </a>
+
+      <a href="users.html">
+        Users
+      </a>
+
+      <a href="approvals.html">
+        Approvals
+      </a>
+
+      <a href="approved-content.html">
+        Approved Content
+      </a>
+
+      <a href="archived-content.html">
+        Archived Content
+      </a>
+
+      <a
+        href="reports.html"
+        class="active"
+      >
+        Reports
+      </a>
+
+      <a href="../pages/dashboard.html">
+        User Dashboard
+      </a>
+
+    </nav>
+
+
+    <button
+      id="logoutBtn"
+      class="admin-logout"
+      type="button"
+    >
+      Logout
+    </button>
+
+  </aside>
+
+
+
+  <main class="admin-main">
+
+
+    <header class="admin-topbar">
+
+      <div>
+
+        <h1>
+          Reports
+        </h1>
+
+        <p id="adminWelcome">
+          Checking access...
+        </p>
+
+      </div>
+
+    </header>
+
+
+
+    <div class="admin-dashboard-content">
+
+
+      <section class="report-summary">
+
+
+        <div class="report-summary-card">
+
+          <span>
+            Total Reports
+          </span>
+
+          <strong id="reportsTotalCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="report-summary-card">
+
+          <span>
+            Open
+          </span>
+
+          <strong id="reportsOpenCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="report-summary-card">
+
+          <span>
+            Appeals
+          </span>
+
+          <strong id="reportsAppealedCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="report-summary-card">
+
+          <span>
+            Resolved
+          </span>
+
+          <strong id="reportsResolvedCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="report-summary-card">
+
+          <span>
+            Dismissed
+          </span>
+
+          <strong id="reportsDismissedCount">
+            0
+          </strong>
+
+        </div>
+
+
+      </section>
+
+
+
+      <section class="report-controls">
+
+
+        <div class="report-filter-buttons">
+
+
+          <button
+            type="button"
+            class="report-filter active"
+            data-filter="all"
+          >
+            All
+          </button>
+
+
+          <button
+            type="button"
+            class="report-filter"
+            data-filter="open"
+          >
+            Open
+          </button>
+
+
+          <button
+            type="button"
+            class="report-filter"
+            data-filter="appealed"
+          >
+            Appeals
+          </button>
+
+
+          <button
+            type="button"
+            class="report-filter"
+            data-filter="resolved"
+          >
+            Resolved
+          </button>
+
+
+          <button
+            type="button"
+            class="report-filter"
+            data-filter="dismissed"
+          >
+            Dismissed
+          </button>
+
+
+        </div>
+
+
+        <input
+          type="search"
+          id="reportSearch"
+          class="report-search"
+          placeholder="Search reports..."
+          autocomplete="off"
+        >
+
+
+      </section>
+
+
+
+      <section class="admin-panel">
+
+
+        <div class="admin-panel-header">
+
+          <div>
+
+            <h2>
+              Reported Items
+            </h2>
+
+            <p>
+              Review reports, appeals and moderation decisions.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div id="reportsGrid">
+
+          <p>
+            Loading reports...
+          </p>
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </main>
+
+
 </div>
 
-<nav class="admin-menu">
-<a href="index.html">Dashboard</a>
-<a href="users.html">Users</a>
-<a href="approvals.html">Approvals</a>
-<a href="reports.html" class="active">Reports</a>
-</nav>
 
-</aside>
+<script
+  type="module"
+  src="../js/admin/reports.js"
+></script>
 
-<main class="admin-main">
 
-<header class="admin-topbar">
-<h1>Reports</h1>
-<p>Manage reported content.</p>
-</header>
+<script
+  src="../js/components-loader.js"
+></script>
 
-<section class="admin-panel">
-
-<h2>Reported Items</h2>
-
-<div id="reportsGrid">
-Loading reports...
-</div>
-
-</section>
-
-</main>
-
-</div>
-
-<script type="module" src="../js/admin/reports.js"></script>
-
-<script src="../js/components-loader.js"></script>
 
 </body>
+
 </html>

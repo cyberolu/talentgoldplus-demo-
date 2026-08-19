@@ -1,109 +1,502 @@
 <!DOCTYPE html>
 <html lang="en-GB">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Admin Dashboard | TalentGoldPlus</title>
-  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <title>
+    Admin Dashboard | TalentGoldPlus
+  </title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../assets/images/favicon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/layout.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/admin.css"
+  >
+
 </head>
+
 
 <body style="display: none;">
 
+
 <div class="admin-layout">
+
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
 
   <aside class="admin-sidebar">
 
+
     <div class="admin-brand">
-      <h2>TalentGoldPlus</h2>
-      <p>Admin Panel</p>
+
+      <h2>
+        TalentGoldPlus
+      </h2>
+
+      <p>
+        Admin Panel
+      </p>
+
     </div>
 
+
     <nav class="admin-menu">
-      <a href="index.html" class="active">Dashboard</a>
-      <a href="users.html">Users</a>
-      <a href="approvals.html">Approvals</a>
-      <a href="reports.html">Reports</a>
-      <a href="../pages/dashboard.html">User Dashboard</a>
+
+      <a
+        href="index.html"
+        class="active"
+      >
+        Admin Dashboard
+      </a>
+
+
+      <a href="users.html">
+        Users
+      </a>
+
+
+      <a href="approvals.html">
+        Approvals
+      </a>
+
+
+      <a href="approved-content.html">
+        Approved Content
+      </a>
+
+    <!-- ARCHIVED CONTENT -->
+     
+      <a href="archived-content.html">
+        Archived Content
+      </a>
+
+
+      <a href="reports.html">
+        Reports
+      </a>
+
+
+      <a href="../pages/dashboard.html">
+        User Dashboard
+      </a>
+
     </nav>
 
-    <button id="logoutBtn" class="admin-logout" type="button">
+
+    <button
+      id="logoutBtn"
+      class="admin-logout"
+      type="button"
+    >
       Logout
     </button>
-    
+
 
   </aside>
 
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
   <main class="admin-main">
 
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
     <header class="admin-topbar">
+
       <div>
-        <h1>Admin Dashboard</h1>
-        <p id="adminWelcome">Checking access...</p>
+
+        <h1>
+          Admin Dashboard
+        </h1>
+
+        <p id="adminWelcome">
+          Checking access...
+        </p>
+
       </div>
+
     </header>
 
-    <section class="admin-stats">
 
-      <div class="admin-stat-card">
-        <p>Total Users</p>
-        <h2 id="totalUsers">0</h2>
-      </div>
 
-      <div class="admin-stat-card">
-        <p>Pending Approvals</p>
-        <h3 id="pendingApprovals">0</h3>
-      </div>
+    <!-- =========================
+         DASHBOARD CONTENT
+    ========================== -->
 
-      <div class="admin-stat-card">
-        <p>Approved Listings</p>
-        <h3 id="approvedListings">0</h3>
-      </div>
+    <div class="admin-dashboard-content">
 
-      <div class="admin-stat-card">
-        <p>Reports</p>
-        <h3 id="totalReports">0</h3>
-      </div>
 
-    </section>
+      <!-- =========================
+           STATS
+      ========================== -->
 
-    <section class="admin-panel">
+      <section class="admin-dashboard-stats">
 
-      <h2>Quick Actions</h2>
 
-      <div class="admin-actions">
+        <!-- TOTAL USERS -->
 
-        <a href="users.html" class="admin-action-card">
-          <h3>Manage Users</h3>
-          <p>View users and update roles.</p>
+        <div class="admin-dashboard-stat">
+
+          <span class="admin-stat-label">
+            Total Users
+          </span>
+
+          <strong id="totalUsers">
+            0
+          </strong>
+
+        </div>
+
+
+
+        <!-- PENDING USERS -->
+
+        <a
+          href="users.html"
+          class="
+            admin-dashboard-stat
+            admin-dashboard-stat-link
+          "
+        >
+
+          <span class="admin-stat-label">
+            Pending Users
+          </span>
+
+          <strong id="pendingUsers">
+            0
+          </strong>
+
         </a>
 
-        <a href="approvals.html" class="admin-action-card">
-          <h3>Review Approvals</h3>
-          <p>Approve or reject marketplace listings.</p>
+
+
+        <!-- PENDING CONTENT -->
+
+        <a
+          href="approvals.html"
+          class="
+            admin-dashboard-stat
+            admin-dashboard-stat-link
+          "
+        >
+
+          <span class="admin-stat-label">
+            Pending Approvals
+          </span>
+
+          <strong id="pendingApprovals">
+            0
+          </strong>
+
         </a>
 
-        <a href="reports.html" class="admin-action-card">
-          <h3>Review Reports</h3>
-          <p>Handle reported posts, users and listings.</p>
+
+
+        <!-- APPROVED CONTENT -->
+
+        <a
+          href="approved-content.html"
+          class="
+            admin-dashboard-stat
+            admin-dashboard-stat-link
+          "
+        >
+
+          <span class="admin-stat-label">
+            Approved Content
+          </span>
+
+          <strong id="approvedContent">
+            0
+          </strong>
+
         </a>
 
-      </div>
+        <a
+          href="archived-content.html"
+          class="
+            admin-dashboard-stat
+            admin-dashboard-stat-link
+          "
+        >
+          <span class="admin-stat-label">
+            Archived Content
+          </span>
 
-    </section>
+          <strong id="archivedContent">
+            0
+          </strong>
+        </a>
+
+        <!-- REPORTS -->
+
+        <a
+          href="reports.html"
+          class="
+            admin-dashboard-stat
+            admin-dashboard-stat-link
+          "
+        >
+
+          <span class="admin-stat-label">
+            Reports
+          </span>
+
+          <strong id="totalReports">
+            0
+          </strong>
+
+        </a>
+
+
+      </section>
+
+
+
+      <!-- =========================
+           QUICK ACTIONS
+      ========================== -->
+
+      <section class="admin-dashboard-section">
+
+
+        <div class="admin-dashboard-section-header">
+
+          <div>
+
+            <h2>
+              Quick Actions
+            </h2>
+
+            <p>
+              Manage the main areas of TalentGoldPlus.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="admin-dashboard-actions">
+
+
+          <!-- MANAGE USERS -->
+
+          <a
+            href="users.html"
+            class="admin-dashboard-action"
+          >
+
+            <span class="admin-action-kicker">
+              Accounts
+            </span>
+
+            <h3>
+              Manage Users
+            </h3>
+
+            <p>
+              Review new registrations,
+              manage roles,
+              suspend accounts
+              and maintain user access.
+            </p>
+
+            <span class="admin-action-link">
+              Open Users →
+            </span>
+
+          </a>
+
+
+
+          <!-- APPROVALS -->
+
+          <a
+            href="approvals.html"
+            class="admin-dashboard-action"
+          >
+
+            <span class="admin-action-kicker">
+              Moderation
+            </span>
+
+            <h3>
+              Review Approvals
+            </h3>
+
+            <p>
+              Review events,
+              marketplace listings,
+              opportunities
+              and fundraisers awaiting approval.
+            </p>
+
+            <span class="admin-action-link">
+              Open Approvals →
+            </span>
+
+          </a>
+
+
+
+          <!-- APPROVED CONTENT -->
+
+          <a
+            href="approved-content.html"
+            class="admin-dashboard-action"
+          >
+
+            <span class="admin-action-kicker">
+              Content
+            </span>
+
+            <h3>
+              Approved Content
+            </h3>
+
+            <p>
+              View approved marketplace listings,
+              events,
+              opportunities
+              and fundraisers.
+            </p>
+
+            <span class="admin-action-link">
+              View Content →
+            </span>
+
+          </a>
+
+
+
+          <!-- ARCHIVED CONTENT -->
+
+          <a
+            href="archived-content.html"
+            class="admin-dashboard-action"
+          >
+
+            <span class="admin-action-kicker">
+              Archive
+            </span>
+
+            <h3>
+              Archived Content
+            </h3>
+
+            <p>
+              Review archived marketplace listings,
+              events, opportunities and fundraisers,
+              including archive reasons and scheduled
+              deletion dates.
+            </p>
+
+            <span class="admin-action-link">
+              View Archive →
+            </span>
+
+          </a>
+
+
+
+          <!-- REPORTS -->
+
+          <a
+            href="reports.html"
+            class="admin-dashboard-action"
+          >
+
+            <span class="admin-action-kicker">
+              Safety
+            </span>
+
+            <h3>
+              Review Reports
+            </h3>
+
+            <p>
+              Review reported users
+              and content
+              and take moderation action
+              where required.
+            </p>
+
+            <span class="admin-action-link">
+              Open Reports →
+            </span>
+
+          </a>
+
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
 
   </main>
 
+
 </div>
 
-<script type="module" src="../js/admin/admin.js"></script>
 
-<script src="../js/components-loader.js"></script>
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script
+  type="module"
+  src="../js/admin/admin.js"
+></script>
+
+
+<script
+  src="../js/components-loader.js"
+></script>
+
 
 </body>
+
 </html>

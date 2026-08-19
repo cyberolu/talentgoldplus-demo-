@@ -9,18 +9,31 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-let unsubscribeNotifications = null;
+
+let unsubscribeNotifications =
+  null;
+
 
 export function listenForNotifications(
   userId
 ) {
+
   if (!userId) {
     return;
   }
 
-  if (unsubscribeNotifications) {
+
+  if (
+    unsubscribeNotifications
+  ) {
+
     unsubscribeNotifications();
+
+    unsubscribeNotifications =
+      null;
+
   }
+
 
   const notificationsQuery =
     query(
@@ -28,11 +41,13 @@ export function listenForNotifications(
         db,
         "notifications"
       ),
+
       where(
         "userId",
         "==",
         userId
       ),
+
       where(
         "read",
         "==",
@@ -40,25 +55,67 @@ export function listenForNotifications(
       )
     );
 
+
   unsubscribeNotifications =
     onSnapshot(
+
       notificationsQuery,
+
       (snapshot) => {
+
         const notificationsCount =
           document.getElementById(
             "notificationsCount"
           );
 
-        if (notificationsCount) {
-          notificationsCount.textContent =
-            snapshot.size;
+
+        if (
+          !notificationsCount
+        ) {
+
+          return;
+
         }
+
+
+        const unreadCount =
+          snapshot.size;
+
+
+        notificationsCount.textContent =
+          unreadCount;
+
+
+        notificationsCount.hidden =
+          unreadCount === 0;
+
       },
+
       (error) => {
+
         console.error(
           "Notification listener error:",
           error
         );
+
       }
+
     );
+
+}
+
+
+export function stopNotificationListener() {
+
+  if (
+    unsubscribeNotifications
+  ) {
+
+    unsubscribeNotifications();
+
+    unsubscribeNotifications =
+      null;
+
+  }
+
 }

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Archived Content | TalentGoldPlus
+  </title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../assets/images/favicon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/layout.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/admin.css"
+  >
+
+</head>
+
+
+<body style="display: none;">
+
+
+<div class="admin-layout">
+
+
+  <aside class="admin-sidebar">
+
+    <div class="admin-brand">
+
+      <h2>
+        TalentGoldPlus
+      </h2>
+
+      <p>
+        Admin Panel
+      </p>
+
+    </div>
+
+
+    <nav class="admin-menu">
+
+      <a href="index.html">
+        Admin Dashboard
+      </a>
+
+      <a href="users.html">
+        Users
+      </a>
+
+      <a href="approvals.html">
+        Approvals
+      </a>
+
+      <a href="approved-content.html">
+        Approved Content
+      </a>
+
+      <a href="archived-content.html">
+        Archived Content
+      </a>
+
+      <a
+        href="archived-content.html"
+        class="active"
+      >
+        Archived Content
+      </a>
+
+      <a href="reports.html">
+        Reports
+      </a>
+
+      <a href="../pages/dashboard.html">
+        User Dashboard
+      </a>
+
+    </nav>
+
+
+    <button
+      id="logoutBtn"
+      class="admin-logout"
+      type="button"
+    >
+      Logout
+    </button>
+
+  </aside>
+
+
+
+  <main class="admin-main">
+
+
+    <header class="admin-topbar">
+
+      <div>
+
+        <h1>
+          Archived Content
+        </h1>
+
+        <p id="adminWelcome">
+          Checking access...
+        </p>
+
+      </div>
+
+    </header>
+
+
+
+    <div class="admin-dashboard-content">
+
+
+      <section class="archive-summary">
+
+        <div class="archive-summary-card">
+
+          <span>
+            Archived Records
+          </span>
+
+          <strong id="archiveVisibleCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="archive-summary-card">
+
+          <span>
+            Page
+          </span>
+
+          <strong id="archivePageNumber">
+            1
+          </strong>
+
+        </div>
+
+
+        <div class="archive-summary-card">
+
+          <span>
+            Page Size
+          </span>
+
+          <strong>
+            50
+          </strong>
+
+        </div>
+
+      </section>
+
+
+
+      <section class="archive-controls">
+
+
+        <div class="archive-filter-buttons">
+
+          <button
+            type="button"
+            class="archive-filter active"
+            data-filter="all"
+          >
+            All
+          </button>
+
+
+          <button
+            type="button"
+            class="archive-filter"
+            data-filter="marketplace"
+          >
+            Marketplace
+          </button>
+
+
+          <button
+            type="button"
+            class="archive-filter"
+            data-filter="event"
+          >
+            Events
+          </button>
+
+
+          <button
+            type="button"
+            class="archive-filter"
+            data-filter="opportunity"
+          >
+            Opportunities
+          </button>
+
+
+          <button
+            type="button"
+            class="archive-filter"
+            data-filter="fundraiser"
+          >
+            Fundraisers
+          </button>
+
+        </div>
+
+
+        <input
+          type="search"
+          id="archiveSearch"
+          class="archive-search"
+          placeholder="Search this page..."
+          autocomplete="off"
+        >
+
+
+        <button
+          type="button"
+          id="rebuildArchiveIndexBtn"
+          class="archive-maintenance-btn"
+        >
+          Rebuild Archive Index
+        </button>
+
+
+      </section>
+
+
+
+      <section class="archive-panel">
+
+
+        <div class="archive-table-wrap">
+
+
+          <table class="archive-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Type
+                </th>
+
+                <th>
+                  Content
+                </th>
+
+                <th>
+                  Owner
+                </th>
+
+                <th>
+                  Archived
+                </th>
+
+                <th>
+                  Reason
+                </th>
+
+                <th>
+                  Delete After
+                </th>
+
+                <th>
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="archiveTableBody">
+
+              <tr>
+
+                <td colspan="7">
+                  Loading archived content...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+        </div>
+
+
+
+        <div class="archive-pagination">
+
+          <button
+            id="archivePreviousBtn"
+            type="button"
+            disabled
+          >
+            ← Previous
+          </button>
+
+
+          <span id="archivePaginationStatus">
+            Page 1
+          </span>
+
+
+          <button
+            id="archiveNextBtn"
+            type="button"
+          >
+            Next →
+          </button>
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+  </main>
+
+
+</div>
+
+
+<script
+  type="module"
+  src="../js/admin/archived-content.js"
+></script>
+
+
+<script src="../js/components-loader.js"></script>
+
+
+</body>
+
+</html>

@@ -439,3 +439,251 @@ body,
 .stat-link h3 {
   color: inherit;
 }
+/* =========================
+   LISTING STATUS CARDS
+========================= */
+
+.listing-status-card {
+  position: relative;
+}
+
+.listing-status-card p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #777777;
+  margin-bottom: 8px;
+}
+
+.listing-status-card h3 {
+  font-size: 32px;
+  margin-bottom: 0;
+  color: #111111;
+}
+
+.listing-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  min-width: 9px;
+  border-radius: 50%;
+}
+
+.approved-listing .listing-dot {
+  background: #22c55e;
+}
+
+.pending-listing .listing-dot {
+  background: var(--gold);
+}
+
+.rejected-listing .listing-dot {
+  background: #ef4444;
+}
+/* =========================
+   SUBMISSION STATUS
+========================= */
+
+.submission-status-panel {
+  margin-bottom: 28px;
+}
+
+.submission-status-panel
+.portal-panel-header {
+  margin-bottom: 22px;
+}
+
+.submission-status-panel
+.portal-panel-header h2 {
+  margin-bottom: 5px;
+}
+
+.submission-status-panel
+.portal-panel-header p {
+  margin: 0;
+  color: #777777;
+}
+
+
+.submission-status-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 20px;
+}
+
+
+.submission-status-group {
+  background: #fafafa;
+
+  border:
+    1px solid #eeeeee;
+
+  border-radius: 18px;
+
+  padding: 22px;
+}
+
+
+.submission-status-header {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+
+.submission-label {
+  display: block;
+
+  color: #999999;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+
+  margin-bottom: 5px;
+}
+
+
+.submission-status-header h3 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+
+.submission-status-header a {
+  color: var(--gold);
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+  font-size: 14px;
+}
+
+
+.submission-status-header a:hover {
+  text-decoration: underline;
+}
+
+
+.submission-status-counts {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+}
+
+
+.submission-count {
+  position: relative;
+
+  background: #ffffff;
+
+  border:
+    1px solid #eeeeee;
+
+  border-radius: 14px;
+
+  padding:
+    16px 12px;
+
+  text-align: center;
+}
+
+
+.submission-count
+.status-dot {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+
+.submission-count.approved
+.status-dot {
+  background: #22c55e;
+}
+
+
+.submission-count.pending
+.status-dot {
+  background: var(--gold);
+}
+
+
+.submission-count.rejected
+.status-dot {
+  background: #ef4444;
+}
+
+
+.submission-count strong {
+  display: block;
+
+  font-size: 30px;
+
+  line-height: 1;
+
+  color: #111111;
+
+  margin-bottom: 8px;
+}
+
+
+.submission-count p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+@media (max-width: 900px) {
+
+  .submission-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .submission-status-counts {
+    grid-template-columns: 1fr;
+  }
+
+}
