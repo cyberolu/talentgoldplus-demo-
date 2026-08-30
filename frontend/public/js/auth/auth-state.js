@@ -315,7 +315,7 @@ async function checkAccountStatus(
     if (!isPendingPage) {
 
       window.location.href =
-        "../pages/account-pending.html";
+        "/account-pending";
 
     } else {
 
@@ -340,7 +340,7 @@ async function checkAccountStatus(
     if (!isPendingPage) {
 
       window.location.href =
-        "../pages/account-pending.html?status=rejected";
+        "/account-pending?status=rejected";
 
     } else {
 

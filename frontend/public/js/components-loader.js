@@ -14,135 +14,135 @@ const basePath =
 const links = {
 
   home:
-    `${basePath}index.html`,
+    "/",
 
   about:
-    `${basePath}pages/about.html`,
+    "/about",
 
   sports:
-    `${basePath}pages/sports.html`,
+    "/sports",
 
   athletes:
-    `${basePath}pages/athletes.html`,
+    "/athletes",
 
   coaches:
-    `${basePath}pages/services.html?category=coach`,
+    "/services?category=coach",
 
   scouts:
-    `${basePath}pages/scouts.html`,
+    "/scouts",
 
   investors:
-    `${basePath}pages/investors.html`,
+    "/investors",
 
   community:
-    `${basePath}pages/community.html`,
+    "/community",
 
   events:
-    `${basePath}pages/events.html`,
+    "/events",
 
   opportunities:
-    `${basePath}pages/opportunities.html`,
+    "/opportunities",
 
   opportunitiesPage:
-    `${basePath}pages/opportunities.html`,
+    "/opportunities",
 
   marketplace:
-    `${basePath}pages/marketplace.html`,
+    "/marketplace",
 
   notifications:
-    `${basePath}pages/notifications.html`,
+    "/notifications",
 
   services:
-    `${basePath}pages/services.html`,
+    "/services",
 
   volunteer:
-    `${basePath}pages/volunteer.html`,
+    "/volunteer",
 
   ambassadors:
-    `${basePath}pages/ambassadors.html`,
+    "/ambassadors",
 
   partners:
-    `${basePath}pages/partners.html`,
+    "/partners",
 
   donate:
-    `${basePath}pages/donate.html`,
+    "/donate",
 
 
   football:
-    `${basePath}pages/athletes.html?sport=football`,
+    "/athletes?sport=football",
 
   athletics:
-    `${basePath}pages/athletes.html?sport=athletics`,
+    "/athletes?sport=athletics",
 
   basketball:
-    `${basePath}pages/athletes.html?sport=basketball`,
+    "/athletes?sport=basketball",
 
   rugby:
-    `${basePath}pages/athletes.html?sport=rugby`,
+    "/athletes?sport=rugby",
 
   tennis:
-    `${basePath}pages/athletes.html?sport=tennis`,
+    "/athletes?sport=tennis",
 
   combat:
-    `${basePath}pages/athletes.html?sport=combat-sports`,
+    "/athletes?sport=combat-sports",
 
 
   physiotherapists:
-    `${basePath}pages/services.html?category=physiotherapist`,
+    "/services?category=physiotherapist",
 
   sportsTherapists:
-    `${basePath}pages/services.html?category=sports-therapist`,
+    "/services?category=sports-therapist",
 
   nutritionists:
-    `${basePath}pages/services.html?category=nutritionist`,
+    "/services?category=nutritionist",
 
   psychologists:
-    `${basePath}pages/services.html?category=psychologist`,
+    "/services?category=psychologist",
 
   wellbeing:
-    `${basePath}pages/services.html?category=wellbeing-specialist`,
+    "/services?category=wellbeing-specialist",
 
   recovery:
-    `${basePath}pages/services.html?category=recovery-expert`,
+    "/services?category=recovery-expert",
 
   mentors:
-    `${basePath}pages/services.html?category=mentor`,
+    "/services?category=mentor",
 
   performance:
-    `${basePath}pages/services.html?category=performance-specialist`,
+    "/services?category=performance-specialist",
 
 
   login:
-    `${basePath}auth/login.html`,
+    "/login",
 
   register:
-    `${basePath}auth/register.html`,
+    "/register",
 
 
   terms:
-    `${basePath}legal/terms.html`,
+    "/terms",
 
   privacy:
-    `${basePath}legal/privacy.html`,
+    "/privacy",
 
   cookies:
-    `${basePath}legal/cookies.html`,
+    "/cookies",
 
   communityGuidelines:
-    `${basePath}legal/community-guidelines.html`,
+    "/community-guidelines",
 
   safeguarding:
-    `${basePath}legal/safeguarding.html`,
+    "/safeguarding",
 
   copyright:
-    `${basePath}legal/copyright.html`,
+    "/copyright",
 
   contact:
-    `${basePath}legal/contact.html`,
+    "/contact",
 
 
   raiseFunds:
-    `${basePath}pages/raise-funds.html`
+    "/raise-funds"
 
 };
 

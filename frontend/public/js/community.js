@@ -39,7 +39,7 @@ let unsubscribePosts = null;
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "../auth/login.html";
+    window.location.href = "/login";
     return;
   }
 
@@ -279,7 +279,7 @@ function loadCommunityPosts() {
 
           <div>
             <h3>
-              <a href="profile.html?user=${post.userId}">
+              <a href="/profile?user=${post.userId}">
                 ${post.name || "TalentGoldPlus User"}
               </a>
             </h3>

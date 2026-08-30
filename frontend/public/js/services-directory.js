@@ -189,7 +189,7 @@ function renderProfessionals() {
         createProfileCard(
           user,
           {
-            profilePage: "profile.html",
+            profilePage: "/profile",
             roleLabel: "Professional",
             fallbackImage:
               "../assets/images/avatar-placeholder.png"

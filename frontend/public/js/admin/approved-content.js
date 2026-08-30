@@ -109,7 +109,7 @@ import {
       if (!user) {
   
         window.location.href =
-          "../auth/login.html";
+          "/login";
   
         return;
   
@@ -137,7 +137,7 @@ import {
         ) {
   
           window.location.href =
-            "../pages/dashboard.html";
+            "/dashboard";
   
           return;
   
@@ -165,7 +165,7 @@ import {
   
   
           window.location.href =
-            "../pages/dashboard.html";
+            "/dashboard";
   
           return;
   
@@ -1113,35 +1113,35 @@ import {
       case "marketplace":
   
         return (
-          "../pages/marketplace.html"
+          "../pages//marketplace"
         );
   
   
       case "event":
   
         return (
-          "../pages/events.html"
+          "../pages//events"
         );
   
   
       case "opportunity":
   
         return (
-          "../pages/opportunities.html"
+          "../pages//opportunities"
         );
   
   
       case "fundraiser":
   
         return (
-          "../pages/raise-funds.html"
+          "../pages//raise-funds"
         );
   
   
       default:
   
         return (
-          "../pages/dashboard.html"
+          "/dashboard"
         );
   
     }
@@ -1404,7 +1404,7 @@ if (
   
   
         window.location.href =
-          "../index.html";
+          "/";
   
       }
     );

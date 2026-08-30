@@ -122,7 +122,7 @@ async function loadAthletes() {
           ${extra}
         </p>
 
-        <a href="profile.html?user=${user.id}" class="btn-primary">
+        <a href="/profile?user=${user.id}" class="btn-primary">
           View Profile
         </a>
       </div>

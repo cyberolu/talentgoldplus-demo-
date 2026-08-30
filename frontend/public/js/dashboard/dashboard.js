@@ -235,7 +235,7 @@ function renderDashboardNavigation(
   dashboardNav.innerHTML = `
 
     <a
-      href="dashboard.html"
+      href="/dashboard"
       class="active"
     >
       Dashboard
@@ -243,58 +243,58 @@ function renderDashboardNavigation(
 
 
     <a
-      href="profile.html?user=${userId}"
+      href="/profile?user=${userId}"
     >
       View My Profile
     </a>
 
 
-    <a href="profile-setup.html">
+    <a href="/profile-setup">
       Edit Profile
     </a>
 
 
-    <a href="media.html">
+    <a href="/media">
       My Media
     </a>
 
 
-    <a href="community.html">
+    <a href="/community">
       Community
     </a>
 
 
-    <a href="events.html">
+    <a href="/events">
       Events
     </a>
 
 
-    <a href="connections.html">
+    <a href="/connections">
       Connections
     </a>
 
 
-    <a href="messages.html">
+    <a href="/messages">
       Messages
     </a>
 
 
-    <a href="marketplace.html">
+    <a href="/marketplace">
       Marketplace
     </a>
 
 
-    <a href="my-submissions.html">
+    <a href="/my-submissions">
       My Submissions
     </a>
 
 
-    <a href="raise-funds.html">
+    <a href="/raise-funds">
       Raise Funds
     </a>
 
 
-    <a href="notifications.html">
+    <a href="/notifications">
       Notifications
     </a>
 
@@ -303,7 +303,7 @@ function renderDashboardNavigation(
       role === "admin" ||
       role === "superadmin"
         ? `
-          <a href="../admin/index.html">
+          <a href="../admin//">
             Admin
           </a>
         `
@@ -340,7 +340,7 @@ function renderDashboardCards(
   const commonCards = `
 
     <a
-      href="profile.html?user=${userId}"
+      href="/profile?user=${userId}"
       class="dashboard-card-link"
     >
 
@@ -364,7 +364,7 @@ function renderDashboardCards(
 
 
     <a
-      href="community.html"
+      href="/community"
       class="dashboard-card-link"
     >
 
@@ -388,7 +388,7 @@ function renderDashboardCards(
 
 
     <a
-      href="events.html"
+      href="/events"
       class="dashboard-card-link"
     >
 
@@ -413,7 +413,7 @@ function renderDashboardCards(
 
 
     <a
-      href="marketplace.html"
+      href="/marketplace"
       class="dashboard-card-link"
     >
 
@@ -437,7 +437,7 @@ function renderDashboardCards(
 
 
     <a
-      href="my-submissions.html"
+      href="/my-submissions"
       class="dashboard-card-link"
     >
 
@@ -462,7 +462,7 @@ function renderDashboardCards(
 
 
     <a
-      href="messages.html"
+      href="/messages"
       class="dashboard-card-link"
     >
 
@@ -490,7 +490,7 @@ function renderDashboardCards(
   const adminCard = `
 
     <a
-      href="../admin/index.html"
+      href="../admin//"
       class="dashboard-card-link"
     >
 
@@ -525,3 +525,4 @@ function renderDashboardCards(
     );
 
 }
+

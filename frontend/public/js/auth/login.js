@@ -336,7 +336,7 @@ async function routeAuthenticatedUser(
   ) {
 
     window.location.href =
-      "../pages/account-pending.html";
+      "/account-pending";
 
     return;
   }
@@ -346,7 +346,7 @@ async function routeAuthenticatedUser(
   ) {
 
     window.location.href =
-      "../pages/account-pending.html?status=rejected";
+      "/account-pending?status=rejected";
 
     return;
   }
@@ -364,7 +364,7 @@ async function routeAuthenticatedUser(
   }
 
   window.location.href =
-    "../pages/dashboard.html";
+    "/dashboard";
 
 }
 

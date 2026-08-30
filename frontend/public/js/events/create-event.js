@@ -234,7 +234,7 @@ async function loadEventForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#events";
+        "/my-submissions#events";
 
       return;
 
@@ -257,7 +257,7 @@ async function loadEventForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#events";
+        "/my-submissions#events";
 
       return;
 
@@ -281,7 +281,7 @@ async function loadEventForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#events";
+        "/my-submissions#events";
 
       return;
 
@@ -816,7 +816,7 @@ async function handleEventSubmit(
 
 
     window.location.href =
-      "../auth/login.html";
+      "/login";
 
 
     return;
@@ -1296,7 +1296,7 @@ async function handleEventSubmit(
 
 
       window.location.href =
-        "my-submissions.html#events";
+        "/my-submissions#events";
 
 
       return;
@@ -1359,7 +1359,7 @@ async function handleEventSubmit(
 
 
     window.location.href =
-      "my-submissions.html#events";
+      "/my-submissions#events";
 
   } catch (error) {
 

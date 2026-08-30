@@ -1,7 +1,7 @@
 export function createProfileCard(user, options = {}) {
 
   const {
-    profilePage = "profile.html",
+    profilePage = "/profile",
     roleLabel = "Member",
     fallbackImage = "../assets/images/avatar-placeholder.png"
   } = options;

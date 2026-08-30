@@ -72,7 +72,7 @@ onAuthStateChanged(
     if (!user) {
 
       window.location.href =
-        "../auth/login.html";
+        "/login";
 
       return;
     }
@@ -95,7 +95,7 @@ onAuthStateChanged(
     if (!userSnap.exists()) {
 
       window.location.href =
-        "../pages/dashboard.html";
+        "/dashboard";
 
       return;
     }
@@ -121,7 +121,7 @@ onAuthStateChanged(
       );
 
       window.location.href =
-        "../pages/dashboard.html";
+        "/dashboard";
 
       return;
     }
@@ -511,7 +511,7 @@ if (
 
 
       window.location.href =
-        "../index.html";
+        "/";
 
     }
   );

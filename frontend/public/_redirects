@@ -1,0 +1,45 @@
+/about /pages/about.html 200
+/sports /pages/sports.html 200
+/athletes /pages/athletes.html 200
+/scouts /pages/scouts.html 200
+/investors /pages/investors.html 200
+/community /pages/community.html 200
+/events /pages/events.html 200
+/opportunities /pages/opportunities.html 200
+/marketplace /pages/marketplace.html 200
+/notifications /pages/notifications.html 200
+/services /pages/services.html 200
+/volunteer /pages/volunteer.html 200
+/ambassadors /pages/ambassadors.html 200
+/partners /pages/partners.html 200
+/donate /pages/donate.html 200
+/raise-funds /pages/raise-funds.html 200
+/connections /pages/connections.html 200
+/messages /pages/messages.html 200
+/profile /pages/profile.html 200
+/profile-setup /pages/profile-setup.html 200
+/dashboard /pages/dashboard.html 200
+/my-submissions /pages/my-submissions.html 200
+/account-pending /pages/account-pending.html 200
+
+/login /auth/login.html 200
+/register /auth/register.html 200
+
+/terms /legal/terms.html 200
+/privacy /legal/privacy.html 200
+/cookies /legal/cookies.html 200
+/community-guidelines /legal/community-guidelines.html 200
+/safeguarding /legal/safeguarding.html 200
+/copyright /legal/copyright.html 200
+/contact /legal/contact.html 200
+/media /pages/media.html 200
+/create-listing /pages/create-listing.html 200
+/create-opportunity /pages/create-opportunity.html 200
+/create-fundraiser /pages/create-fundraiser.html 200
+/create-event /pages/create-event.html 200
+
+/event-details /pages/event-details.html 200
+/fundraiser-details /pages/fundraiser-details.html 200
+/professional-profile /pages/professional-profile.html 200
+/scout-profile /pages/scout-profile.html 200
+/investor-profile /pages/investor-profile.html 200

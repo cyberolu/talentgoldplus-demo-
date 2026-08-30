@@ -158,7 +158,7 @@ function populateProfileForm(userData) {
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
-    window.location.href = "../auth/login.html";
+    window.location.href = "/login";
     return;
   }
 
@@ -274,7 +274,7 @@ onAuthStateChanged(auth, async (user) => {
 
       alert("Profile updated successfully!");
 
-      window.location.href = "dashboard.html";
+      window.location.href = "/dashboard";
 
     } catch (error) {
 

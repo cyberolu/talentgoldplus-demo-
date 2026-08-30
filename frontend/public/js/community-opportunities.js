@@ -112,7 +112,7 @@ function renderCommunityOpportunities(
       document.createElement("a");
 
     opportunityLink.href =
-      "opportunities.html";
+      "/opportunities";
 
     opportunityLink.className =
       "community-opportunity-item";

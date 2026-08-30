@@ -267,7 +267,7 @@ function addCurrentMonthDays(
           */
 
           window.location.href =
-            `pages/event-details.html?id=${firstEvent.id}`;
+            `pages//event-details?id=${firstEvent.id}`;
 
         }
       );

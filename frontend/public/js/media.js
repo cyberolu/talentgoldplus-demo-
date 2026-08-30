@@ -31,7 +31,7 @@ let currentUser = null;
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
-    window.location.href = "../auth/login.html";
+    window.location.href = "/login";
     return;
   }
 

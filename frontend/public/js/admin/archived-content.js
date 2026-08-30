@@ -133,7 +133,7 @@ import {
       if (!user) {
   
         window.location.href =
-          "../auth/login.html";
+          "/login";
   
         return;
   
@@ -159,7 +159,7 @@ import {
       ) {
   
         window.location.href =
-          "../pages/dashboard.html";
+          "/dashboard";
   
         return;
   
@@ -187,7 +187,7 @@ import {
   
   
         window.location.href =
-          "../pages/dashboard.html";
+          "/dashboard";
   
         return;
   
@@ -1281,7 +1281,7 @@ import {
   
   
         window.location.href =
-          "../index.html";
+          "/";
   
       }
     );

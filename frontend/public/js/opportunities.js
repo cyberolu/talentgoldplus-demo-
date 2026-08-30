@@ -188,7 +188,7 @@ async function loadOpportunityForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#opportunities";
+        "/my-submissions#opportunities";
 
       return;
 
@@ -285,7 +285,7 @@ async function loadOpportunityForEditing() {
 
 
     window.location.href =
-      "my-submissions.html#opportunities";
+      "/my-submissions#opportunities";
 
   }
 
@@ -479,7 +479,7 @@ if (
 
 
           window.location.href =
-            "my-submissions.html#opportunities";
+            "/my-submissions#opportunities";
 
           return;
 
@@ -527,7 +527,7 @@ if (
 
 
         window.location.href =
-          "my-submissions.html#opportunities";
+          "/my-submissions#opportunities";
 
       } catch (error) {
 
@@ -659,7 +659,7 @@ function renderOpportunities(
         </p>
 
         <a
-          href="create-opportunity.html"
+          href="/create-opportunity"
           class="btn-primary"
         >
           Post Opportunity

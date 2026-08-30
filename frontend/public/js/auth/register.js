@@ -176,7 +176,7 @@ async function handleRegistration(
     );
 
     window.location.href =
-      "../pages/account-pending.html";
+      "/account-pending";
 
   } catch (error) {
 

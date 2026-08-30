@@ -1140,7 +1140,7 @@ if (
 
     return `
       <a
-        href="create-listing.html?edit=${encodedId}"
+        href="/create-listing?edit=${encodedId}"
         class="submission-view-btn"
       >
         Renew Listing
@@ -1179,7 +1179,7 @@ if (
   
         return `
           <a
-            href="create-listing.html?edit=${encodedId}"
+            href="/create-listing?edit=${encodedId}"
             class="submission-view-btn"
           >
             ${buttonText}
@@ -1195,7 +1195,7 @@ if (
   
         return `
           <a
-            href="create-event.html?edit=${encodedId}"
+            href="/create-event?edit=${encodedId}"
             class="submission-view-btn"
           >
             ${buttonText}
@@ -1211,7 +1211,7 @@ if (
   
         return `
           <a
-            href="create-opportunity.html?edit=${encodedId}"
+            href="/create-opportunity?edit=${encodedId}"
             class="submission-view-btn"
           >
             ${buttonText}
@@ -1227,7 +1227,7 @@ if (
   
         return `
           <a
-            href="create-fundraiser.html?edit=${encodedId}"
+            href="/create-fundraiser?edit=${encodedId}"
             class="submission-view-btn"
           >
             ${buttonText}
@@ -1249,7 +1249,7 @@ if (
   
       return `
         <a
-          href="event-details.html?id=${encodedId}"
+          href="/event-details?id=${encodedId}"
           class="submission-view-btn"
         >
           View Event
@@ -1265,7 +1265,7 @@ if (
   
       return `
         <a
-          href="marketplace.html"
+          href="/marketplace"
           class="submission-view-btn"
         >
           View Marketplace
@@ -1281,7 +1281,7 @@ if (
   
       return `
         <a
-          href="opportunities.html"
+          href="/opportunities"
           class="submission-view-btn"
         >
           View Opportunity
@@ -1297,7 +1297,7 @@ if (
   
       return `
         <a
-          href="fundraiser-details.html?id=${encodedId}"
+          href="/fundraiser-details?id=${encodedId}"
           class="submission-view-btn"
         >
           View Fundraiser

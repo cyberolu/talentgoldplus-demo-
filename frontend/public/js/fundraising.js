@@ -135,7 +135,7 @@ onAuthStateChanged(
 
 
         /*
-          If create-fundraiser.html was opened
+          If /create-fundraiser was opened
           with ?edit=DOCUMENT_ID, load the
           existing fundraiser into the form.
         */
@@ -212,7 +212,7 @@ async function loadFundraiserForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#fundraisers";
+        "/my-submissions#fundraisers";
 
       return;
 
@@ -235,7 +235,7 @@ async function loadFundraiserForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#fundraisers";
+        "/my-submissions#fundraisers";
 
       return;
 
@@ -264,7 +264,7 @@ async function loadFundraiserForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#fundraisers";
+        "/my-submissions#fundraisers";
 
       return;
 
@@ -375,7 +375,7 @@ async function loadFundraiserForEditing() {
 
 
     window.location.href =
-      "my-submissions.html#fundraisers";
+      "/my-submissions#fundraisers";
 
   }
 
@@ -725,7 +725,7 @@ if (
 
 
           window.location.href =
-            "my-submissions.html#fundraisers";
+            "/my-submissions#fundraisers";
 
 
           return;
@@ -805,7 +805,7 @@ if (
         */
 
         window.location.href =
-          "my-submissions.html#fundraisers";
+          "/my-submissions#fundraisers";
 
       } catch (error) {
 
@@ -994,7 +994,7 @@ function renderFundraisers(
         </p>
 
         <a
-          href="create-fundraiser.html"
+          href="/create-fundraiser"
           class="btn-primary"
         >
           Start Fundraising
@@ -1180,7 +1180,7 @@ function renderFundraisers(
 
 
           <a
-            href="fundraiser-details.html?id=${fundraiser.id}"
+            href="/fundraiser-details?id=${fundraiser.id}"
             class="btn-primary fundraiser-view-btn"
           >
             View Fundraiser

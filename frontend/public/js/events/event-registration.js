@@ -52,7 +52,7 @@ async function registerForEvent(event){
         );
 
         window.location.href =
-            "../auth/login.html";
+            "/login";
 
         return;
 

@@ -152,7 +152,7 @@ function createEventCard(event) {
 
   return `
     <a
-      href="event-details.html?id=${event.id}"
+      href="/event-details?id=${event.id}"
       class="event-card"
     >
 

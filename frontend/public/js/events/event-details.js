@@ -40,7 +40,7 @@ async function loadEvent() {
         </p>
 
         <a
-          href="events.html"
+          href="/events"
           class="btn-primary"
         >
           Browse Events
@@ -121,7 +121,7 @@ async function loadEvent() {
         </p>
 
         <a
-          href="events.html"
+          href="/events"
           class="btn-secondary"
         >
           Return to Events
@@ -536,7 +536,7 @@ function showNotFound() {
       </p>
 
       <a
-        href="events.html"
+        href="/events"
         class="btn-primary"
       >
         Browse Events

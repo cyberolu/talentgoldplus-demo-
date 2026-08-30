@@ -48,7 +48,7 @@ onAuthStateChanged(
     if (!user) {
 
       window.location.href =
-        "../auth/login.html";
+        "/login";
 
       return;
 
@@ -314,7 +314,7 @@ function attachNotificationEvents() {
             ) {
 
               window.location.href =
-                `messages.html?conversation=${encodeURIComponent(
+                `/messages?conversation=${encodeURIComponent(
                   conversationId
                 )}`;
 
@@ -329,7 +329,7 @@ function attachNotificationEvents() {
             ) {
 
               window.location.href =
-                "connections.html";
+                "/connections";
 
               return;
 
@@ -365,7 +365,7 @@ function attachNotificationEvents() {
 
 
             window.location.href =
-              "dashboard.html";
+              "/dashboard";
 
           }
         );

@@ -34,7 +34,7 @@ let currentUser = null;
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
-    window.location.href = "../auth/login.html";
+    window.location.href = "/login";
     return;
   }
 
@@ -140,7 +140,7 @@ async function loadPendingRequests() {
 
       <div>
         <h3>
-          <a href="profile.html?user=${connection.senderId}">
+          <a href="/profile?user=${connection.senderId}">
             ${getDisplayName(senderData)}
           </a>
         </h3>
@@ -305,7 +305,7 @@ async function loadAcceptedConnections() {
 
         <div class="connection-list-info">
           <h3>
-            <a href="profile.html?user=${otherUserId}">
+            <a href="/profile?user=${otherUserId}">
               ${getDisplayName(otherUser)}
             </a>
           </h3>
@@ -376,7 +376,7 @@ async function loadSentRequests() {
 
       <div>
         <h3>
-          <a href="profile.html?user=${connection.receiverId}">
+          <a href="/profile?user=${connection.receiverId}">
             ${getDisplayName(receiverData)}
           </a>
         </h3>
@@ -427,7 +427,7 @@ async function createOrOpenConversation(otherUserId) {
   );
 
   window.location.href =
-    `messages.html?conversation=${conversationId}`;
+    `/messages?conversation=${conversationId}`;
 
 }
 

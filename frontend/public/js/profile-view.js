@@ -25,7 +25,7 @@ let viewedUserId = null;
 onAuthStateChanged(auth, async (user) => {
 
   if (!user) {
-    window.location.href = "../auth/login.html";
+    window.location.href = "/login";
     return;
   }
 
@@ -116,7 +116,7 @@ async function loadProfile() {
       ${
         isOwnProfile
           ? `
-            <a href="profile-setup.html" class="btn-primary">
+            <a href="/profile-setup" class="btn-primary">
               Edit Profile
             </a>
           `
@@ -128,13 +128,13 @@ async function loadProfile() {
               Message
             </button>
 
-            <a href="connections.html" class="btn-secondary">
+            <a href="/connections" class="btn-secondary">
               View Connections
             </a>
           `
       }
 
-      <a href="dashboard.html" class="btn-secondary">
+      <a href="/dashboard" class="btn-secondary">
         Back to Dashboard
       </a>
 
@@ -398,7 +398,7 @@ async function openConversation(otherUserId) {
   );
 
   window.location.href =
-    `messages.html?conversation=${conversationId}`;
+    `/messages?conversation=${conversationId}`;
 
 }
 

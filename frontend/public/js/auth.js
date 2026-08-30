@@ -13,18 +13,18 @@ const isPageFolder =
 
 const loginPath =
   isPageFolder
-    ? "../auth/login.html"
-    : "auth/login.html";
+    ? "/login"
+    : "/login";
 
 const dashboardPath =
   isPageFolder
-    ? "dashboard.html"
-    : "pages/dashboard.html";
+    ? "/dashboard"
+    : "/dashboard";
 
 const homePath =
   isPageFolder
-    ? "../index.html"
-    : "index.html";
+    ? "/"
+    : "/";
 
 import { auth, db } from "./firebase.js";
 
@@ -54,14 +54,14 @@ import {
 // =========================
 
 const protectedPages = [
-  "dashboard.html",
   "/dashboard",
-  "profile-setup.html",
-  "community.html",
-  "connections.html",
-  "messages.html",
-  "notifications.html",
-  "create-listing.html"
+  "/dashboard",
+  "/profile-setup",
+  "/community",
+  "/connections",
+  "/messages",
+  "/notifications",
+  "/create-listing"
 ];
 
 const isProtectedPage =
@@ -70,7 +70,7 @@ const isProtectedPage =
   );
 
   const isDashboardPage =
-    window.location.pathname.includes("dashboard.html") ||
+    window.location.pathname.includes("/dashboard") ||
     window.location.pathname.includes("/dashboard");
 
 // =========================
@@ -128,7 +128,7 @@ if (registerForm) {
       alert("Account created successfully.");
 
       window.location.href =
-        "../pages/dashboard.html";
+        "/dashboard";
 
     } catch (error) {
 
@@ -168,7 +168,7 @@ if (loginForm) {
       );
 
       window.location.href =
-        "../pages/dashboard.html";
+        "/dashboard";
 
     } catch (error) {
 
@@ -271,7 +271,7 @@ if (googleLoginBtn) {
       }
 
       window.location.href =
-        "../pages/dashboard.html";
+        "/dashboard";
 
     } catch (error) {
 
@@ -468,7 +468,7 @@ if (accountStatus !== "active") {
   await signOut(auth);
 
   window.location.href =
-    isAuthPage ? "login.html" : "../auth/login.html";
+    isAuthPage ? "/login" : "/login";
 
   return;
 
@@ -561,15 +561,15 @@ const notificationsNavItem =
               Dashboard
             </a>
 
-            <a href="${isPageFolder ? "profile-setup.html" : "pages/profile-setup.html"}">
+            <a href="${isPageFolder ? "/profile-setup" : "pages//profile-setup"}">
               My Profile
             </a>
 
-            <a href="${isPageFolder ? "messages.html" : "pages/messages.html"}">
+            <a href="${isPageFolder ? "/messages" : "pages//messages"}">
               Messages
             </a>
 
-            <a href="${isPageFolder ? "notifications.html" : "pages/notifications.html"}">
+            <a href="${isPageFolder ? "/notifications" : "pages//notifications"}">
               Notifications
             </a>
 
@@ -765,20 +765,20 @@ function renderDashboardNav(role) {
     auth.currentUser?.uid;
 
   dashboardNav.innerHTML = `
-    <a href="dashboard.html" class="active">Dashboard</a>
-    <a href="profile.html?user=${userId}">View My Profile</a>
-    <a href="profile-setup.html">Edit Profile</a>
-    <a href="media.html">My Media</a>
-    <a href="community.html">Community</a>
-    <a href="connections.html">Connections</a>
-    <a href="messages.html">Messages</a>
-    <a href="marketplace.html">Marketplace</a>
-    <a href="notifications.html">Notifications</a>
+    <a href="/dashboard" class="active">Dashboard</a>
+    <a href="/profile?user=${userId}">View My Profile</a>
+    <a href="/profile-setup">Edit Profile</a>
+    <a href="/media">My Media</a>
+    <a href="/community">Community</a>
+    <a href="/connections">Connections</a>
+    <a href="/messages">Messages</a>
+    <a href="/marketplace">Marketplace</a>
+    <a href="/notifications">Notifications</a>
 
     ${
       role === "admin" ||
       role === "superadmin"
-        ? `<a href="../admin/index.html">Admin</a>`
+        ? `<a href="../admin//">Admin</a>`
         : ""
     }
   `;
@@ -796,7 +796,7 @@ function renderDashboardCards(role) {
   dashboardCards.innerHTML = "";
 
   const commonCards = `
-    <a href="profile.html?user=${auth.currentUser?.uid}" class="dashboard-card-link">
+    <a href="/profile?user=${auth.currentUser?.uid}" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
           <h3>View My Profile</h3>
@@ -805,7 +805,7 @@ function renderDashboardCards(role) {
       </div>
     </a>
 
-    <a href="community.html" class="dashboard-card-link">
+    <a href="/community" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
           <h3>Community</h3>
@@ -814,7 +814,7 @@ function renderDashboardCards(role) {
       </div>
     </a>
 
-    <a href="marketplace.html" class="dashboard-card-link">
+    <a href="/marketplace" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
           <h3>Marketplace</h3>
@@ -823,7 +823,7 @@ function renderDashboardCards(role) {
       </div>
     </a>
 
-    <a href="messages.html" class="dashboard-card-link">
+    <a href="/messages" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
           <h3>Messages</h3>
@@ -836,7 +836,7 @@ function renderDashboardCards(role) {
   
 
   const adminCards = `
-    <a href="../admin/index.html" class="dashboard-card-link">
+    <a href="../admin//" class="dashboard-card-link">
       <div class="athlete-card">
         <div class="athlete-info">
           <h3>Admin Panel</h3>

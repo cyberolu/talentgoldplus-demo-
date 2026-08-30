@@ -38,7 +38,7 @@ let allUsers = [];
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "../auth/login.html";
+    window.location.href = "/login";
     return;
   }
 
@@ -130,7 +130,7 @@ async function loadConversations() {
         window.history.replaceState(
           null,
           "",
-          `messages.html?conversation=${conversationDoc.id}`
+          `/messages?conversation=${conversationDoc.id}`
         );
       });
 
@@ -206,7 +206,7 @@ async function startConversationWithUser(targetUserId) {
     window.history.replaceState(
       null,
       "",
-      `messages.html?conversation=${existingConversationId}`
+      `/messages?conversation=${existingConversationId}`
     );
 
     hideNewChatSearch();
@@ -232,7 +232,7 @@ async function startConversationWithUser(targetUserId) {
   window.history.replaceState(
     null,
     "",
-    `messages.html?conversation=${newConversationRef.id}`
+    `/messages?conversation=${newConversationRef.id}`
   );
 
   hideNewChatSearch();

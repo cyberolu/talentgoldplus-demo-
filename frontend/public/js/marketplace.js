@@ -168,7 +168,7 @@ async function loadListingForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#marketplace";
+        "/my-submissions#marketplace";
 
       return;
 
@@ -189,7 +189,7 @@ async function loadListingForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#marketplace";
+        "/my-submissions#marketplace";
 
       return;
 
@@ -213,7 +213,7 @@ async function loadListingForEditing() {
       );
 
       window.location.href =
-        "my-submissions.html#marketplace";
+        "/my-submissions#marketplace";
 
       return;
 
@@ -527,7 +527,7 @@ if (
 
 
           window.location.href =
-            "my-submissions.html#marketplace";
+            "/my-submissions#marketplace";
 
           return;
 
@@ -579,7 +579,7 @@ if (
 
 
         window.location.href =
-          "my-submissions.html#marketplace";
+          "/my-submissions#marketplace";
 
       } catch (error) {
 
@@ -724,7 +724,7 @@ function renderMarketplaceListings(
         </p>
 
         <a
-          href="create-listing.html"
+          href="/create-listing"
           class="btn-primary"
         >
           Create a Listing
@@ -831,7 +831,7 @@ function renderMarketplaceListings(
             currentUser
               ? `
                 <a
-                  href="messages.html?to=${listing.userId}"
+                  href="/messages?to=${listing.userId}"
                   class="btn-primary marketplace-btn"
                 >
                   Contact Provider
@@ -839,7 +839,7 @@ function renderMarketplaceListings(
               `
               : `
                 <a
-                  href="../auth/login.html"
+                  href="/login"
                   class="btn-primary marketplace-btn"
                 >
                   Login To Contact
