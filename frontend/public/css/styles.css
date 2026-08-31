@@ -1381,3 +1381,354 @@ footer p {
   }
 
 }
+/* =========================================
+   GLOBAL MOBILE STABILITY
+   TalentGoldPlus
+========================================= */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* Prevent common elements breaking viewport */
+
+img,
+video,
+iframe,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+
+/* Allow grid/flex children to shrink */
+
+main,
+section,
+article,
+aside,
+.container,
+.wide-container,
+.page-wrapper,
+.portal-main,
+.admin-main {
+  min-width: 0;
+}
+
+
+/* Long text/email/URLs must not force page width */
+
+p,
+span,
+a,
+strong,
+td,
+li {
+  overflow-wrap: anywhere;
+}
+
+
+/* Form controls should never exceed screen */
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
+
+@media (max-width: 950px) {
+
+  .container,
+  .wide-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  /* Shared grids */
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+
+  .auto-grid {
+    grid-template-columns:
+      repeat(
+        auto-fit,
+        minmax(
+          min(260px, 100%),
+          1fr
+        )
+      );
+  }
+
+
+  /* Shared multi-column layouts */
+
+  .portal-layout,
+  .two-column-layout,
+  .three-column-layout {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+
+  /* Prevent hidden desktop sidebars taking width */
+
+  .left-sidebar,
+  .right-sidebar,
+  .portal-sidebar {
+    max-width: 100%;
+  }
+
+
+  /* Cards */
+
+  .card,
+  .sidebar-panel {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  /* Flex sections */
+
+  .flex-between {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+
+  /* Buttons */
+
+  .hero-buttons,
+  .cta-buttons {
+    width: 100%;
+  }
+
+
+  .hero-buttons a,
+  .cta-buttons a {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+  }
+
+
+  /* Navigation */
+
+  header,
+  header nav {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  .nav-links.active {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    box-sizing: border-box;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .container,
+  .wide-container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+
+  main {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* Reduce oversized section spacing */
+
+  .section-sm {
+    padding:
+      28px
+      14px;
+  }
+
+
+  .section-md {
+    padding:
+      42px
+      14px;
+  }
+
+
+  .section-lg {
+    padding:
+      56px
+      14px;
+  }
+
+
+  /* Headings should scale to viewport */
+
+  h1 {
+    font-size:
+      clamp(
+        30px,
+        9vw,
+        42px
+      );
+  }
+
+
+  h2 {
+    font-size:
+      clamp(
+        24px,
+        7vw,
+        34px
+      );
+  }
+
+
+  h3 {
+    max-width: 100%;
+  }
+
+
+  /* Prevent cards from retaining desktop widths */
+
+  .card,
+  .sidebar-panel,
+  .admin-panel {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+  }
+
+
+  /* Forms */
+
+  form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+  }
+
+
+  /* Tables remain contained */
+
+  .admin-table-wrap,
+  .table-wrap {
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+
+  /* Floating WhatsApp button */
+
+  .whatsapp-button {
+    right: 14px;
+    bottom: 14px;
+
+    max-width:
+      calc(100vw - 28px);
+
+    box-sizing: border-box;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+  nav {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+
+  .menu-toggle {
+    width: 46px !important;
+    height: 46px !important;
+
+    font-size: 30px !important;
+  }
+
+
+  #hero {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+
+  .hero-title {
+    font-size:
+      clamp(
+        30px,
+        10vw,
+        38px
+      );
+
+    letter-spacing: -1px;
+  }
+
+}

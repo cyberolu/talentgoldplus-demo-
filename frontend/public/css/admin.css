@@ -2257,3 +2257,466 @@
 .moderation-modal-actions button:hover {
   opacity: 0.9;
 }
+
+/* =========================
+   USERS TABLE - MOBILE CARDS
+========================= */
+
+@media (max-width: 700px) {
+
+  .admin-table-wrap {
+    overflow-x: visible;
+  }
+
+
+  .admin-table {
+    min-width: 0;
+    width: 100%;
+    display: block;
+    background: transparent;
+  }
+
+
+  .admin-table thead {
+    display: none;
+  }
+
+
+  .admin-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+
+  .admin-table tbody tr {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    border:
+      1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    box-shadow:
+      0 6px 20px
+      rgba(0, 0, 0, 0.05);
+  }
+
+
+  .admin-table tbody td {
+    display: flex;
+
+    width: 100%;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding:
+      12px 0;
+
+    border-bottom:
+      1px solid #eeeeee;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
+  }
+
+
+  .admin-table tbody td:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+
+  .admin-table tbody td::before {
+    flex:
+      0 0 105px;
+
+    color: #777777;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+
+    text-align: left;
+  }
+
+
+  .admin-table tbody td:nth-child(1)::before {
+    content: "User";
+  }
+
+
+  .admin-table tbody td:nth-child(2)::before {
+    content: "Email";
+  }
+
+
+  .admin-table tbody td:nth-child(3)::before {
+    content: "Role";
+  }
+
+
+  .admin-table tbody td:nth-child(4)::before {
+    content: "Change Role";
+  }
+
+
+  .admin-table tbody td:nth-child(5)::before {
+    content: "Profile";
+  }
+
+
+  .admin-table tbody td:nth-child(6)::before {
+    content: "Status";
+  }
+
+
+  /* User cell */
+
+  .admin-table tbody td:first-child {
+    display: block;
+
+    text-align: left;
+
+    padding-top: 0;
+  }
+
+
+  .admin-table tbody td:first-child::before {
+    display: none;
+  }
+
+
+  .admin-user-cell {
+    align-items: center;
+  }
+
+
+  .admin-user-cell img {
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+  }
+
+
+  .admin-user-cell p {
+    overflow-wrap: anywhere;
+  }
+
+
+  /* Role dropdown */
+
+  .admin-role-select {
+    width: 100%;
+
+    max-width: 190px;
+  }
+
+
+  /* Status/actions */
+
+  .admin-user-status-area {
+    width: 100%;
+
+    align-items: flex-end;
+  }
+
+
+  .admin-status-reason {
+    max-width: 100%;
+
+    text-align: right;
+  }
+
+
+  .admin-status-btn,
+  .admin-delete-user-btn {
+    width: 100%;
+
+    max-width: 190px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 420px) {
+
+  .admin-main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+
+  .admin-panel {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+
+  .admin-table tbody tr {
+    padding: 15px;
+  }
+
+
+  .admin-table tbody td {
+    display: block;
+
+    text-align: left;
+  }
+
+
+  .admin-table tbody td::before {
+    display: block;
+
+    margin-bottom: 7px;
+
+    width: 100%;
+  }
+
+
+  .admin-user-status-area {
+    align-items: flex-start;
+  }
+
+
+  .admin-status-reason {
+    text-align: left;
+  }
+
+
+  .admin-role-select,
+  .admin-status-btn,
+  .admin-delete-user-btn {
+    width: 100%;
+
+    max-width: none;
+  }
+
+}
+/* =========================================
+   ADMIN MOBILE NAVIGATION
+========================================= */
+
+.admin-mobile-toggle {
+  display: none;
+}
+
+
+/* Overlay normally hidden */
+
+.admin-sidebar-overlay {
+  display: none;
+}
+
+
+/* =========================================
+   MOBILE ADMIN
+========================================= */
+
+@media (max-width: 900px) {
+
+  body.admin-menu-open {
+    overflow: hidden;
+  }
+
+
+  .admin-topbar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+  }
+
+
+  /* Hamburger */
+
+  .admin-mobile-toggle {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    position: relative;
+
+    z-index: 12002;
+  }
+
+
+  .admin-mobile-toggle:hover {
+    background: #222222;
+  }
+
+
+  /* Sidebar becomes slide-out drawer */
+
+  .admin-sidebar {
+    display: block !important;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width:
+      min(
+        320px,
+        86vw
+      );
+
+    height: 100dvh;
+    min-height: 100dvh;
+
+    padding:
+      28px
+      22px;
+
+    overflow-y: auto;
+
+    transform:
+      translateX(-105%);
+
+    transition:
+      transform
+      0.28s ease;
+
+    z-index: 12001;
+
+    box-shadow:
+      12px 0 40px
+      rgba(
+        0,
+        0,
+        0,
+        0.28
+      );
+  }
+
+
+  .admin-sidebar.mobile-open {
+    transform:
+      translateX(0);
+  }
+
+
+  /* Navigation links */
+
+  .admin-menu {
+    width: 100%;
+  }
+
+
+  .admin-menu a {
+    width: 100%;
+  }
+
+
+  /* Background overlay */
+
+  .admin-sidebar-overlay {
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+      rgba(
+        0,
+        0,
+        0,
+        0.48
+      );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+      opacity
+      0.25s ease,
+      visibility
+      0.25s ease;
+
+    z-index: 12000;
+  }
+
+
+  .admin-sidebar-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE ADMIN
+========================================= */
+
+@media (max-width: 560px) {
+
+  .admin-mobile-toggle {
+    width: 44px;
+    height: 44px;
+
+    font-size: 25px;
+  }
+
+
+  .admin-sidebar {
+    width: 88vw;
+
+    padding:
+      24px
+      18px;
+  }
+
+}
