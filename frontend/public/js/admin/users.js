@@ -58,6 +58,12 @@ const setUserStatusFunction =
     "setUserStatus"
   );
 
+  const deleteUserFunction =
+  httpsCallable(
+    functions,
+    "deleteUser"
+  );
+
 const approveUserAccountFunction =
   httpsCallable(
     functions,
@@ -411,7 +417,12 @@ async function loadUsers() {
               !isAdminAccount
             )
           );
-
+        
+          const canDeleteUser =
+            currentAdminRole ===
+              "superadmin" &&
+            !isOwnAccount &&
+            !isSuperadminAccount;
 
         /*
           Normal admins only see
@@ -623,6 +634,23 @@ async function loadUsers() {
                       `
               }
 
+              ${
+
+                canDeleteUser
+                  ? `
+                    <button
+                      class="admin-delete-user-btn"
+                      data-user-id="${userId}"
+                      data-user-role="${role}"
+                      data-user-name="${escapeHtml(name)}"
+                    >
+                      Delete User
+                    </button>
+                  `
+                  : ""
+
+              }
+
             </div>
 
           </td>
@@ -640,6 +668,7 @@ async function loadUsers() {
     attachAccountApprovalEvents();
     attachRoleChangeEvents();
     attachStatusChangeEvents();
+    attachDeleteUserEvents();
 
 
   } catch (error) {
@@ -1224,6 +1253,181 @@ function attachStatusChangeEvents() {
 
 }
 
+/* =========================
+   DELETE USER
+========================= */
+
+function attachDeleteUserEvents() {
+
+  document
+    .querySelectorAll(
+      ".admin-delete-user-btn"
+    )
+    .forEach((button) => {
+
+      button.addEventListener(
+        "click",
+        async () => {
+
+          const userId =
+            button.dataset.userId;
+
+          const targetRole =
+            (
+              button.dataset.userRole ||
+              ""
+            ).toLowerCase();
+
+          const userName =
+            button.dataset.userName ||
+            "this user";
+
+
+          if (
+            !userId
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+            Frontend protection.
+
+            The backend Cloud Function
+            performs these checks again.
+          */
+
+          if (
+            currentAdminRole !==
+            "superadmin"
+          ) {
+
+            alert(
+              "Only a superadmin can permanently delete users."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            currentAdmin.uid ===
+            userId
+          ) {
+
+            alert(
+              "You cannot delete your own account."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            targetRole ===
+            "superadmin"
+          ) {
+
+            alert(
+              "Superadmin accounts are protected."
+            );
+
+            return;
+
+          }
+
+
+          const confirmed =
+            confirm(
+              `Permanently delete ${userName}?\n\n` +
+              "This will remove their TalentGoldPlus login account and user profile.\n\n" +
+              "This action cannot be undone."
+            );
+
+
+          if (
+            !confirmed
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+            Second confirmation reduces
+            accidental permanent deletion.
+          */
+
+          const verification =
+            window.prompt(
+              'Type DELETE to confirm permanent deletion:'
+            );
+
+
+          if (
+            verification !== "DELETE"
+          ) {
+
+            alert(
+              "Deletion cancelled."
+            );
+
+            return;
+
+          }
+
+
+          try {
+
+            button.disabled =
+              true;
+
+            button.textContent =
+              "Deleting...";
+
+
+            await deleteUserFunction({
+              userId
+            });
+
+
+            alert(
+              "User account permanently deleted."
+            );
+
+
+            await loadUsers();
+
+
+          } catch (error) {
+
+            console.error(
+              "User deletion failed:",
+              error
+            );
+
+
+            alert(
+              error?.message ||
+              "Unable to delete user."
+            );
+
+
+            await loadUsers();
+
+          }
+
+        }
+      );
+
+    });
+
+}
 
 /* =========================
    LOGOUT

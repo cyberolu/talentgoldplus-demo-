@@ -108,3 +108,7 @@ export {
 export {
   renewMarketplaceListing,
 } from "./marketplace/renew-marketplace-listing";
+
+export {
+  deleteUser,
+} from "./admin/delete-user";
