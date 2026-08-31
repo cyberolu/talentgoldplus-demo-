@@ -1950,3 +1950,89 @@ button {
     padding: 92px 18px 30px !important;
   }
 }
+/* =========================================
+   PUBLIC MOBILE MENU FINAL CORRECTIONS
+   ========================================= */
+
+@media (max-width: 950px) {
+
+  .public-nav-overlay {
+    z-index: 11990 !important;
+  }
+
+  header {
+    z-index: 12000 !important;
+  }
+
+  header nav {
+    z-index: 12001 !important;
+  }
+
+  .nav-links {
+    display: flex !important;
+
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+
+    gap: 0 !important;
+
+    z-index: 12002 !important;
+  }
+
+  .nav-links.mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  .nav-links > li {
+    display: block !important;
+
+    position: relative !important;
+
+    flex: none !important;
+
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .nav-links > li > a {
+    display: flex !important;
+
+    position: static !important;
+
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: 58px !important;
+
+    margin: 0 !important;
+    padding: 15px 4px !important;
+
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .nav-links .dropdown {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .nav-links .dropdown-menu {
+    position: static !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+  }
+
+  .menu-toggle {
+    z-index: 12003 !important;
+  }
+}
