@@ -1,3 +1,4 @@
+/__/auth/* https://talentgoldplus-96542.firebaseapp.com/__/auth/:splat 200
 /about /pages/about.html 200
 /sports /pages/sports.html 200
 /athletes /pages/athletes.html 200

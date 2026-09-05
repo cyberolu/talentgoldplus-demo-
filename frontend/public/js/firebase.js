@@ -41,7 +41,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBKRL9hPbhFlcqg1fLEy35kZa0g_4hLEKQ",
 
   authDomain:
-    "talentgoldplus-96542.firebaseapp.com",
+    "talentgoldplus.com",
 
   projectId:
     "talentgoldplus-96542",
@@ -104,20 +104,23 @@ const functions =
 // LOCAL DEVELOPMENT
 // =========================
 
-const isLocalhost =
-  window.location.hostname ===
-    "localhost" ||
-  window.location.hostname ===
-    "127.0.0.1";
+const isCapacitor =
+  window.Capacitor?.isNativePlatform?.() === true;
 
+
+const isLocalhost =
+  !isCapacitor &&
+  (
+    window.location.hostname ===
+      "localhost" ||
+    window.location.hostname ===
+      "127.0.0.1"
+  );
 
 
 if (
   isLocalhost
 ) {
-
-
-  // AUTH
 
   connectAuthEmulator(
     auth,
@@ -128,17 +131,11 @@ if (
     }
   );
 
-
-  // FIRESTORE
-
   connectFirestoreEmulator(
     db,
     "127.0.0.1",
     8080
   );
-
-
-  // STORAGE
 
   connectStorageEmulator(
     storage,
@@ -146,20 +143,15 @@ if (
     9199
   );
 
-
-  // CLOUD FUNCTIONS
-
   connectFunctionsEmulator(
     functions,
     "127.0.0.1",
     5001
   );
 
-
   console.log(
     "Connected to Firebase Emulators"
   );
-
 }
 
 
